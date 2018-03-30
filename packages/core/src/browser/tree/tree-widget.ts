@@ -21,6 +21,7 @@ import { SelectableTreeNode, TreeSelection } from "./tree-selection";
 import { TreeDecoration, TreeDecoratorService } from "./tree-decorator";
 import { notEmpty } from '../../common/objects';
 import { isOSX } from '../../common/os';
+import { MaybePromise } from '../../common/types';
 
 export const TREE_CLASS = 'theia-Tree';
 export const TREE_NODE_CLASS = 'theia-TreeNode';
@@ -118,8 +119,8 @@ export class TreeWidget extends VirtualWidget implements StatefulWidget {
         ]);
     }
 
-    protected updateDecorations(decorations: Map<string, TreeDecoration.Data[]>) {
-        this.decorations = decorations;
+    protected async updateDecorations(decorations: MaybePromise<Map<string, TreeDecoration.Data[]>>): Promise<void> {
+        this.decorations = await decorations;
         this.update();
     }
 

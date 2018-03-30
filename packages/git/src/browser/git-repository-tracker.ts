@@ -23,7 +23,7 @@ export class GitRepositoryTracker {
     protected readonly onGitEventEmitter = new Emitter<GitStatusChangeEvent>();
 
     constructor(
-        @inject(Git) protected readonly git: Git,
+        @inject(Git) readonly git: Git,
         @inject(GitRepositoryProvider) protected readonly repositoryProvider: GitRepositoryProvider,
         @inject(GitWatcher) protected readonly gitWatcher: GitWatcher,
     ) { }
@@ -65,7 +65,7 @@ export class GitRepositoryTracker {
     }
 
     /**
-     * Returns the last known status of the selected respository, or `undefined` if no repositories are available.
+     * Returns the last known status of the selected repository, or `undefined` if no repositories are available.
      */
     get selectedRepositoryStatus(): WorkingDirectoryStatus | undefined {
         return this.workingDirectoryStatus;
@@ -90,14 +90,7 @@ export class GitRepositoryTracker {
         if (!repository) {
             return undefined;
         }
-        const repositoryUri = new URI(repository.localUri);
-        const repositoryPath = repositoryUri.path.toString();
-        const path = uri.path.toString();
-        if (!path.startsWith(repositoryPath)) {
-            return undefined;
-        }
-        const relativePath = path.substr(repositoryPath.length);
-        return relativePath[0] === '/' ? relativePath.substr(1) : relativePath;
+        return Repository.relativePath(repository, uri);
     }
 
     getUri(path: string): URI | undefined {

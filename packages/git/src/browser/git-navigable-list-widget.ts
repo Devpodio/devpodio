@@ -62,11 +62,11 @@ export class GitNavigableListWidget<T extends { selected?: boolean }> extends Vi
     }
 
     protected relativePath(uri: URI | string): string {
-        const parsedUri = typeof uri === 'string' ? new URI(uri) : uri;
         const repo = this.repositoryProvider.selectedRepository;
         if (repo) {
-            return Repository.relativePath(repo, parsedUri).toString();
+            return Repository.relativePath(repo, uri)!.toString();
         } else {
+            const parsedUri = typeof uri === 'string' ? new URI(uri) : uri;
             return this.labelProvider.getLongName(parsedUri);
         }
     }

@@ -691,6 +691,8 @@ export interface Git extends Disposable {
  */
 export namespace GitUtils {
 
+    export const GIT_IGNORE = '.gitignore';
+
     /**
      * `true` if the argument is an option for renaming an existing branch in the repository.
      */

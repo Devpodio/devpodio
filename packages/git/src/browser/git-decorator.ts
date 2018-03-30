@@ -5,61 +5,99 @@
  * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0
  */
 
-import { inject, injectable } from 'inversify';
+import { inject, injectable, postConstruct } from 'inversify';
 import URI from '@theia/core/lib/common/uri';
 import { ILogger } from '@theia/core/lib/common/logger';
+import { MaybePromise } from '@theia/core/lib/common/types';
 import { Event, Emitter } from '@theia/core/lib/common/event';
 import { Tree } from '@theia/core/lib/browser/tree/tree';
 import { DepthFirstTreeIterator } from '@theia/core/lib/browser/tree/tree-iterator';
 import { DisposableCollection } from '@theia/core/lib/common/disposable';
 import { PreferenceChangeEvent } from '@theia/core/lib/browser/preferences/preference-proxy';
 import { TreeDecorator, TreeDecoration } from '@theia/core/lib/browser/tree/tree-decorator';
-import { Git } from '../common/git';
-import { GitWatcher } from '../common/git-watcher';
 import { WorkingDirectoryStatus } from '../common/git-model';
-import { GitRepositoryProvider } from './git-repository-provider';
 import { GitFileChange, GitFileStatus } from '../common/git-model';
 import { GitPreferences, GitConfiguration } from './git-preferences';
+import { GitRepositoryTracker } from './git-repository-tracker';
 
 @injectable()
-export class GitDecorator implements TreeDecorator {
+export abstract class GitDecorator implements TreeDecorator {
 
-    readonly id = 'theia-git-decorator';
+    abstract readonly id: string;
 
-    protected readonly toDispose: DisposableCollection;
-    protected readonly emitter: Emitter<(tree: Tree) => Map<string, TreeDecoration.Data>>;
+    @inject(ILogger)
+    protected readonly logger: ILogger;
+
+    @inject(GitRepositoryTracker)
+    protected readonly tracker: GitRepositoryTracker;
+
+    @inject(GitPreferences)
+    protected readonly gitPreferences: GitPreferences;
+
+    protected readonly toDispose: DisposableCollection = new DisposableCollection();
+    protected readonly decorationChangeEmitter: Emitter<(tree: Tree) => MaybePromise<Map<string, TreeDecoration.Data>>> = new Emitter();
 
     protected enabled: boolean;
     protected showColors: boolean;
 
-    constructor(
-        @inject(Git) protected readonly git: Git,
-        @inject(GitRepositoryProvider) protected readonly repositoryProvider: GitRepositoryProvider,
-        @inject(GitWatcher) protected readonly watcher: GitWatcher,
-        @inject(GitPreferences) protected readonly preferences: GitPreferences,
-        @inject(ILogger) protected readonly logger: ILogger) {
-        this.emitter = new Emitter();
-        this.toDispose = new DisposableCollection();
-        repositoryProvider.onDidChangeRepository(async repository => {
+    @postConstruct()
+    protected init(): void {
+        this.gitPreferences.onPreferenceChanged(event => this.handlePreferenceChange(event));
+        this.enabled = this.gitPreferences['git.decorations.enabled'];
+        this.showColors = this.gitPreferences['git.decorations.colors'];
+    }
+
+    protected abstract collectDecorators(tree: Tree, status: WorkingDirectoryStatus): MaybePromise<Map<string, TreeDecoration.Data>>;
+
+    get onDidChangeDecorations(): Event<(tree: Tree) => MaybePromise<Map<string, TreeDecoration.Data>>> {
+        return this.decorationChangeEmitter.event;
+    }
+
+    protected fireDidChangeDecorations(event: (tree: Tree) => MaybePromise<Map<string, TreeDecoration.Data>>): void {
+        this.decorationChangeEmitter.fire(event);
+    }
+
+    protected async handlePreferenceChange(event: PreferenceChangeEvent<GitConfiguration>): Promise<void> {
+        let refresh = false;
+        const { preferenceName, newValue } = event;
+        if (preferenceName === 'git.decorations.enabled') {
+            const enabled = !!newValue;
+            if (this.enabled !== enabled) {
+                this.enabled = enabled;
+                refresh = true;
+            }
+        }
+        if (preferenceName === 'git.decorations.colors') {
+            const showColors = !!newValue;
+            if (this.showColors !== showColors) {
+                this.showColors = showColors;
+                refresh = true;
+            }
+        }
+        const repository = this.tracker.selectedRepository;
+        if (refresh && repository) {
+            const status = await this.tracker.git.status(repository);
+            this.fireDidChangeDecorations((tree: Tree) => this.collectDecorators(tree, status));
+        }
+    }
+
+}
+
+export class GitFileChangeDecorator extends GitDecorator {
+
+    readonly id = 'theia-git-decorator';
+
+    @postConstruct()
+    protected init(): void {
+        super.init();
+        this.tracker.onDidChangeRepository(async repository => {
             this.toDispose.dispose();
             if (repository) {
                 this.toDispose.pushAll([
-                    await this.watcher.watchGitChanges(repository),
-                    this.watcher.onGitEvent(event => this.fireDidChangeDecorations((tree: Tree) => this.collectDecorators(tree, event.status)))
+                    this.tracker.onGitEvent(event => this.fireDidChangeDecorations((tree: Tree) => this.collectDecorators(tree, event.status)))
                 ]);
             }
         });
-        this.preferences.onPreferenceChanged(event => this.handlePreferenceChange(event));
-        this.enabled = this.preferences['git.decorations.enabled'];
-        this.showColors = this.preferences['git.decorations.colors'];
-    }
-
-    get onDidChangeDecorations(): Event<(tree: Tree) => Map<string, TreeDecoration.Data>> {
-        return this.emitter.event;
-    }
-
-    protected fireDidChangeDecorations(event: (tree: Tree) => Map<string, TreeDecoration.Data>): void {
-        this.emitter.fire(event);
     }
 
     protected collectDecorators(tree: Tree, status: WorkingDirectoryStatus): Map<string, TreeDecoration.Data> {
@@ -142,30 +180,6 @@ export class GitDecorator implements TreeDecorator {
             case GitFileStatus.Modified: return 'var(--theia-brand-color0)';
             case GitFileStatus.Deleted: return 'var(--theia-warn-color0)';
             case GitFileStatus.Conflicted: return 'var(--theia-error-color0)';
-        }
-    }
-
-    protected async handlePreferenceChange(event: PreferenceChangeEvent<GitConfiguration>): Promise<void> {
-        let refresh = false;
-        const { preferenceName, newValue } = event;
-        if (preferenceName === 'git.decorations.enabled') {
-            const enabled = !!newValue;
-            if (this.enabled !== enabled) {
-                this.enabled = enabled;
-                refresh = true;
-            }
-        }
-        if (preferenceName === 'git.decorations.colors') {
-            const showColors = !!newValue;
-            if (this.showColors !== showColors) {
-                this.showColors = showColors;
-                refresh = true;
-            }
-        }
-        const repository = this.repositoryProvider.selectedRepository;
-        if (refresh && repository) {
-            const status = await this.git.status(repository);
-            this.fireDidChangeDecorations((tree: Tree) => this.collectDecorators(tree, status));
         }
     }
 

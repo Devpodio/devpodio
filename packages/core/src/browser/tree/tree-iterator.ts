@@ -15,6 +15,7 @@ export namespace TreeIterator {
 
     export interface Options {
         readonly pruneCollapsed: boolean
+        readonly prune?: (node: TreeNode) => boolean;
     }
 
     export const DEFAULT_OPTIONS: Options = {
@@ -46,6 +47,10 @@ export abstract class AbstractTreeIterator implements TreeIterator, Iterable<Tre
             return undefined;
         }
         if (this.options.pruneCollapsed && this.isCollapsed(node)) {
+            return undefined;
+        }
+        const { prune } = this.options;
+        if (prune && prune(node)) {
             return undefined;
         }
         return node.children.slice();

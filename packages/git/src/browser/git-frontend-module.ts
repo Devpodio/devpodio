@@ -18,7 +18,8 @@ import { GitResourceResolver } from './git-resource';
 import { GitRepositoryProvider } from './git-repository-provider';
 import { GitQuickOpenService } from './git-quick-open-service';
 import { GitUriLabelProviderContribution } from './git-uri-label-contribution';
-import { GitDecorator } from './git-decorator';
+import { GitFileChangeDecorator } from './git-decorator';
+import { GitIgnoreDecorator } from './git-ignore-decorator';
 import { bindGitPreferences } from './git-preferences';
 import { bindDirtyDiff } from './dirty-diff/dirty-diff-module';
 import { bindBlame } from './blame/blame-module';
@@ -52,5 +53,6 @@ export default new ContainerModule(bind => {
     bind(GitQuickOpenService).toSelf().inSingletonScope();
 
     bind(LabelProviderContribution).to(GitUriLabelProviderContribution).inSingletonScope();
-    bind(NavigatorTreeDecorator).to(GitDecorator).inSingletonScope();
+    bind(NavigatorTreeDecorator).to(GitFileChangeDecorator).inSingletonScope();
+    bind(NavigatorTreeDecorator).to(GitIgnoreDecorator).inSingletonScope();
 });

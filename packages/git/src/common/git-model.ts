@@ -6,7 +6,6 @@
  */
 
 import URI from "@theia/core/lib/common/uri";
-import { Path } from "@theia/core";
 
 export interface WorkingDirectoryStatus {
 
@@ -160,19 +159,36 @@ export interface Repository {
 }
 
 export namespace Repository {
-    export function equal(repository: Repository | undefined, repository2: Repository | undefined): boolean {
-        if (repository && repository2) {
-            return repository.localUri === repository2.localUri;
+
+    export function equal(left: Repository | undefined, right: Repository | undefined): boolean {
+        if (left && right) {
+            return left.localUri === right.localUri;
         }
-        return repository === repository2;
+        return left === right;
     }
-    export function is(repository: Object | undefined): repository is Repository {
-        return !!repository && 'localUri' in repository;
+
+    /**
+     * Returns with the repository relative path of the resource or `undefined` if it is not contained
+     * in the repository. This method does not check any Git ignored states or unstaged properties. It simply
+     * operates on the URIs and relative paths. The returning string always has the forward slash separators.
+     *
+     * @param repository the repository, or its local URI as a string. If `undefined`, this function always returns with `undefined`.
+     * @param uri the URI of the resource. Might not be in the repository.
+     */
+    export function relativePath(repository: Repository | string | undefined, uri: URI | string): string | undefined {
+        if (!repository) {
+            return undefined;
+        }
+        const repositoryUri = new URI(typeof repository === 'string' ? repository : repository.localUri);
+        const repositoryPath = repositoryUri.path.toString();
+        const path = (uri instanceof URI ? uri : new URI(uri)).path.toString();
+        if (!path.startsWith(repositoryPath)) {
+            return undefined;
+        }
+        const _relativePath = path.substr(repositoryPath.length);
+        return _relativePath[0] === '/' ? _relativePath.substr(1) : _relativePath;
     }
-    export function relativePath(repository: Repository | string, uri: URI | string): Path {
-        const repositoryUri = new URI(Repository.is(repository) ? repository.localUri : repository);
-        return new Path(uri.toString().substr(repositoryUri.toString().length + 1));
-    }
+
 }
 
 /**
