@@ -6,6 +6,7 @@
  */
 
 import { inject, injectable, postConstruct } from 'inversify';
+import URI from '@theia/core/lib/common/uri';
 import { Tree, TreeNode } from '@theia/core/lib/browser/tree/tree';
 import { DepthFirstTreeIterator } from '@theia/core/lib/browser/tree/tree-iterator';
 import { FileSystemWatcher } from '@theia/filesystem/lib/browser/filesystem-watcher';
@@ -44,14 +45,16 @@ export class GitIgnoreDecorator extends GitDecorator {
             return new Map();
         }
 
-        const ignoresUris = new Set();
-        const prune = this.prune.bind(this);
-        for (const node of new DepthFirstTreeIterator(root, { pruneCollapsed: true, prune })) {
-            if (DirNode.is(node)) {
-                (await this.collectIgnoredChildrenUris(node, node === root)).forEach(uri => ignoresUris.add(uri));
-            }
-        }
-        return new Map(Array.from(ignoresUris).map(uri => [uri, { fontData: { color: 'yellow' } }] as [string, TreeDecoration.Data]));
+        // const ignoresUris = new Set();
+        const ignoresUris = await this.hack_collectIgnoredChildrenUris(root);
+        // const prune = this.prune.bind(this);
+        // for (const node of new DepthFirstTreeIterator(root, { pruneCollapsed: true, prune })) {
+        //     if (DirNode.is(node)) {
+        //         (await this.collectIgnoredChildrenUris(node, node === root)).forEach(uri => ignoresUris.add(uri));
+        //     }
+        // }
+
+        return new Map(Array.from(ignoresUris).map(uri => [uri, { fontData: { color: 'red' } }] as [string, TreeDecoration.Data]));
     }
 
     protected prune(node: TreeNode): boolean {
@@ -61,6 +64,42 @@ export class GitIgnoreDecorator extends GitDecorator {
             return selectedRepository === undefined || !selectedRepository.localUri.startsWith(id);
         }
         return true;
+    }
+
+    protected async hack_collectIgnoredChildrenUris(root: TreeNode): Promise<string[]> {
+        const { git, selectedRepository } = this.tracker;
+        if (selectedRepository === undefined) {
+            return [];
+        }
+        const uri = new URI(root.id);
+        const relativePath = this.tracker.getPath(uri);
+        if (relativePath === undefined) {
+            return [];
+        }
+        try {
+            const { stdout } = await git.exec(selectedRepository, ['clean', '-ndX']);
+            // We got back either directory paths (ending with /) if the whole content is ignored
+            // or individual files.
+            const paths = stdout.trim().split('Would remove ') || [];
+            // Drop the first empty string (if any).
+            paths.shift();
+            const ignoredUris = new Set(paths.map(p => uri.resolve(p.trim()).toString()));
+            if (ignoredUris.size === 0) {
+                return [];
+            }
+            const visibleIgnoredUris = [];
+            for (const node of new DepthFirstTreeIterator(root, { pruneCollapsed: true })) {
+                const id = DirNode.is(node) ? `${node.id}/` : node.id;
+                if (ignoredUris.has(id) || Array.from(ignoredUris).some(u => id.startsWith(u) && u.endsWith('/'))) {
+                    // XXX use the original `node.id`.
+                    visibleIgnoredUris.push(node.id);
+                }
+            }
+            return visibleIgnoredUris;
+        } catch (e) {
+            this.logger.error(`Error occurred when collecting Git ignored resources for ${root.id}.`, e);
+            return [];
+        }
     }
 
     /**
