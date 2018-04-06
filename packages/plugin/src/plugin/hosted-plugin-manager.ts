@@ -22,7 +22,7 @@ export class HostedPluginManagerExtImpl implements HostedPluginManagerExt {
     }
 
     $loadPlugin(ext: Plugin): void {
-        this.host.loadPlugin(ext.extPath);
+        this.host.loadPlugin(ext.pluginPath);
     }
 
     $stopPlugin(): PromiseLike<void> {

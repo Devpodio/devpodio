@@ -20,7 +20,7 @@ export interface Plugin {
     name: string;
     publisher: string;
     version: string;
-    extPath: string;
+    pluginPath: string;
 }
 
 export interface CommandRegistryMain {

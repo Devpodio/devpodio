@@ -38,7 +38,7 @@ export class HostedPluginSupport {
             setUpPluginApi(this.worker.rpc, container);
             const hostedExtManager = this.worker.rpc.getProxy(MAIN_RPC_CONTEXT.HOSTED_PLUGIN_MANAGER_EXT);
             hostedExtManager.$loadPlugin({
-                extPath: plugin.theiaPlugin.worker!,
+                pluginPath: plugin.theiaPlugin.worker!,
                 name: plugin.name,
                 publisher: plugin.publisher,
                 version: plugin.version
@@ -49,7 +49,7 @@ export class HostedPluginSupport {
             setUpPluginApi(rpc, container);
             const hostedExtManager = rpc.getProxy(MAIN_RPC_CONTEXT.HOSTED_PLUGIN_MANAGER_EXT);
             hostedExtManager.$loadPlugin({
-                extPath: plugin.theiaPlugin.node!,
+                pluginPath: plugin.theiaPlugin.node!,
                 name: plugin.name,
                 publisher: plugin.publisher,
                 version: plugin.version
