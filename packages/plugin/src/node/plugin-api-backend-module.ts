@@ -1,15 +1,11 @@
 /*
- * Copyright (C) 2015-2018 Red Hat, Inc.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
+ * Copyright (C) 2018 Red Hat, Inc. and others.
  *
- * Contributors:
- *   Red Hat, Inc. - initial API and implementation
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0
  */
 
-import { ContainerModule } from "inversify";
+import { interfaces } from "inversify";
 import { ConnectionHandler, JsonRpcConnectionHandler } from "@theia/core/lib/common/messaging";
 import { BackendApplicationContribution } from '@theia/core/lib/node/backend-application';
 import { PluginApiContribution, HostedPluginServerImpl } from './plugin-service';
@@ -17,7 +13,7 @@ import { HostedPluginReader } from './plugin-reader';
 import { HostedPluginClient, HostedPluginServer, hostedServicePath } from '../common/plugin-protocol';
 import { HostedPluginSupport } from './hosted-plugin';
 
-export default new ContainerModule(bind => {
+export function bindCommonPart(bind: interfaces.Bind): void {
     bind(PluginApiContribution).toSelf().inSingletonScope();
     bind(HostedPluginReader).toSelf().inSingletonScope();
     bind(HostedPluginServer).to(HostedPluginServerImpl).inSingletonScope();
@@ -34,4 +30,4 @@ export default new ContainerModule(bind => {
             return server;
         })
     ).inSingletonScope();
-});
+}

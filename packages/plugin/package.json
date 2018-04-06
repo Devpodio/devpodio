@@ -1,16 +1,19 @@
 {
   "name": "@theia/plugin",
   "version": "0.3.8",
+  "typings": "./src/common/index.ts",
   "description": "Theia - Plugin API",
   "dependencies": {
-    "@theia/core": "^0.3.8"
+    "@theia/core": "^0.3.8",
+    "@theia/filesystem": "^0.3.8"
   },
   "publishConfig": {
     "access": "public"
   },
   "theiaExtensions": [
     {
-      "backend": "lib/node/plugin-api-backend-module",
+      "backend": "lib/node/node-plugin-api-backend-module",
+      "backendElectron": "lib/node-electron/electron-plugin-api-backend-module",
       "frontend": "lib/browser/plugin-api-frontend-module"
     }
   ],
