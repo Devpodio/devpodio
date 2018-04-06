@@ -5,7 +5,7 @@
  * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0
  */
 
-import { inject, injectable } from 'inversify';
+import { inject, injectable, named } from 'inversify';
 import { ILogger, Disposable, isWindows } from '@theia/core/lib/common/';
 import { TaskClient, TaskExitedEvent, TaskInfo, TaskOptions, TaskServer } from '../common/task-protocol';
 import { Task, TaskFactory } from './task';
@@ -26,7 +26,7 @@ export class TaskServerImpl implements TaskServer {
     protected tasksToDispose = new Map<number, Disposable>();
 
     constructor(
-        @inject(ILogger) protected readonly logger: ILogger,
+        @inject(ILogger) @named('task') protected readonly logger: ILogger,
         @inject(RawProcessFactory) protected readonly rawProcessFactory: RawProcessFactory,
         @inject(TerminalProcessFactory) protected readonly terminalProcessFactory: TerminalProcessFactory,
         @inject(TaskManager) protected readonly taskManager: TaskManager,
@@ -87,7 +87,7 @@ export class TaskServerImpl implements TaskServer {
         // When we create a process to execute a command, it's difficult to know if it failed
         // because the executable or script was not found, or if it was found, ran, and exited
         // unsuccessfully. So here we look to see if it seems we can find a file of that name
-        // that is likely to be the one we want, before attemting to execute it.
+        // that is likely to be the one we want, before attempting to execute it.
         const cmd = await this.findCommand(command, cwd);
         if (cmd) {
             try {
@@ -128,7 +128,7 @@ export class TaskServerImpl implements TaskServer {
                 return taskInfo;
 
             } catch (error) {
-                this.logger.error(`Error occured while creating task: ${error}`);
+                this.logger.error(`Error occurred while creating task: ${error}`);
                 return Promise.reject(new Error(error));
             }
         } else {
@@ -180,11 +180,11 @@ export class TaskServerImpl implements TaskServer {
     }
 
     /**
-     * uses heuristics to look-for a command. Will look into the system path, if the command
+     * Uses heuristics to look-for a command. Will look into the system path, if the command
      * is given without a path. Will resolve if a potential match is found, else reject. There
-     * is no garantee that a command we find will be the one executed, if multiple commands with
+     * is no guarantee that a command we find will be the one executed, if multiple commands with
      * the same name exist.
-     * @param command command name to look-for
+     * @param command command name to look for
      * @param cwd current working directory
      */
     protected async findCommand(command: string, cwd: string): Promise<string | undefined> {
@@ -222,7 +222,7 @@ export class TaskServerImpl implements TaskServer {
     }
 
     /**
-     * Checks for the existance of a file, at the provided path, and make sure that
+     * Checks for the existence of a file, at the provided path, and make sure that
      * it's readable and executable.
      */
     protected async executableFileExists(filePath: string): Promise<boolean> {

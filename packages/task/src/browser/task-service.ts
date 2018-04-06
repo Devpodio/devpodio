@@ -5,9 +5,9 @@
  * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0
  */
 
-import { inject, injectable } from "inversify";
+import { inject, injectable, named } from "inversify";
 import { ILogger } from '@theia/core/lib/common';
-import { FrontendApplication } from '@theia/core/lib/browser';
+import { FrontendApplication, ApplicationShell } from '@theia/core/lib/browser';
 import { TaskServer, TaskExitedEvent, TaskOptions, TaskInfo } from '../common/task-protocol';
 import { TERMINAL_WIDGET_FACTORY_ID, TerminalWidgetFactoryOptions } from '@theia/terminal/lib/browser/terminal-widget';
 import { WidgetManager } from '@theia/core/lib/browser/widget-manager';
@@ -16,6 +16,8 @@ import { MessageService } from '@theia/core/lib/common/message-service';
 import { WorkspaceService } from '@theia/workspace/lib/browser/workspace-service';
 import { TaskConfigurations, TaskConfigurationClient } from './task-configurations';
 import { TerminalWidget } from '@theia/terminal/lib/browser/terminal-widget';
+import { VariableResolverService } from "@theia/variable-resolver/lib/browser";
+import { ProcessOptions } from "@theia/process/lib/node";
 
 @injectable()
 export class TaskService implements TaskConfigurationClient {
@@ -29,13 +31,15 @@ export class TaskService implements TaskConfigurationClient {
 
     constructor(
         @inject(FrontendApplication) protected readonly app: FrontendApplication,
+        @inject(ApplicationShell) protected readonly shell: ApplicationShell,
         @inject(TaskServer) protected readonly taskServer: TaskServer,
-        @inject(ILogger) protected readonly logger: ILogger,
+        @inject(ILogger) @named('task') protected readonly logger: ILogger,
         @inject(WidgetManager) protected readonly widgetManager: WidgetManager,
         @inject(TaskWatcher) protected readonly taskWatcher: TaskWatcher,
         @inject(MessageService) protected readonly messageService: MessageService,
         @inject(WorkspaceService) protected readonly workspaceService: WorkspaceService,
-        @inject(TaskConfigurations) protected readonly taskConfigurations: TaskConfigurations
+        @inject(TaskConfigurations) protected readonly taskConfigurations: TaskConfigurations,
+        @inject(VariableResolverService) protected readonly variableResolverService: VariableResolverService
     ) {
         // wait for the workspace root to be set
         this.workspaceService.root.then(async root => {
@@ -105,7 +109,7 @@ export class TaskService implements TaskConfigurationClient {
         }
 
         try {
-            taskInfo = await this.taskServer.run(this.prepareTaskConfiguration(task), this.getContext());
+            taskInfo = await this.taskServer.run(await this.prepareTaskConfiguration(task), this.getContext());
         } catch (error) {
             this.logger.error(`Error launching task '${taskName}': ${error}`);
             this.messageService.error(`Error launching task '${taskName}': ${error}`);
@@ -124,23 +128,33 @@ export class TaskService implements TaskConfigurationClient {
      * Perform some adjustments to the task launch configuration, before sending
      * it to the backend to be executed. We can make sure that parameters that
      * are optional to the user but required by the server will be defined, with
-     * sane default values.
+     * sane default values. Also, resolve all known variables, e.g. `${workspaceFolder}`.
      */
-    protected prepareTaskConfiguration(task: TaskOptions): TaskOptions {
-        if (task.cwd) {
-            if (this.workspaceRootUri) {
-                task.cwd = task.cwd.replace(/\$workspace/gi, this.workspaceRootUri);
-            }
-        } else if (this.workspaceRootUri) {
-            // if "cwd' is not set in task launch config. Let's use the workspace root
-            // as default
-            task.cwd = this.workspaceRootUri;
+    protected async prepareTaskConfiguration(task: TaskOptions): Promise<TaskOptions> {
+        const resultTask: TaskOptions = {
+            label: task.label,
+            processType: task.processType ? task.processType : 'terminal',
+            processOptions: await this.resolveVariablesInOptions(task.processOptions)
+        };
+        if (task.windowsProcessOptions) {
+            resultTask.windowsProcessOptions = await this.resolveVariablesInOptions(task.windowsProcessOptions);
         }
+        resultTask.cwd = await this.variableResolverService.resolve(task.cwd ? task.cwd : '${workspaceFolder}');
+        return resultTask;
+    }
 
-        if (!task.processType) {
-            task.processType = 'terminal';
+    /**
+     * Resolve the variables in the given process options.
+     */
+    protected async resolveVariablesInOptions(options: ProcessOptions): Promise<ProcessOptions> {
+        const resultOptions: ProcessOptions = {
+            command: await this.variableResolverService.resolve(options.command)
+        };
+        if (options.args) {
+            resultOptions.args = await this.variableResolverService.resolveArray(options.args);
         }
-        return task;
+        resultOptions.options = options.options;
+        return resultOptions;
     }
 
     async attach(terminalId: number, taskId: number): Promise<void> {
@@ -154,6 +168,8 @@ export class TaskService implements TaskConfigurationClient {
                 label: `Task #${taskId}`,
                 destroyTermOnClose: true
             });
+        this.shell.addWidget(widget, { area: 'bottom' });
+        this.shell.activateWidget(widget.id);
         widget.start(terminalId);
     }
 

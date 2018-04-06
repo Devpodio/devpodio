@@ -13,6 +13,7 @@ import { WorkspaceServer } from '../common';
 import { WindowService } from '@theia/core/lib/browser/window/window-service';
 import { FrontendApplication, FrontendApplicationContribution } from '@theia/core/lib/browser';
 import { Deferred } from '@theia/core/lib/common/promise-util';
+import { ILogger } from '@theia/core/lib/common/logger';
 
 /**
  * The workspace service.
@@ -37,6 +38,9 @@ export class WorkspaceService implements FrontendApplicationContribution {
 
     @inject(WindowService)
     protected readonly windowService: WindowService;
+
+    @inject(ILogger)
+    protected logger: ILogger;
 
     @postConstruct()
     protected async init(): Promise<void> {
@@ -84,9 +88,12 @@ export class WorkspaceService implements FrontendApplicationContribution {
         const valid = await this.toValidRoot(rootUri);
         if (valid) {
             // The same window has to be preserved too (instead of opening a new one), if the workspace root is not yet available and we are setting it for the first time.
-            const preserveWindow = !(await this.root);
+            const preserveWindow = options ? options.preserveWindow : !(await this.root);
             await this.server.setRoot(rootUri);
-            this.openWindow(uri, Object.assign(options || {}, { preserveWindow }));
+            if (preserveWindow) {
+                this._root = valid;
+            }
+            this.openWindow(uri, { preserveWindow });
             return;
         }
         throw new Error(`Invalid workspace root URI. Expected an existing directory location. URI: ${rootUri}.`);
@@ -127,12 +134,17 @@ export class WorkspaceService implements FrontendApplicationContribution {
         if (this.shouldPreserveWindow(options)) {
             this.reloadWindow();
         } else {
-            this.openNewWindow();
+            try {
+                this.openNewWindow();
+            } catch (error) {
+                // Fall back to reloading the current window in case the browser has blocked the new window
+                this.logger.error(error.toString()).then(() => this.reloadWindow());
+            }
         }
     }
 
     protected reloadWindow(): void {
-        window.location.reload();
+        window.location.reload(true);
     }
 
     protected openNewWindow(): void {
