@@ -211,7 +211,7 @@ class RPCMultiplexer {
 
     private readonly connection: MessageConnection;
     private readonly sendAccumulatedBound: () => void;
-
+    private readonly runImmediately: (callback: (args: any[]) => void) => void;
     private messagesToSend: string[];
 
     constructor(connection: MessageConnection, onMessage: (msg: string) => void) {
@@ -226,6 +226,13 @@ class RPCMultiplexer {
                 onMessage(data[i]);
             }
         });
+
+        // Use setTimeout if setImmediate is not defined
+        if (typeof (setImmediate) !== 'undefined') {
+            this.runImmediately = setImmediate;
+        } else {
+            this.runImmediately = (callback: (args: any[]) => void) => setTimeout(callback, 0);
+        }
     }
 
     private sendAccumulated(): void {
@@ -236,7 +243,7 @@ class RPCMultiplexer {
 
     public send(msg: string): void {
         if (this.messagesToSend.length === 0) {
-            setImmediate(this.sendAccumulatedBound);
+            this.runImmediately(this.sendAccumulatedBound);
         }
         this.messagesToSend.push(msg);
     }
