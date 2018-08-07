@@ -21,12 +21,11 @@ import { RPCProtocol } from '../../api/rpc-protocol';
 import { PLUGIN_RPC_CONTEXT } from '../../api/plugin-api';
 import { MessageRegistryMainImpl } from './message-registry-main';
 import { WindowStateMain } from './window-state-main';
-import { WorkspaceMain } from './workspace-main';
+import { WorkspaceMainImpl } from './workspace-main';
 import { StatusBarMessageRegistryMainImpl } from './status-bar-message-registry-main';
 import { EnvMainImpl } from './env-main';
 import { EditorsAndDocumentsMain } from './editors-and-documents-main';
 import { OutputChannelRegistryMainImpl } from './output-channel-registry-main';
-import { WorkspaceService } from '@theia/workspace/lib/browser';
 import { TerminalServiceMainImpl } from './terminal-main';
 
 export function setUpPluginApi(rpc: RPCProtocol, container: interfaces.Container): void {
@@ -36,6 +35,9 @@ export function setUpPluginApi(rpc: RPCProtocol, container: interfaces.Container
     const quickOpenMain = new QuickOpenMainImpl(rpc, container);
     rpc.set(PLUGIN_RPC_CONTEXT.QUICK_OPEN_MAIN, quickOpenMain);
 
+    const workspaceMain = new WorkspaceMainImpl(rpc, container);
+    rpc.set(PLUGIN_RPC_CONTEXT.WORKSPACE_MAIN, workspaceMain);
+
     const messageRegistryMain = new MessageRegistryMainImpl(container);
     rpc.set(PLUGIN_RPC_CONTEXT.MESSAGE_REGISTRY_MAIN, messageRegistryMain);
 
@@ -44,7 +46,6 @@ export function setUpPluginApi(rpc: RPCProtocol, container: interfaces.Container
 
     /* tslint:disable */
     new WindowStateMain(rpc);
-    new WorkspaceMain(rpc, container.get(WorkspaceService));
     new EditorsAndDocumentsMain(rpc, container);
     /* tslint:enable */
 
