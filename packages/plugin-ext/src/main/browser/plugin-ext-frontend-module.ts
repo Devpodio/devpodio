@@ -24,7 +24,7 @@ import { PluginWorker } from './plugin-worker';
 import { HostedPluginSupport } from '../../hosted/browser/hosted-plugin';
 import { HostedPluginWatcher } from '../../hosted/browser/hosted-plugin-watcher';
 import { HostedPluginLogViewer } from '../../hosted/browser/hosted-plugin-log-viewer';
-import { HostedPluginManagerClient } from './plugin-manager-client';
+import { HostedPluginManagerClient } from '../../hosted/browser/hosted-plugin-manager-client';
 import { PluginApiFrontendContribution } from './plugin-frontend-contribution';
 import { setUpPluginApi } from './main-context';
 import { HostedPluginServer, hostedServicePath, PluginServer, pluginServerJsonRpcPath } from '../../common/plugin-protocol';
@@ -33,15 +33,19 @@ import { PluginWidget } from './plugin-ext-widget';
 import { PluginFrontendViewContribution } from './plugin-frontend-view-contribution';
 
 import { HostedPluginInformer } from '../../hosted/browser/hosted-plugin-informer';
-import { HostedPluginController } from './hosted-plugin-controller';
+import { bindHostedPluginPreferences } from '../../hosted/browser/hosted-plugin-preferences';
+import { HostedPluginController } from '../../hosted/browser/hosted-plugin-controller';
 
 import '../../../src/main/browser/style/index.css';
 import { PluginExtDeployCommandService } from './plugin-ext-deploy-command';
 import { TextEditorService, TextEditorServiceImpl } from './text-editor-service';
 import { EditorModelService, EditorModelServiceImpl } from './text-editor-model-service';
 import { UntitledResourceResolver } from './editor/untitled-resource';
+import { PluginContributionHandler } from './plugin-contribution-handler';
 
 export default new ContainerModule(bind => {
+    bindHostedPluginPreferences(bind);
+
     bind(ModalNotification).toSelf().inSingletonScope();
 
     bind(PluginWorker).toSelf().inSingletonScope();
@@ -89,5 +93,7 @@ export default new ContainerModule(bind => {
         const provider = ctx.container.get(WebSocketConnectionProvider);
         return provider.createProxy<PluginServer>(pluginServerJsonRpcPath);
     }).inSingletonScope();
+
+    bind(PluginContributionHandler).toSelf().inSingletonScope();
 
 });
