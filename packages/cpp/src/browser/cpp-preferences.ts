@@ -32,7 +32,10 @@ export const cppPreferencesSchema: PreferenceSchema = {
                     },
                     'directory': {
                         type: 'string'
-                    }
+                    },
+                    'command': {
+                        type: 'string',
+                    },
                 },
                 required: ['name', 'directory'],
             }

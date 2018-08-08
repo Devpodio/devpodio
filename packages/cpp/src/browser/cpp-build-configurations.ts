@@ -24,6 +24,7 @@ import { CppPreferences } from './cpp-preferences';
 export interface CppBuildConfiguration {
     name: string;
     directory: string;
+    command?: string;
 }
 
 /** What we save in the local storage.  */
@@ -37,6 +38,7 @@ class SavedActiveBuildConfiguration {
  */
 @injectable()
 export class CppBuildConfigurationManager {
+
     @inject(StorageService)
     protected readonly storageService: StorageService;
 
@@ -120,60 +122,53 @@ export class CppBuildConfigurationManager {
 }
 
 @injectable()
-export class CppBuildConfigurationChanger implements QuickOpenModel {
+export class CppBuildConfigurationPicker implements QuickOpenModel {
 
-    @inject(QuickOpenService)
-    protected readonly quickOpenService: QuickOpenService;
+    protected activeMarker = ' ✔';
 
-    @inject(CppBuildConfigurationManager)
-    protected readonly cppBuildConfigurations: CppBuildConfigurationManager;
+    @inject(QuickOpenService) protected readonly quickOpenService: QuickOpenService;
+    @inject(CppBuildConfigurationManager) protected readonly cppBuildConfigurations: CppBuildConfigurationManager;
 
-    async onType(lookFor: string, acceptor: (items: QuickOpenItem[]) => void): Promise<void> {
+    protected getConfigurations(): CppBuildConfiguration[] {
+        return Array.from(this.cppBuildConfigurations.getConfigs()).sort();
+    }
+
+    protected getItems(): QuickOpenItem[] {
         const items: QuickOpenItem[] = [];
         const active: CppBuildConfiguration | undefined = this.cppBuildConfigurations.getActiveConfig();
-        const configurations = Array.from(this.cppBuildConfigurations.getConfigs()).sort();
+        const configurations = this.getConfigurations();
 
         // Add feedback item when no configurations are present
         if (!configurations.length) {
             items.push(new QuickOpenItem({
                 label: 'No build configurations available',
-                run: () => false,
+                run: mode => this.itemNoAction(mode),
             }));
-            return acceptor(items);
-        }
-
-        // Item to de-select any active build config
-        if (active) {
-            items.push(new QuickOpenItem({
-                label: 'None',
-                detail: 'Reset active build configuration',
-                run: (mode: QuickOpenMode): boolean => {
-                    if (mode !== QuickOpenMode.OPEN) {
-                        return false;
-                    }
-                    this.cppBuildConfigurations.setActiveConfig(undefined);
-                    return true;
-                },
-            }));
+            return items;
         }
 
         // Add one item per build config.
         configurations.forEach(config => {
             items.push(new QuickOpenItem({
-                label: config.name + (config === active ? ' ✔' : ''),
+                label: config.name + (config === active ? this.activeMarker : ''),
                 detail: config.directory,
-                run: (mode: QuickOpenMode): boolean => {
-                    if (mode !== QuickOpenMode.OPEN) {
-                        return false;
-                    }
-
-                    this.cppBuildConfigurations.setActiveConfig(config);
-                    return true;
-                },
+                run: mode => this.itemAction(mode, config),
             }));
         });
 
-        acceptor(items);
+        return items;
+    }
+
+    protected itemNoAction(mode: QuickOpenMode): boolean {
+        return false;
+    }
+
+    protected itemAction(mode: QuickOpenMode, config?: CppBuildConfiguration): boolean {
+        return false;
+    }
+
+    async onType(lookFor: string, acceptor: (items: QuickOpenItem[]) => void): Promise<void> {
+        acceptor(this.getItems());
     }
 
     open() {
@@ -182,6 +177,33 @@ export class CppBuildConfigurationChanger implements QuickOpenModel {
             fuzzyMatchLabel: true,
             fuzzyMatchDescription: true,
         });
+    }
+}
+
+@injectable()
+export class CppBuildConfigurationChanger extends CppBuildConfigurationPicker {
+
+    protected getItems(): QuickOpenItem[] {
+        const items = super.getItems();
+
+        const active = this.cppBuildConfigurations.getActiveConfig();
+        if (active) {
+            items.unshift(new QuickOpenItem({
+                label: 'None',
+                detail: 'Reset active build configuration',
+                run: mode => this.itemAction(mode, undefined),
+            }));
+        }
+
+        return items;
+    }
+
+    protected itemAction(mode: QuickOpenMode, config?: CppBuildConfiguration) {
+        if (mode === QuickOpenMode.OPEN) {
+            this.cppBuildConfigurations.setActiveConfig(config);
+            return true;
+        }
+        return super.itemAction(mode);
     }
 }
 

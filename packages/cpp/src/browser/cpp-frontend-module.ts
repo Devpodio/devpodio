@@ -15,7 +15,7 @@
  ********************************************************************************/
 
 import { ContainerModule } from 'inversify';
-import { CommandContribution } from '@theia/core/lib/common';
+import { CommandContribution, MenuContribution } from '@theia/core/lib/common';
 import { KeybindingContribution, KeybindingContext } from '@theia/core/lib/browser';
 import { CppCommandContribution } from './cpp-commands';
 
@@ -23,10 +23,11 @@ import { LanguageClientContribution } from '@theia/languages/lib/browser';
 import { CppLanguageClientContribution } from './cpp-language-client-contribution';
 import { CppKeybindingContribution, CppKeybindingContext } from './cpp-keybinding';
 import { bindCppPreferences } from './cpp-preferences';
-import { CppBuildConfigurationsContributions, CppBuildConfigurationChanger, CppBuildConfigurationManager } from './cpp-build-configurations';
+import { CppBuildConfigurationsContributions, CppBuildConfigurationPicker, CppBuildConfigurationChanger, CppBuildConfigurationManager } from './cpp-build-configurations';
 import { LanguageGrammarDefinitionContribution } from '@theia/monaco/lib/browser/textmate';
 import { CppGrammarContribution } from './cpp-grammar-contribution';
 import { CppBuildConfigurationsStatusBarElement } from './cpp-build-configurations-statusbar-element';
+import { CppBuildManagementContribution, CppBuildConfigurationBuilder } from './cpp-build-management';
 
 export default new ContainerModule(bind => {
     bind(CommandContribution).to(CppCommandContribution).inSingletonScope();
@@ -38,13 +39,20 @@ export default new ContainerModule(bind => {
     bind(LanguageClientContribution).toDynamicValue(ctx => ctx.container.get(CppLanguageClientContribution));
 
     bind(CppBuildConfigurationManager).toSelf().inSingletonScope();
+    bind(CppBuildConfigurationPicker).toSelf().inSingletonScope();
     bind(CppBuildConfigurationChanger).toSelf().inSingletonScope();
+    bind(CppBuildConfigurationBuilder).toSelf().inSingletonScope();
     bind(CppBuildConfigurationsContributions).toSelf().inSingletonScope();
     bind(CommandContribution).to(CppBuildConfigurationsContributions).inSingletonScope();
 
     bind(LanguageGrammarDefinitionContribution).to(CppGrammarContribution).inSingletonScope();
 
     bind(CppBuildConfigurationsStatusBarElement).toSelf().inSingletonScope();
+
+    bind(CppBuildManagementContribution).toSelf().inSingletonScope();
+    for (const symbol of [CommandContribution, MenuContribution, KeybindingContribution]) {
+        bind(symbol).toService(CppBuildManagementContribution);
+    }
 
     bindCppPreferences(bind);
 });
