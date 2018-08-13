@@ -86,8 +86,8 @@ const missingKeyContent = `[
 
 // [badContent, errorMessage]
 const badContents = [
-    [notListContent, `content is not a list and should fail, yet it doesn't`],
-    [wrongTypeContent, `content defines the wrong data types and should fail, yet it doesn't`],
-    [extraKeyContent, `content is has an extra key and should fail, yet it doesn't`],
-    [missingKeyContent, `"command" value missing and should fail, yet it doesn't`],
+    [notListContent, 'content is not a list and should fail, yet it doesn\'t'],
+    [wrongTypeContent, 'content defines the wrong data types and should fail, yet it doesn\'t'],
+    [extraKeyContent, 'content is has an extra key and should fail, yet it doesn\'t'],
+    [missingKeyContent, '"command" value missing and should fail, yet it doesn\'t'],
 ];

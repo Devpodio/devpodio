@@ -43,9 +43,7 @@ const bogusCommand = 'thisisnotavalidcommand';
 const commandToFindInPathUnix = 'ls';
 const commandToFindInPathWindows = 'dir';
 
-// we use test-resources subfolder ('<theia>/packages/task/src/node/test-resources/'),
-// as workspace root, for these tests
-const wsRoot: string = FileUri.fsPath(new URI(__dirname).resolve('test-resources'));
+const wsRoot = FileUri.fsPath(new URI(__dirname).resolve('../../test-resources')).toString();
 
 describe('Task server / back-end', function () {
     this.timeout(10000);
