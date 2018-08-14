@@ -15,19 +15,20 @@
  ********************************************************************************/
 
 import { ContainerModule } from 'inversify';
+import { TaskContribution } from '@theia/task/lib/browser';
+import { LanguageClientContribution } from '@theia/languages/lib/browser';
+import { LanguageGrammarDefinitionContribution } from '@theia/monaco/lib/browser/textmate';
 import { CommandContribution, MenuContribution } from '@theia/core/lib/common';
 import { KeybindingContribution, KeybindingContext } from '@theia/core/lib/browser';
-import { CppCommandContribution } from './cpp-commands';
-
-import { LanguageClientContribution } from '@theia/languages/lib/browser';
-import { CppLanguageClientContribution } from './cpp-language-client-contribution';
-import { CppKeybindingContribution, CppKeybindingContext } from './cpp-keybinding';
-import { bindCppPreferences } from './cpp-preferences';
 import { CppBuildConfigurationsContributions, CppBuildConfigurationPicker, CppBuildConfigurationChanger, CppBuildConfigurationManager } from './cpp-build-configurations';
-import { LanguageGrammarDefinitionContribution } from '@theia/monaco/lib/browser/textmate';
-import { CppGrammarContribution } from './cpp-grammar-contribution';
-import { CppBuildConfigurationsStatusBarElement } from './cpp-build-configurations-statusbar-element';
 import { CppBuildManagementContribution, CppBuildConfigurationBuilder } from './cpp-build-management';
+import { CppBuildConfigurationsStatusBarElement } from './cpp-build-configurations-statusbar-element';
+import { CppKeybindingContribution, CppKeybindingContext } from './cpp-keybinding';
+import { CppLanguageClientContribution } from './cpp-language-client-contribution';
+import { CppBuildManagementTaskProvider } from './cpp-build-management-task';
+import { CppGrammarContribution } from './cpp-grammar-contribution';
+import { CppCommandContribution } from './cpp-commands';
+import { bindCppPreferences } from './cpp-preferences';
 
 export default new ContainerModule(bind => {
     bind(CommandContribution).to(CppCommandContribution).inSingletonScope();
@@ -49,6 +50,7 @@ export default new ContainerModule(bind => {
 
     bind(CppBuildConfigurationsStatusBarElement).toSelf().inSingletonScope();
 
+    bind(TaskContribution).to(CppBuildManagementTaskProvider).inSingletonScope();
     bind(CppBuildManagementContribution).toSelf().inSingletonScope();
     for (const symbol of [CommandContribution, MenuContribution, KeybindingContribution]) {
         bind(symbol).toService(CppBuildManagementContribution);

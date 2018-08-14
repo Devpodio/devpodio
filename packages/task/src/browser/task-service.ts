@@ -170,30 +170,31 @@ export class TaskService implements TaskConfigurationClient {
             this.logger.error(`Can't get task launch configuration for label: ${taskLabel}`);
             return;
         }
-        this.run(task.type, task.label);
+        this.runTaskConfiguration(task);
     }
 
     /**
      * Runs a task, by task type and task configuration label.
-     * It looks for configured and provided tasks.
+     * It looks for provided tasks first, and then for configured tasks.
      */
     async run(type: string, taskLabel: string): Promise<void> {
-        let task = await this.getProvidedTask(type, taskLabel);
+        const task = await this.getProvidedTask(type, taskLabel)
+            || this.taskConfigurations.getTask(taskLabel);
         if (!task) {
-            task = this.taskConfigurations.getTask(taskLabel);
-            if (!task) {
-                this.logger.error(`Can't get task launch configuration for label: ${taskLabel}`);
-                return;
-            }
+            this.logger.error(`Can't get task launch configuration for label: ${taskLabel}`);
+            return;
         }
+        this.runTaskConfiguration(task);
+    }
 
+    async runTaskConfiguration(task: TaskConfiguration) {
         const resolver = this.taskResolverRegistry.getResolver(task.type);
         let resolvedTask: TaskConfiguration;
         try {
             resolvedTask = resolver ? await resolver.resolveTask(task) : task;
         } catch (error) {
-            this.logger.error(`Error resolving task '${taskLabel}': ${error}`);
-            this.messageService.error(`Error resolving task '${taskLabel}': ${error}`);
+            this.logger.error(`Error resolving task '${task.label}': ${error}`);
+            this.messageService.error(`Error resolving task '${task.label}': ${error}`);
             return;
         }
 
@@ -201,8 +202,8 @@ export class TaskService implements TaskConfigurationClient {
         try {
             taskInfo = await this.taskServer.run(resolvedTask, this.getContext());
         } catch (error) {
-            this.logger.error(`Error launching task '${taskLabel}': ${error}`);
-            this.messageService.error(`Error launching task '${taskLabel}': ${error}`);
+            this.logger.error(`Error launching task '${task.label}': ${error}`);
+            this.messageService.error(`Error launching task '${task.label}': ${error}`);
             return;
         }
 
@@ -231,10 +232,7 @@ export class TaskService implements TaskConfigurationClient {
     }
 
     protected isEventForThisClient(context: string | undefined): boolean {
-        if (context === this.getContext()) {
-            return true;
-        }
-        return false;
+        return context === this.getContext();
     }
 
     taskConfigurationChanged(event: string[]) {
