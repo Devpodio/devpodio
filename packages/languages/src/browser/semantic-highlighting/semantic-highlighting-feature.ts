@@ -24,7 +24,7 @@ import {
     ServerCapabilities,
     Disposable,
     DocumentSelector
-} from '../';
+} from '../index';
 import { SemanticHighlight, SemanticHighlightingParams } from './semantic-highlighting-protocol';
 
 // NOTE: This module can be removed, or at least can be simplified once the semantic highlighting will become the part of the LSP.

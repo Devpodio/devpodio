@@ -14,21 +14,16 @@
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  ********************************************************************************/
 
-import { NotificationType, VersionedTextDocumentIdentifier } from '../index';
+/* note: this bogus test file is required so that
+   we are able to run mocha unit tests on this
+   package, without having any actual unit tests in it.
+   This way a coverage report will be generated,
+   showing 0% coverage, instead of no report.
+   This file can be removed once we have real unit
+   tests in place. */
 
-// NOTE: This module can be removed, once the semantic highlighting will become the part of the LSP.
-// https://github.com/Microsoft/vscode-languageserver-node/issues/368
+describe('typehierarchy package', () => {
 
-export interface SemanticHighlightingParams {
-    readonly textDocument: VersionedTextDocumentIdentifier;
-    readonly lines: SemanticHighlightingInformation[];
-}
+    it('support code coverage statistics', () => true);
 
-export interface SemanticHighlightingInformation {
-    readonly line: number;
-    readonly tokens?: string;
-}
-
-export namespace SemanticHighlight {
-    export const type = new NotificationType<SemanticHighlightingParams, void>('textDocument/semanticHighlighting');
-}
+});

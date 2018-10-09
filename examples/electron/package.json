@@ -43,6 +43,7 @@
     "@theia/textmate-grammars": "^0.3.15",
     "@theia/tslint": "^0.3.15",
     "@theia/typescript": "^0.3.15",
+    "@theia/typehierarchy": "^0.3.15",
     "@theia/userstorage": "^0.3.15",
     "@theia/variable-resolver": "^0.3.15",
     "@theia/workspace": "^0.3.15"

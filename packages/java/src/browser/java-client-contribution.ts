@@ -18,6 +18,7 @@ import { injectable, inject } from 'inversify';
 import { MessageConnection } from 'vscode-jsonrpc';
 import { CommandService } from '@theia/core/lib/common';
 import { StatusBar, StatusBarEntry, StatusBarAlignment } from '@theia/core/lib/browser';
+import { TypeHierarchyService } from '@theia/typehierarchy/lib/browser/typehierarchy-service';
 import { SemanticHighlightingService } from '@theia/editor/lib/browser/semantic-highlight/semantic-highlighting-service';
 import {
     Window,
@@ -50,7 +51,8 @@ export class JavaClientContribution extends BaseLanguageClientContribution {
         @inject(Window) protected readonly window: Window,
         @inject(CommandService) protected readonly commandService: CommandService,
         @inject(StatusBar) protected readonly statusBar: StatusBar,
-        @inject(SemanticHighlightingService) protected readonly semanticHighlightingService: SemanticHighlightingService
+        @inject(SemanticHighlightingService) protected readonly semanticHighlightingService: SemanticHighlightingService,
+        @inject(TypeHierarchyService) protected readonly typeHierarchyService: TypeHierarchyService
     ) {
         super(workspace, languages, languageClientFactory);
     }
@@ -71,7 +73,10 @@ export class JavaClientContribution extends BaseLanguageClientContribution {
 
     protected createLanguageClient(connection: MessageConnection): ILanguageClient {
         const client: ILanguageClient & Readonly<{ languageId: string }> = Object.assign(super.createLanguageClient(connection), { languageId: this.id });
-        client.registerFeature(SemanticHighlightingService.createNewFeature(this.semanticHighlightingService, client));
+        client.registerFeatures([
+            SemanticHighlightingService.createNewFeature(this.semanticHighlightingService, client),
+            ...TypeHierarchyService.createNewFeatures(this.typeHierarchyService, client)
+        ]);
         return client;
     }
 

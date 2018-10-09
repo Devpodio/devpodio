@@ -7,6 +7,7 @@
     "@theia/editor": "^0.3.15",
     "@theia/languages": "^0.3.15",
     "@theia/monaco": "^0.3.15",
+    "@theia/typehierarchy": "^0.3.15",
     "@types/glob": "^5.0.30",
     "@types/tar": "4.0.0",
     "glob": "^7.1.2",
@@ -58,6 +59,6 @@
     "extends": "../../configs/nyc.json"
   },
   "ls": {
-    "downloadUrl": "https://github.com/kittaakos/eclipse.jdt.ls-gh-715/raw/master/jdt-language-server-latest.tar.gz"
+    "downloadUrl": "https://github.com/kittaakos/eclipse.jdt.ls-gh-28/raw/master/jdt-language-server-latest.tar.gz"
   }
 }
