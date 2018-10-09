@@ -14,7 +14,7 @@
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  ********************************************************************************/
 
-import { Position, Range } from 'vscode-languageserver-types';
+import { Position, Range, Location } from 'vscode-languageserver-types';
 import * as lsp from 'vscode-languageserver-types';
 import URI from '@devpodio/core/lib/common/uri';
 import { Event, Disposable } from '@devpodio/core/lib/common';
@@ -22,7 +22,7 @@ import { Saveable } from '@devpodio/core/lib/browser';
 import { EditorDecoration } from './decorations';
 
 export {
-    Position, Range
+    Position, Range, Location
 };
 
 export const TextEditorProvider = Symbol('TextEditorProvider');
