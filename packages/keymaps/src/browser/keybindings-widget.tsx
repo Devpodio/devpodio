@@ -361,6 +361,6 @@ export class KeybindingWidget extends ReactWidget {
         }
     }
 
-    protected openKeybindings = () => this.keymapsService.open();
+    protected openKeybindings = () => this.keymapsService.open(this);
 
 }

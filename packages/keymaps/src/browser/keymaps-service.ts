@@ -17,7 +17,7 @@
 import { inject, injectable, postConstruct } from 'inversify';
 import URI from '@theia/core/lib/common/uri';
 import { ResourceProvider, Resource, MessageService } from '@theia/core/lib/common';
-import { KeybindingRegistry, KeybindingScope, OpenerService, open, Keybinding } from '@theia/core/lib/browser';
+import { Keybinding, KeybindingRegistry, KeybindingScope, OpenerService, open, WidgetOpenerOptions, Widget } from '@theia/core/lib/browser';
 import { UserStorageUri } from '@theia/userstorage/lib/browser';
 import { KeymapsParser } from './keymaps-parser';
 import * as jsoncparser from 'jsonc-parser';
@@ -75,8 +75,12 @@ export class KeymapsService {
         }
     }
 
-    open(): void {
-        open(this.opener, this.resource.uri);
+    open(ref: Widget): void {
+        const options: WidgetOpenerOptions = {
+            widgetOptions: { area: 'main', mode: 'split-right', ref },
+            mode: 'activate'
+        };
+        open(this.opener, this.resource.uri, options);
     }
 
     async setKeybinding(command: string, keybinding: string): Promise<void> {
