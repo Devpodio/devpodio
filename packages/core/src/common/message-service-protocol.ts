@@ -16,6 +16,7 @@
 
 import { injectable, inject } from 'inversify';
 import { ILogger } from './logger';
+import { Event } from '../common';
 
 export const messageServicePath = '/services/messageService';
 
@@ -23,7 +24,8 @@ export enum MessageType {
     Error = 1,
     Warning = 2,
     Info = 3,
-    Log = 4
+    Log = 4,
+    Progress = 5
 }
 
 export interface Message {
@@ -31,6 +33,12 @@ export interface Message {
     text: string;
     actions?: string[];
     options?: MessageOptions;
+}
+
+export interface ProgressMessageArguments {
+    text: string;
+    onCancel?: (id: string) => void;
+    actions?: string[];
 }
 
 export interface MessageOptions {
@@ -53,6 +61,40 @@ export class MessageClient {
         this.logger.info(message.text);
         return Promise.resolve(undefined);
     }
+
+    /**
+     * Show progress message with possible actions to user.
+     *
+     * To be implemented by an extension, e.g. by the messages extension.
+     */
+    newProgress(message: ProgressMessageArguments): Promise<ProgressToken| undefined> {
+        return Promise.resolve(undefined);
+    }
+
+    /**
+     * Hide progress message.
+     *
+     * To be implemented by an extension, e.g. by the messages extension.
+     */
+    stopProgress(progress: ProgressToken): Promise<void> {
+        return Promise.resolve(undefined);
+    }
+
+    /**
+     * Update started progress message.
+     *
+     * To be implemented by an extension, e.g. by the messages extension.
+     */
+    reportProgress(progress: ProgressToken, update: ProgressUpdate): Promise<void> {
+        return Promise.resolve(undefined);
+    }
+
+    /**
+     * Event that fires when a progress message is canceled.
+     *
+     * To be implemented by an extension, e.g. by the messages extension.
+     */
+    onProgressCanceled: Event<string>;
 }
 
 @injectable()
@@ -66,4 +108,13 @@ export class DispatchingMessageClient extends MessageClient {
         ));
     }
 
+}
+
+export interface ProgressToken {
+    id: string;
+}
+
+export interface ProgressUpdate {
+    value?: string;
+    increment?: number;
 }
