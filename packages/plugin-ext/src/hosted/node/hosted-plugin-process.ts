@@ -112,6 +112,7 @@ export class HostedPluginProcess implements ServerPluginRunner {
         // create env and add PATH to it so any executable from root process is available
         const env = createIpcEnv();
         env.PATH = process.env.PATH;
+        env.HOME = process.env.HOME;
 
         const forkOptions: cp.ForkOptions = {
             silent: true,
