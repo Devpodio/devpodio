@@ -324,7 +324,7 @@ declare module '@devpodio/plugin' {
     }
 
     /**
-     * Pair if two positions.
+     * Pair of two positions.
      */
     export class Range {
         /**
