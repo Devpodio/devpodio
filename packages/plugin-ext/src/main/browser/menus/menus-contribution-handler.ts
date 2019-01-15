@@ -19,6 +19,7 @@ import { MenuPath, ILogger, CommandRegistry } from '@devpodio/core';
 import { EDITOR_CONTEXT_MENU } from '@devpodio/editor/lib/browser';
 import { MenuModelRegistry } from '@devpodio/core/lib/common';
 import { NAVIGATOR_CONTEXT_MENU } from '@devpodio/navigator/lib/browser/navigator-contribution';
+import { QuickCommandService } from '@devpodio/core/lib/browser/quick-open/quick-command-service';
 import { VIEW_ITEM_CONTEXT_MENU } from '../view/tree-views-main';
 import { PluginContribution, Menu } from '../../../common';
 
@@ -33,6 +34,9 @@ export class MenusContributionPointHandler {
 
     @inject(ILogger)
     protected readonly logger: ILogger;
+
+    @inject(QuickCommandService)
+    protected readonly quickCommandService: QuickCommandService;
 
     // menu location to command IDs
     protected readonly registeredMenus: Map<string, Set<string>> = new Map();
@@ -49,7 +53,13 @@ export class MenusContributionPointHandler {
             return;
         }
         for (const location in allMenus) {
-            if (allMenus.hasOwnProperty(location)) {
+            if (location === 'commandPalette') {
+                for (const menu of allMenus[location]) {
+                    if (menu.when) {
+                        this.quickCommandService.pushCommandContext(menu.command, menu.when);
+                    }
+                }
+            } else if (allMenus.hasOwnProperty(location)) {
                 const menuPath = MenusContributionPointHandler.parseMenuPath(location);
                 if (!menuPath) {
                     this.logger.warn(`Plugin contributes items to a menu with invalid identifier: ${location}`);
