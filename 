@@ -1,0 +1,1908 @@
+[33mcommit 1f6e0cb211c9509ba31da65aa60f81b9dd585bcd[m[33m ([m[1;31mtheia/master[m[33m)[m
+Author: Florent Benoit <fbenoit@redhat.com>
+Date:   Mon Mar 18 16:37:34 2019 +0100
+
+    - Rename API.md to README
+    - fix links to be handled by typedoc
+    
+    Change-Id: I5248a1314abc1410f7d405cd1f747912000103c1
+    Signed-off-by: Florent Benoit <fbenoit@redhat.com>
+
+[33mcommit a2f831cc04874581158c32ac658d30da7f01a425[m
+Author: Anton Kosyakov <anton.kosyakov@typefox.io>
+Date:   Fri Mar 15 11:21:57 2019 +0000
+
+    [plugin/workspace] fix #4565: implement saveAll
+    
+    Signed-off-by: Anton Kosyakov <anton.kosyakov@typefox.io>
+
+[33mcommit e06d5420ee85d4ec41b585c43edb4af001744779[m
+Author: Jan Koehnlein <jan.koehnlein@typefox.io>
+Date:   Wed Mar 13 13:24:53 2019 +0100
+
+    #4538 check document version in applyEdit
+    
+    This change rejects an entire workspaceEdit if it contains refs to versioned documents whose version doesn't match. It should add a lot of safety against concurrent modifications for operations that make changes across multiple files, e.g. rename refactorings.
+    
+    Signed-off-by: Jan Koehnlein <jan.koehnlein@typefox.io>
+
+[33mcommit 7be08835cc6b040b7c611ba01582bc70e4909ec8[m
+Author: Florent Benoit <fbenoit@redhat.com>
+Date:   Fri Mar 15 15:57:04 2019 +0100
+
+    Do not remove only the entrypoint from the cache but also all the files of the plug-in. Else some of the files may still have previous values while some others were correctly invalidated
+    
+    Change-Id: I09f745145b05c041e8f0cd55e85a666617527d76
+    Signed-off-by: Florent Benoit <fbenoit@redhat.com>
+
+[33mcommit 625ed2a249997188016e987078a5f43068100833[m
+Author: Mykola Morhun <mmorhun@redhat.com>
+Date:   Thu Mar 14 15:36:41 2019 +0000
+
+    Fire onDidChangeVisibleTextEditors on editors change (not documents)
+    
+    Signed-off-by: Mykola Morhun <mmorhun@redhat.com>
+
+[33mcommit dc914bf769c33337eb326c7a1cb859272178f06f[m
+Author: Nigel Westbury <nigelipse@miegel.org>
+Date:   Thu Mar 14 12:20:20 2019 +0000
+
+    Fast deletes by moving
+    
+    Signed-off-by: Nigel Westbury <nigelipse@miegel.org>
+
+[33mcommit b21023ef38060a127b0c152bdf71344de8950f59[m
+Author: Anton Kosyakov <anton.kosyakov@typefox.io>
+Date:   Wed Mar 13 21:23:11 2019 +0000
+
+    [file-search] spawn rigrep with root URI as cwd and only once for each root
+    
+    Signed-off-by: Anton Kosyakov <anton.kosyakov@typefox.io>
+
+[33mcommit 79ded6cbe674d99c96521cba588cad8cf38a2f79[m
+Author: Anton Kosyakov <anton.kosyakov@typefox.io>
+Date:   Wed Mar 13 09:43:31 2019 +0000
+
+    [file-search] match against relative paths (not absolute) #4537
+    
+    Signed-off-by: Anton Kosyakov <anton.kosyakov@typefox.io>
+
+[33mcommit 037aac57b3eb69f7fc546defec7faab7494b4232[m
+Author: Anton Kosyakov <anton.kosyakov@typefox.io>
+Date:   Wed Mar 13 08:09:54 2019 +0000
+
+    [file-search] handle cancellation properly to avoid race conditions #4537
+    
+    Signed-off-by: Anton Kosyakov <anton.kosyakov@typefox.io>
+
+[33mcommit 155ac370424dcc24e456c5363b3c0cfa217d11be[m
+Author: Anton Kosyakov <anton.kosyakov@typefox.io>
+Date:   Wed Mar 13 07:58:02 2019 +0000
+
+    [quick-open] disable separate fuzzy substring matching by default #4537
+    
+    Signed-off-by: Anton Kosyakov <anton.kosyakov@typefox.io>
+
+[33mcommit f8b3be0819453c510af1a5f1e0a3e463b5988c9e[m
+Author: Florent Benoit <fbenoit@redhat.com>
+Date:   Thu Mar 14 11:50:11 2019 +0100
+
+    - Refactor plug-in-host-rpc to remove static values and use instead instances of the class.
+    - Add helper method stopContext() (like initContext but for stopping)
+    - Also introduce cleanup of the require cache to be sure to always have a proper initialization.
+    
+    Change-Id: Id536d9d524d5d39a43033eba20e9d2bb6209d18a
+    Signed-off-by: Florent Benoit <fbenoit@redhat.com>
+
+[33mcommit 1624d4f84a4c1a434327d48a1462ade438989432[m
+Author: Florent Benoit <fbenoit@redhat.com>
+Date:   Thu Mar 14 11:47:04 2019 +0100
+
+    Fix issue around pluginID which can be any value of a plug-ins of a host.
+    
+    Change-Id: I511fc3690f8a553dbec15839eefc811f97d8d37f
+    Signed-off-by: Florent Benoit <fbenoit@redhat.com>
+
+[33mcommit fdc6d0fd3d2409c6dcabf1fd25b6d2b4aae7c333[m
+Author: Florent Benoit <fbenoit@redhat.com>
+Date:   Thu Mar 14 11:46:22 2019 +0100
+
+    Handle propagate of clientClosed event to all runners. This is required as now there can have several clients connected
+    
+    Change-Id: I604b9c44c4278b64c0572716beb053891ad7ae4c
+    Signed-off-by: Florent Benoit <fbenoit@redhat.com>
+
+[33mcommit 67bc2d4e9ebb0dd169005f80fdeb41074f61463a[m
+Author: Miro Spönemann <miro.spoenemann@typefox.io>
+Date:   Thu Mar 14 09:37:45 2019 +0100
+
+    #1999: alt+shift+w closes all main area tabs
+    
+    Signed-off-by: Miro Spönemann <miro.spoenemann@typefox.io>
+
+[33mcommit e73566f7846fe623414b57db336e5ad3e9a9344d[m
+Author: Feng Qingxue <948699357@qq.com>
+Date:   Mon Mar 11 14:59:59 2019 +0800
+
+    Fix #3800: refresh git view after deleting the only repository
+    
+    Signed-off-by: Feng Qingxue <948699357@qq.com>
+
+[33mcommit b277770f5b817541543586d4c935d7370ebb3bee[m
+Author: Alex Tugarev <alex.tugarev@typefox.io>
+Date:   Tue Mar 12 17:00:22 2019 +0100
+
+    [java] handle incomplete classpath commands
+    
+    fixes #1078
+    
+    Signed-off-by: Alex Tugarev <alex.tugarev@typefox.io>
+
+[33mcommit 3ffc462392ad669eeb4441a25b43467a20f95622[m
+Author: Alex Tugarev <alex.tugarev@typefox.io>
+Date:   Tue Mar 12 16:58:32 2019 +0100
+
+    [java] remove 100% report message faster
+    
+    aligning with vscode plugin.
+    
+    Signed-off-by: Alex Tugarev <alex.tugarev@typefox.io>
+
+[33mcommit 01a983076976a3c18f54ad507abaf2df174ccd43[m
+Author: Miro Spönemann <miro.spoenemann@typefox.io>
+Date:   Tue Mar 12 16:16:43 2019 +0100
+
+    #1923: Pass the DOM element as first argument to context menu command handlers
+    
+    Signed-off-by: Miro Spönemann <miro.spoenemann@typefox.io>
+
+[33mcommit 9ea666ca5b3ef4fa92be2248137dacd49637ab3c[m
+Author: Anton Kosyakov <anton.kosyakov@typefox.io>
+Date:   Mon Mar 11 09:12:21 2019 +0000
+
+    [plugin] fix #4509: support multiple windows per a backend
+    
+    Signed-off-by: Anton Kosyakov <anton.kosyakov@typefox.io>
+
+[33mcommit 2bd0e8f4e9f8ba84fe9a10085232c444b8b215a8[m
+Author: Vincent Fugnitto <vincent.fugnitto@ericsson.com>
+Date:   Wed Mar 13 10:05:21 2019 -0400
+
+    Apply typehierarchy styling to only typehierarchy
+    
+    Fixes #4554
+    
+    Previously, the `typehierarchy` extension would describe styling which
+    were set globally instead of solely for the `typehierarchy` widget.
+    This meant that any other component using the `theia-caption-suffix`
+    would be styled incorrectly.
+    
+    The fix was to simply specify the styling solely for the `typehierarchy` class.
+    
+    Signed-off-by: Vincent Fugnitto <vincent.fugnitto@ericsson.com>
+
+[33mcommit 8235400c78af8eb46ef5523ae1a635ec9761a0c3[m
+Author: Anatoliy Bazko <abazko@redhat.com>
+Date:   Wed Mar 13 15:14:12 2019 +0200
+
+    Add Go grammar contribution
+    
+    Signed-off-by: Anatoliy Bazko <abazko@redhat.com>
+
+[33mcommit 785e74a3f54682e9bfc30d14fa3c00fb17fdae58[m
+Author: Miro Spönemann <miro.spoenemann@typefox.io>
+Date:   Wed Mar 13 11:30:11 2019 +0100
+
+    #4551: Catch electron-store errors
+    
+    Signed-off-by: Miro Spönemann <miro.spoenemann@typefox.io>
+
+[33mcommit 164110af62d91370e719c0cc1744d972cefb7466[m
+Author: Nigel Westbury <nigelipse@miegel.org>
+Date:   Fri Mar 8 15:34:48 2019 +0000
+
+    Duplicate keys when more than one tail decorator on a node
+    
+    Signed-off-by: Nigel Westbury <nigelipse@miegel.org>
+
+[33mcommit c12f14ecca696ec91ccd29d5870602dfd282c3e6[m
+Author: Anton Kosyakov <anton.kosyakov@typefox.io>
+Date:   Tue Mar 12 08:13:39 2019 +0000
+
+    fix #4529: compute resource context keys based on global selection
+    
+    and clean up global selection when owning widgets are disposed
+    
+    Signed-off-by: Anton Kosyakov <anton.kosyakov@typefox.io>
+
+[33mcommit fc1edf11acf54f08f927686c567c0747e0d3644b[m
+Author: Sven Efftinge <sven.efftinge@typefox.io>
+Date:   Tue Feb 26 12:07:29 2019 +0000
+
+    Added gitpod.yml to enable prebuilds
+    
+    Signed-off-by: Sven Efftinge <sven.efftinge@typefox.io>
+
+[33mcommit ed309e6b50cf51c0e0e1fcb210fe0e7ed5dfc6e2[m
+Author: Akos Kitta <kittaakos@typefox.io>
+Date:   Mon Mar 11 20:06:10 2019 +0100
+
+    GH-4526: Rebuild `@theia/node-pty` instead of `node-pty` for electron.
+    
+     - We use a custom `node-pty` fork for Theia, so we have to rebuild it.
+     - Also fixed the issue in `rebuild`. It incorrectly assumed that all
+    the npm dependencies are direct children of the `.browser_modules`
+    folder.
+    
+    Closes #4526
+    
+    Signed-off-by: Akos Kitta <kittaakos@typefox.io>
+    
+    s
+    
+    Signed-off-by: Akos Kitta <kittaakos@typefox.io>
+
+[33mcommit f5cec4444315651c1c583f740adcfeb6bef5a33f[m
+Author: Anatoliy Bazko <abazko@redhat.com>
+Date:   Mon Mar 11 15:51:15 2019 +0200
+
+    workspace.getWorkspaceFolder() return either WorkspaceFolder or undefined
+    
+    Signed-off-by: Anatoliy Bazko <abazko@redhat.com>
+
+[33mcommit 15a3b34678d1da7db3876e2297d8eb4600460748[m
+Author: Victor Rubezhny <vrubezhny@redhat.com>
+Date:   Mon Feb 25 19:52:16 2019 +0100
+
+    workspace.onDidRenameFile and workspace.onWillRenameFile implementations are missed #4167
+    
+    Signed-off-by: Victor Rubezhny <vrubezhny@redhat.com>
+
+[33mcommit f59ecdebc4f65dddda302e37bf0cc99c6149fdda[m
+Author: Sven Efftinge <sven.efftinge@typefox.io>
+Date:   Mon Mar 11 09:31:28 2019 +0000
+
+    [core] reduce default tree indent
+    
+    Fixes theia-ide/theia#4520
+    
+    Signed-off-by: Sven Efftinge <sven.efftinge@typefox.io>
+
+[33mcommit fed754618c4b8dce9cc3a08c589e37f120f55fb1[m
+Author: Mykola Morhun <mmorhun@redhat.com>
+Date:   Thu Mar 7 10:17:26 2019 +0000
+
+    Fix VScode plug-in API incompatibilities for onDidChangeActiveTextEditor event
+    
+    Signed-off-by: Mykola Morhun <mmorhun@redhat.com>
+
+[33mcommit d287ff44c816c58ce05c9ae833c48a95f707e624[m
+Author: Anton Kosyakov <anton.kosyakov@typefox.io>
+Date:   Wed Mar 6 07:55:38 2019 +0000
+
+    added missing copyrights
+    
+    Signed-off-by: Anton Kosyakov <anton.kosyakov@typefox.io>
+
+[33mcommit cd07b5cecff42332ac3f64a4be9a5476f1306440[m
+Author: Artem Zatsarynnyi <azatsary@redhat.com>
+Date:   Thu Mar 7 17:28:10 2019 +0200
+
+    workspace.registerFileSystemProvider API
+    
+    The PR adds partial support of workspace.registerFileSystemProvider API, namely workspace.openTextDocument API now takes into account all the contributed FileSystemProviders. So a text document content can be fetched/written through a corresponding FileSystemProvider depending on file URL scheme.
+
+[33mcommit ab28d1f4f4c6ff6875f57d46c173ca2bbb08a31b[m
+Author: Amiram Wingarten <amiram.wingarten@sap.com>
+Date:   Thu Mar 7 11:23:54 2019 +0200
+
+    Fix host plugin run to remove --port arg of theia run
+    
+    Signed-off-by: Amiram Wingarten <amiram.wingarten@sap.com>
+
+[33mcommit 8ff594a1c1ea411c6213c138c8c3f08810ddf347[m
+Author: Akos Kitta <kittaakos@typefox.io>
+Date:   Tue Oct 9 16:41:46 2018 +0200
+
+    GH-707: Introduced the `@theia/typehierarchy` extension.
+    
+     - Extended the LSP with the type hierarchy.
+     - From now on, a tree node can carry decoration data.
+     - Added editor access for the current/active editors.
+    
+    Closes: #707.
+    
+    Signed-off-by: Akos Kitta <kittaakos@typefox.io>
+
+[33mcommit b8fe799dace5d5053d71d7c165472aa48a0fba01[m
+Author: Jan Keromnes <jan.keromnes@typefox.io>
+Date:   Wed Mar 6 18:25:02 2019 +0000
+
+    [preview] Fix opening images, #4495
+    
+    Signed-off-by: Jan Keromnes <jan.keromnes@typefox.io>
+
+[33mcommit 629cde58dfbbdd4f5e84dc8dc9bd49a3994ee004[m
+Author: Vincent Fugnitto <vincent.fugnitto@ericsson.com>
+Date:   Tue Mar 5 15:03:29 2019 -0500
+
+    Fix preferences circular dependency
+    
+    Fix circular dependencies present in `@theia/core/preferences` which affect the following files:
+    1. `preference-contribution`
+    2. `preference-provider`
+    3. `preference-service`
+    
+    The issue is that all three files made use of `PreferenceScope` which was present in the `preference-service`.
+    The fix includes moving both the `PreferenceScope` interface and namespace to a seperate file so that the coupling
+    is avoided.
+    
+    Circular dependencies are generally bad for a number of reasons including coupling,
+    prevent static linking and affect dependency injection among other reasons.
+    
+    Signed-off-by: Vincent Fugnitto <vincent.fugnitto@ericsson.com>
+
+[33mcommit 9d3fbed39e5245ee102852a93f542cc7b00f6d13[m
+Author: Anton Kosyakov <anton.kosyakov@typefox.io>
+Date:   Mon Jan 21 11:28:49 2019 +0000
+
+    fix #4035: retry to download debug adapters on http or network errors
+    
+    Signed-off-by: Anton Kosyakov <anton.kosyakov@typefox.io>
+
+[33mcommit da70d222804dcfb557db94e80ae136c56a76c9bc[m
+Author: Anton Kosyakov <anton.kosyakov@typefox.io>
+Date:   Wed Mar 6 09:33:25 2019 +0000
+
+    install vscode extensions from npm tarballs
+    
+    In order to support built in vscode extensions republished under `@theia/vscode-bultin-` prefix to npm
+    
+    Signed-off-by: Anton Kosyakov <anton.kosyakov@typefox.io>
+
+[33mcommit 57185e190d52537335f2127e81fbdfd9026c3e1a[m
+Author: Anatoliy Bazko <abazko@redhat.com>
+Date:   Wed Mar 6 12:45:41 2019 +0200
+
+    Move python language contribution to textmate-grammars package
+    
+    Signed-off-by: Anatoliy Bazko <abazko@redhat.com>
+
+[33mcommit 5f82fc50df128f1ea139c3ea9ce5b38a00fa512b[m
+Author: Vladyslav Zhukovskyi <vzhukovs@redhat.com>
+Date:   Wed Mar 6 11:28:32 2019 +0200
+
+    Use correct arguments in diff command handler
+    
+    Signed-off-by: Vladyslav Zhukovskyi <vzhukovs@redhat.com>
+
+[33mcommit 759b6b339921db279086e26230cf9b66d66760d9[m
+Author: Anton Kosyakov <anton.kosyakov@typefox.io>
+Date:   Mon Mar 4 16:23:30 2019 +0000
+
+    [plugin] fix #4463 fire onWillSaveTextDocument event properly
+    
+    Signed-off-by: Anton Kosyakov <anton.kosyakov@typefox.io>
+
+[33mcommit abda3b41d90e7b5f860429975b15758033141315[m
+Author: Anton Kosyakov <anton.kosyakov@typefox.io>
+Date:   Mon Mar 4 16:21:44 2019 +0000
+
+    [plugin] timeout host process save participant
+    
+    Signed-off-by: Anton Kosyakov <anton.kosyakov@typefox.io>
+
+[33mcommit 221c1681d69fbacf5ba1cd915284bcb48f8f2ef9[m
+Author: Anton Kosyakov <anton.kosyakov@typefox.io>
+Date:   Mon Mar 4 16:21:07 2019 +0000
+
+    [monaco] timeout format on save participant
+    
+    Signed-off-by: Anton Kosyakov <anton.kosyakov@typefox.io>
+
+[33mcommit d26840919d8c49d0826f2f394a05a9a32309ac5f[m
+Author: Anton Kosyakov <anton.kosyakov@typefox.io>
+Date:   Mon Mar 4 13:53:02 2019 +0000
+
+    [monaco] get rid of general save timeout
+    
+    Signed-off-by: Anton Kosyakov <anton.kosyakov@typefox.io>
+
+[33mcommit df62ad046ef57c5d3528c2ad4b486be313aba100[m
+Author: elaihau <liang.huang@ericsson.com>
+Date:   Thu Feb 28 16:24:22 2019 -0500
+
+    add 'scope' to task configuration
+    
+    To align the task list display in theia with that of vscode, we need to differentiate 3 things:
+    - the task type
+    - where the task comes from, and
+    - where the task is supposed to be run from
+    This change adds an optional '_scope' to the TaskConfiguration interface. Together with 'type' and '_source', we have enough number of properties to hold the information from vscode extensions.
+    
+    Signed-off-by: elaihau <liang.huang@ericsson.com>
+
+[33mcommit a70530151473191ee11b4aabe673ead78822f50f[m
+Author: Anatoliy Bazko <abazko@redhat.com>
+Date:   Tue Mar 5 10:34:39 2019 +0200
+
+    Fix progress creation
+    
+    Signed-off-by: Anatoliy Bazko <abazko@redhat.com>
+
+[33mcommit 6c8a63213511d9341b212f32c1c1a7344fe765f6[m
+Author: yotamshapira <yotamshapira@gmail.com>
+Date:   Thu Dec 6 13:05:22 2018 +0200
+
+    Typo in description of Range class
+    
+    Signed-off-by: Shapira <yotam.shapira@sap.com>
+
+[33mcommit 184ce8d75b07f06e9b4b5c63a4a48af1f194b78d[m
+Author: Gorkem Ercan <gorkem.ercan@gmail.com>
+Date:   Thu Feb 28 15:46:31 2019 -0500
+
+    Add schema support for tasks.json
+    Adds schema for task configurations. It enhances task-server
+    to be able to collect information about task types.
+    
+    Signed-off-by: Gorkem Ercan <gorkem.ercan@gmail.com>
+
+[33mcommit b53b1146f5e444564fe8131603ed9175595ff3d4[m
+Author: Vincent Fugnitto <vincent.fugnitto@ericsson.com>
+Date:   Fri Mar 1 16:12:43 2019 -0500
+
+    Added command to re-run last task
+    
+    - added a new command and keybinding to re-run the last recently ran task.
+    
+    Signed-off-by: Vincent Fugnitto <vincent.fugnitto@ericsson.com>
+
+[33mcommit 02ead365d967cb616b5076e288077c4f3fc105d1[m
+Author: Vladyslav Zhukovskyi <vzhukovs@redhat.com>
+Date:   Mon Mar 4 15:41:15 2019 +0200
+
+    Add ability to get selection context after execute command
+    
+    Signed-off-by: Vladyslav Zhukovskyi <vzhukovs@redhat.com>
+
+[33mcommit 7286cfbd44a1393129e107e1ef6564e8f27f6726[m
+Author: Anton Kosyakov <anton.kosyakov@typefox.io>
+Date:   Fri Mar 1 13:13:03 2019 +0000
+
+    fix #4455: don't pass user message actions over RPC
+    
+    Signed-off-by: Anton Kosyakov <anton.kosyakov@typefox.io>
+
+[33mcommit e1b5a60f0841f8edf1d8d60d99012e996fc145bc[m
+Author: Anatoliy Bazko <abazko@redhat.com>
+Date:   Fri Mar 1 13:00:12 2019 +0200
+
+    Fix configuration contribution and workspace.getWorkspaceFolder implementation
+    
+    Signed-off-by: Anatoliy Bazko <abazko@redhat.com>
+
+[33mcommit 91f5561bb1ea9a06be75e163e06a458163da3049[m
+Author: Akos Kitta <kittaakos@typefox.io>
+Date:   Sat Mar 2 10:16:45 2019 +0100
+
+    GH-4461: From now on, no `electron-store` will be created by the workers.
+    
+    Having one for the `isMaster` process is sufficient.
+    
+    Closes: #4461
+    Signed-off-by: Akos Kitta <kittaakos@typefox.io>
+
+[33mcommit 30298afd51ca8e61075c5879d9b2c1c57669d583[m
+Author: Bogdan Stolojan <petre.stolojan@arm.com>
+Date:   Fri Mar 1 11:46:34 2019 +0000
+
+    Removing reliance on FrontendApplicationConfigProvider
+    
+    Signed-off-by: Bogdan Stolojan <petre.stolojan@arm.com>
+
+[33mcommit 9621100cf5f6bbfb76d62358871f7a19ecf87a1d[m
+Author: Bogdan Stolojan <stolojan.bogdan@gmail.com>
+Date:   Tue Feb 19 15:14:38 2019 +0000
+
+    Adding customizable file name and extension for new files
+    
+    Signed-off-by: Bogdan Stolojan <petre.stolojan@arm.com>
+
+[33mcommit 6381e063982ac87755e69fa5851cbe57b902d12f[m
+Author: Jan Keromnes <jan.keromnes@typefox.io>
+Date:   Thu Feb 21 12:53:04 2019 +0000
+
+    [mini-browser] Better handle iframe errors
+    
+    * Hide spinner on iframe loading errors
+    * Hide spinner if the iframe doesn't load within 3 seconds
+    * Show an error message above the iframe when loading fails
+    * Honor 'resetBackground' on iframe loading errors too
+    * Add a 0.8s fade out transition to the spinner
+    
+    Signed-off-by: Jan Keromnes <jan.keromnes@typefox.io>
+
+[33mcommit 34df263ea61591329a651f3c5ac3c06462a0eeeb[m
+Author: Jan Keromnes <jan.keromnes@typefox.io>
+Date:   Fri Mar 1 13:09:27 2019 +0000
+
+    [minor] Trailing spaces in Developing.md
+    
+    Signed-off-by: Jan Keromnes <jan.keromnes@typefox.io>
+
+[33mcommit da771757c27df6eabe8c6e5f0c2bdc69f1439b2a[m
+Author: Simon Marchi <simon.marchi@efficios.com>
+Date:   Fri Mar 1 08:20:12 2019 -0500
+
+    Fix changing of cpp build configuration
+    
+    Previously, to change build configuration, we were relying on the fact
+    that calling "this.restart()" in onActiveBuildConfigChanged would cause
+    a new LanguageClient to be instantiated.  This would call
+    createOptions(), where we would return new value of
+    compilationDatabasePath in the initializationOptions that are sent to
+    clangd.
+    
+    However, since commit bfb235a0d7b ("[languages] fix leaking language
+    clients"), this.restart() does not create a new client, it re-uses the
+    existing one.  createOptions is not called and the old setting of
+    compilationDatabasePath is sent to clangd.  Therefore, the new build
+    configuration does not take effect.
+    
+    This patch fixes it locally in the cpp package: we now go overwrite the
+    initializationOptions in the existing LanguageClient object, so that the
+    new value will be picked up when call restart.
+    
+    Refs #4282
+    
+    Signed-off-by: Simon Marchi <simon.marchi@efficios.com>
+
+[33mcommit 431fa6737d03781b4cec13562045e3a73774b14b[m
+Author: Marc Dumais <marc.dumais@ericsson.com>
+Date:   Fri Mar 1 06:15:44 2019 -0500
+
+    [browser example] Step @theia versions in package.json
+    
+    Lerna automatically steps the version of our various package.json when
+    we release. It looks like it missed the one for examples/browser for
+    an unknown reason. Fixing it in this commit.
+    
+    Signed-off-by: Marc Dumais <marc.dumais@ericsson.com>
+
+[33mcommit f67ffc68ba3f0882852c646c269430ed845c10f9[m
+Author: Vladyslav Zhukovskyi <vzhukovs@redhat.com>
+Date:   Thu Feb 28 17:16:34 2019 +0200
+
+    Remove labels in commands to hide them from command palette
+    
+    Signed-off-by: Vladyslav Zhukovskyi <vzhukovs@redhat.com>
+
+[33mcommit 71ad5409a5cd52d2854517ab15ac66e0e662ca55[m[33m ([m[1;33mtag: v0.4.0[m[33m)[m
+Author: Marc Dumais <marc.dumais@ericsson.com>
+Date:   Thu Feb 28 14:55:34 2019 -0500
+
+    publish v0.4.0
+    
+    Signed-off-by: Marc Dumais <marc.dumais@ericsson.com>
+
+[33mcommit 7f23b92efc7a94ddcc20400057250fbe26920966[m
+Author: Simon Delisle <simon.delisle@ericsson.com>
+Date:   Thu Feb 28 10:57:48 2019 -0500
+
+    Remove global buttons styling in Theia core
+    
+    Fix #4430 by applying Theia style only for .theia-button instead of all buttons
+    
+    Signed-off-by: Simon Delisle <simon.delisle@ericsson.com>
+
+[33mcommit 39688e49d5ddbfddff199ef7f1e3dc9ece0353dc[m
+Author: Anton Kosyakov <anton.kosyakov@typefox.io>
+Date:   Thu Feb 28 10:53:36 2019 +0000
+
+    fix #4443: breakpoint widget focus context should be enabled only when a widget is visible
+    
+    Signed-off-by: Anton Kosyakov <anton.kosyakov@typefox.io>
+
+[33mcommit c683f7dae38b34f13a7d8967cc765fe43322a25c[m
+Author: Vincent Fugnitto <vincent.fugnitto@ericsson.com>
+Date:   Thu Feb 28 09:06:16 2019 -0500
+
+    Update tabbar padding
+    
+    - Fixes issue addressed by the following comment https://github.com/theia-ide/theia/pull/4420#issuecomment-468263493
+    
+    Signed-off-by: Vincent Fugnitto <vincent.fugnitto@ericsson.com>
+
+[33mcommit 7e49f8784dc439db521ba6543c59f86e9ae55d36[m
+Author: elaihau <liang.huang@ericsson.com>
+Date:   Tue Feb 26 15:11:26 2019 -0500
+
+    update 'exclude' of file search in plugin api
+    
+    - vscode.workspace.findFiles() supports passing either a GlobPattern, undefined, or null to represent the pattern to ignore, while in theia, passing null is not allowed. This change aligned the theia pplugin api with that of vscode.
+    
+    Signed-off-by: elaihau <liang.huang@ericsson.com>
+
+[33mcommit f8794ddd3838e04c49c24692ee49c6715fbe6cb7[m
+Author: elaihau <liang.huang@ericsson.com>
+Date:   Tue Feb 26 08:44:03 2019 -0500
+
+    support ignored globs & limit in file search & plugin-ext
+    
+    - in current Theia, passing "ignored globs" or "limit" to plugins-api from plugins does not work, as the data is dropped before reaching the file search service. This change ensures the data goes through and handled by the service.
+    
+    Signed-off-by: elaihau <liang.huang@ericsson.com>
+
+[33mcommit b1ef055e2edcaaf29d22797a3d416ba710ce9f9d[m
+Author: vinayb21 <vinay@hackerrank.com>
+Date:   Thu Feb 28 11:51:14 2019 +0530
+
+    [Theia] Upgrade version of less to 3.0.3 for fixing the vulnerability in cryptiles package
+    
+    Signed-off-by: vinayb21 <vinay@hackerrank.com>
+
+[33mcommit 0e62adecd79997540a5cd8736a3910f83a2052ea[m
+Author: Sven Efftinge <sven.efftinge@typefox.io>
+Date:   Tue Feb 26 13:17:39 2019 +0000
+
+    [JSON] prefix file matches with / if they are relative.
+    
+    Fixes theia-ide/theia#4422
+    
+    Signed-off-by: Sven Efftinge <sven.efftinge@typefox.io>
+
+[33mcommit 36c105a2ac97162c7e42a7541895936a1a693566[m
+Author: Jan Bicker <jan.bicker@typefox.io>
+Date:   Mon Feb 25 15:15:43 2019 +0000
+
+    Added stash command
+    
+    Signed-off-by: Jan Bicker <jan.bicker@typefox.io>
+
+[33mcommit 84284959a3c579f874831b5450e5858670aeee07[m
+Author: vinayb21 <vinay@hackerrank.com>
+Date:   Wed Feb 27 12:03:14 2019 +0530
+
+    [Theia] Fix typo when pulling from/pushing to remote
+    
+    Fixes issue https://github.com/theia-ide/theia/issues/4365
+    
+    Signed-off-by: vinayb21 <vinay@hackerrank.com>
+
+[33mcommit 3302096bb4d66c488a17344d24f4ae70618d58bf[m
+Author: Oleksandr Andriienko <oandriie@redhat.com>
+Date:   Wed Feb 27 14:31:18 2019 +0200
+
+    Add issue template.
+    
+    Signed-off-by: Oleksandr Andriienko <oandriie@redhat.com>
+
+[33mcommit 979b0f8a911966ed954809032a1f3f62e6e52b97[m
+Author: Thomas Mäder <tmader@redhat.com>
+Date:   Mon Jan 28 16:05:40 2019 +0100
+
+    Use problem manager to handle markers from plugins
+    
+    Signed-off-by: Thomas Mäder <tmader@redhat.com>
+
+[33mcommit d874539bdca1f3d91a3169712cf71e9488269acb[m
+Author: Vincent Fugnitto <vincent.fugnitto@ericsson.com>
+Date:   Mon Feb 25 18:55:36 2019 -0500
+
+    Update tab-bar styling
+    
+    Fixes #2034
+    
+    - display `x` (close icon) when hovering over the dirty editor marker (circle).
+    - increase padding between editor name and (close / dirty) icons.
+    - adjust the `x` (close icon) size.
+    
+    Signed-off-by: Vincent Fugnitto <vincent.fugnitto@ericsson.com>
+
+[33mcommit 46fffd6226b537a9004f0a2abe5fd210d272f8b4[m
+Author: elaihau <liang.huang@ericsson.com>
+Date:   Mon Feb 25 10:24:48 2019 -0500
+
+    support file searches with globs
+    
+    - vscode.workspace.findFiles() requires the search service to support finding files with globs, while the theia service only supports string match at the moment. Since the Theia goal is making the plugin system compatible with vscode extensions, the glob support should be added to theia file search service.
+    
+    Signed-off-by: elaihau <liang.huang@ericsson.com>
+
+[33mcommit 523426dd3e2b0b10234ab20455d521c370540f9f[m
+Author: Anatoliy Bazko <abazko@redhat.com>
+Date:   Mon Feb 25 13:56:48 2019 +0200
+
+    Decouple typescript language and grammar contribution
+    
+    Signed-off-by: Anatoliy Bazko <abazko@redhat.com>
+
+[33mcommit 41bbd0e7f3886700d5a0503e971b7f3352f5f6b9[m
+Author: Vincent Fugnitto <vincent.fugnitto@ericsson.com>
+Date:   Mon Feb 25 20:00:07 2019 -0500
+
+    Remove git diff editors from quick open file
+    
+    Fixes #4404
+    
+    - Remove `git diff editors` from the quick file open.
+    
+    Signed-off-by: Vincent Fugnitto <vincent.fugnitto@ericsson.com>
+
+[33mcommit a078351064c96986e8b702dbfcc325755346abba[m
+Author: Vincent Fugnitto <vincent.fugnitto@ericsson.com>
+Date:   Mon Feb 25 21:25:15 2019 -0500
+
+    Register editor to navigation location stack when 'onCurrentEditorChanged'
+    
+    Fixes #4388
+    
+    - Previously, it wasn't clear when an editor would be registered to the `navigation location stack`.
+    This change adds the missing registration of an editor when `onCurrentEditorChanged`. Results in the
+    quick file open are now more consistently added to the stack.
+    
+    Signed-off-by: Vincent Fugnitto <vincent.fugnitto@ericsson.com>
+
+[33mcommit 615e817b68e114531282a8a0af34c5af08c573c7[m
+Author: Akos Kitta <kittaakos@typefox.io>
+Date:   Tue Feb 19 15:38:34 2019 +0100
+
+    GH-4150: Replaced the platform-specific `export` with a CLI option.
+    
+    So that Windows users can start the example application too.
+    
+    Usage: `yarn run start --plugins=local-dir:/path/to/your/plugins`.
+    
+    Closes: #4150.
+    
+    Signed-off-by: Akos Kitta <kittaakos@typefox.io>
+
+[33mcommit 30eaeb02cca616f11d59988ba562eccc3891a6ae[m
+Author: Thomas Mäder <tmader@redhat.com>
+Date:   Mon Feb 4 10:03:50 2019 +0100
+
+    Map well known commands to theia cmd
+    
+    Signed-off-by: Thomas Mäder <tmader@redhat.com>
+
+[33mcommit 26613fe408f21e22b4adbeb0176fa3ed7e096fc5[m
+Author: Thomas Mäder <tmader@redhat.com>
+Date:   Mon Feb 4 10:03:33 2019 +0100
+
+    Fix command conversions for code lens
+    
+    Signed-off-by: Thomas Mäder <tmader@redhat.com>
+
+[33mcommit 8ab19eae08df325382d3cf595cd7f1c46c616037[m
+Author: Jan Keromnes <jan.keromnes@typefox.io>
+Date:   Thu Feb 21 09:25:01 2019 +0000
+
+    [mini-browser] Fix 6px gap above the load-indicator.
+    
+    Signed-off-by: Jan Keromnes <jan.keromnes@typefox.io>
+
+[33mcommit 6bd4786c3a9b03c14ee52e807bf52294dc7a6194[m
+Author: Vincent Fugnitto <vincent.fugnitto@ericsson.com>
+Date:   Fri Feb 22 13:56:12 2019 -0500
+
+    Add border between recently opened and file results for the quick file open
+    
+    Added border between the `recently opened` and `file results` quick file open groups, similar to vscode.
+    
+    Signed-off-by: Vincent Fugnitto <vincent.fugnitto@ericsson.com>
+
+[33mcommit 43f772d5e480962c22d5d3f0115011c99cf0c5c8[m
+Author: Vincent Fugnitto <vincent.fugnitto@ericsson.com>
+Date:   Fri Feb 22 15:11:12 2019 -0500
+
+    Fix minor scrollbar issue for the command palette
+    
+    Fixes #4408
+    Fixes #4409
+    
+    - Fix issue on dark themes where the `command palette` scrollbar is completely black when in the
+    active state, making it difficult to see.
+    - Fix issue where the scrollbar in the `command palette` is difficult to find. Now when a user hovers over the scrollbar area, the scrollbar is displayed.
+    - Fix minor typo in the `scrollbar.css` with an extra comma.
+    
+    Signed-off-by: Vincent Fugnitto <vincent.fugnitto@ericsson.com>
+
+[33mcommit e710223dd3ee8acb70569a3cf8b5266574f47386[m
+Author: Oleksii Orel <oorel@redhat.com>
+Date:   Mon Feb 25 14:06:02 2019 +0200
+
+    fix the check which depends on TreeView id
+    
+    Signed-off-by: Oleksii Orel <oorel@redhat.com>
+
+[33mcommit 5d5ec345a9473a7dba6228d96f0162df38495880[m
+Author: Oleksii Orel <oorel@redhat.com>
+Date:   Mon Feb 25 12:56:05 2019 +0200
+
+    remove the wrong filter for container views
+    
+    Signed-off-by: Oleksii Orel <oorel@redhat.com>
+
+[33mcommit 611acf73fff20dea396bd75431cae0ea0363d3f9[m
+Author: Akos Kitta <kittaakos@typefox.io>
+Date:   Sun Feb 24 20:25:46 2019 +0100
+
+    Show the `X` on the closeable tab-bars only if current or has the hover.
+    
+    Otherwise hide them, so that the UI does not feel too noisy.
+    
+    Signed-off-by: Akos Kitta <kittaakos@typefox.io>
+
+[33mcommit 43b9f5ad3bfb5974c8c427874d5bca4630f1c7e5[m
+Author: Akos Kitta <kittaakos@typefox.io>
+Date:   Mon Feb 25 08:22:08 2019 +0100
+
+    Fixed the typos in the plugin API documentation.
+    
+    Signed-off-by: Akos Kitta <kittaakos@typefox.io>
+
+[33mcommit 6d030f8e92d25d426acfe4ae5d00b516161e047f[m
+Author: Oleksii Orel <oorel@redhat.com>
+Date:   Fri Feb 22 14:07:07 2019 +0200
+
+    Code refactoring
+    
+    Signed-off-by: Oleksii Orel <oorel@redhat.com>
+
+[33mcommit 58e1f6c64ed912edd5d4d9b2353b7a6ec114c333[m
+Author: Oleksii Orel <oorel@redhat.com>
+Date:   Tue Feb 19 21:25:54 2019 +0200
+
+    fix TreeView widget registration
+    
+    Signed-off-by: Oleksii Orel <oorel@redhat.com>
+
+[33mcommit c559850cb3b04d413dbee6c1da3ce515d0a5ad54[m
+Author: Akos Kitta <kittaakos@typefox.io>
+Date:   Fri Feb 15 13:35:15 2019 +0100
+
+    GH-4324: Use the `resetBackground`  property for the mini-browser.
+    
+    Instead of the hard-coded white background.
+    
+    Closes: #4324
+    
+    Signed-off-by: Akos Kitta <kittaakos@typefox.io>
+
+[33mcommit 4a73a1e0b598a55117e96de1db75b25c1873eb9e[m
+Author: Roman Nikitenko <rnikiten@redhat.com>
+Date:   Fri Feb 22 15:25:50 2019 +0200
+
+    Align TaskDto with TaskConfiguration
+    
+    Signed-off-by: Roman Nikitenko <rnikiten@redhat.com>
+
+[33mcommit 3bc56af7dfd1e5816495bde8bcabbfd9313c94ba[m
+Author: Vincent Fugnitto <vincent.fugnitto@ericsson.com>
+Date:   Wed Feb 20 13:23:46 2019 -0500
+
+    Add 'Clear Editor History' command
+    
+    Fixes #4389
+    
+    - If a user's recently opened editors list becomes large, there is no way to currently purge the list.
+    The command helps solve that issue by clearing the location stack, and resetting the pointer.
+    
+    Signed-off-by: Vincent Fugnitto <vincent.fugnitto@ericsson.com>
+
+[33mcommit ba717c52e7d00d102ee170e6e5b62bc796366082[m
+Author: Akos Kitta <kittaakos@typefox.io>
+Date:   Thu Feb 21 18:03:36 2019 +0100
+
+    GH-4371: Do not unset the `global` Git `protocol.version` on Travis.
+    
+    Travis does not set the default Git `protocol.version` to `2` anymore.
+    
+    See: https://travis-ci.community/t/got-to-fail-carthage-outdated-command-because-of-git-protocol-version/2359/
+    Signed-off-by: Akos Kitta <kittaakos@typefox.io>
+
+[33mcommit 45646c517cede2cb2ce5653a4d0264ebbf2692a0[m
+Author: Akos Kitta <kittaakos@typefox.io>
+Date:   Thu Feb 21 17:58:41 2019 +0100
+
+    GH-4395: Made the Git env variable validation less aggressive.
+    
+    This is an interim solution.
+    
+    Rules:
+     - Fails when the env variable was set, and we try to set another value.
+     - Passes when the env variable was set, and we try to re-set the same.
+    
+    Managing the external Git location via env vars is getting complicated:
+     - `dugite` manages the non-embedded Git locations with env variables.
+     - We have switched to connection scope DI-bindings for `DugiteGit`.
+    
+    Closes #4395.
+    
+    Signed-off-by: Akos Kitta <kittaakos@typefox.io>
+
+[33mcommit a0e1fd2c39d3d0b97b7eb2c71b14096609d0c230[m
+Author: Anatoliy Bazko <abazko@redhat.com>
+Date:   Thu Feb 21 11:36:26 2019 +0200
+
+    Fixes for golang plugin
+    
+    Signed-off-by: Anatoliy Bazko <abazko@redhat.com>
+
+[33mcommit fcb40018bcc4b573b23ee03791bc9a20562e4a10[m
+Author: elaihau <liang.huang@ericsson.com>
+Date:   Tue Feb 19 17:52:28 2019 -0500
+
+    setup plugin api before plugins are started
+    
+    - in current Theia code plugins are loaded and activated before the plugin api becomes ready. This change fixes this problem.
+    
+    Signed-off-by: elaihau <liang.huang@ericsson.com>
+
+[33mcommit 0702db135695ce1b618f7fb87d1431824e1e207b[m
+Author: elaihau <liang.huang@ericsson.com>
+Date:   Tue Feb 19 17:34:30 2019 -0500
+
+    delay hosted plugins' initialization
+    
+    - When plugins query the `workspace.workspaceFolders`, Theia plugin api returns `undefined` when there is no workspace open, or the opened workspace has not been resolved by `WorkspaceService`. And this is inconsistent with vsCode, where the extension host is not started until the `initialize` function of `WorkspaceService` returns. This change delays the initialization and loading of plugins to ensure workspace root(s) are resolved beforehand.
+    
+    Signed-off-by: elaihau <liang.huang@ericsson.com>
+
+[33mcommit 167ff063a2a746acf28f375e28544bd2a5ff0407[m
+Author: Roman Nikitenko <rnikiten@redhat.com>
+Date:   Tue Feb 19 15:33:25 2019 +0200
+
+    Add 'tasks.taskExecutions' Plug-in API
+    
+    Signed-off-by: Roman Nikitenko <rnikiten@redhat.com>
+
+[33mcommit 63b7115badd51896ae7572e02fd5beb996508637[m
+Author: Kavith Thiranga Lokuhewage <kaviththiranga@gmail.com>
+Date:   Tue Feb 5 16:11:27 2019 +0530
+
+    Fix local resource loading in webviews
+    
+    Fixes https://github.com/theia-ide/theia/issues/4251
+    
+    Signed-off-by: Kavith Lokuhewage <kaviththiranga@gmail.com>
+
+[33mcommit 5325f9227e03c9b039766243973cc6fab36580f4[m
+Author: Oleksandr Andriienko <oandriie@redhat.com>
+Date:   Wed Feb 13 13:50:55 2019 +0000
+
+    Implement onWillSaveTextDocument plugin api event handler. Align onWillSaveLoop time out value with VSCode(1500ms)
+    
+    Signed-off-by: Oleksandr Andriienko <oandriie@redhat.com>
+
+[33mcommit ea5fd6574f1e237dbeff68e611532c305437d29c[m
+Author: Vladyslav Zhukovskyi <vzhukovs@redhat.com>
+Date:   Wed Feb 20 16:31:09 2019 +0200
+
+    Add ability to handle vscode.diff command and open diff editor
+    
+    Signed-off-by: Vladyslav Zhukovskyi <vzhukovs@redhat.com>
+
+[33mcommit a4c16aaab132b62c7da3cf2091fbc65f568da10a[m
+Author: Rob Moran <rob.moran@arm.com>
+Date:   Thu Feb 14 12:56:00 2019 +0000
+
+    Allow easier overriding of DefaultWorkspaceServer
+    
+    Signed-off-by: Rob Moran <rob.moran@arm.com>
+
+[33mcommit 92e207e79a9d71e500d36e34155271498c0f01b0[m
+Author: Vincent Fugnitto <vincent.fugnitto@ericsson.com>
+Date:   Thu Feb 14 14:53:54 2019 -0500
+
+    Update quick open file sort order
+    
+    Fixes #4348
+    
+    Updated the quick open file to prioritize file name over file path when displaying results.
+    
+    Signed-off-by: Vincent Fugnitto <vincent.fugnitto@ericsson.com>
+
+[33mcommit ac658a1e943dce856027009b01e6804e56e11d26[m
+Author: Alex Tugarev <alex.tugarev@typefox.io>
+Date:   Thu Feb 14 08:53:00 2019 +0100
+
+    [git] Bind Git in connection scope
+    
+    - This should make it possible to use the `MessageService`,
+    e.g. in `GitInit`.
+    - Adjusted the tests.
+    
+    Signed-off-by: Alex Tugarev <alex.tugarev@typefox.io>
+
+[33mcommit 63f08119764128ac299b06e098681c5b5510c141[m
+Author: Akos Kitta <kittaakos@typefox.io>
+Date:   Thu Jan 31 17:10:09 2019 +0100
+
+    GH-4209: From now on, Theia is not shipped with Git.
+    
+    Closes: #4209.
+    Signed-off-by: Akos Kitta <kittaakos@typefox.io>
+
+[33mcommit 1ca7db0a020773194a68306ccf70fa65403f6ae8[m
+Author: jbicker <jan.bicker@typefox.io>
+Date:   Tue Feb 19 10:45:43 2019 +0100
+
+    Store the last state of window geometry of an electron app.
+    
+    Signed-off-by: jbicker <jan.bicker@typefox.io>
+
+[33mcommit 45f8993d5843d01b534518d390814c1083c044c4[m
+Author: Vitalii Parfonov <vparfonov@redhat.com>
+Date:   Wed Feb 20 10:44:30 2019 +0200
+
+    Introduce vscode.previeHtml command support
+    
+    Signed-off-by: Vitalii Parfonov <vparfonov@redhat.com>
+
+[33mcommit 234b88961be3b335dc6e567cef057f89a55aecb2[m
+Author: Akos Kitta <kittaakos@typefox.io>
+Date:   Tue Feb 19 15:44:50 2019 +0100
+
+    GH-4136: Ignore the `.cache` folder when checking hoisted dependencies.
+    
+    We have ignored the `.bin` folder previously,
+    now we have to ignore the `.cache` folder too.
+    
+    Closes: #4136.
+    Signed-off-by: Akos Kitta <kittaakos@typefox.io>
+
+[33mcommit 5dc9ba77cfa74af77f166d168d774ce075532734[m
+Author: Akos Kitta <kittaakos@typefox.io>
+Date:   Tue Feb 19 21:25:58 2019 +0100
+
+    GH-4371: Unset the Git `protocol.version` for the macOS build.
+    
+    Closes: #4371
+    Signed-off-by: Akos Kitta <kittaakos@typefox.io>
+
+[33mcommit 711b5800e2e79f1b9035ba5942e688553a7ff085[m
+Author: Akos Kitta <kittaakos@typefox.io>
+Date:   Tue Feb 19 19:00:44 2019 +0100
+
+    GH-4371: Unset the `global` Git `protocol.version` config on Travis-CI.
+    
+    So that Git `< 2.18.1` will not try to use the unsupported protocol
+    when cloning repositories into the temp folder for the tests.
+    
+    Closes #4371.
+    
+    Signed-off-by: Akos Kitta <kittaakos@typefox.io>
+
+[33mcommit 335f6600f503d4c59a37d21efa98f1c838af035a[m
+Author: Sven Efftinge <sven.efftinge@typefox.io>
+Date:   Tue Feb 19 12:55:53 2019 +0000
+
+    [terminal] introduced font preferences
+    
+    Signed-off-by: Sven Efftinge <sven.efftinge@typefox.io>
+
+[33mcommit c59633f7a0e60e719bf1e423bee783107b7cf48e[m
+Author: Roman Nikitenko <rnikiten@redhat.com>
+Date:   Fri Feb 8 11:48:52 2019 +0200
+
+    Add ability to specify container for webview panel
+    
+    Signed-off-by: Roman Nikitenko <rnikiten@redhat.com>
+
+[33mcommit 2d090d3836753ad21252147dfc6a5bb173b46ab6[m
+Author: Rob Moran <rob.moran@arm.com>
+Date:   Thu Feb 14 19:42:29 2019 +0000
+
+    URI decode the workspace path in location.hash
+    
+    Signed-off-by: Rob Moran <rob.moran@arm.com>
+
+[33mcommit 5967a9922cf98ac517073e56281df9f4aab16b79[m
+Author: Akos Kitta <kittaakos@typefox.io>
+Date:   Fri Feb 15 09:22:38 2019 +0100
+
+    GH-4352: Fixed the logic when guessing the cause of the LS failure.
+    
+    Closes: #4352
+    
+    Signed-off-by: Akos Kitta <kittaakos@typefox.io>
+
+[33mcommit 4b0b09d0852d3f52ab13bb98d28a716c482fc7af[m
+Author: Vincent Fugnitto <vincent.fugnitto@ericsson.com>
+Date:   Tue Feb 12 13:59:47 2019 -0500
+
+    Fix clash in language server session ids
+    
+    Fixes an issue where language server sessions ids clashed when starting multiple language servers.
+    The issue was encourented when attempting to start the `cpp` language server which could not properly
+    find the `cpp.clangdExecutable` since the `startParameters` were overwritten.
+    
+    **Example**:
+    The issue can be seen in the following example. Let's assume there are two language servers, A and B.
+    Language server A creates it's session id as 1, then B creates it's session id as 1 which essentially
+    overwrites the previous session information. When it comes time to configurate the language server
+    and start it with its `startParams` we query the sessions to get the values. In this case, the proper
+    values of A have already been overwritten and we can no longer properly start the LS.
+    
+    In the example of `cpp`, we attempt to tell the language server where `clangd` is located, but since
+    we also have TypeScript who registers a session, the values for `cpp` have been overwritten and we
+    can no longer start the LS.
+    
+    Signed-off-by: Vincent Fugnitto <vincent.fugnitto@ericsson.com>
+
+[33mcommit 1730624aeabc09ed291c0ddb2614eed2a5a49c9e[m
+Author: Florent Benoit <fbenoit@redhat.com>
+Date:   Wed Feb 13 16:20:41 2019 +0100
+
+    Align API with VScode API
+    fix typos
+    
+    Change-Id: Ie99ea50c0f9e982aa11d95a521cab81a3829c119
+    Signed-off-by: Florent Benoit <fbenoit@redhat.com>
+
+[33mcommit b8633c3fd5f08994c5d97b0e1d00e590b38c62d8[m
+Author: Simon Marchi <simon.marchi@ericsson.com>
+Date:   Thu Feb 14 12:13:24 2019 -0500
+
+    Fix languages package build error
+    
+    The latest patch was rebased and merged using Github, and therefore was
+    not tested in its final form.  Unfortunately, it broke due to some more
+    recent changes.
+    
+    [compile] src/node/language-server-contribution.ts(112,44): error TS2345: Argument of type 'ProcessErrorEvent' is not assignable to parameter of type 'Error'.
+    
+    This patch fixes it.
+    
+    Change-Id: Ic905fdd07078f129177284e17582d5698e67e4ac
+    Signed-off-by: Simon Marchi <simon.marchi@ericsson.com>
+
+[33mcommit eaf99431c08d8dc2f1c3481954a6c141aeb35889[m
+Author: Nigel Westbury <nigelipse@miegel.org>
+Date:   Thu Feb 14 15:07:49 2019 +0000
+
+    Fix 'git reset'
+    
+    Signed-off-by: Nigel Westbury <nigelipse@miegel.org>
+
+[33mcommit f24de1ce478cb12390865a5f0cb2a8e28b75e8d9[m
+Author: Simon Marchi <simon.marchi@ericsson.com>
+Date:   Mon Jan 28 12:08:43 2019 -0500
+
+    Remove ProcessTaskRunner.findCommand, introduce process "started" event
+    
+    In the long term goal of handling properly shell tasks (allowing the
+    user to specify "abc && def" as the command), we need to get rid of the
+    findCommand method in ProcessTaskRunner.  Otherwise, it will always
+    return that the binary "abc && def" can't be found.  Even for non-shell
+    tasks, it doesn't seem ideal to implement ourselves the logic of looking
+    through PATH.  It's better to leave that to the OS.
+    
+    Instead, we want to rely on the underlying thing we use to run processes
+    (either node's child_process or node-pty) to return us an appropriate
+    error code.
+    
+    With node's child_process, we can do it out-of-the-box.  With node-pty,
+    we use our own fork available at [1] which adds the necessary
+    features.  On error, the Process emits an onError event.
+    
+    For the non-error case, we need to know when the process has been
+    successfully started, so we can inform the client that the task has been
+    successfully started.  To do this, I added an 'onStart' event on
+    Process.
+    
+    [1] https://github.com/theia-ide/node-pty/tree/theia
+    
+    Change-Id: Ie2db8909610129842912d312872a48aef3de23a5
+    Signed-off-by: Simon Marchi <simon.marchi@ericsson.com>
+
+[33mcommit 45c95f344b1548d0dbaba77dacc6cad712174c30[m
+Author: elaihau <liang.huang@ericsson.com>
+Date:   Thu Feb 14 10:00:48 2019 -0500
+
+    fix PreferencesContainer.activatePreferenceEditor()
+    
+    PreferencesContainer.activatePreferenceEditor() is broken by commit https://github.com/theia-ide/theia/commit/a2fa90401638148b5fd1f713d096db46e0a8aa80. If activatePreferenceEditor() function is called right after PreferenceContainer gets created, the function could possibly execute code that activates a PreferenceEditor that has not been attached yet. With this change, activatePreferenceEditor() takes the readiness of PreferenceEditors into consideration.
+    
+    Signed-off-by: elaihau <liang.huang@ericsson.com>
+
+[33mcommit fa5173d85293b0f2d1cc7af60ba26c2ef6c7f08b[m
+Author: Vincent Fugnitto <vincent.fugnitto@ericsson.com>
+Date:   Wed Jan 16 15:43:46 2019 -0500
+
+    Stabilize ui test suite (upgrade dependencies, increase timeouts, clean up logging)
+    
+    - Upgraded `chromedriver` to latest compatible version according to chrome version.
+    - Upgraded peer webdriver dependencies.
+    - Reduced "noise" in test cases (removed unneeded logging, and deprecation warnings).
+    - Skip `cpp-change-build-config.ui-spec.ts` test case since it no longer works properly.
+    
+    Signed-off-by: Vincent Fugnitto <vincent.fugnitto@ericsson.com>
+
+[33mcommit 57e694e051236dde40f3ce798616d0529286556e[m
+Author: Vincent Fugnitto <vincent.fugnitto@ericsson.com>
+Date:   Tue Jan 29 16:01:48 2019 -0500
+
+    Improve `git pull` & `git push` quick-open-items
+    
+    Updated `git pull` and `git push` quick open items to now also display remote uri, instead
+    of simply displaying the remote name.
+    
+    - deprecate existing `getRemote` method, instead use the new method which return more
+    information `{name, url}` and handle cases of duplication by querying for specific remotes
+    based on the different actions `{fetch, push}`.
+    
+    Signed-off-by: Vincent Fugnitto <vincent.fugnitto@ericsson.com>
+
+[33mcommit 206127051db971630ebb2250715c87b322b831d4[m
+Author: Vincent Fugnitto <vincent.fugnitto@ericsson.com>
+Date:   Wed Feb 13 17:45:13 2019 -0500
+
+    Update cpp build config status bar item
+    
+    - Updated the cpp build config status bar to include tooltip
+    and display the build config more easily while reducing vertical space.
+    Previously the active build config was harder to identify and took too much space
+    on the status bar.
+    
+    Signed-off-by: Vincent Fugnitto <vincent.fugnitto@ericsson.com>
+
+[33mcommit e339cfec2ea680eec358b8b67ca0f5bf3426d12c[m
+Author: Vincent Fugnitto <vincent.fugnitto@ericsson.com>
+Date:   Wed Feb 13 16:28:37 2019 -0500
+
+    Update cpp-build-configuration documentation
+    
+    Signed-off-by: Vincent Fugnitto <vincent.fugnitto@ericsson.com>
+
+[33mcommit 92c360acf05c9630af8056b8186496ff82f7636c[m
+Author: Vincent Fugnitto <vincent.fugnitto@ericsson.com>
+Date:   Wed Feb 13 10:42:47 2019 -0500
+
+    Update cpp change build config statusbar on active change
+    
+    Fixes #4283
+    
+    - Previously, when an active cpp build config was updated through the settings,
+    the statusbar element would still show the outdated information. This PR handles
+    properly updating the statusbar element when the active build config is no longer
+    valid or has been updated.
+    
+    Signed-off-by: Vincent Fugnitto <vincent.fugnitto@ericsson.com>
+
+[33mcommit 826bfad22f5f7b435cc6ad1ce7b585bc465a9583[m
+Author: Rob Moran <rob.moran@arm.com>
+Date:   Mon Feb 11 15:45:56 2019 +0000
+
+    Add async frontend lifecycle callback for configure
+    
+    Signed-off-by: Rob Moran <rob.moran@arm.com>
+
+[33mcommit c79be15e1b6d635ae4226f729c35eaf83914f476[m
+Author: elaihau <liang.huang@ericsson.com>
+Date:   Mon Feb 11 13:13:05 2019 -0500
+
+    do not clear Task definition or scope unless execution changes
+    
+    - in the current Task class of the plugin-ext package, the "definition" and "scope" property are reset if any Task property gets updated. Since the "task definition" is only dependent on "task execution", this change updates the value of "task definition" if and only if "task execution" is changed.
+    
+    Signed-off-by: elaihau <liang.huang@ericsson.com>
+
+[33mcommit 60206635557685f049e1334362d491966f519171[m
+Author: Vincent Fugnitto <vincent.fugnitto@ericsson.com>
+Date:   Tue Feb 12 08:24:54 2019 -0500
+
+    Add missing cpp build config commands
+    
+    Fixes #4307
+    
+    - added the command `Reset Build Configuration` which resets an active config.
+    - added the command `Create New Build Configuration` which inserts a placholder setting for a new config,
+    and opens the preferences widget.
+    
+    Signed-off-by: Vincent Fugnitto <vincent.fugnitto@ericsson.com>
+
+[33mcommit 5fc113f8002d2c2d981f16a9e4022bc45580e51b[m
+Author: Vincent Fugnitto <vincent.fugnitto@ericsson.com>
+Date:   Tue Feb 12 10:51:58 2019 -0500
+
+    Removed duplicate 'new build config' when triggering for the first time.
+    
+    Fixes #4305
+    
+    - removed duplicate `build config` when tiggering `Create Build Config` for the first time.
+    
+    Signed-off-by: Vincent Fugnitto <vincent.fugnitto@ericsson.com>
+
+[33mcommit 1955032819a2ae754265a259f8a569809116ad20[m
+Author: Akos Kitta <kittaakos@typefox.io>
+Date:   Mon Feb 11 18:02:35 2019 +0100
+
+    GH-4272: Got rid of the `FileUri` dependency from the Git frontend code.
+    
+    Used the FS instead.
+    
+    Signed-off-by: Akos Kitta <kittaakos@typefox.io>
+
+[33mcommit 34e35a90965d200077da18d8488d3b1c63af74c7[m
+Author: Valeriy Svydenko <vsvydenk@redhat.com>
+Date:   Mon Feb 11 17:30:53 2019 +0200
+
+    [plug-in][java][preferences]use files.exclude preference instead of navigator.exclude
+    
+    Signed-off-by: Valeriy Svydenko <vsvydenk@redhat.com>
+
+[33mcommit 1e2cce94fd687a086988a1a1969a06b1f6429f2f[m
+Author: Paul Maréchal <paul.marechal@ericsson.com>
+Date:   Mon Feb 4 11:55:32 2019 -0500
+
+    [core] Return a proper Window object when possible
+    
+    I had changed a bit the return value of some
+    `WindowService.openNewWindow` functions.
+    
+    The API didn't change, although the actual returned values aren't the
+    same. This commit fixes it.
+    
+    Signed-off-by: Paul Maréchal <paul.marechal@ericsson.com>
+
+[33mcommit 41cfaabb61059b16b4af2734f35f8eed23619dee[m
+Author: Vincent Fugnitto <vincent.fugnitto@ericsson.com>
+Date:   Fri Feb 8 06:35:04 2019 -0500
+
+    Align 'Find in Folder' command label
+    
+    Fixes #4292
+    
+    Signed-off-by: Vincent Fugnitto <vincent.fugnitto@ericsson.com>
+
+[33mcommit 508e33c4cb169f80343640edbebd74abc305052b[m
+Author: Anton Kosyakov <anton.kosyakov@typefox.io>
+Date:   Fri Feb 8 11:41:13 2019 +0000
+
+    fix #1106, fix #3540: support language specific preferences
+    
+    Signed-off-by: Anton Kosyakov <anton.kosyakov@typefox.io>
+
+[33mcommit d9385eda84679e37f4f46c26ffd097479f965eff[m
+Author: elaihau <liang.huang@ericsson.com>
+Date:   Fri Feb 1 10:11:50 2019 -0500
+
+    refresh GitView when git repo changes
+    
+    - With current theia code, GitView could be initialised with incorrect repository, and it fails to change its internal state when the right repository is found. With this change, GitView is refreshed if and only if the active git repository changes.
+    - fixed #3988
+    - fixed #4219
+    
+    Signed-off-by: elaihau <liang.huang@ericsson.com>
+
+[33mcommit 87ad22b5da0598fc9d40ee422b053457adbf8a4d[m
+Author: elaihau <liang.huang@ericsson.com>
+Date:   Thu Feb 7 16:19:59 2019 -0500
+
+    fix displayed values in the preference editor
+    
+    - preference values displayed in the tree of preference editor are broken by the commit https://github.com/theia-ide/theia/commit/57b8add5db31a2da5d8b501cdd0ed76609dbcb24. This change fixes the bug where preference values (if boolean or number) don't get updated after being edited.
+    
+    Signed-off-by: elaihau <liang.huang@ericsson.com>
+
+[33mcommit ba4c62a63bd5a3c3d89e97ca6ee36a2c37da75fd[m
+Author: Anton Kosyakov <anton.kosyakov@typefox.io>
+Date:   Thu Feb 7 15:50:36 2019 +0000
+
+    [plugin] fix #4280: serialize preference change event properly
+    
+    Signed-off-by: Anton Kosyakov <anton.kosyakov@typefox.io>
+
+[33mcommit ed7f27d0b918e5fdf867c5f38906bd3462bf9b3c[m
+Author: Anton Kosyakov <anton.kosyakov@typefox.io>
+Date:   Tue Feb 5 16:16:13 2019 +0000
+
+    [plugin] fix #4259: support read-only configuration index access
+    
+    Signed-off-by: Anton Kosyakov <anton.kosyakov@typefox.io>
+
+[33mcommit da26d1dd67ac9a77d3ffa494b2156ee4881df0c7[m
+Author: Anton Kosyakov <anton.kosyakov@typefox.io>
+Date:   Tue Feb 5 15:27:58 2019 +0000
+
+    fix #4258: align preference default values by type with vscode
+    
+    Signed-off-by: Anton Kosyakov <anton.kosyakov@typefox.io>
+
+[33mcommit 6aff2195c781c3432b45e352497a370e1d2d55f3[m
+Author: Sven Efftinge <sven.efftinge@typefox.io>
+Date:   Thu Feb 7 13:42:46 2019 +0000
+
+    [dialogs] fix bad vertical resizing behavior
+    
+    Signed-off-by: Sven Efftinge <sven.efftinge@typefox.io>
+
+[33mcommit 8192a13763ee27931f499793786932505751da9c[m
+Author: Rob Moran <rob.moran@arm.com>
+Date:   Fri Feb 1 17:15:36 2019 +0000
+
+    Support preload HTML template
+    
+    Signed-off-by: Rob Moran <rob.moran@arm.com>
+
+[33mcommit 55507576d726c7350644f051eec548d5658963ec[m[33m ([m[1;31mtheia/ab/taskDefinitions[m[33m)[m
+Author: Anton Kosyakov <anton.kosyakov@typefox.io>
+Date:   Wed Feb 6 07:15:02 2019 +0000
+
+    fix #4230: complete implementation of command VS Code API
+    
+    Signed-off-by: Anton Kosyakov <anton.kosyakov@typefox.io>
+
+[33mcommit 36380db0a0e494f2a4e0694757ae78f46705c809[m
+Author: Anton Kosyakov <anton.kosyakov@typefox.io>
+Date:   Mon Feb 4 10:00:47 2019 +0000
+
+    [vscode] fix #4241: revive URIs properly to open documents
+    
+    Signed-off-by: Anton Kosyakov <anton.kosyakov@typefox.io>
+
+[33mcommit ab3c97db1ef7f1241e0b99aa2dd4d9219cc02daa[m
+Author: Anton Kosyakov <anton.kosyakov@typefox.io>
+Date:   Mon Feb 4 09:16:53 2019 +0000
+
+    [vscode] implement `workpace.rootPath`
+    
+    Signed-off-by: Anton Kosyakov <anton.kosyakov@typefox.io>
+
+[33mcommit 3ac12e103d1f5f839134aa0184388e0fcadc11b7[m
+Author: Anton Kosyakov <anton.kosyakov@typefox.io>
+Date:   Mon Feb 4 09:16:11 2019 +0000
+
+    [vscode] implement `commands.registerTextEditorCommand`
+    
+    Signed-off-by: Anton Kosyakov <anton.kosyakov@typefox.io>
+
+[33mcommit f763eeaafd5b2c373dc2cd05c6d58e10f9fd10d5[m
+Author: Anton Kosyakov <anton.kosyakov@typefox.io>
+Date:   Mon Feb 4 07:59:14 2019 +0000
+
+    [vscode] implement `commands.getCommands` API
+    
+    Signed-off-by: Anton Kosyakov <anton.kosyakov@typefox.io>
+
+[33mcommit 5956e48a3e9bffccc6f8fc8379ebe23957f43735[m
+Author: Anton Kosyakov <anton.kosyakov@typefox.io>
+Date:   Fri Feb 1 16:13:23 2019 +0000
+
+    [plug-in] enable running of VS Code extension tests
+    
+    Signed-off-by: Anton Kosyakov <anton.kosyakov@typefox.io>
+
+[33mcommit cc2396523fe7f44222eced143dd0ec6cd3f2aec5[m
+Author: Akos Kitta <kittaakos@typefox.io>
+Date:   Tue Feb 5 11:47:14 2019 +0100
+
+    GH-4253: Dropped the `path` and `name` when loading with `file-loader`.
+    
+    So that a bundled electron application can pick up the images.
+    
+    Closes: #4253.
+    Signed-off-by: Akos Kitta <kittaakos@typefox.io>
+
+[33mcommit e7a5cf1c49fff96bb90b4e5e1554f5b3268309f0[m
+Author: Roman Nikitenko <rnikiten@redhat.com>
+Date:   Tue Feb 5 11:17:20 2019 +0200
+
+    Add ability to pass argument for 'mini-browser.openUrl' command
+    
+    Signed-off-by: Roman Nikitenko <rnikiten@redhat.com>
+
+[33mcommit 403cc2f60db05270bf2512cc992f77f31a46ecd9[m
+Author: Aditya Sharma <adi.sharma@samsung.com>
+Date:   Mon Feb 4 18:35:24 2019 +0530
+
+    Show "Open With" context menu item only if there are multiple open handlers
+    
+    Signed-off-by: Aditya Sharma <adi.sharma@samsung.com>
+
+[33mcommit a2fa90401638148b5fd1f713d096db46e0a8aa80[m
+Author: elaihau <liang.huang@ericsson.com>
+Date:   Fri Feb 1 06:45:13 2019 -0500
+
+    preferences for multi-root workspace
+    
+    With changes in 543b119, URIs of root folders in a multi-root workspace are stored in a file with the extension of "theia-workspace", while the workspace preferences are in the ".theia/settings.json" under the first root.
+    
+    In this pull request, workspace preferences are stored
+    - in the workspace file under the "settings" property, if a workspace file exists, or
+    - in the ".theia/settings.json" if the workspace data is not saved in a workspace file.
+    
+    Also, this change supports
+    - having 4 levels of preferences (from highest priority to the lowest): FolderPreference, WorkspacePreference, UserPreference, and DefaultPreference, with
+    - an updated preference editor that supports viewing & editing the FolderPreferences, WorkspacePreferences, and UserPreferneces.
+    
+    - Internally, vsCode uses an enum to define the preference scope. External extensions, however, make contributions to preference schemas by having schemas defined in the package.json, where the preference scope is a string enum of "window", "application", and "resource". This change updates the PreferenceSchema interface defined in theia, to allow contribution points to define scopes with strings.
+    
+    - Added affects() function to PreferenceChange,  to help client decide whether or not the preference change matters.
+    
+    Signed-off-by: elaihau <liang.huang@ericsson.com>
+
+[33mcommit f54fc5c67232592e71bd65d5514fdbab8e90c51f[m
+Author: Paul Maréchal <paul.marechal@ericsson.com>
+Date:   Wed Nov 21 10:59:56 2018 -0500
+
+    Add optionnal `external` option to `WindowService`
+    
+    In a browser, this makes little difference to open a new Theia tab or to open a
+    link. But in Electron, we want to open a BrowserWindow for new Theia
+    workspaces, and to open in the default browser that the user has configured on
+    his machine.
+    
+    Signed-off-by: Paul Maréchal <paul.marechal@ericsson.com>
+
+[33mcommit 737fb8f86d39368d591ce3f790c22cb867f378c3[m
+Author: Paul Maréchal <paul.marechal@ericsson.com>
+Date:   Tue Nov 20 11:21:23 2018 -0500
+
+    [electron] electron-main.js fixes
+    
+    - Do not open links with `window.open` in an Electron Browser (security hazard).
+    - Fix #3531
+    
+    Signed-off-by: Paul Maréchal <paul.marechal@ericsson.com>
+
+[33mcommit 9118e523882e755879ce85419af0eba719df979e[m
+Author: Anton Kosiakov <anton.kosyakov@typefox.io>
+Date:   Fri Feb 1 13:21:38 2019 +0100
+
+    fix keybinding tests on mac
+    
+    Signed-off-by: Anton Kosiakov <anton.kosyakov@typefox.io>
+
+[33mcommit baa82bbe3dcc680461313bf3fbe2082e81de57a1[m
+Author: Anton Kosyakov <anton.kosyakov@typefox.io>
+Date:   Fri Feb 1 08:09:15 2019 +0000
+
+    fix #4214: make `OutputChannel.show` actually show
+    
+    Signed-off-by: Anton Kosyakov <anton.kosyakov@typefox.io>
+
+[33mcommit e8821cbf2f9c15f7a7db2d6db5293c86fe5ecb0b[m
+Author: Akos Kitta <kittaakos@typefox.io>
+Date:   Thu Jan 31 10:50:04 2019 +0100
+
+    Fixed typos.
+    
+    Signed-off-by: Akos Kitta <kittaakos@typefox.io>
+
+[33mcommit 10ff275305c787ebfda0f78ee91843b5991a8eff[m
+Author: Akos Kitta <kittaakos@typefox.io>
+Date:   Thu Jan 31 10:04:45 2019 +0100
+
+    GH-4189: Added LS start-up error handler.
+    
+    So that we can notfy the clients if the LS has failed.
+    
+    Closes: #4189
+    
+    Signed-off-by: Akos Kitta <kittaakos@typefox.io>
+
+[33mcommit 8f23321a7abf3b7420697eab9a0febfb7342d80c[m
+Author: Jan Bicker <jan.bicker@typefox.io>
+Date:   Tue Jan 15 10:19:16 2019 +0000
+
+    Fixed keybinding for 'Search In Workspace' widget.
+    
+    Fix: Handle normalized keysequences differently.
+    
+    Fixes theia-ide/theia#4039
+    
+    Signed-off-by: Jan Bicker <jan.bicker@typefox.io>
+
+[33mcommit 0628cb33c794848d8df45d53f60ac782bfbb7d07[m
+Author: Anton Kosyakov <anton.kosyakov@typefox.io>
+Date:   Thu Jan 31 08:06:11 2019 +0000
+
+    [vscode] fix #4175: tolerate mistyped keybindings
+    
+    Signed-off-by: Anton Kosyakov <anton.kosyakov@typefox.io>
+
+[33mcommit 57b8add5db31a2da5d8b501cdd0ed76609dbcb24[m
+Author: Uni Sayo <unibtc@gmail.com>
+Date:   Mon Jan 21 19:38:11 2019 +0000
+
+    escape and unescape \n and \r\n
+    
+    Signed-off-by: Uni Sayo <unibtc@gmail.com>
+    
+    move escape/unescape functions to core common strings.
+    
+    Signed-off-by: Uni Sayo <unibtc@gmail.com>
+    
+    use explicit string type
+    
+    Signed-off-by: Uni Sayo <unibtc@gmail.com>
+    
+    rename prefValue to value
+    
+    Signed-off-by: Uni Sayo <unibtc@gmail.com>
+
+[33mcommit 7cf3ca769f75165191f342f7207c740f535d81a8[m
+Author: Anton Kosyakov <anton.kosyakov@typefox.io>
+Date:   Thu Jan 31 10:54:22 2019 +0000
+
+    fix #4204: align debug commands with VS Code
+    
+    Signed-off-by: Anton Kosyakov <anton.kosyakov@typefox.io>
+
+[33mcommit c9da297421547a414ac618d4c9a646dead71e2d6[m
+Author: Anton Kosyakov <anton.kosyakov@typefox.io>
+Date:   Thu Jan 31 09:34:36 2019 +0000
+
+    [vscode] fix #4203: support os specific keybindings
+    
+    Signed-off-by: Anton Kosyakov <anton.kosyakov@typefox.io>
+
+[33mcommit d552d2a4c1f350220e5c6bc6a3b1b2707d41b2fa[m
+Author: Anton Kosyakov <anton.kosyakov@typefox.io>
+Date:   Thu Jan 31 11:21:16 2019 +0000
+
+    update Change Log with renamed menu groups
+    
+    Signed-off-by: Anton Kosyakov <anton.kosyakov@typefox.io>
+
+[33mcommit ce745642d4cc5a058c3e7d3cdf473141dba80cd0[m
+Author: Anton Kosyakov <anton.kosyakov@typefox.io>
+Date:   Wed Jan 30 10:52:25 2019 +0000
+
+    [vscode/menu] provide current selected resource as a command argument
+    
+    Signed-off-by: Anton Kosyakov <anton.kosyakov@typefox.io>
+
+[33mcommit ef9d80dbed88ee4b93eff988e00e6ecb1a5e8304[m
+Author: Anton Kosyakov <anton.kosyakov@typefox.io>
+Date:   Tue Jan 29 12:32:30 2019 +0000
+
+    fix #4151: register vscode commands/handlers properly
+    
+    Signed-off-by: Anton Kosyakov <anton.kosyakov@typefox.io>
+
+[33mcommit 46f66d5390cbda6d89c38a12346e043188a68772[m
+Author: Anton Kosyakov <anton.kosyakov@typefox.io>
+Date:   Tue Jan 29 10:09:10 2019 +0000
+
+    [browser] allow multiple menu items for the same command but in different contexts
+    
+    Signed-off-by: Anton Kosyakov <anton.kosyakov@typefox.io>
+
+[33mcommit 8b4fe733ecc5f930da5f13d0e6111ae78c9fa071[m
+Author: Anton Kosyakov <anton.kosyakov@typefox.io>
+Date:   Fri Jan 25 15:20:14 2019 +0000
+
+    [vscode] debug/callstack/context menu support
+    
+    Signed-off-by: Anton Kosyakov <anton.kosyakov@typefox.io>
+
+[33mcommit c173a7ef67664040e21c8838350d5aca05b54279[m
+Author: Anton Kosyakov <anton.kosyakov@typefox.io>
+Date:   Fri Jan 25 13:40:20 2019 +0000
+
+    [vscode] editor/title context menu support
+    
+    Signed-off-by: Anton Kosyakov <anton.kosyakov@typefox.io>
+
+[33mcommit a1c630ae48d26f9020b1ea6e19a3682ff640a557[m
+Author: Anton Kosyakov <anton.kosyakov@typefox.io>
+Date:   Thu Jan 24 12:51:20 2019 +0000
+
+    [vscode] editor/context menu support
+    
+    Signed-off-by: Anton Kosyakov <anton.kosyakov@typefox.io>
+
+[33mcommit 01833b5ce35247c3a8bd27251bed1cbad52904d8[m
+Author: Anton Kosyakov <anton.kosyakov@typefox.io>
+Date:   Thu Jan 24 10:56:52 2019 +0000
+
+    [vscode] explorer/context menu support
+    
+    Signed-off-by: Anton Kosyakov <anton.kosyakov@typefox.io>
+
+[33mcommit b37cc0724a85d6c786e9f34ee32008928cea3113[m
+Author: Anton Kosyakov <anton.kosyakov@typefox.io>
+Date:   Thu Jan 24 09:51:11 2019 +0000
+
+    [vscode/menu] sort navigation group always to the top top of a menu
+    
+    Signed-off-by: Anton Kosyakov <anton.kosyakov@typefox.io>
+
+[33mcommit 1d4138c7f14ca674eaee41db8d38a3a5eae95c88[m
+Author: Anton Kosyakov <anton.kosyakov@typefox.io>
+Date:   Wed Jan 30 14:19:32 2019 +0000
+
+    [ts] fix #4194: restore version only when workspace & preference are ready
+    
+    Signed-off-by: Anton Kosyakov <anton.kosyakov@typefox.io>
+
+[33mcommit 16b0159d1c85e672f47e1500a461e46f66900e7d[m
+Author: Anton Kosyakov <anton.kosyakov@typefox.io>
+Date:   Wed Jan 30 16:02:38 2019 +0000
+
+    [debug] fix #4197: only convert source file URIs to path
+    
+    Signed-off-by: Anton Kosyakov <anton.kosyakov@typefox.io>
+
+[33mcommit 67a288876b8284c92c30778f6ca5d59db57722a1[m
+Author: alainbernard <alain.bernard1224@gmail.com>
+Date:   Tue Jan 29 11:12:58 2019 +0100
+
+    Fixes #4169
+    
+    Uses 'request' module instead of plain 'http' and 'https' modules for
+    downloading the JAVA LS, allowing use of system properties for proxy
+    settings.
+    
+    Signed-off-by: alainbernard <alain.bernard1224@gmail.com>
+
+[33mcommit e2f3ec66321b938886faaf75d82f347dd40a76b5[m
+Author: elaihau <liang.huang@ericsson.com>
+Date:   Thu Jan 24 16:47:59 2019 -0500
+
+    use frontend file watcher service in task configuration
+    
+    In current code the backend FileSystemWatcherServer is injected into TaskConfiguration. Since TaskConfiguration is in the front end, we should use the frontend FileSystemWatcher instead.
+    
+    Signed-off-by: elaihau <liang.huang@ericsson.com>
+
+[33mcommit 33929f3b35a6f33ffc872f2f8c229c3aa6349f85[m
+Author: Simon Marchi <simon.marchi@ericsson.com>
+Date:   Wed Jan 30 09:25:21 2019 -0500
+
+    cpp: README changes
+    
+    - Split the README in sections, to allow readers to jump to what they
+      are looking for instead of reading the whole text.
+    - Mention clangd's --background-index switch
+    
+    Change-Id: Iee7ee817218b18f8d643ed6ef876b25284e511f6
+    Signed-off-by: Simon Marchi <simon.marchi@ericsson.com>
+
+[33mcommit 6b1a35cf249dc8c6c73cdf058cba4c5673b7e31c[m
+Author: Oleksii Kurinnyi <okurinny@redhat.com>
+Date:   Wed Jan 23 15:40:53 2019 +0200
+
+    [plug-in] implement inspect configuration method
+    
+    Signed-off-by: Oleksii Kurinnyi <okurinny@redhat.com>
+
+[33mcommit d76196d2dcfad65f3d302b556d7a7a8032f943e8[m
+Author: Anton Kosyakov <anton.kosyakov@typefox.io>
+Date:   Mon Jan 28 13:36:23 2019 +0000
+
+    [node-debug] fix #4176: fixes for `Toggle skipping this file` command
+    
+    Signed-off-by: Anton Kosyakov <anton.kosyakov@typefox.io>
+
+[33mcommit ab5596ea7182fb300401b647f834ae6468666a45[m
+Author: Valeriy Svydenko <vsvydenk@redhat.com>
+Date:   Tue Jan 29 16:19:24 2019 +0200
+
+    [plug-in][debug]Make it possible to connect to remote debug server
+    
+    Signed-off-by: Valeriy Svydenko <vsvydenk@redhat.com>
+
+[33mcommit be33962b892b22694130790d582d212ab8b22838[m
+Author: vince-fugnitto <vincent.fugnitto@ericsson.com>
+Date:   Mon Jan 28 11:50:25 2019 -0500
+
+    Handle uncaught plugin local dir does not exist
+    
+    Fixes #4041
+    
+    - handle the uncaught exception `Error: The directory referenced by local-dir:../../plugins does not exist.` by logging warning instead of throwing error.
+    - remove unecessary `await`.
+    
+    Signed-off-by: vince-fugnitto <vincent.fugnitto@ericsson.com>
+
+[33mcommit c8676eebb8b783ec71129204ef665682a3b79513[m
+Author: Oleksandr Andriienko <oandriie@redhat.com>
+Date:   Tue Jan 29 12:33:24 2019 +0200
+
+    Use PromiseLike instead of Thenable for theia-proposed.d.ts file.
+    
+    Signed-off-by: Oleksandr Andriienko <oandriie@redhat.com>
+
+[33mcommit fa5810fbb58feb3f62fc007003b8c05a98e28c60[m
+Author: Anatoliy Bazko <abazko@redhat.com>
+Date:   Mon Jan 28 10:12:51 2019 +0200
+
+    Fixes for typescript plugin
+    
+    Signed-off-by: Anatoliy Bazko <abazko@redhat.com>
+
+[33mcommit 11d282719bc2c43485e4aae99ab06006d7135db9[m
+Author: Anton Kosyakov <anton.kosyakov@typefox.io>
+Date:   Wed Jan 23 15:47:51 2019 +0000
+
+    [plugin] fix #4032: ensure uniqueness of status bar entries
+    
+    Signed-off-by: Anton Kosyakov <anton.kosyakov@typefox.io>
+
+[33mcommit 74a46e43280220e952475bc37f1009f457620bc0[m
+Author: Anatoliy Bazko <abazko@redhat.com>
+Date:   Fri Jan 25 10:53:31 2019 +0200
+
+    Implement VS Code setContext command
+    
+    Signed-off-by: Anatoliy Bazko <abazko@redhat.com>
+
+[33mcommit 5156023a4b0c590b40485f82d5c798c6ef6f8dec[m
+Author: arekzaluski <arkadiusz.zaluski@arm.com>
+Date:   Thu Jan 24 16:34:23 2019 +0000
+
+    [cpp] - Fix clangd environment variables
+    
+    Signed-off-by: arekzaluski <arkadiusz.zaluski@arm.com>
+
+[33mcommit 19c8f4207a42e0fd8e9ca33573b1eea333fc3c18[m
+Author: elaihau <liang.huang@ericsson.com>
+Date:   Wed Jan 23 17:57:49 2019 -0500
+
+    mark TaskConfiguration.source as an internal field
+    
+    - changed TaskConfiguration.source to TaskConfiguration._source
+    
+    Signed-off-by: elaihau <liang.huang@ericsson.com>
+
+[33mcommit 763ca8b4e1c3d1ce477efe79cea238c693b586dc[m
+Author: Anton Kosyakov <anton.kosyakov@typefox.io>
+Date:   Wed Jan 23 13:34:33 2019 +0000
+
+    fix #4073: support configuration settings when contexts
+    
+    Signed-off-by: Anton Kosyakov <anton.kosyakov@typefox.io>
+
+[33mcommit a8310fe4843f17c1611976cd243f7e430a322383[m
+Author: Anton Kosyakov <anton.kosyakov@typefox.io>
+Date:   Fri Jan 18 13:08:37 2019 +0000
+
+    support snippet mode when contexts
+    
+    Signed-off-by: Anton Kosyakov <anton.kosyakov@typefox.io>
+
+[33mcommit 8f4292909da293a51d682c0a792b213c62291e38[m
+Author: Anton Kosyakov <anton.kosyakov@typefox.io>
+Date:   Thu Jan 17 16:28:06 2019 +0000
+
+    fix #4098: preserve focus when open the quick pick recursively
+    
+    Signed-off-by: Anton Kosyakov <anton.kosyakov@typefox.io>
+
+[33mcommit c101d61e525dacf7cac69cab61c42fddccb07fa2[m
+Author: Anton Kosyakov <anton.kosyakov@typefox.io>
+Date:   Thu Jan 17 14:17:59 2019 +0000
+
+    support workspace when contexts
+    
+    Signed-off-by: Anton Kosyakov <anton.kosyakov@typefox.io>
+
+[33mcommit f02de9c636f529c07e38a8b2e8812895779cf49c[m
+Author: Anton Kosyakov <anton.kosyakov@typefox.io>
+Date:   Thu Jan 17 14:14:34 2019 +0000
+
+    support editor when contexts
+    
+    Signed-off-by: Anton Kosyakov <anton.kosyakov@typefox.io>
+
+[33mcommit 7cc7f7b3fba8fef6de8cf096b79711bb731ab915[m
+Author: Anton Kosyakov <anton.kosyakov@typefox.io>
+Date:   Thu Jan 17 14:03:08 2019 +0000
+
+    support console when contexts
+    
+    Signed-off-by: Anton Kosyakov <anton.kosyakov@typefox.io>
+
+[33mcommit 7f1ef7ef4d9e38766a045a48361d27344070a7b7[m
+Author: Anton Kosyakov <anton.kosyakov@typefox.io>
+Date:   Thu Jan 17 08:45:35 2019 +0000
+
+    support shell when contexts
+    
+    Signed-off-by: Anton Kosyakov <anton.kosyakov@typefox.io>
