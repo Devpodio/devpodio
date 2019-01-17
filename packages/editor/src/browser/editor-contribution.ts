@@ -19,7 +19,7 @@ import { TextEditor } from './editor';
 import { injectable, inject } from 'inversify';
 import URI from '@devpodio/core/lib/common/uri';
 import { StatusBarAlignment, StatusBar } from '@devpodio/core/lib/browser/status-bar/status-bar';
-import { FrontendApplicationContribution } from '@devpodio/core/lib/browser';
+import { FrontendApplicationContribution, DiffUris } from '@devpodio/core/lib/browser';
 import { Languages } from '@devpodio/languages/lib/browser';
 import { ContextKeyService } from '@devpodio/core/lib/browser/context-key-service';
 import { DisposableCollection } from '@devpodio/core';
@@ -36,6 +36,14 @@ export class EditorContribution implements FrontendApplicationContribution {
     protected readonly contextKeyService: ContextKeyService;
 
     onStart(): void {
+        this.initResourceContextKeys();
+        this.initEditorContextKeys();
+
+        this.updateStatusBar();
+        this.editorManager.onCurrentEditorChanged(() => this.updateStatusBar());
+    }
+
+    protected initResourceContextKeys(): void {
         const resourceSchemeKey = this.contextKeyService.createKey<string>('resourceScheme', undefined);
         const resourceFileName = this.contextKeyService.createKey<string>('resourceFilename', undefined);
         const resourceExtname = this.contextKeyService.createKey<string>('resourceExtname', undefined);
@@ -50,11 +58,7 @@ export class EditorContribution implements FrontendApplicationContribution {
         };
         updateContextKeys();
         this.editorManager.onCurrentEditorChanged(updateContextKeys);
-
-        this.updateStatusBar();
-        this.editorManager.onCurrentEditorChanged(() => this.updateStatusBar());
     }
-
     protected getLanguageId(uri: URI | undefined): string | undefined {
         const { languages } = this.languages;
         if (uri && languages) {
@@ -65,6 +69,24 @@ export class EditorContribution implements FrontendApplicationContribution {
             }
         }
         return undefined;
+    }
+
+    protected initEditorContextKeys(): void {
+        const editorIsOpen = this.contextKeyService.createKey<boolean>('editorIsOpen', false);
+        const textCompareEditorVisible = this.contextKeyService.createKey<boolean>('textCompareEditorVisible', false);
+        const updateContextKeys = () => {
+            const widgets = this.editorManager.all;
+            editorIsOpen.set(!!widgets.length);
+            textCompareEditorVisible.set(widgets.some(widget => DiffUris.isDiffUri(widget.editor.uri)));
+        };
+        updateContextKeys();
+        for (const widget of this.editorManager.all) {
+            widget.disposed.connect(updateContextKeys);
+        }
+        this.editorManager.onCreated(widget => {
+            updateContextKeys();
+            widget.disposed.connect(updateContextKeys);
+        });
     }
 
     protected readonly toDisposeOnCurrentEditorChanged = new DisposableCollection();
