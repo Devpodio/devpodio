@@ -19,9 +19,9 @@ import { join } from 'path';
 import { spawnSync } from 'child_process';
 
 export function rebuild(target: 'electron' | 'browser', modules: string[]) {
-    const nodeModulesPath = join(process.cwd(), 'node_modules');
-    const browserModulesPath = join(process.cwd(), '.browser_modules');
-    const modulesToProcess = modules || ['@theia/node-pty', 'vscode-nsfw', 'find-git-repositories'];
+    const nodeModulesPath = path.join(process.cwd(), 'node_modules');
+    const browserModulesPath = path.join(process.cwd(), '.browser_modules');
+    const modulesToProcess = modules || ['@theia/node-pty', 'nsfw', 'find-git-repositories'];
 
     if (target === 'electron' && !existsSync(browserModulesPath)) {
         const dependencies: {
