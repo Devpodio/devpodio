@@ -15,8 +15,9 @@
  ********************************************************************************/
 
 import { inject, injectable } from 'inversify';
-import { Tree, TreeDecorator, TreeDecoration, PreferenceProperty, PreferenceService } from '@devpodio/core/lib/browser';
-import { Emitter, Event, MaybePromise } from '@devpodio/core';
+import { Tree, TreeDecorator, TreeDecoration, PreferenceProperty, PreferenceService } from '@theia/core/lib/browser';
+import { Emitter, Event, MaybePromise } from '@theia/core';
+import { escapeInvisibleChars } from '@theia/core/lib/common/strings';
 
 @injectable()
 export class PreferencesDecorator implements TreeDecorator {
@@ -50,7 +51,7 @@ export class PreferencesDecorator implements TreeDecorator {
                 tooltip: preferenceValue.description,
                 captionSuffixes: [
                     {
-                        data: storedValue !== undefined ? ': ' + this.escapeInvisibleChars(storedValue) :
+                        data: storedValue !== undefined && typeof storedValue === 'string' ? ': ' + escapeInvisibleChars(storedValue) :
                             preferenceValue.default !== undefined ? ': ' + preferenceValue.default : undefined,
                     },
                     {
@@ -65,8 +66,5 @@ export class PreferencesDecorator implements TreeDecorator {
     decorations(tree: Tree): MaybePromise<Map<string, TreeDecoration.Data>> {
         return this.preferencesDecorations;
     }
-    // tslint:disable-next-line:no-any
-    escapeInvisibleChars(prefValue: any): any {
-        return prefValue && typeof prefValue === 'string' ? prefValue.replace(/\n/g, '\\n').replace(/\r/g, '\\r') : prefValue;
-    }
+
 }
