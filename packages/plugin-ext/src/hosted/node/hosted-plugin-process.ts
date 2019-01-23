@@ -20,7 +20,7 @@ import { injectable, inject } from 'inversify';
 import { ILogger, ConnectionErrorHandler } from '@devpodio/core/lib/common';
 import { Emitter } from '@devpodio/core/lib/common/event';
 import { createIpcEnv } from '@devpodio/core/lib/node/messaging/ipc-protocol';
-import { HostedPluginClient, ServerPluginRunner } from '../../common/plugin-protocol';
+import { HostedPluginClient, ServerPluginRunner, PluginMetadata } from '../../common/plugin-protocol';
 import { RPCProtocolImpl } from '../../api/rpc-protocol';
 import { MAIN_RPC_CONTEXT } from '../../api/plugin-api';
 
@@ -139,4 +139,9 @@ export class HostedPluginProcess implements ServerPluginRunner {
 
         return childProcess;
     }
+
+    async getExtraPluginMetadata(): Promise<PluginMetadata[]> {
+        return [];
+    }
+
 }

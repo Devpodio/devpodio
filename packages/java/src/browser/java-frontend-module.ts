@@ -25,11 +25,8 @@ import { JavaCommandContribution } from './java-commands';
 import { JavaLabelProviderContribution } from './java-label-provider';
 import { JavaResourceResolver } from './java-resource';
 import { JavaEditorTextFocusContext } from './java-keybinding-contexts';
-import { JavaTextmateContribution } from './monaco-contribution/java-textmate-contribution';
-import { LanguageGrammarDefinitionContribution } from '@devpodio/monaco/lib/browser/textmate/textmate-contribution';
-import { bindJavaPreferences } from './java-preferences';
 
-import './monaco-contribution';
+import { bindJavaPreferences } from './java-preferences';
 
 export default new ContainerModule(bind => {
     bindJavaPreferences(bind);
@@ -48,6 +45,4 @@ export default new ContainerModule(bind => {
     bind(ResourceResolver).toService(JavaResourceResolver);
 
     bind(LabelProviderContribution).to(JavaLabelProviderContribution).inSingletonScope();
-
-    bind(LanguageGrammarDefinitionContribution).to(JavaTextmateContribution).inSingletonScope();
 });

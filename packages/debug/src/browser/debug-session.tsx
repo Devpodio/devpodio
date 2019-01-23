@@ -28,13 +28,14 @@ import { DebugThread, StoppedDetails, DebugThreadData } from './model/debug-thre
 import { DebugScope } from './console/debug-console-items';
 import { DebugStackFrame } from './model/debug-stack-frame';
 import { DebugSource } from './model/debug-source';
-import { DebugBreakpoint } from './model/debug-breakpoint';
+import { DebugBreakpoint, DebugBreakpointData } from './model/debug-breakpoint';
 import debounce = require('p-debounce');
 import URI from '@devpodio/core/lib/common/uri';
 import { BreakpointManager } from './breakpoint/breakpoint-manager';
 import { DebugSessionOptions, InternalDebugSessionOptions } from './debug-session-options';
 import { DebugConfiguration } from '../common/debug-common';
 import { SourceBreakpoint } from './breakpoint/breakpoint-marker';
+import { FileSystem } from '@theia/filesystem/lib/common';
 
 export enum DebugState {
     Inactive,
@@ -68,7 +69,8 @@ export class DebugSession implements CompositeTreeElement {
         protected readonly editorManager: EditorManager,
         protected readonly breakpoints: BreakpointManager,
         protected readonly labelProvider: LabelProvider,
-        protected readonly messages: MessageClient) {
+        protected readonly messages: MessageClient,
+        protected readonly fileSystem: FileSystem) {
         this.connection.onRequest('runInTerminal', (request: DebugProtocol.RunInTerminalRequest) => this.runInTerminal(request));
         this.toDispose.pushAll([
             this.onDidChangeEmitter,
@@ -128,12 +130,27 @@ export class DebugSession implements CompositeTreeElement {
     getSourceForUri(uri: URI): DebugSource | undefined {
         return this.sources.get(uri.toString());
     }
-    toSource(uri: URI): DebugSource {
+    async toSource(uri: URI): Promise<DebugSource> {
         const source = this.getSourceForUri(uri);
         if (source) {
             return source;
         }
-        return this.getSource(DebugSource.toSource(uri));
+
+        return this.getSource(await this.toDebugSource(uri));
+    }
+
+    async toDebugSource(uri: URI): Promise<DebugProtocol.Source> {
+        if (uri.scheme === DebugSource.SCHEME) {
+            return {
+                name: uri.path.toString(),
+                sourceReference: Number(uri.query)
+            };
+        }
+        const path = await this.fileSystem.getFsPath(uri.toString());
+        return {
+            name: uri.displayName,
+            path
+        };
     }
 
     protected _threads = new Map<number, DebugThread>();
@@ -507,18 +524,41 @@ export class DebugSession implements CompositeTreeElement {
         }
         const { uri, sourceModified } = options;
         for (const affectedUri of this.getAffectedUris(uri)) {
-            const source = this.toSource(affectedUri);
+            const source = await this.toSource(affectedUri);
             const all = this.breakpoints.findMarkers({ uri: affectedUri }).map(({ data }) =>
                 new DebugBreakpoint(data, this.labelProvider, this.breakpoints, this.editorManager, this)
             );
             const enabled = all.filter(b => b.enabled);
-            const response = await this.sendRequest('setBreakpoints', {
-                source: source.raw,
-                sourceModified,
-                breakpoints: enabled.map(({ origin }) => origin.raw)
-            });
-            response.body.breakpoints.map((raw, index) => enabled[index].update({ raw }));
-            this.setBreakpoints(affectedUri, all);
+
+            try {
+                const response = await this.sendRequest('setBreakpoints', {
+                    source: source.raw,
+                    sourceModified,
+                    breakpoints: enabled.map(({ origin }) => origin.raw)
+                });
+                response.body.breakpoints.map((raw, index) => enabled[index].update({ raw }));
+            } catch (error) {
+                // could be error or promise rejection of DebugProtocol.SetBreakpointsResponse
+                if (error instanceof Error) {
+                    console.error(`Error setting breakpoints: ${error.message}`);
+                } else {
+                    // handle adapters that send failed DebugProtocol.SetBreakpointsResponse for invalid breakpoints
+                    const genericMessage: string = 'Breakpoint not valid for current debug session';
+                    const message: string = error.message ? `${error.message}` : genericMessage;
+                    console.warn(`Could not handle breakpoints for ${affectedUri}: ${message}, disabling...`);
+                    enabled.forEach((brkPoint: DebugBreakpoint) => {
+                        const debugBreakpointData: Partial<DebugBreakpointData> = {
+                            raw: {
+                                verified: false,
+                                message
+                            }
+                        };
+                        brkPoint.update(debugBreakpointData);
+                    });
+                }
+            } finally {
+                this.setBreakpoints(affectedUri, all);
+            }
         }
     }
     protected setBreakpoints(uri: URI, breakpoints: DebugBreakpoint[]): void {

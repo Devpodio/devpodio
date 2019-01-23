@@ -24,7 +24,7 @@ import { DisposableCollection } from '@devpodio/core';
 import { TaskProviderRegistry, TaskResolverRegistry, TaskProvider, TaskResolver } from '@devpodio/task/lib/browser/task-contribution';
 import { interfaces } from 'inversify';
 import { WorkspaceService } from '@devpodio/workspace/lib/browser/workspace-service';
-import { TaskInfo } from '@devpodio/task/lib/common/task-protocol';
+import { TaskInfo, TaskExitedEvent } from '@devpodio/task/lib/common/task-protocol';
 import { TaskWatcher } from '@devpodio/task/lib/common/task-watcher';
 import { TaskService } from '@devpodio/task/lib/browser/task-service';
 import { TaskConfiguration } from '@devpodio/task/lib/common';
@@ -61,6 +61,12 @@ export class TasksMainImpl implements TasksMain {
                     id: event.taskId,
                     task: event.config
                 });
+            }
+        });
+
+        this.taskWatcher.onTaskExit((event: TaskExitedEvent) => {
+            if (event.ctx === this.workspaceRootUri) {
+                this.proxy.$onDidEndTask(event.taskId);
             }
         });
     }

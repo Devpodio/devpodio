@@ -93,7 +93,7 @@ import {
     Color,
     ColorInformation,
     ColorPresentation,
-    OSType,
+    OperatingSystem,
 } from './types-impl';
 import { SymbolKind } from '../api/model';
 import { EditorsAndDocumentsExtImpl } from './editors-and-documents';
@@ -164,6 +164,9 @@ export function createAPIFactory(
             // tslint:disable-next-line:no-any
             registerHandler(commandId: string, handler: (...args: any[]) => any): Disposable {
                 return commandRegistry.registerHandler(commandId, handler);
+            },
+            getKeyBinding(commandId: string): PromiseLike<theia.CommandKeyBinding[] | undefined> {
+                return commandRegistry.getKeyBinding(commandId);
             }
         };
 
@@ -419,8 +422,8 @@ export function createAPIFactory(
             getQueryParameters(): QueryParameters {
                 return envExt.getQueryParameters();
             },
-            getOsType(): PromiseLike<theia.OSType> {
-                return envExt.getOsType();
+            getClientOperatingSystem(): PromiseLike<theia.OperatingSystem> {
+                return envExt.getClientOperatingSystem();
             }
 
         };
@@ -582,6 +585,10 @@ export function createAPIFactory(
 
             onDidStartTask(listener, thisArg?, disposables?) {
                 return tasksExt.onDidStartTask(listener, thisArg, disposables);
+            },
+
+            onDidEndTask(listener, thisArg?, disposables?) {
+                return tasksExt.onDidEndTask(listener, thisArg, disposables);
             }
         };
 
@@ -669,7 +676,7 @@ export function createAPIFactory(
             ColorPresentation,
             FoldingRange,
             FoldingRangeKind,
-            OSType
+            OperatingSystem
         };
     };
 }

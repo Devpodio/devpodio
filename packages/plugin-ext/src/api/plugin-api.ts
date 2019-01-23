@@ -155,6 +155,7 @@ export interface CommandRegistryMain {
     $unregisterCommand(id: string): void;
     $executeCommand<T>(id: string, ...args: any[]): PromiseLike<T | undefined>;
     $getCommands(): PromiseLike<string[]>;
+    $getKeyBinding(commandId: string): PromiseLike<theia.CommandKeyBinding[] | undefined>;
 }
 
 export interface CommandRegistryExt {
@@ -702,7 +703,7 @@ export interface DocumentsMain {
 
 export interface EnvMain {
     $getEnvVariable(envVarName: string): Promise<string | undefined>;
-    $getOsType(): Promise<theia.OSType>;
+    $getClientOperatingSystem(): Promise<theia.OperatingSystem>;
 }
 
 export interface PreferenceRegistryMain {
@@ -1028,6 +1029,7 @@ export interface TasksExt {
     $provideTasks(handle: number): Promise<TaskDto[] | undefined>;
     $resolveTask(handle: number, task: TaskDto): Promise<TaskDto | undefined>;
     $onDidStartTask(execution: TaskExecutionDto): void;
+    $onDidEndTask(id: number): void;
 }
 
 export interface TasksMain {

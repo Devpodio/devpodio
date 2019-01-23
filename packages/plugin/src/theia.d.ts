@@ -48,6 +48,14 @@ declare module '@devpodio/plugin' {
          * dispose all provided disposables.
          */
         static from(...disposableLikes: { dispose: () => any }[]): Disposable;
+
+        /**
+        * Creates a new Disposable calling the provided function
+        * on dispose.
+        * @param callOnDispose Function that disposes something.
+        */
+        constructor(callOnDispose: Function);
+
     }
 
     export type PluginType = 'frontend' | 'backend';
@@ -176,6 +184,17 @@ declare module '@devpodio/plugin' {
          * invoked with.
          */
         arguments?: any[];
+
+        // Title and command fields are needed to make Command object similar to Command from vscode API
+
+        /**
+         * Title of the command, like "save".
+         */
+        title?: string;
+        /**
+         * The identifier of the actual command handler.
+         */
+        command?: string;
     }
 
     /**
@@ -193,7 +212,7 @@ declare module '@devpodio/plugin' {
          */
         readonly character: number;
 
-        constructor(line: number, char: number);
+        constructor(line: number, character: number);
 
         /**
          * Check if this position is before `other`.
@@ -325,11 +344,11 @@ declare module '@devpodio/plugin' {
          * Create a new position from coordinates.
          *
          * @param startLine a zero based line value
-         * @param startChar a zero based character value
+         * @param startCharacter a zero based character value
          * @param endLine a zero based line value
-         * @param endChar a zero based character value
+         * @param endCharacter a zero based character value
          */
-        constructor(startLine: number, startChar: number, endLine: number, endChar: number);
+        constructor(startLine: number, startCharacter: number, endLine: number, endCharacter: number);
 
         /**
          * Check if a position or a range is in this range.
@@ -405,11 +424,11 @@ declare module '@devpodio/plugin' {
          * Create a selection from coordinates.
          *
          * @param anchorLine a zero based line value
-         * @param anchorChar a zero based character value
+         * @param anchorCharacter a zero based character value
          * @param activeLine a zero based line value
-         * @param activeChar a zero based character value
+         * @param activeCharacter a zero based character value
          */
-        constructor(anchorLine: number, anchorChar: number, activeLine: number, activeChar: number);
+        constructor(anchorLine: number, anchorCharacter: number, activeLine: number, activeCharacter: number);
     }
 
     /**
@@ -1066,7 +1085,7 @@ declare module '@devpodio/plugin' {
          * @param options The undo/redo behavior around this edit. By default, undo stops will be created before and after this edit.
          * @return A promise that resolves with a value indicating if the edits could be applied.
          */
-        edit(callback: (editBuilder: TextEditorEdit) => void, options?: { undoStopBefore: boolean; undoStopAfter: boolean; }): Promise<boolean>;
+        edit(callback: (editBuilder: TextEditorEdit) => void, options?: { undoStopBefore: boolean; undoStopAfter: boolean; }): PromiseLike<boolean>;
 
         /**
          * Insert a [snippet](#SnippetString) and put the editor into snippet mode. "Snippet mode"
@@ -1079,7 +1098,7 @@ declare module '@devpodio/plugin' {
          * @return A promise that resolves with a value indicating if the snippet could be inserted. Note that the promise does not signal
          * that the snippet is completely filled-in or accepted.
          */
-        insertSnippet(snippet: SnippetString, location?: Position | Range | Position[] | Range[], options?: { undoStopBefore: boolean; undoStopAfter: boolean; }): Promise<boolean>;
+        insertSnippet(snippet: SnippetString, location?: Position | Range | Position[] | Range[], options?: { undoStopBefore: boolean; undoStopAfter: boolean; }): PromiseLike<boolean>;
 
         /**
          * Adds a set of decorations to the text editor. If a set of decorations already exists with
@@ -2821,7 +2840,7 @@ declare module '@devpodio/plugin' {
          * @param items A set of items that will be rendered as actions in the message.
          * @return A promise that resolves to the selected item or `undefined` when being dismissed.
          */
-        export function showInformationMessage<T extends MessageItem>(message: string, options: MessageOptions, ...items: T[]): PromiseLike<T | undefined>;
+        export function showInformationMessage<T extends MessageItem>(message: string, ...items: T[]): PromiseLike<T | undefined>;
 
         /**
          * Show an information message.
@@ -2840,7 +2859,7 @@ declare module '@devpodio/plugin' {
          * @param items A set of items that will be rendered as actions in the message.
          * @return A promise that resolves to the selected item or `undefined` when being dismissed.
          */
-        export function showWarningMessage<T extends MessageItem>(message: string, options: MessageOptions, ...items: T[]): PromiseLike<T | undefined>;
+        export function showWarningMessage(message: string, ...items: string[]): PromiseLike<string | undefined>;
 
         /**
          * Show a warning message.
@@ -2878,7 +2897,7 @@ declare module '@devpodio/plugin' {
          * @param items A set of items that will be rendered as actions in the message.
          * @return A promise that resolves to the selected item or `undefined` when being dismissed.
          */
-        export function showErrorMessage<T extends MessageItem>(message: string, options: MessageOptions, ...items: T[]): PromiseLike<T | undefined>;
+        export function showErrorMessage(message: string, ...items: string[]): PromiseLike<string | undefined>;
 
         /**
          * Show an error message.
@@ -3184,7 +3203,7 @@ declare module '@devpodio/plugin' {
          *
          * **NOTE:** [TreeDataProvider](#TreeDataProvider) is required to implement [getParent](#TreeDataProvider.getParent) method to access this API.
          */
-        reveal(element: T, options?: { select?: boolean }): PromiseLike<void>;
+        reveal(element: T, options?: { select?: boolean, focus?: boolean, expand?: boolean | number }): PromiseLike<void>;
     }
 
     /**
@@ -3806,7 +3825,7 @@ declare module '@devpodio/plugin' {
 		 *
 		 * The current thresholds are 1.5 seconds as overall time budget and a listener can misbehave 3 times before being ignored.
 		 */
-		export const onWillSaveTextDocument: Event<TextDocumentWillSaveEvent>;
+        export const onWillSaveTextDocument: Event<TextDocumentWillSaveEvent>;
 
         /**
          * An event that is emitted when a [text document](#TextDocument) is saved to disk.
@@ -3830,7 +3849,7 @@ declare module '@devpodio/plugin' {
          * @param uri Identifies the resource to open.
          * @return A promise that resolves to a [document](#TextDocument).
          */
-        export function openTextDocument(uri: Uri): Promise<TextDocument | undefined>;
+        export function openTextDocument(uri: Uri): PromiseLike<TextDocument | undefined>;
 
         /**
          * A short-hand for `openTextDocument(Uri.file(fileName))`.
@@ -3839,7 +3858,7 @@ declare module '@devpodio/plugin' {
          * @param fileName A name of a file on disk.
          * @return A promise that resolves to a [document](#TextDocument).
          */
-        export function openTextDocument(fileName: string): Promise<TextDocument | undefined>;
+        export function openTextDocument(fileName: string): PromiseLike<TextDocument | undefined>;
 
         /**
          * Opens an untitled text document. The editor will prompt the user for a file
@@ -3849,7 +3868,7 @@ declare module '@devpodio/plugin' {
          * @param options Options to control how the document will be created.
          * @return A promise that resolves to a [document](#TextDocument).
          */
-        export function openTextDocument(options?: { language?: string; content?: string; }): Promise<TextDocument | undefined>;
+        export function openTextDocument(options?: { language?: string; content?: string; }): PromiseLike<TextDocument | undefined>;
 
         /**
          * Get a workspace configuration object.
@@ -3926,7 +3945,7 @@ declare module '@devpodio/plugin' {
 		 * @param edit A workspace edit.
 		 * @return A thenable that resolves when the edit could be applied.
 		 */
-		export function applyEdit(edit: WorkspaceEdit): PromiseLike<boolean>;
+        export function applyEdit(edit: WorkspaceEdit): PromiseLike<boolean>;
 
 
         /**
@@ -4234,10 +4253,11 @@ declare module '@devpodio/plugin' {
         /**
          * Creates a new parameter information object.
          *
-         * @param label A label string.
+         * @param label A label string or inclusive start and exclusive end offsets within its containing signature label.
          * @param documentation A doc string.
          */
-        constructor(label: string, documentation?: string | MarkdownString);
+        constructor(label: string | [number, number], documentation?: string | MarkdownString);
+
     }
 
     /**
@@ -7001,6 +7021,18 @@ declare module '@devpodio/plugin' {
         execution: TaskExecution;
     }
 
+    /**
+     * An event signaling the end of an executed task.
+     *
+     * This interface is not intended to be implemented.
+     */
+    interface TaskEndEvent {
+        /**
+         * The task item representing the task that finished.
+         */
+        execution: TaskExecution;
+    }
+
     export namespace tasks {
 
         /**
@@ -7014,6 +7046,9 @@ declare module '@devpodio/plugin' {
 
         /** Fires when a task starts. */
         export const onDidStartTask: Event<TaskStartEvent>;
+
+        /** Fires when a task ends. */
+        export const onDidEndTask: Event<TaskEndEvent>;
     }
 
     /**

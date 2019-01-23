@@ -524,6 +524,7 @@ export interface EditorConfiguration {
     'editor.autoClosingBrackets'?: boolean
     'editor.autoIndent'?: boolean
     'editor.formatOnType'?: boolean
+    'editor.formatOnSave'?: boolean
     'editor.formatOnPaste'?: boolean
     'editor.formatOnSave'?: boolean
     'editor.dragAndDrop'?: boolean
