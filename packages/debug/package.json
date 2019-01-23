@@ -1,20 +1,20 @@
 {
-  "name": "@theia/debug",
-  "version": "0.3.18",
+  "name": "@devpodio/debug",
+  "version": "1.0.14",
   "description": "Theia - Debug Extension",
   "dependencies": {
-    "@theia/console": "^0.3.18",
-    "@theia/core": "^0.3.18",
-    "@theia/editor": "^0.3.18",
-    "@theia/filesystem": "^0.3.18",
-    "@theia/json": "^0.3.18",
-    "@theia/markers": "^0.3.18",
-    "@theia/monaco": "^0.3.18",
-    "@theia/output": "^0.3.18",
-    "@theia/process": "^0.3.18",
-    "@theia/terminal": "^0.3.18",
-    "@theia/variable-resolver": "^0.3.18",
-    "@theia/workspace": "^0.3.18",
+    "@devpodio/console": "^1.0.14",
+    "@devpodio/core": "^1.0.14",
+    "@devpodio/editor": "^1.0.14",
+    "@devpodio/filesystem": "^1.0.14",
+    "@devpodio/json": "^1.0.14",
+    "@devpodio/markers": "^1.0.14",
+    "@devpodio/monaco": "^1.0.14",
+    "@devpodio/output": "^1.0.14",
+    "@devpodio/process": "^1.0.14",
+    "@devpodio/terminal": "^1.0.14",
+    "@devpodio/variable-resolver": "^1.0.14",
+    "@devpodio/workspace": "^1.0.14",
     "@types/p-debounce": "^1.0.0",
     "jsonc-parser": "^2.0.2",
     "mkdirp": "^0.5.0",
@@ -62,7 +62,7 @@
     "docs": "theiaext docs"
   },
   "devDependencies": {
-    "@theia/ext-scripts": "^0.3.18"
+    "@devpodio/ext-scripts": "^1.0.14"
   },
   "nyc": {
     "extends": "../../configs/nyc.json"

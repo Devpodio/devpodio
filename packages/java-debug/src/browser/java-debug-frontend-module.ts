@@ -16,8 +16,8 @@
 
 import { ContainerModule } from 'inversify';
 // tslint:disable:no-implicit-dependencies
-import { CommandContribution } from '@theia/core/lib/common';
-import { FrontendApplicationContribution } from '@theia/core/lib/browser';
+import { CommandContribution } from '@devpodio/core/lib/common';
+import { FrontendApplicationContribution } from '@devpodio/core/lib/browser';
 // tslint:enable:no-implicit-dependencies
 import { bindJavaDebugPreferences } from './java-debug-preferences';
 import { JavaDebugFrontendContribution } from './java-debug-frontend-contribution';

@@ -15,7 +15,7 @@
  ********************************************************************************/
 
 import { injectable, postConstruct } from 'inversify';
-import { Disposable, DisposableCollection } from '@theia/core/lib/common/disposable';
+import { Disposable, DisposableCollection } from '@devpodio/core/lib/common/disposable';
 
 /**
  * Provides an additional environment object when executing every single Git command.

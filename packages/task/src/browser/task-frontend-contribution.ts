@@ -15,14 +15,14 @@
  ********************************************************************************/
 
 import { inject, injectable, named } from 'inversify';
-import { ILogger, ContributionProvider } from '@theia/core/lib/common';
+import { ILogger, ContributionProvider } from '@devpodio/core/lib/common';
 import { QuickOpenTask } from './quick-open-task';
-import { CommandContribution, Command, CommandRegistry, MenuContribution, MenuModelRegistry } from '@theia/core/lib/common';
-import { FrontendApplication, FrontendApplicationContribution, QuickOpenContribution, QuickOpenHandlerRegistry } from '@theia/core/lib/browser';
-import { WidgetManager } from '@theia/core/lib/browser/widget-manager';
+import { CommandContribution, Command, CommandRegistry, MenuContribution, MenuModelRegistry } from '@devpodio/core/lib/common';
+import { FrontendApplication, FrontendApplicationContribution, QuickOpenContribution, QuickOpenHandlerRegistry } from '@devpodio/core/lib/browser';
+import { WidgetManager } from '@devpodio/core/lib/browser/widget-manager';
 import { TaskContribution, TaskResolverRegistry, TaskProviderRegistry } from './task-contribution';
 import { TaskService } from './task-service';
-import { TerminalMenus } from '@theia/terminal/lib/browser/terminal-frontend-contribution';
+import { TerminalMenus } from '@devpodio/terminal/lib/browser/terminal-frontend-contribution';
 
 export namespace TaskCommands {
     const TASK_CATEGORY = 'Task';

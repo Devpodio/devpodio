@@ -44,7 +44,7 @@ export namespace Event {
     const _disposable = { dispose() { } };
     export const None: Event<any> = Object.assign(function () { return _disposable; }, {
         get maxListeners(): number { return 0; },
-        set maxListeners(maxListeners: number) { }
+        set maxListeners(maxListeners: number) { this.maxListeners = maxListeners; }
     });
 
     /**
@@ -194,7 +194,7 @@ export class Emitter<T> {
 
                 return result;
             }, {
-                    maxListeners: 30
+                    maxListeners: 200
                 }
             );
         }
@@ -202,10 +202,12 @@ export class Emitter<T> {
     }
 
     protected checkMaxListeners(maxListeners: number): void {
+
         if (maxListeners === 0 || !this._callbacks) {
             return;
         }
         const count = this._callbacks.length;
+
         if (count > maxListeners) {
             console.warn(new Error(`Possible Emitter memory leak detected. ${maxListeners} exit listeners added. Use event.maxListeners to increase limit`));
         }

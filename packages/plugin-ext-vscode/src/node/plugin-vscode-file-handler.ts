@@ -14,10 +14,10 @@
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  ********************************************************************************/
 
-import { PluginDeployerFileHandler, PluginDeployerEntry, PluginDeployerFileHandlerContext } from '@theia/plugin-ext';
+import { PluginDeployerFileHandler, PluginDeployerEntry, PluginDeployerFileHandlerContext } from '@devpodio/plugin-ext';
 import { injectable } from 'inversify';
 import * as path from 'path';
-import { getTempDir } from '@theia/plugin-ext';
+import { getTempDir } from '@devpodio/plugin-ext';
 
 @injectable()
 export class PluginVsCodeFileHandler implements PluginDeployerFileHandler {

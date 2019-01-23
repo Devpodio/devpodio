@@ -16,8 +16,8 @@
 
 import * as chai from 'chai';
 import { Container, ContainerModule } from 'inversify';
-import { ILogger, Disposable } from '@theia/core/lib/common';
-import { MockLogger } from '@theia/core/lib/common/test/mock-logger';
+import { ILogger, Disposable } from '@devpodio/core/lib/common';
+import { MockLogger } from '@devpodio/core/lib/common/test/mock-logger';
 import { Variable, VariableRegistry } from './variable';
 
 // tslint:disable:no-unused-expression

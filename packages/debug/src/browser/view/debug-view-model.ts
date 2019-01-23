@@ -15,8 +15,8 @@
  ********************************************************************************/
 
 import { injectable, inject, postConstruct } from 'inversify';
-import { Disposable, DisposableCollection, Event, Emitter } from '@theia/core/lib/common';
-import URI from '@theia/core/lib/common/uri';
+import { Disposable, DisposableCollection, Event, Emitter } from '@devpodio/core/lib/common';
+import URI from '@devpodio/core/lib/common/uri';
 import { DebugSession, DebugState } from '../debug-session';
 import { DebugSessionManager } from '../debug-session-manager';
 import { DebugThread } from '../model/debug-thread';

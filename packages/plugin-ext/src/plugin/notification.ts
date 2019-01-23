@@ -15,10 +15,10 @@
  ********************************************************************************/
 
 import { PLUGIN_RPC_CONTEXT, NotificationExt, NotificationMain } from '../api/plugin-api';
-import { CancellationToken, Progress, ProgressOptions } from '@theia/plugin';
+import { CancellationToken, Progress, ProgressOptions } from '@devpodio/plugin';
 import { RPCProtocol } from '../api/rpc-protocol';
-import { Event, Emitter } from '@theia/core/lib/common/event';
-import { Disposable, DisposableCollection } from '@theia/core/lib/common/disposable';
+import { Event, Emitter } from '@devpodio/core/lib/common/event';
+import { Disposable, DisposableCollection } from '@devpodio/core/lib/common/disposable';
 
 export class NotificationExtImpl implements NotificationExt {
     private readonly proxy: NotificationMain;

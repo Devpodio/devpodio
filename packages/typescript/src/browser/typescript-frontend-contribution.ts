@@ -18,18 +18,19 @@ import { injectable, inject, postConstruct } from 'inversify';
 import * as tsp from 'typescript/lib/protocol';
 import { Commands } from 'typescript-language-server/lib/commands';
 import {
-    QuickPickService, KeybindingRegistry, KeybindingContribution, QuickPickItem, StorageService, LabelProvider, FrontendApplicationContribution, StatusBar, StatusBarAlignment
-} from '@theia/core/lib/browser';
-import { ExecuteCommandRequest } from '@theia/languages/lib/browser';
-import { FileSystemWatcher, FileMoveEvent } from '@theia/filesystem/lib/browser';
-import { EditorManager, EditorWidget, EDITOR_CONTEXT_MENU, TextEditor } from '@theia/editor/lib/browser';
-import { CommandContribution, CommandRegistry, Command, MenuModelRegistry, MenuContribution, DisposableCollection } from '@theia/core/lib/common';
-import { MonacoEditor } from '@theia/monaco/lib/browser/monaco-editor';
+    KeybindingRegistry, KeybindingContribution, StorageService, LabelProvider, FrontendApplicationContribution, StatusBar, StatusBarAlignment
+} from '@devpodio/core/lib/browser';
+import { QuickPickService, QuickPickItem } from '@devpodio/core/lib/common/quick-pick-service';
+import { ExecuteCommandRequest } from '@devpodio/languages/lib/browser';
+import { FileSystemWatcher, FileMoveEvent } from '@devpodio/filesystem/lib/browser';
+import { EditorManager, EditorWidget, EDITOR_CONTEXT_MENU, TextEditor } from '@devpodio/editor/lib/browser';
+import { CommandContribution, CommandRegistry, Command, MenuModelRegistry, MenuContribution, DisposableCollection } from '@devpodio/core/lib/common';
+import { MonacoEditor } from '@devpodio/monaco/lib/browser/monaco-editor';
 import { TYPESCRIPT_LANGUAGE_ID, TS_JS_LANGUAGES } from '../common';
 import { TypeScriptClientContribution, TypescriptContributionData } from './typescript-client-contribution';
 import { TypeScriptKeybindingContexts } from './typescript-keybinding-contexts';
 import { TypescriptVersion } from '../common/typescript-version-service';
-import URI from '@theia/core/lib/common/uri';
+import URI from '@devpodio/core/lib/common/uri';
 
 export namespace TypeScriptCommands {
     export const applyCompletionCodeAction: Command = {

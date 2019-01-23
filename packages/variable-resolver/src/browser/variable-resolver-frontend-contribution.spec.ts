@@ -14,15 +14,15 @@
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  ********************************************************************************/
 
-import { enableJSDOM } from '@theia/core/lib/browser/test/jsdom';
+import { enableJSDOM } from '@devpodio/core/lib/browser/test/jsdom';
 
 let disableJSDOM = enableJSDOM();
 
 import * as chai from 'chai';
 import { Container, ContainerModule } from 'inversify';
-import { QuickOpenService } from '@theia/core/lib/browser';
-import { ILogger, bindContributionProvider } from '@theia/core/lib/common';
-import { MockLogger } from '@theia/core/lib/common/test/mock-logger';
+import { QuickOpenService } from '@devpodio/core/lib/browser';
+import { ILogger, bindContributionProvider } from '@devpodio/core/lib/common';
+import { MockLogger } from '@devpodio/core/lib/common/test/mock-logger';
 import { VariableContribution, VariableRegistry } from './variable';
 import { VariableQuickOpenService } from './variable-quick-open-service';
 import { VariableResolverFrontendContribution } from './variable-resolver-frontend-contribution';

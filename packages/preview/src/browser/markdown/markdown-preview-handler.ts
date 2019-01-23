@@ -15,9 +15,9 @@
  ********************************************************************************/
 
 import { injectable, inject } from 'inversify';
-import URI from '@theia/core/lib/common/uri';
-import { OpenerService } from '@theia/core/lib/browser';
-import { isOSX } from '@theia/core/lib/common';
+import URI from '@devpodio/core/lib/common/uri';
+import { OpenerService } from '@devpodio/core/lib/browser';
+import { isOSX } from '@devpodio/core/lib/common';
 
 import * as hljs from 'highlight.js';
 import * as markdownit from 'markdown-it';
@@ -106,7 +106,7 @@ export class MarkdownPreviewHandler implements PreviewHandler {
         if (!elementToReveal) {
             return;
         }
-        elementToReveal.scrollIntoView({ behavior: 'instant' });
+        elementToReveal.scrollIntoView({ behavior: 'auto' });
     }
 
     findElementForFragment(content: HTMLElement, link: string): HTMLElement | undefined {

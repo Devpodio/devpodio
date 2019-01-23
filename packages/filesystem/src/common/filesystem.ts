@@ -15,7 +15,7 @@
  ********************************************************************************/
 
 import { TextDocumentContentChangeEvent } from 'vscode-languageserver-types';
-import { JsonRpcServer, ApplicationError } from '@theia/core/lib/common';
+import { JsonRpcServer, ApplicationError } from '@devpodio/core/lib/common';
 import { injectable } from 'inversify';
 export const fileSystemPath = '/services/filesystem';
 

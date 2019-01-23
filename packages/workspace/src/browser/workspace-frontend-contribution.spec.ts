@@ -14,12 +14,12 @@
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  ********************************************************************************/
 
-import { enableJSDOM } from '@theia/core/lib/browser/test/jsdom';
+import { enableJSDOM } from '@devpodio/core/lib/browser/test/jsdom';
 let disableJSDOM = enableJSDOM();
 
 import { expect } from 'chai';
-import { OS } from '@theia/core/lib/common/os';
-import { OpenFileDialogProps } from '@theia/filesystem/lib/browser/file-dialog';
+import { OS } from '@devpodio/core/lib/common/os';
+import { OpenFileDialogProps } from '@devpodio/filesystem/lib/browser/file-dialog';
 import { WorkspaceFrontendContribution } from './workspace-frontend-contribution';
 import { WorkspaceCommands } from './workspace-commands';
 

@@ -15,7 +15,7 @@
  ********************************************************************************/
 
 import { injectable, inject, named } from 'inversify';
-import { MenuModelRegistry, CommandRegistry } from '@theia/core';
+import { MenuModelRegistry, CommandRegistry } from '@devpodio/core';
 import {
     CommonMenus,
     PreferenceScope,
@@ -23,12 +23,12 @@ import {
     AbstractViewContribution,
     CommonCommands,
     KeybindingRegistry
-} from '@theia/core/lib/browser';
+} from '@devpodio/core/lib/browser';
 import { WorkspacePreferenceProvider } from './workspace-preference-provider';
-import { FileSystem } from '@theia/filesystem/lib/common';
-import { UserStorageService } from '@theia/userstorage/lib/browser';
+import { FileSystem } from '@devpodio/filesystem/lib/common';
+import { UserStorageService } from '@devpodio/userstorage/lib/browser';
 import { PreferencesContainer } from './preferences-tree-widget';
-import { EditorManager } from '@theia/editor/lib/browser';
+import { EditorManager } from '@devpodio/editor/lib/browser';
 
 @injectable()
 export class PreferencesContribution extends AbstractViewContribution<PreferencesContainer> {

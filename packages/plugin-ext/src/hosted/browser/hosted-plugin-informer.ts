@@ -15,14 +15,14 @@
  ********************************************************************************/
 
 import { injectable, inject } from 'inversify';
-import { StatusBar } from '@theia/core/lib/browser/status-bar/status-bar';
-import { StatusBarAlignment, StatusBarEntry, FrontendApplicationContribution } from '@theia/core/lib/browser';
-import { WorkspaceService } from '@theia/workspace/lib/browser';
+import { StatusBar } from '@devpodio/core/lib/browser/status-bar/status-bar';
+import { StatusBarAlignment, StatusBarEntry, FrontendApplicationContribution } from '@devpodio/core/lib/browser';
+import { WorkspaceService } from '@devpodio/workspace/lib/browser';
 import { HostedPluginServer } from '../../common/plugin-protocol';
-import { ConnectionStatusService, ConnectionStatus } from '@theia/core/lib/browser/connection-status-service';
-import URI from '@theia/core/lib/common/uri';
-import { FileStat } from '@theia/filesystem/lib/common';
-import { FrontendApplicationStateService } from '@theia/core/lib/browser/frontend-application-state';
+import { ConnectionStatusService, ConnectionStatus } from '@devpodio/core/lib/browser/connection-status-service';
+import URI from '@devpodio/core/lib/common/uri';
+import { FileStat } from '@devpodio/filesystem/lib/common';
+import { FrontendApplicationStateService } from '@devpodio/core/lib/browser/frontend-application-state';
 
 /**
  * Informs the user whether Theia is running with hosted plugin.

@@ -15,10 +15,10 @@
  ********************************************************************************/
 
 import { ContainerModule } from 'inversify';
-import { ResourceResolver } from '@theia/core/lib/common';
-import { WebSocketConnectionProvider, WidgetFactory, bindViewContribution, LabelProviderContribution, FrontendApplicationContribution } from '@theia/core/lib/browser';
-import { TabBarToolbarContribution } from '@theia/core/lib/browser/shell/tab-bar-toolbar';
-import { NavigatorTreeDecorator } from '@theia/navigator/lib/browser';
+import { ResourceResolver } from '@devpodio/core/lib/common';
+import { WebSocketConnectionProvider, WidgetFactory, bindViewContribution, LabelProviderContribution, FrontendApplicationContribution } from '@devpodio/core/lib/browser';
+import { TabBarToolbarContribution } from '@devpodio/core/lib/browser/shell/tab-bar-toolbar';
+import { NavigatorTreeDecorator } from '@devpodio/navigator/lib/browser';
 import { Git, GitPath, GitWatcher, GitWatcherPath, GitWatcherServer, GitWatcherServerProxy, ReconnectingGitWatcherServer } from '../common';
 import { GitViewContribution, GIT_WIDGET_FACTORY_ID } from './git-view-contribution';
 import { bindGitDiffModule } from './diff/git-diff-frontend-module';

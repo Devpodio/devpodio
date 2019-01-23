@@ -21,7 +21,7 @@
  *--------------------------------------------------------------------------------------------*/
 'use strict';
 import { startsWithIgnoreCase } from './strings';
-import { isWindows } from '@theia/core/lib/common/os';
+import { isWindows } from '@devpodio/core/lib/common/os';
 import { CharCode } from './char-code';
 
 /**

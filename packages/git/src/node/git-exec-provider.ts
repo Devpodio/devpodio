@@ -15,7 +15,7 @@
  ********************************************************************************/
 
 import { injectable } from 'inversify';
-import { Disposable, MaybePromise } from '@theia/core/';
+import { Disposable, MaybePromise } from '@devpodio/core/';
 import { IGitExecutionOptions } from 'dugite-extra/lib/core/git';
 
 /**

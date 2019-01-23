@@ -18,7 +18,7 @@ import { ContainerModule } from 'inversify';
 import {
     WebSocketConnectionProvider, WidgetFactory,
     OpenHandler, bindViewContribution
-} from '@theia/core/lib/browser';
+} from '@devpodio/core/lib/browser';
 import { ExtensionServer, extensionPath } from '../common/extension-protocol';
 import { ExtensionManager } from '../common';
 import { ExtensionContribution, EXTENSIONS_WIDGET_FACTORY_ID } from './extension-contribution';

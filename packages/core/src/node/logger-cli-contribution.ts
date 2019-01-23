@@ -19,7 +19,7 @@ import { injectable } from 'inversify';
 import { LogLevel } from '../common/logger';
 import { CliContribution } from './cli';
 import * as fs from 'fs-extra';
-import * as nsfw from 'vscode-nsfw';
+import * as nsfw from 'nsfw';
 import { Event, Emitter } from '../common/event';
 import * as path from 'path';
 
@@ -89,8 +89,8 @@ export class LogLevelCliContribution implements CliContribution {
         }
     }
 
-    protected watchLogConfigFile(filename: string): Promise<void> {
-        return nsfw(filename, async (events: nsfw.ChangeEvent[]) => {
+    protected async watchLogConfigFile(filename: string): Promise<void> {
+        const watcher = await nsfw(filename, async (events: nsfw.ChangeEvent[]) => {
             try {
                 for (const event of events) {
                     switch (event.action) {
@@ -104,9 +104,8 @@ export class LogLevelCliContribution implements CliContribution {
             } catch (e) {
                 console.error(`Error reading log config file ${filename}: ${e}`);
             }
-        }).then((watcher: nsfw.NSFW) => {
-            watcher.start();
         });
+        watcher.start();
     }
 
     protected async slurpLogConfigFile(filename: string): Promise<void> {

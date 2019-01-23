@@ -17,10 +17,10 @@
 import { EditorManager } from './editor-manager';
 import { TextEditor } from './editor';
 import { injectable, inject } from 'inversify';
-import { StatusBarAlignment, StatusBar } from '@theia/core/lib/browser/status-bar/status-bar';
-import { FrontendApplicationContribution } from '@theia/core/lib/browser';
-import { Languages } from '@theia/languages/lib/browser';
-import { DisposableCollection } from '@theia/core';
+import { StatusBarAlignment, StatusBar } from '@devpodio/core/lib/browser/status-bar/status-bar';
+import { FrontendApplicationContribution } from '@devpodio/core/lib/browser';
+import { Languages } from '@devpodio/languages/lib/browser';
+import { DisposableCollection } from '@devpodio/core';
 import { EditorCommands } from './editor-command';
 
 @injectable()

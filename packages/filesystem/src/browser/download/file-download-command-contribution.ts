@@ -15,12 +15,12 @@
  ********************************************************************************/
 
 import { inject, injectable } from 'inversify';
-import URI from '@theia/core/lib/common/uri';
-import { notEmpty } from '@theia/core/lib/common/objects';
-import { UriSelection } from '@theia/core/lib/common/selection';
-import { SelectionService } from '@theia/core/lib/common/selection-service';
-import { Command, CommandContribution, CommandRegistry } from '@theia/core/lib/common/command';
-import { UriAwareCommandHandler, UriCommandHandler } from '@theia/core/lib/common/uri-command-handler';
+import URI from '@devpodio/core/lib/common/uri';
+import { notEmpty } from '@devpodio/core/lib/common/objects';
+import { UriSelection } from '@devpodio/core/lib/common/selection';
+import { SelectionService } from '@devpodio/core/lib/common/selection-service';
+import { Command, CommandContribution, CommandRegistry } from '@devpodio/core/lib/common/command';
+import { UriAwareCommandHandler, UriCommandHandler } from '@devpodio/core/lib/common/uri-command-handler';
 import { FileDownloadService } from './file-download-service';
 
 @injectable()

@@ -15,7 +15,7 @@
  ********************************************************************************/
 
 import { injectable } from 'inversify';
-import { MaybePromise } from '@theia/core/lib/common/types';
+import { MaybePromise } from '@devpodio/core/lib/common/types';
 
 @injectable()
 export class GitCommitMessageValidator {

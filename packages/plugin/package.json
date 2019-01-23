@@ -1,6 +1,6 @@
 {
-  "name": "@theia/plugin",
-  "version": "0.3.18",
+  "name": "@devpodio/plugin",
+  "version": "1.0.14",
   "description": "Theia - Plugin API",
   "types": "./src/theia.d.ts",
   "publishConfig": {
@@ -27,7 +27,7 @@
     "docs": "rimraf docs && typedoc --module commonjs --target es6 --mode file --hideGenerator --name 'Theia Plug-in API' --readme API.md --excludeExternals --includeDeclarations --out ./docs/api  src/theia.d.ts"
   },
   "devDependencies": {
-    "@theia/ext-scripts": "^0.3.18"
+    "@devpodio/ext-scripts": "^1.0.14"
   },
   "nyc": {
     "extends": "../../configs/nyc.json"

@@ -13,8 +13,8 @@
  *
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  ********************************************************************************/
-import { Event, Disposable } from '@theia/core/lib/common';
-import URI from '@theia/core/lib/common/uri';
+import { Event, Disposable } from '@devpodio/core/lib/common';
+import URI from '@devpodio/core/lib/common/uri';
 
 export const UserStorageService = Symbol('UserStorageService');
 

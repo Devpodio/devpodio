@@ -17,8 +17,8 @@
 import { injectable, inject } from 'inversify';
 import * as fs from 'fs';
 import * as path from 'path';
-import { Deferred } from '@theia/core/lib/common/promise-util';
-import { FileSystem } from '@theia/filesystem/lib/common';
+import { Deferred } from '@devpodio/core/lib/common/promise-util';
+import { FileSystem } from '@devpodio/filesystem/lib/common';
 import { PluginPaths } from './paths/const';
 import { PluginPathsService } from '../common/plugin-paths-protocol';
 import { KeysToAnyValues, KeysToKeysToAnyValue } from '../../common/types';

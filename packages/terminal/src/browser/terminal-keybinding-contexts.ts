@@ -15,7 +15,7 @@
  ********************************************************************************/
 
 import { injectable, inject } from 'inversify';
-import { KeybindingContext, ApplicationShell } from '@theia/core/lib/browser';
+import { KeybindingContext, ApplicationShell } from '@devpodio/core/lib/browser';
 import { TerminalWidget } from './base/terminal-widget';
 
 export namespace TerminalKeybindingContexts {

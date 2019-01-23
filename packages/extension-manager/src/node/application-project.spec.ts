@@ -81,25 +81,25 @@ describe('application-project', function () {
         await fs.writeJSON(path.resolve(appProjectPath, 'package.json'), {
             'private': true,
             'dependencies': {
-                '@theia/core': '0.1.1',
-                '@theia/filesystem': '0.1.1'
+                '@devpodio/core': '0.1.1',
+                '@devpodio/filesystem': '0.1.1'
             }
         });
         appProject.scheduleInstall();
         await assertInstallation({
-            installed: ['@theia/core', '@theia/filesystem']
+            installed: ['@devpodio/core', '@devpodio/filesystem']
         });
 
         await fs.writeJSON(path.resolve(appProjectPath, 'package.json'), {
             'private': true,
             'dependencies': {
-                '@theia/core': '0.1.1'
+                '@devpodio/core': '0.1.1'
             }
         });
         appProject.scheduleInstall();
         await assertInstallation({
-            installed: ['@theia/core'],
-            uninstalled: ['@theia/filesystem']
+            installed: ['@devpodio/core'],
+            uninstalled: ['@devpodio/filesystem']
         });
     });
 

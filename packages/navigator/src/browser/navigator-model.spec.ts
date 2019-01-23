@@ -14,27 +14,27 @@
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  ********************************************************************************/
 
-import { enableJSDOM } from '@theia/core/lib/browser/test/jsdom';
+import { enableJSDOM } from '@devpodio/core/lib/browser/test/jsdom';
 let disableJSDOM = enableJSDOM();
 
 import { Container } from 'inversify';
-import { Emitter, ILogger, Logger } from '@theia/core';
+import { Emitter, ILogger, Logger } from '@devpodio/core';
 import {
     CompositeTreeNode, DefaultOpenerService, ExpandableTreeNode, LabelProvider, OpenerService,
     Tree, TreeNode, TreeSelectionService, TreeExpansionService, TreeExpansionServiceImpl,
     TreeNavigationService, TreeSearch, CorePreferences
-} from '@theia/core/lib/browser';
-import { TreeSelectionServiceImpl } from '@theia/core/lib/browser/tree/tree-selection-impl';
-import { FileSystem, FileStat } from '@theia/filesystem/lib/common';
-import { FileSystemWatcher } from '@theia/filesystem/lib/browser/filesystem-watcher';
-import { FileSystemNode } from '@theia/filesystem/lib/node/node-filesystem';
-import { DirNode, FileChange, FileMoveEvent, FileTreeModel, FileStatNode } from '@theia/filesystem/lib/browser';
-import { WorkspaceService } from '@theia/workspace/lib/browser';
+} from '@devpodio/core/lib/browser';
+import { TreeSelectionServiceImpl } from '@devpodio/core/lib/browser/tree/tree-selection-impl';
+import { FileSystem, FileStat } from '@devpodio/filesystem/lib/common';
+import { FileSystemWatcher } from '@devpodio/filesystem/lib/browser/filesystem-watcher';
+import { FileSystemNode } from '@devpodio/filesystem/lib/node/node-filesystem';
+import { DirNode, FileChange, FileMoveEvent, FileTreeModel, FileStatNode } from '@devpodio/filesystem/lib/browser';
+import { WorkspaceService } from '@devpodio/workspace/lib/browser';
 import { FileNavigatorTree, WorkspaceNode, WorkspaceRootNode } from './navigator-tree';
 import { FileNavigatorModel } from './navigator-model';
-import { createMockPreferenceProxy } from '@theia/core/lib/browser/preferences/test';
+import { createMockPreferenceProxy } from '@devpodio/core/lib/browser/preferences/test';
 import { expect } from 'chai';
-import URI from '@theia/core/lib/common/uri';
+import URI from '@devpodio/core/lib/common/uri';
 import * as sinon from 'sinon';
 
 disableJSDOM();

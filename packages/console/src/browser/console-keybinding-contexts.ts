@@ -15,7 +15,7 @@
  ********************************************************************************/
 
 import { injectable, inject } from 'inversify';
-import { KeybindingContext } from '@theia/core/lib/browser';
+import { KeybindingContext } from '@devpodio/core/lib/browser';
 import { ConsoleManager } from './console-manager';
 import { ConsoleWidget } from './console-widget';
 

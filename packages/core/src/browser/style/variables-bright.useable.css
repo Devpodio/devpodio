@@ -71,11 +71,11 @@ is not optimized for dense, information rich UIs.
   --theia-content-font-color2: var(--md-grey-700);
   --theia-content-font-color3: var(--md-grey-500);
 
-  --theia-code-font-size: 13px;
+  --theia-code-font-size: 17px;
   --theia-code-line-height: 17px;
   --theia-code-padding: 5px;
   --theia-code-font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
-  --theia-terminal-font-family: monospace;
+  --theia-terminal-font-family: Inconsolata, "Source Code Pro", Consolas,  monospace;
   --theia-ui-padding: 6px;
 
   /* Main layout colors (bright to dark)
@@ -249,4 +249,26 @@ is not optimized for dense, information rich UIs.
   --theia-ansi-cyan-background-color: darkcyan;
   --theia-ansi-white-background-color: #BDBDBD;
 
+ /* Terminal Theme */
+    --theia-terminal-foreground: '#fff';
+    --theia-terminal-background: '#272822';
+    --theia-terminal-cursor: 'rgba(248,28,229,0.8)';
+    --theia-terminal-cursorAccent: '#000';
+    --theia-terminal-selection: 'rgba(248,28,229,0.3)';
+    --theia-terminal-black: '#000000';
+    --theia-terminal-red: '#C51E14';
+    --theia-terminal-green: '#1DC121';
+    --theia-terminal-yellow: '#C7C329';
+    --theia-terminal-blue: '#7b8afb';
+    --theia-terminal-magenta: '#C839C5';
+    --theia-terminal-cyan: '#20C5C6';
+    --theia-terminal-white: '#C7C7C7';
+    --theia-terminal-brightBlack: '#686868';
+    --theia-terminal-brightRed: '#FD6F6B';
+    --theia-terminal-brightGreen: '#abef1e';
+    --theia-terminal-brightYellow: '#FFFA72';
+    --theia-terminal-brightBlue: '#6A76FB';
+    --theia-terminal-brightMagenta: '#8e97ff';
+    --theia-terminal-brightCyan: '#68FDFE';
+    --theia-terminal-brightWhite: '#ddd';
 }

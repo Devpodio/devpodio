@@ -17,7 +17,7 @@
 import { inject, injectable } from 'inversify';
 import { Git, GitFileBlame } from '../../common';
 import { GitRepositoryTracker } from '../git-repository-tracker';
-import URI from '@theia/core/lib/common/uri';
+import URI from '@devpodio/core/lib/common/uri';
 
 @injectable()
 export class BlameManager {

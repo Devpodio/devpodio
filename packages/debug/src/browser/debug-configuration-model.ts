@@ -15,8 +15,8 @@
  ********************************************************************************/
 
 import * as jsoncparser from 'jsonc-parser';
-import URI from '@theia/core/lib/common/uri';
-import { Resource, Disposable, DisposableCollection, Emitter, Event } from '@theia/core';
+import URI from '@devpodio/core/lib/common/uri';
+import { Resource, Disposable, DisposableCollection, Emitter, Event } from '@devpodio/core';
 import { DebugConfiguration } from '../common/debug-common';
 
 export class DebugConfigurationModel implements Disposable {

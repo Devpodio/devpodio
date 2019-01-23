@@ -17,7 +17,7 @@
 import { injectable, inject, named } from 'inversify';
 import { Location } from 'vscode-languageserver-types';
 import { Definition, Caller } from './callhierarchy';
-import { ContributionProvider } from '@theia/core/lib/common';
+import { ContributionProvider } from '@devpodio/core/lib/common';
 
 export const CallHierarchyService = Symbol('CallHierarchyService');
 

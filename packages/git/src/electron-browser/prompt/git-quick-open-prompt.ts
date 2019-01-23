@@ -16,8 +16,8 @@
 
 import { inject, injectable } from 'inversify';
 import * as PQueue from 'p-queue';
-import { QuickOpenItem, QuickOpenMode } from '@theia/core/lib/browser/quick-open/quick-open-model';
-import { QuickOpenService } from '@theia/core/lib/browser/quick-open/quick-open-service';
+import { QuickOpenItem, QuickOpenMode } from '@devpodio/core/lib/browser/quick-open/quick-open-model';
+import { QuickOpenService } from '@devpodio/core/lib/browser/quick-open/quick-open-service';
 import { GitPrompt } from '../../common/git-prompt';
 
 @injectable()

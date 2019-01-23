@@ -14,7 +14,7 @@
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  ********************************************************************************/
 import {Disposable, StatusBarAlignment} from './types-impl';
-import {StatusBarItem} from '@theia/plugin';
+import {StatusBarItem} from '@devpodio/plugin';
 import {
     PLUGIN_RPC_CONTEXT as Ext, StatusBarMessageRegistryMain
 } from '../api/plugin-api';

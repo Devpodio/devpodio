@@ -15,10 +15,10 @@
  ********************************************************************************/
 
 import { injectable, inject } from 'inversify';
-import { KeybindingContext } from '@theia/core/lib/browser/keybinding';
+import { KeybindingContext } from '@devpodio/core/lib/browser/keybinding';
 import { EditorManager } from './editor-manager';
 import { EditorWidget } from './editor-widget';
-import { DiffUris } from '@theia/core/lib/browser';
+import { DiffUris } from '@devpodio/core/lib/browser';
 
 export namespace EditorKeybindingContexts {
 

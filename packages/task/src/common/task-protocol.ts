@@ -14,7 +14,7 @@
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  ********************************************************************************/
 
-import { JsonRpcServer } from '@theia/core/lib/common/messaging/proxy-factory';
+import { JsonRpcServer } from '@devpodio/core/lib/common/messaging/proxy-factory';
 
 export const taskPath = '/services/task';
 

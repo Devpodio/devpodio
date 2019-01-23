@@ -15,12 +15,12 @@
  ********************************************************************************/
 
 // tslint:disable:no-any
-import URI from '@theia/core/lib/common/uri';
-import { EditorPreferenceChange, EditorPreferences, TextEditor, DiffNavigator, EndOfLinePreference } from '@theia/editor/lib/browser';
-import { DiffUris } from '@theia/core/lib/browser/diff-uris';
+import URI from '@devpodio/core/lib/common/uri';
+import { EditorPreferenceChange, EditorPreferences, TextEditor, DiffNavigator, EndOfLinePreference } from '@devpodio/editor/lib/browser';
+import { DiffUris } from '@devpodio/core/lib/browser/diff-uris';
 import { inject, injectable } from 'inversify';
-import { DisposableCollection } from '@theia/core/lib/common';
-import { MonacoToProtocolConverter, ProtocolToMonacoConverter } from 'monaco-languageclient';
+import { DisposableCollection } from '@devpodio/core/lib/common';
+import { MonacoToProtocolConverter, ProtocolToMonacoConverter, TextDocumentSaveReason } from 'monaco-languageclient';
 import { MonacoCommandServiceFactory } from './monaco-command-service';
 import { MonacoContextMenuService } from './monaco-context-menu';
 import { MonacoDiffEditor } from './monaco-diff-editor';
@@ -34,8 +34,8 @@ import { MonacoWorkspace } from './monaco-workspace';
 import { MonacoBulkEditService } from './monaco-bulk-edit-service';
 
 import IEditorOverrideServices = monaco.editor.IEditorOverrideServices;
-import { ApplicationServer } from '@theia/core/lib/common/application-protocol';
-import { OS } from '@theia/core';
+import { ApplicationServer } from '@devpodio/core/lib/common/application-protocol';
+import { OS } from '@devpodio/core';
 
 @injectable()
 export class MonacoEditorProvider {
@@ -142,6 +142,14 @@ export class MonacoEditorProvider {
         const options = this.createMonacoEditorOptions(model);
         const editor = new MonacoEditor(uri, model, document.createElement('div'), this.m2p, this.p2m, options, override);
         toDispose.push(this.editorPreferences.onPreferenceChanged(event => this.updateMonacoEditorOptions(editor, event)));
+        editor.document.onWillSaveModel(event => {
+            event.waitUntil(new Promise<monaco.editor.IIdentifiedSingleEditOperation[]>(async resolve => {
+                if (event.reason === TextDocumentSaveReason.Manual && this.editorPreferences['editor.formatOnSave']) {
+                    await this.commandServiceFactory().executeCommand('monaco.editor.action.formatDocument');
+                }
+                resolve([]);
+            }));
+        });
         return editor;
     }
     protected createMonacoEditorOptions(model: MonacoEditorModel): MonacoEditor.IOptions {

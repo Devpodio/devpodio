@@ -18,14 +18,14 @@ import { injectable, inject } from 'inversify';
 import {
     ContextMenuRenderer, TreeWidget, NodeProps, TreeProps, TreeNode,
     TreeModel, DockPanel
-} from '@theia/core/lib/browser';
-import { LabelProvider } from '@theia/core/lib/browser/label-provider';
+} from '@devpodio/core/lib/browser';
+import { LabelProvider } from '@devpodio/core/lib/browser/label-provider';
 import { DefinitionNode, CallerNode } from './callhierarchy-tree';
 import { CallHierarchyTreeModel } from './callhierarchy-tree-model';
 import { CALLHIERARCHY_ID, Definition, Caller } from '../callhierarchy';
-import URI from '@theia/core/lib/common/uri';
+import URI from '@devpodio/core/lib/common/uri';
 import { Location, Range, SymbolKind } from 'vscode-languageserver-types';
-import { EditorManager } from '@theia/editor/lib/browser';
+import { EditorManager } from '@devpodio/editor/lib/browser';
 import * as React from 'react';
 
 export const HIERARCHY_TREE_CLASS = 'theia-CallHierarchyTree';

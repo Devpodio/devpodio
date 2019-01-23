@@ -13,16 +13,16 @@
  *
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  ********************************************************************************/
-import { enableJSDOM } from '@theia/core/lib/browser/test/jsdom';
+import { enableJSDOM } from '@devpodio/core/lib/browser/test/jsdom';
 
 let disableJSDOM = enableJSDOM();
 
 import { expect } from 'chai';
 import { Container } from 'inversify';
-import { ILogger } from '@theia/core/lib/common/logger';
-import { MockLogger } from '@theia/core/lib/common/test/mock-logger';
-import { OpenerService } from '@theia/core/lib/browser/opener-service';
-import { MockOpenerService } from '@theia/core/lib/browser/test/mock-opener-service';
+import { ILogger } from '@devpodio/core/lib/common/logger';
+import { MockLogger } from '@devpodio/core/lib/common/test/mock-logger';
+import { OpenerService } from '@devpodio/core/lib/browser/opener-service';
+import { MockOpenerService } from '@devpodio/core/lib/browser/test/mock-opener-service';
 import { NavigationLocationUpdater } from './navigation-location-updater';
 import { NoopNavigationLocationUpdater } from './test/mock-navigation-location-updater';
 import { NavigationLocationSimilarity } from './navigation-location-similarity';

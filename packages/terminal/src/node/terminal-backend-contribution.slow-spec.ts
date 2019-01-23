@@ -15,12 +15,12 @@
  ********************************************************************************/
 
 import { createTerminalTestContainer } from './test/terminal-test-container';
-import { BackendApplication } from '@theia/core/lib/node/backend-application';
+import { BackendApplication } from '@devpodio/core/lib/node/backend-application';
 import { IShellTerminalServer } from '../common/shell-terminal-protocol';
 import * as http from 'http';
 import * as https from 'https';
 import { terminalsPath } from '../common/terminal-protocol';
-import { TestWebSocketChannel } from '@theia/core/lib/node/messaging/test/test-web-socket-channel';
+import { TestWebSocketChannel } from '@devpodio/core/lib/node/messaging/test/test-web-socket-channel';
 
 describe('Terminal Backend Contribution', function () {
 

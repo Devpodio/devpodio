@@ -14,17 +14,17 @@
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  ********************************************************************************/
 
-import { DefaultDebugSessionFactory, } from '@theia/debug/lib/browser/debug-session-contribution';
-import { TerminalService } from '@theia/terminal/lib/browser/base/terminal-service';
-import { EditorManager } from '@theia/editor/lib/browser/editor-manager';
-import { BreakpointManager } from '@theia/debug/lib/browser/breakpoint/breakpoint-manager';
-import { LabelProvider } from '@theia/core/lib/browser/label-provider';
-import { MessageClient } from '@theia/core/lib/common/message-service-protocol';
-import { OutputChannelManager } from '@theia/output/lib/common/output-channel';
-import { DebugPreferences } from '@theia/debug/lib/browser/debug-preferences';
-import { DebugSessionOptions } from '@theia/debug/lib/browser/debug-session-options';
-import { DebugSession } from '@theia/debug/lib/browser/debug-session';
-import { DebugSessionConnection } from '@theia/debug/lib/browser/debug-session-connection';
+import { DefaultDebugSessionFactory, } from '@devpodio/debug/lib/browser/debug-session-contribution';
+import { TerminalService } from '@devpodio/terminal/lib/browser/base/terminal-service';
+import { EditorManager } from '@devpodio/editor/lib/browser/editor-manager';
+import { BreakpointManager } from '@devpodio/debug/lib/browser/breakpoint/breakpoint-manager';
+import { LabelProvider } from '@devpodio/core/lib/browser/label-provider';
+import { MessageClient } from '@devpodio/core/lib/common/message-service-protocol';
+import { OutputChannelManager } from '@devpodio/output/lib/common/output-channel';
+import { DebugPreferences } from '@devpodio/debug/lib/browser/debug-preferences';
+import { DebugSessionOptions } from '@devpodio/debug/lib/browser/debug-session-options';
+import { DebugSession } from '@devpodio/debug/lib/browser/debug-session';
+import { DebugSessionConnection } from '@devpodio/debug/lib/browser/debug-session-connection';
 import { IWebSocket } from 'vscode-ws-jsonrpc/lib/socket/socket';
 
 /**

@@ -15,8 +15,8 @@
  ********************************************************************************/
 
 import { injectable } from 'inversify';
-import { PluginScanner, PluginEngine, PluginPackage, PluginModel, PluginLifecycle } from '@theia/plugin-ext';
-import { TheiaPluginScanner } from '@theia/plugin-ext/lib/hosted/node/scanners/scanner-theia';
+import { PluginScanner, PluginEngine, PluginPackage, PluginModel, PluginLifecycle } from '@devpodio/plugin-ext';
+import { TheiaPluginScanner } from '@devpodio/plugin-ext/lib/hosted/node/scanners/scanner-theia';
 
 @injectable()
 export class VsCodePluginScanner extends TheiaPluginScanner implements PluginScanner {

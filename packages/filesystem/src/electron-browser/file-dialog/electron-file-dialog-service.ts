@@ -16,10 +16,10 @@
 
 import { inject, injectable } from 'inversify';
 import { remote, FileFilter, OpenDialogOptions, SaveDialogOptions } from 'electron';
-import URI from '@theia/core/lib/common/uri';
-import { isOSX } from '@theia/core/lib/common/os';
-import { MaybeArray } from '@theia/core/lib/common/types';
-import { MessageService } from '@theia/core/lib/common/message-service';
+import URI from '@devpodio/core/lib/common/uri';
+import { isOSX } from '@devpodio/core/lib/common/os';
+import { MaybeArray } from '@devpodio/core/lib/common/types';
+import { MessageService } from '@devpodio/core/lib/common/message-service';
 import { FileStat } from '../../common';
 import { FileAccess } from '../../common/filesystem';
 import { DefaultFileDialogService, OpenFileDialogProps, SaveFileDialogProps } from '../../browser/file-dialog';
@@ -30,7 +30,7 @@ import { DefaultFileDialogService, OpenFileDialogProps, SaveFileDialogProps } fr
 // and at packaging time, clients can decide whether they need the native or the browser-based
 // solution.
 //
-import { FileUri } from '@theia/core/lib/node/file-uri';
+import { FileUri } from '@devpodio/core/lib/node/file-uri';
 
 @injectable()
 export class ElectronFileDialogService extends DefaultFileDialogService {

@@ -16,8 +16,8 @@
 
 import * as path from 'path';
 import { injectable, inject } from 'inversify';
-import { JsonRpcProxyFactory, ILogger, ConnectionErrorHandler, DisposableCollection, Disposable } from '@theia/core';
-import { IPCConnectionProvider } from '@theia/core/lib/node/messaging';
+import { JsonRpcProxyFactory, ILogger, ConnectionErrorHandler, DisposableCollection, Disposable } from '@devpodio/core';
+import { IPCConnectionProvider } from '@devpodio/core/lib/node/messaging';
 import { FileSystemWatcherServer, WatchOptions, FileSystemWatcherClient, ReconnectingFileSystemWatcherServer } from '../common/filesystem-watcher-protocol';
 
 export const NSFW_WATCHER = 'nsfw-watcher';

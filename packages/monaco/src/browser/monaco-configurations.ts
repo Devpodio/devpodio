@@ -19,8 +19,8 @@
 import { injectable, inject, postConstruct } from 'inversify';
 import { JSONExt, JSONObject, JSONValue } from '@phosphor/coreutils';
 import { Configurations, ConfigurationChangeEvent, WorkspaceConfiguration } from 'monaco-languageclient';
-import { Event, Emitter } from '@theia/core/lib/common';
-import { PreferenceServiceImpl, PreferenceChanges } from '@theia/core/lib/browser';
+import { Event, Emitter } from '@devpodio/core/lib/common';
+import { PreferenceServiceImpl, PreferenceChanges } from '@devpodio/core/lib/browser';
 
 @injectable()
 export class MonacoConfigurations implements Configurations {

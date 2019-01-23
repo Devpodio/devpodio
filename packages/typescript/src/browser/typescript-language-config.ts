@@ -16,8 +16,8 @@
 
 import { TYPESCRIPT_LANGUAGE_ID, TYPESCRIPT_REACT_LANGUAGE_ID, TYPESCRIPT_LANGUAGE_NAME, TYPESCRIPT_REACT_LANGUAGE_NAME } from '../common';
 import { injectable, inject } from 'inversify';
-import { LanguageGrammarDefinitionContribution, TextmateRegistry } from '@theia/monaco/lib/browser/textmate';
-import { MonacoSnippetSuggestProvider } from '@theia/monaco/lib/browser/monaco-snippet-suggest-provider';
+import { LanguageGrammarDefinitionContribution, TextmateRegistry } from '@devpodio/monaco/lib/browser/textmate';
+import { MonacoSnippetSuggestProvider } from '@devpodio/monaco/lib/browser/monaco-snippet-suggest-provider';
 
 @injectable()
 export class TypescriptGrammarContribution implements LanguageGrammarDefinitionContribution {

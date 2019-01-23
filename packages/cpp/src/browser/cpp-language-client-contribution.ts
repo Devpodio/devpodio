@@ -19,9 +19,9 @@ import {
     BaseLanguageClientContribution, LanguageClientFactory,
     LanguageClientOptions,
     ILanguageClient
-} from '@theia/languages/lib/browser';
-import { Languages, Workspace } from '@theia/languages/lib/browser';
-import { ILogger } from '@theia/core/lib/common/logger';
+} from '@devpodio/languages/lib/browser';
+import { Languages, Workspace } from '@devpodio/languages/lib/browser';
+import { ILogger } from '@devpodio/core/lib/common/logger';
 import { CPP_LANGUAGE_ID, CPP_LANGUAGE_NAME, HEADER_AND_SOURCE_FILE_EXTENSIONS, CppStartParameters } from '../common';
 import { CppBuildConfigurationManager, CppBuildConfiguration } from './cpp-build-configurations';
 import { CppBuildConfigurationsStatusBarElement } from './cpp-build-configurations-statusbar-element';

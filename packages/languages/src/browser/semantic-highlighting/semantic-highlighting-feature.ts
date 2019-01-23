@@ -15,7 +15,7 @@
  ********************************************************************************/
 
 import { v4 } from 'uuid';
-import { DisposableCollection } from '@theia/core/lib/common/';
+import { DisposableCollection } from '@devpodio/core/lib/common/';
 import {
     ILanguageClient,
     TextDocumentFeature,

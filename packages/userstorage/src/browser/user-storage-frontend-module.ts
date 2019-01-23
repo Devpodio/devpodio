@@ -15,7 +15,7 @@
  ********************************************************************************/
 
 import { ContainerModule, } from 'inversify';
-import { ResourceResolver } from '@theia/core/lib/common';
+import { ResourceResolver } from '@devpodio/core/lib/common';
 import { UserStorageResolver } from './user-storage-resource';
 import { UserStorageServiceFilesystemImpl } from './user-storage-service-filesystem';
 import { UserStorageService } from './user-storage-service';

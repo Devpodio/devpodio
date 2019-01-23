@@ -15,11 +15,11 @@
  ********************************************************************************/
 
 import { injectable, inject } from 'inversify';
-import { Emitter, Event } from '@theia/core/lib/common';
-import { StorageService } from '@theia/core/lib/browser';
-import { Marker } from '@theia/markers/lib/common/marker';
-import { MarkerManager } from '@theia/markers/lib/browser/marker-manager';
-import URI from '@theia/core/lib/common/uri';
+import { Emitter, Event } from '@devpodio/core/lib/common';
+import { StorageService } from '@devpodio/core/lib/browser';
+import { Marker } from '@devpodio/markers/lib/common/marker';
+import { MarkerManager } from '@devpodio/markers/lib/browser/marker-manager';
+import URI from '@devpodio/core/lib/common/uri';
 import { SourceBreakpoint, BREAKPOINT_KIND } from './breakpoint-marker';
 
 export interface BreakpointsChangeEvent {

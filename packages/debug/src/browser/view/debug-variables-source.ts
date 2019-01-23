@@ -15,7 +15,7 @@
  ********************************************************************************/
 
 import { injectable, inject, postConstruct } from 'inversify';
-import { TreeSource } from '@theia/core/lib/browser/source-tree';
+import { TreeSource } from '@devpodio/core/lib/browser/source-tree';
 import { DebugScope } from '../console/debug-console-items';
 import { DebugViewModel } from './debug-view-model';
 import debounce = require('p-debounce');

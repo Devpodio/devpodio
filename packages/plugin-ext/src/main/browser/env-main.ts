@@ -15,11 +15,11 @@
  ********************************************************************************/
 
 import { interfaces } from 'inversify';
-import { EnvVariablesServer } from '@theia/core/lib/common/env-variables';
+import { EnvVariablesServer } from '@devpodio/core/lib/common/env-variables';
 import { RPCProtocol } from '../../api/rpc-protocol';
 import { EnvMain } from '../../api/plugin-api';
 import { QueryParameters } from '../../common/env';
-import { isWindows, isOSX } from '@theia/core';
+import { isWindows, isOSX } from '@devpodio/core';
 import { OSType } from '../../plugin/types-impl';
 
 export class EnvMainImpl implements EnvMain {

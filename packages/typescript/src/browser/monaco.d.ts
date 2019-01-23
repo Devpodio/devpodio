@@ -1,1 +1,1 @@
-/// <reference types="@theia/monaco/src/typings/monaco/index"/>
+/// <reference types="@devpodio/monaco/src/typings/monaco/index"/>

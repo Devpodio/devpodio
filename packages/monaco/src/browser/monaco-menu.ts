@@ -15,8 +15,8 @@
  ********************************************************************************/
 
 import { injectable, inject } from 'inversify';
-import { MenuContribution, MenuModelRegistry, MAIN_MENU_BAR } from '@theia/core/lib/common';
-import { EDITOR_CONTEXT_MENU } from '@theia/editor/lib/browser';
+import { MenuContribution, MenuModelRegistry, MAIN_MENU_BAR } from '@devpodio/core/lib/common';
+import { EDITOR_CONTEXT_MENU } from '@devpodio/editor/lib/browser';
 import { MonacoCommands } from './monaco-command';
 import { MonacoCommandRegistry } from './monaco-command-registry';
 import MenuRegistry = monaco.actions.MenuRegistry;

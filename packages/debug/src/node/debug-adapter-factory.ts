@@ -29,7 +29,7 @@ import {
     RawProcess,
     RawForkOptions,
     RawProcessOptions
-} from '@theia/process/lib/node';
+} from '@devpodio/process/lib/node';
 import {
     DebugAdapterExecutable,
     CommunicationProvider,

@@ -15,9 +15,9 @@
  ********************************************************************************/
 
 import { CallHierarchyContribution } from './callhierarchy-contribution';
-import { bindContributionProvider } from '@theia/core/lib/common';
+import { bindContributionProvider } from '@devpodio/core/lib/common';
 import { CallHierarchyService, CallHierarchyServiceProvider } from './callhierarchy-service';
-import { WidgetFactory, bindViewContribution } from '@theia/core/lib/browser';
+import { WidgetFactory, bindViewContribution } from '@devpodio/core/lib/browser';
 import { CALLHIERARCHY_ID } from './callhierarchy';
 import { createHierarchyTreeWidget } from './callhierarchy-tree';
 import { CurrentEditorAccess } from './current-editor-access';

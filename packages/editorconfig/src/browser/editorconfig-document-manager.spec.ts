@@ -14,7 +14,7 @@
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  ********************************************************************************/
 
-import { enableJSDOM } from '@theia/core/lib/browser/test/jsdom';
+import { enableJSDOM } from '@devpodio/core/lib/browser/test/jsdom';
 
 // tslint:disable:no-unused-expression
 
@@ -24,7 +24,7 @@ import { expect } from 'chai';
 import { EditorconfigDocumentManager } from './editorconfig-document-manager';
 import * as sinon from 'sinon';
 import { KnownProps } from 'editorconfig';
-import { MonacoEditor } from '@theia/monaco/lib/browser/monaco-editor';
+import { MonacoEditor } from '@devpodio/monaco/lib/browser/monaco-editor';
 
 disableJSDOM();
 

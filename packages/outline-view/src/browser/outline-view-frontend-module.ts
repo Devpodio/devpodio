@@ -17,7 +17,7 @@
 import { ContainerModule, interfaces } from 'inversify';
 import { OutlineViewService } from './outline-view-service';
 import { OutlineViewContribution } from './outline-view-contribution';
-import { WidgetFactory } from '@theia/core/lib/browser/widget-manager';
+import { WidgetFactory } from '@devpodio/core/lib/browser/widget-manager';
 import {
     FrontendApplicationContribution,
     createTreeContainer,
@@ -26,10 +26,10 @@ import {
     TreeProps,
     defaultTreeProps,
     TreeDecoratorService
-} from '@theia/core/lib/browser';
+} from '@devpodio/core/lib/browser';
 import { OutlineViewWidgetFactory, OutlineViewWidget } from './outline-view-widget';
 import '../../src/browser/styles/index.css';
-import { bindContributionProvider } from '@theia/core/lib/common/contribution-provider';
+import { bindContributionProvider } from '@devpodio/core/lib/common/contribution-provider';
 import { OutlineDecoratorService, OutlineTreeDecorator } from './outline-decorator-service';
 
 export default new ContainerModule(bind => {

@@ -23,8 +23,8 @@ import * as touch from 'touch';
 import * as drivelist from 'drivelist';
 import { injectable, inject, optional } from 'inversify';
 import { TextDocumentContentChangeEvent, TextDocument } from 'vscode-languageserver-types';
-import URI from '@theia/core/lib/common/uri';
-import { FileUri } from '@theia/core/lib/node/file-uri';
+import URI from '@devpodio/core/lib/common/uri';
+import { FileUri } from '@devpodio/core/lib/node/file-uri';
 import { FileStat, FileSystem, FileSystemClient, FileSystemError, FileMoveOptions, FileDeleteOptions, FileAccess } from '../common/filesystem';
 
 @injectable()

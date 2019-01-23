@@ -13,10 +13,10 @@
  *
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  ********************************************************************************/
-import * as theia from '@theia/plugin';
+import * as theia from '@devpodio/plugin';
 import { CommandRegistryImpl } from './command-registry';
-import { Emitter } from '@theia/core/lib/common/event';
-import { CancellationTokenSource } from '@theia/core/lib/common/cancellation';
+import { Emitter } from '@devpodio/core/lib/common/event';
+import { CancellationTokenSource } from '@devpodio/core/lib/common/cancellation';
 import { QuickOpenExtImpl } from './quick-open';
 import { MAIN_RPC_CONTEXT, Plugin as InternalPlugin, PluginManager, PluginAPIFactory } from '../api/plugin-api';
 import { RPCProtocol } from '../api/rpc-protocol';
@@ -109,7 +109,7 @@ import { fromDocumentSelector } from './type-converters';
 import { DialogsExtImpl } from './dialogs';
 import { NotificationExtImpl } from './notification';
 import { StatusBarExtImpl } from './statusBar';
-import { CancellationToken } from '@theia/core/lib/common/cancellation';
+import { CancellationToken } from '@devpodio/core/lib/common/cancellation';
 import { MarkdownString } from './markdown-string';
 import { TreeViewsExtImpl } from './tree/tree-views';
 import { LanguagesContributionExtImpl } from './languages-contribution-ext';

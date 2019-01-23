@@ -15,8 +15,8 @@
  ********************************************************************************/
 
 import { injectable } from 'inversify';
-import { EditorWidget } from '@theia/editor/lib/browser/editor-widget';
-import { StrictEditorTextFocusContext } from '@theia/editor/lib/browser/editor-keybinding-contexts';
+import { EditorWidget } from '@devpodio/editor/lib/browser/editor-widget';
+import { StrictEditorTextFocusContext } from '@devpodio/editor/lib/browser/editor-keybinding-contexts';
 import { MonacoEditor } from './monaco-editor';
 
 /**

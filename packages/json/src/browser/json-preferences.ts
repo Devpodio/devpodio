@@ -22,8 +22,8 @@ import {
     PreferenceContribution,
     PreferenceSchema,
     PreferenceChangeEvent
-} from '@theia/core/lib/browser/preferences';
-import { JsonSchemaConfiguration } from '@theia/core/lib/browser/json-schema-store';
+} from '@devpodio/core/lib/browser/preferences';
+import { JsonSchemaConfiguration } from '@devpodio/core/lib/browser/json-schema-store';
 
 export const jsonPreferenceSchema: PreferenceSchema = {
     'type': 'object',

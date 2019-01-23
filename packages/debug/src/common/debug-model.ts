@@ -23,11 +23,11 @@
 // Some entities copied and modified from https://github.com/Microsoft/vscode/blob/master/src/vs/workbench/parts/debug/common/debug.ts
 
 import * as stream from 'stream';
-import { WebSocketChannel } from '@theia/core/lib/common/messaging/web-socket-channel';
+import { WebSocketChannel } from '@devpodio/core/lib/common/messaging/web-socket-channel';
 import { DebugConfiguration } from './debug-configuration';
-import { IJSONSchema, IJSONSchemaSnippet } from '@theia/core/lib/common/json-schema';
-import { Disposable } from '@theia/core/lib/common/disposable';
-import { MaybePromise } from '@theia/core/lib/common/types';
+import { IJSONSchema, IJSONSchemaSnippet } from '@devpodio/core/lib/common/json-schema';
+import { Disposable } from '@devpodio/core/lib/common/disposable';
+import { MaybePromise } from '@devpodio/core/lib/common/types';
 
 // FXIME: break down this file to debug adapter and debug adapter contribution (see Theia file naming conventions)
 

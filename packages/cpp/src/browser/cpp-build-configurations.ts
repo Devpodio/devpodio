@@ -15,9 +15,9 @@
  ********************************************************************************/
 
 import { injectable, inject, postConstruct } from 'inversify';
-import { Emitter, Event } from '@theia/core';
+import { Emitter, Event } from '@devpodio/core';
 import { CppPreferences } from './cpp-preferences';
-import { StorageService } from '@theia/core/lib/browser/storage-service';
+import { StorageService } from '@devpodio/core/lib/browser/storage-service';
 
 export interface CppBuildConfiguration {
     /** Human-readable configuration name.  */

@@ -15,7 +15,7 @@
  ********************************************************************************/
 
 import { injectable, inject } from 'inversify';
-import { KeybindingContext, ApplicationShell } from '@theia/core/lib/browser';
+import { KeybindingContext, ApplicationShell } from '@devpodio/core/lib/browser';
 import { FileNavigatorWidget } from './navigator-widget';
 
 export namespace NavigatorKeybindingContexts {

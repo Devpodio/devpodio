@@ -15,10 +15,10 @@
  ********************************************************************************/
 
 import { injectable, inject } from 'inversify';
-import { MessageService } from '@theia/core';
-import { FrontendApplication } from '@theia/core/lib/browser';
+import { MessageService } from '@devpodio/core';
+import { FrontendApplication } from '@devpodio/core/lib/browser';
 import { ExtensionManager } from '../common';
-import { AbstractViewContribution } from '@theia/core/lib/browser/shell/view-contribution';
+import { AbstractViewContribution } from '@devpodio/core/lib/browser/shell/view-contribution';
 import { ExtensionWidget } from './extension-widget';
 
 export const EXTENSIONS_WIDGET_FACTORY_ID = 'extensions';

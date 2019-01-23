@@ -15,12 +15,12 @@
  ********************************************************************************/
 
 import { injectable } from 'inversify';
-import { TreeImpl, CompositeTreeNode, TreeNode, SelectableTreeNode, ExpandableTreeNode } from '@theia/core/lib/browser';
+import { TreeImpl, CompositeTreeNode, TreeNode, SelectableTreeNode, ExpandableTreeNode } from '@devpodio/core/lib/browser';
 import { MarkerManager } from './marker-manager';
 import { Marker } from '../common/marker';
-import { UriSelection } from '@theia/core/lib/common/selection';
-import URI from '@theia/core/lib/common/uri';
-import { LabelProvider } from '@theia/core/lib/browser/label-provider';
+import { UriSelection } from '@devpodio/core/lib/common/selection';
+import URI from '@devpodio/core/lib/common/uri';
+import { LabelProvider } from '@devpodio/core/lib/browser/label-provider';
 
 export const MarkerOptions = Symbol('MarkerOptions');
 export interface MarkerOptions {

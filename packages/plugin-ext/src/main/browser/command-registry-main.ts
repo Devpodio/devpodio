@@ -15,9 +15,9 @@
  ********************************************************************************/
 
 import { interfaces } from 'inversify';
-import { CommandRegistry } from '@theia/core/lib/common/command';
-import * as theia from '@theia/plugin';
-import { Disposable } from '@theia/core/lib/common/disposable';
+import { CommandRegistry } from '@devpodio/core/lib/common/command';
+import * as theia from '@devpodio/plugin';
+import { Disposable } from '@devpodio/core/lib/common/disposable';
 import { CommandRegistryMain, CommandRegistryExt, MAIN_RPC_CONTEXT } from '../../api/plugin-api';
 import { RPCProtocol } from '../../api/rpc-protocol';
 

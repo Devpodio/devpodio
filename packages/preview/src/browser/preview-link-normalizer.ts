@@ -15,8 +15,8 @@
  ********************************************************************************/
 
 import { injectable } from 'inversify';
-import URI from '@theia/core/lib/common/uri';
-import { MiniBrowserEndpoint } from '@theia/mini-browser/lib/browser/location-mapper-service';
+import URI from '@devpodio/core/lib/common/uri';
+import { MiniBrowserEndpoint } from '@devpodio/mini-browser/lib/browser/location-mapper-service';
 
 @injectable()
 export class PreviewLinkNormalizer {

@@ -15,8 +15,8 @@
  ********************************************************************************/
 
 import { injectable, inject, named } from 'inversify';
-import { ContributionProvider, CommandContribution, CommandRegistry } from '@theia/core/lib/common';
-import { FrontendApplication, FrontendApplicationContribution, PreferenceSchema, PreferenceSchemaProvider } from '@theia/core/lib/browser';
+import { ContributionProvider, CommandContribution, CommandRegistry } from '@devpodio/core/lib/common';
+import { FrontendApplication, FrontendApplicationContribution, PreferenceSchema, PreferenceSchemaProvider } from '@devpodio/core/lib/browser';
 import { LanguageClientContribution } from './language-client-contribution';
 
 @injectable()

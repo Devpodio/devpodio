@@ -16,11 +16,11 @@
 
 import * as React from 'react';
 import { DebugProtocol } from 'vscode-debugprotocol/lib/debugProtocol';
-import { RecursivePartial } from '@theia/core';
-import URI from '@theia/core/lib/common/uri';
-import { EditorManager, Range } from '@theia/editor/lib/browser';
-import { LabelProvider, DISABLED_CLASS, WidgetOpenerOptions } from '@theia/core/lib/browser';
-import { TreeElement } from '@theia/core/lib/browser/source-tree';
+import { RecursivePartial } from '@devpodio/core';
+import URI from '@devpodio/core/lib/common/uri';
+import { EditorManager, Range } from '@devpodio/editor/lib/browser';
+import { LabelProvider, DISABLED_CLASS, WidgetOpenerOptions } from '@devpodio/core/lib/browser';
+import { TreeElement } from '@devpodio/core/lib/browser/source-tree';
 import { DebugSession } from '../debug-session';
 import { SourceBreakpoint } from '../breakpoint/breakpoint-marker';
 import { DebugSource } from './debug-source';

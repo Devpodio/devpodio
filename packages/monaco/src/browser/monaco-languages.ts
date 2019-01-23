@@ -19,11 +19,11 @@ import {
     MonacoLanguages as BaseMonacoLanguages, ProtocolToMonacoConverter,
     MonacoToProtocolConverter
 } from 'monaco-languageclient';
-import { Languages, Diagnostic, DiagnosticCollection, Language, WorkspaceSymbolProvider } from '@theia/languages/lib/browser';
-import { ProblemManager } from '@theia/markers/lib/browser/problem/problem-manager';
-import URI from '@theia/core/lib/common/uri';
-import { Mutable } from '@theia/core/lib/common/types';
-import { Disposable } from '@theia/core/lib/common/disposable';
+import { Languages, Diagnostic, DiagnosticCollection, Language, WorkspaceSymbolProvider } from '@devpodio/languages/lib/browser';
+import { ProblemManager } from '@devpodio/markers/lib/browser/problem/problem-manager';
+import URI from '@devpodio/core/lib/common/uri';
+import { Mutable } from '@devpodio/core/lib/common/types';
+import { Disposable } from '@devpodio/core/lib/common/disposable';
 import { MonacoDiagnosticCollection } from 'monaco-languageclient/lib/monaco-diagnostic-collection';
 
 decorate(injectable(), BaseMonacoLanguages);

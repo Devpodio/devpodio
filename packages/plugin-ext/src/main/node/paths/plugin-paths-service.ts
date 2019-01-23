@@ -15,15 +15,15 @@
  ********************************************************************************/
 
 import { injectable, inject } from 'inversify';
-import { FileSystem, FileStat } from '@theia/filesystem/lib/common';
+import { FileSystem, FileStat } from '@devpodio/filesystem/lib/common';
 import * as path from 'path';
 import * as crypto from 'crypto';
-import URI from '@theia/core/lib/common/uri';
-import { Deferred } from '@theia/core/lib/common/promise-util';
-import { isWindows } from '@theia/core';
+import URI from '@devpodio/core/lib/common/uri';
+import { Deferred } from '@devpodio/core/lib/common/promise-util';
+import { isWindows } from '@devpodio/core';
 import { PluginPaths } from './const';
 import { PluginPathsService } from '../../common/plugin-paths-protocol';
-import { THEIA_EXT, VSCODE_EXT, getTemporaryWorkspaceFileUri } from '@theia/workspace/lib/common';
+import { THEIA_EXT, VSCODE_EXT, getTemporaryWorkspaceFileUri } from '@devpodio/workspace/lib/common';
 
 // Service to provide configuration paths for plugin api.
 @injectable()

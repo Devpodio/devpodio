@@ -18,7 +18,7 @@
 * This is the place for API experiments and proposals.
 * These API are NOT stable and subject to change. Use it on own risk.
 */
-declare module '@theia/plugin' {
+declare module '@devpodio/plugin' {
     export namespace languageServer {
         /**
          * Registers new language server.

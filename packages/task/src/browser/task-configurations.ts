@@ -16,10 +16,10 @@
 
 import { inject, injectable } from 'inversify';
 import { TaskConfiguration } from '../common/task-protocol';
-import { Disposable, DisposableCollection } from '@theia/core/lib/common';
-import URI from '@theia/core/lib/common/uri';
-import { FileSystemWatcherServer, FileChange, FileChangeType } from '@theia/filesystem/lib/common/filesystem-watcher-protocol';
-import { FileSystem } from '@theia/filesystem/lib/common';
+import { Disposable, DisposableCollection } from '@devpodio/core/lib/common';
+import URI from '@devpodio/core/lib/common/uri';
+import { FileSystemWatcherServer, FileChange, FileChangeType } from '@devpodio/filesystem/lib/common/filesystem-watcher-protocol';
+import { FileSystem } from '@devpodio/filesystem/lib/common';
 import * as jsoncparser from 'jsonc-parser';
 import { ParseError } from 'jsonc-parser';
 

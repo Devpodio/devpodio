@@ -33,8 +33,8 @@ import { fromLanguageSelector } from '../../plugin/type-converters';
 import { UriComponents } from '../../common/uri-components';
 import { LanguageSelector } from '../../plugin/languages';
 import { DocumentFilter, MonacoModelIdentifier, testGlob, getLanguages } from 'monaco-languageclient/lib';
-import { DisposableCollection, Emitter } from '@theia/core';
-import { MonacoLanguages } from '@theia/monaco/lib/browser/monaco-languages';
+import { DisposableCollection, Emitter } from '@devpodio/core';
+import { MonacoLanguages } from '@devpodio/monaco/lib/browser/monaco-languages';
 import URI from 'vscode-uri/lib/umd';
 
 export class LanguagesMainImpl implements LanguagesMain {

@@ -15,11 +15,11 @@
  ********************************************************************************/
 
 import { inject, injectable, postConstruct } from 'inversify';
-import { ILogger } from '@theia/core/lib/common/logger';
-import { StorageService } from '@theia/core/lib/browser/storage-service';
-import { Disposable, DisposableCollection } from '@theia/core/lib/common/disposable';
-import { FrontendApplicationContribution } from '@theia/core/lib/browser/frontend-application';
-import { CommandRegistry } from '@theia/core/lib/common/command';
+import { ILogger } from '@devpodio/core/lib/common/logger';
+import { StorageService } from '@devpodio/core/lib/browser/storage-service';
+import { Disposable, DisposableCollection } from '@devpodio/core/lib/common/disposable';
+import { FrontendApplicationContribution } from '@devpodio/core/lib/browser/frontend-application';
+import { CommandRegistry } from '@devpodio/core/lib/common/command';
 import { EditorCommands } from './editor-command';
 import { EditorWidget } from './editor-widget';
 import { EditorManager } from './editor-manager';

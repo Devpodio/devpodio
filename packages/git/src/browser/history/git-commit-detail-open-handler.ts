@@ -15,8 +15,8 @@
  ********************************************************************************/
 
 import { injectable } from 'inversify';
-import { WidgetOpenHandler, WidgetOpenerOptions } from '@theia/core/lib/browser';
-import URI from '@theia/core/lib/common/uri';
+import { WidgetOpenHandler, WidgetOpenerOptions } from '@devpodio/core/lib/browser';
+import URI from '@devpodio/core/lib/common/uri';
 import { GIT_COMMIT_DETAIL, GitCommitDetailWidgetOptions, GitCommitDetailWidget, GitCommitDetails } from './git-commit-detail-widget';
 
 export namespace GitCommitDetailUri {

@@ -15,9 +15,9 @@
  ********************************************************************************/
 
 import { injectable, inject } from 'inversify';
-import { MenuModelRegistry, Command, CommandRegistry } from '@theia/core/lib/common';
-import { AbstractViewContribution, OpenViewArguments, KeybindingRegistry } from '@theia/core/lib/browser';
-import { EDITOR_CONTEXT_MENU } from '@theia/editor/lib/browser';
+import { MenuModelRegistry, Command, CommandRegistry } from '@devpodio/core/lib/common';
+import { AbstractViewContribution, OpenViewArguments, KeybindingRegistry } from '@devpodio/core/lib/browser';
+import { EDITOR_CONTEXT_MENU } from '@devpodio/editor/lib/browser';
 import { CallHierarchyTreeWidget } from './callhierarchy-tree/callhierarchy-tree-widget';
 import { CALLHIERARCHY_ID } from './callhierarchy';
 import { CurrentEditorAccess } from './current-editor-access';

@@ -15,10 +15,10 @@
  ********************************************************************************/
 
 import { inject, injectable } from 'inversify';
-import URI from '@theia/core/lib/common/uri';
-import { ILogger } from '@theia/core/lib/common/logger';
-import { Endpoint } from '@theia/core/lib/browser/endpoint';
-import { StatusBar, StatusBarAlignment } from '@theia/core/lib/browser/status-bar';
+import URI from '@devpodio/core/lib/common/uri';
+import { ILogger } from '@devpodio/core/lib/common/logger';
+import { Endpoint } from '@devpodio/core/lib/browser/endpoint';
+import { StatusBar, StatusBarAlignment } from '@devpodio/core/lib/browser/status-bar';
 import { FileSystem } from '../../common/filesystem';
 import { FileDownloadData } from '../../common/download/file-download-data';
 

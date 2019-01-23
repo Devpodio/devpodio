@@ -16,7 +16,7 @@
 
 import { injectable, inject } from 'inversify';
 import { MessageConnection } from 'vscode-jsonrpc';
-import { CommandRegistry, Disposable, MaybePromise } from '@theia/core/lib/common';
+import { CommandRegistry, Disposable, MaybePromise } from '@devpodio/core/lib/common';
 import { ErrorAction, RevealOutputChannelOn, CloseAction } from 'monaco-languageclient';
 import {
     Workspace, Languages, Window, Services,

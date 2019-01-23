@@ -15,7 +15,7 @@
  ********************************************************************************/
 
 import * as React from 'react';
-import { DISABLED_CLASS } from '@theia/core/lib/browser';
+import { DISABLED_CLASS } from '@devpodio/core/lib/browser';
 
 export class DebugAction extends React.Component<DebugAction.Props> {
 

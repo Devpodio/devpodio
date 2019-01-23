@@ -15,9 +15,9 @@
  ********************************************************************************/
 
 import { ContainerModule } from 'inversify';
-import { bindContributionProvider } from '@theia/core/lib/common';
-import { CliContribution } from '@theia/core/lib/node/cli';
-import { LanguageServerContribution } from '@theia/languages/lib/node';
+import { bindContributionProvider } from '@devpodio/core/lib/common';
+import { CliContribution } from '@devpodio/core/lib/node/cli';
+import { LanguageServerContribution } from '@devpodio/languages/lib/node';
 import { JavaContribution } from './java-contribution';
 import { JavaCliContribution } from './java-cli-contribution';
 import { JavaExtensionContribution } from './java-extension-model';

@@ -15,9 +15,9 @@
  ********************************************************************************/
 
 import { injectable, inject, postConstruct } from 'inversify';
-import URI from '@theia/core/lib/common/uri';
-import { Emitter, Event } from '@theia/core/lib/common';
-import { TreeNode, SelectableTreeNode } from '@theia/core/lib/browser';
+import URI from '@devpodio/core/lib/common/uri';
+import { Emitter, Event } from '@devpodio/core/lib/common';
+import { TreeNode, SelectableTreeNode } from '@devpodio/core/lib/browser';
 import { DirNode, FileNode, FileTreeModel, FileStatNode } from '../file-tree';
 import { FileDialogTree } from './file-dialog-tree';
 

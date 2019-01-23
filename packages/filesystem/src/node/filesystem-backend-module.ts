@@ -16,7 +16,7 @@
 
 import * as cluster from 'cluster';
 import { ContainerModule, interfaces } from 'inversify';
-import { ConnectionHandler, JsonRpcConnectionHandler, ILogger } from '@theia/core/lib/common';
+import { ConnectionHandler, JsonRpcConnectionHandler, ILogger } from '@devpodio/core/lib/common';
 import { FileSystemNode } from './node-filesystem';
 import { FileSystem, FileSystemClient, fileSystemPath, DispatchingFileSystemClient } from '../common';
 import { FileSystemWatcherServer, FileSystemWatcherClient, fileSystemWatcherPath } from '../common/filesystem-watcher-protocol';

@@ -16,7 +16,7 @@
 
 import { ContainerModule, Container, interfaces } from 'inversify';
 import { TerminalBackendContribution } from './terminal-backend-contribution';
-import { ConnectionHandler, JsonRpcConnectionHandler } from '@theia/core/lib/common/messaging';
+import { ConnectionHandler, JsonRpcConnectionHandler } from '@devpodio/core/lib/common/messaging';
 import { ShellProcess, ShellProcessFactory, ShellProcessOptions } from './shell-process';
 import { ITerminalServer, terminalPath } from '../common/terminal-protocol';
 import { IBaseTerminalClient, DispatchingBaseTerminalClient, IBaseTerminalServer } from '../common/base-terminal-protocol';
@@ -25,7 +25,7 @@ import { IShellTerminalServer, shellTerminalPath } from '../common/shell-termina
 import { ShellTerminalServer } from '../node/shell-terminal-server';
 import { TerminalWatcher } from '../common/terminal-watcher';
 import { createCommonBindings } from '../common/terminal-common-module';
-import { MessagingService } from '@theia/core/lib/node/messaging/messaging-service';
+import { MessagingService } from '@devpodio/core/lib/node/messaging/messaging-service';
 
 export function bindTerminalServer(bind: interfaces.Bind, { path, identifier, constructor }: {
     path: string,

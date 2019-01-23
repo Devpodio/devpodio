@@ -15,7 +15,7 @@
  ********************************************************************************/
 
 import { ContainerModule } from 'inversify';
-import { CommandContribution } from '@theia/core/lib/common/command';
+import { CommandContribution } from '@devpodio/core/lib/common/command';
 import { FileDownloadService } from './file-download-service';
 import { FileDownloadCommandContribution } from './file-download-command-contribution';
 

@@ -15,7 +15,7 @@
  ********************************************************************************/
 
 import { interfaces, Container } from 'inversify';
-import { Tree, TreeModel, TreeProps, defaultTreeProps } from '@theia/core/lib/browser';
+import { Tree, TreeModel, TreeProps, defaultTreeProps } from '@devpodio/core/lib/browser';
 import { createFileTreeContainer, FileTreeModel, FileTreeWidget } from '../file-tree';
 import { OpenFileDialog, OpenFileDialogProps, SaveFileDialog, SaveFileDialogProps } from './file-dialog';
 import { FileDialogModel } from './file-dialog-model';

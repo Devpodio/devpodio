@@ -23,7 +23,7 @@ import { pull } from 'dugite-extra/lib/command/pull';
 import { clone } from 'dugite-extra/lib/command/clone';
 import { fetch } from 'dugite-extra/lib/command/fetch';
 import { merge } from 'dugite-extra/lib/command/merge';
-import { FileUri } from '@theia/core/lib/node/file-uri';
+import { FileUri } from '@devpodio/core/lib/node/file-uri';
 import { getStatus } from 'dugite-extra/lib/command/status';
 import { createCommit } from 'dugite-extra/lib/command/commit';
 import { stage, unstage } from 'dugite-extra/lib/command/stage';
@@ -34,9 +34,9 @@ import { createBranch, deleteBranch, renameBranch, listBranch } from 'dugite-ext
 import { IStatusResult, IAheadBehind, AppFileStatus, WorkingDirectoryStatus as DugiteStatus, FileChange as DugiteFileChange } from 'dugite-extra/lib/model/status';
 import { Branch as DugiteBranch } from 'dugite-extra/lib/model/branch';
 import { Commit as DugiteCommit, CommitIdentity as DugiteCommitIdentity } from 'dugite-extra/lib/model/commit';
-import { ILogger } from '@theia/core';
-import { Deferred } from '@theia/core/lib/common/promise-util';
-import * as strings from '@theia/core/lib/common/strings';
+import { ILogger } from '@devpodio/core';
+import { Deferred } from '@devpodio/core/lib/common/promise-util';
+import * as strings from '@devpodio/core/lib/common/strings';
 import {
     Git, GitUtils, Repository, WorkingDirectoryStatus, GitFileChange, GitFileStatus, Branch, Commit,
     CommitIdentity, GitResult, CommitWithChanges, GitFileBlame, CommitLine, GitError

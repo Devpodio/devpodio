@@ -15,8 +15,8 @@
  ********************************************************************************/
 
 import { injectable } from 'inversify';
-import { BaseLanguageServerContribution, IConnection, LanguageServerStartOptions } from '@theia/languages/lib/node';
-import { parseArgs } from '@theia/process/lib/node/utils';
+import { BaseLanguageServerContribution, IConnection, LanguageServerStartOptions } from '@devpodio/languages/lib/node';
+import { parseArgs } from '@devpodio/process/lib/node/utils';
 import { CPP_LANGUAGE_ID, CPP_LANGUAGE_NAME, CLANGD_EXECUTABLE_DEFAULT, CppStartParameters } from '../common';
 
 export interface CppStartOptions extends LanguageServerStartOptions {

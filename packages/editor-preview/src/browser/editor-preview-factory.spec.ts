@@ -18,12 +18,12 @@
 // disable no-unused-expression for chai.
 // tslint:disable:no-any no-unused-expression
 
-import {enableJSDOM} from '@theia/core/lib/browser/test/jsdom';
+import {enableJSDOM} from '@devpodio/core/lib/browser/test/jsdom';
 const disableJsDom = enableJSDOM();
 
 import { Container } from 'inversify';
-import { WidgetFactory, WidgetManager } from '@theia/core/lib/browser';
-import { EditorWidget, EditorManager } from '@theia/editor/lib/browser';
+import { WidgetFactory, WidgetManager } from '@devpodio/core/lib/browser';
+import { EditorWidget, EditorManager } from '@devpodio/editor/lib/browser';
 import { EditorPreviewWidgetFactory, EditorPreviewWidgetOptions } from './editor-preview-factory';
 import { expect } from 'chai';
 import * as sinon from 'sinon';

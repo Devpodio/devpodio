@@ -16,13 +16,13 @@
 
 import { inject, injectable } from 'inversify';
 import { Diagnostic, DiagnosticSeverity } from 'vscode-languageserver-types';
-import URI from '@theia/core/lib/common/uri';
-import { notEmpty } from '@theia/core/lib/common/objects';
-import { Event, Emitter } from '@theia/core/lib/common/event';
-import { Tree } from '@theia/core/lib/browser/tree/tree';
-import { DepthFirstTreeIterator } from '@theia/core/lib/browser/tree/tree-iterator';
-import { TreeDecorator, TreeDecoration } from '@theia/core/lib/browser/tree/tree-decorator';
-import { FileStatNode } from '@theia/filesystem/lib/browser';
+import URI from '@devpodio/core/lib/common/uri';
+import { notEmpty } from '@devpodio/core/lib/common/objects';
+import { Event, Emitter } from '@devpodio/core/lib/common/event';
+import { Tree } from '@devpodio/core/lib/browser/tree/tree';
+import { DepthFirstTreeIterator } from '@devpodio/core/lib/browser/tree/tree-iterator';
+import { TreeDecorator, TreeDecoration } from '@devpodio/core/lib/browser/tree/tree-decorator';
+import { FileStatNode } from '@devpodio/filesystem/lib/browser';
 import { Marker } from '../../common/marker';
 import { ProblemManager } from './problem-manager';
 

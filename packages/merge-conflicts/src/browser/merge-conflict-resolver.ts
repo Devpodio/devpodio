@@ -15,11 +15,11 @@
  ********************************************************************************/
 
 import { injectable, inject } from 'inversify';
-import { TextEdit, TextDocument, Range } from '@theia/languages/lib/browser';
-import { CommandHandler } from '@theia/core/lib/common';
+import { TextEdit, TextDocument, Range } from '@devpodio/languages/lib/browser';
+import { CommandHandler } from '@devpodio/core/lib/common';
 import { MergeConflictCommandArgument, MergeConflict } from './merge-conflict';
-import { EditorManager } from '@theia/editor/lib/browser';
-import URI from '@theia/core/lib/common/uri';
+import { EditorManager } from '@devpodio/editor/lib/browser';
+import URI from '@devpodio/core/lib/common/uri';
 
 @injectable()
 export class MergeConflictResolver {

@@ -14,13 +14,13 @@
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  ********************************************************************************/
 
-import URI from '@theia/core/lib/common/uri';
+import URI from '@devpodio/core/lib/common/uri';
 import { injectable, inject } from 'inversify';
 import { WorkspaceUtils } from './workspace-utils';
 import { WorkspaceService } from './workspace-service';
-import { FileSystem } from '@theia/filesystem/lib/common/filesystem';
-import { UriCommandHandler } from '@theia/core/lib/common/uri-command-handler';
-import { FileSystemUtils } from '@theia/filesystem/lib/common/filesystem-utils';
+import { FileSystem } from '@devpodio/filesystem/lib/common/filesystem';
+import { UriCommandHandler } from '@devpodio/core/lib/common/uri-command-handler';
+import { FileSystemUtils } from '@devpodio/filesystem/lib/common/filesystem-utils';
 
 @injectable()
 export class WorkspaceDuplicateHandler implements UriCommandHandler<URI[]> {

@@ -32,15 +32,15 @@ import {
     DiffUris,
     FOLDER_ICON,
     FILE_ICON
-} from '@theia/core/lib/browser';
-import { CancellationTokenSource, Emitter, Event } from '@theia/core';
-import { EditorManager, EditorDecoration, TrackedRangeStickiness, OverviewRulerLane, EditorWidget, ReplaceOperation, EditorOpenerOptions } from '@theia/editor/lib/browser';
-import { WorkspaceService } from '@theia/workspace/lib/browser';
-import { FileResourceResolver } from '@theia/filesystem/lib/browser';
+} from '@devpodio/core/lib/browser';
+import { CancellationTokenSource, Emitter, Event } from '@devpodio/core';
+import { EditorManager, EditorDecoration, TrackedRangeStickiness, OverviewRulerLane, EditorWidget, ReplaceOperation, EditorOpenerOptions } from '@devpodio/editor/lib/browser';
+import { WorkspaceService } from '@devpodio/workspace/lib/browser';
+import { FileResourceResolver } from '@devpodio/filesystem/lib/browser';
 import { SearchInWorkspaceResult, SearchInWorkspaceOptions } from '../common/search-in-workspace-interface';
 import { SearchInWorkspaceService } from './search-in-workspace-service';
 import { MEMORY_TEXT } from './in-memory-text-resource';
-import URI from '@theia/core/lib/common/uri';
+import URI from '@devpodio/core/lib/common/uri';
 import * as React from 'react';
 
 const ROOT_ID = 'ResultTree';

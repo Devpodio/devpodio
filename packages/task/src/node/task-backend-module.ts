@@ -15,9 +15,9 @@
  ********************************************************************************/
 
 import { ContainerModule } from 'inversify';
-import { bindContributionProvider } from '@theia/core';
-import { ConnectionHandler, JsonRpcConnectionHandler } from '@theia/core/lib/common/messaging';
-import { BackendApplicationContribution } from '@theia/core/lib/node';
+import { bindContributionProvider } from '@devpodio/core';
+import { ConnectionHandler, JsonRpcConnectionHandler } from '@devpodio/core/lib/common/messaging';
+import { BackendApplicationContribution } from '@devpodio/core/lib/node';
 import { bindProcessTaskRunnerModule } from './process/process-task-runner-backend-module';
 import { TaskBackendApplicationContribution } from './task-backend-application-contribution';
 import { TaskManager } from './task-manager';

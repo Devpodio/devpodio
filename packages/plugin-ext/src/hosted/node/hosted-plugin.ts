@@ -15,7 +15,7 @@
  ********************************************************************************/
 
 import { injectable, inject, multiInject, postConstruct, optional } from 'inversify';
-import { ILogger, ConnectionErrorHandler } from '@theia/core/lib/common';
+import { ILogger, ConnectionErrorHandler } from '@devpodio/core/lib/common';
 import { HostedPluginClient, PluginModel, ServerPluginRunner } from '../../common/plugin-protocol';
 import { LogPart } from '../../common/types';
 import { HostedPluginProcess } from './hosted-plugin-process';

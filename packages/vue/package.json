@@ -1,0 +1,50 @@
+{
+  "name": "@devpodio/vue",
+  "description": "Vuejs support for the Theia IDE",
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "theia-extension"
+  ],
+  "license": "Apache-2.0",
+  "version": "1.0.14",
+  "files": [
+    "data",
+    "lib",
+    "src"
+  ],
+  "dependencies": {
+    "@devpodio/core": "^1.0.14",
+    "@devpodio/languages": "^1.0.14",
+    "@devpodio/monaco": "^1.0.14",
+    "@devpodio/vue-language-server": "^0.1.0"
+  },
+  "devDependencies": {
+    "rimraf": "^2.6.2",
+    "typescript": "^3.2.4"
+  },
+  "scripts": {
+    "prepare": "yarn run clean && yarn run build",
+    "clean": "theiaext clean",
+    "build": "theiaext build",
+    "watch": "theiaext watch",
+    "test": "theiaext test",
+    "docs": "theiaext docs"
+  },
+  "author": "Uni Sayo <unibtc@gmail.com> (https://github.com/uniibu)",
+  "repository": "https://github.com/uniibu/theia-vue-extension",
+  "bugs": {
+    "url": "https://github.com/uniibu/theia-vue-extension/issues"
+  },
+  "homepage": "https://github.com/uniibu/theia-vue-extension#readme",
+  "nyc": {
+    "extends": "../../configs/nyc.json"
+  },
+  "theiaExtensions": [
+    {
+      "frontend": "lib/browser/vue-frontend-module",
+      "backend": "lib/node/vue-backend-module"
+    }
+  ]
+}

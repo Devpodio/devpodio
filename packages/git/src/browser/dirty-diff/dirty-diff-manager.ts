@@ -15,12 +15,12 @@
  ********************************************************************************/
 
 import { inject, injectable, postConstruct } from 'inversify';
-import { EditorManager, EditorWidget, TextEditor, TextEditorDocument, TextDocumentChangeEvent } from '@theia/editor/lib/browser';
-import URI from '@theia/core/lib/common/uri';
+import { EditorManager, EditorWidget, TextEditor, TextEditorDocument, TextDocumentChangeEvent } from '@devpodio/editor/lib/browser';
+import URI from '@devpodio/core/lib/common/uri';
 import { DiffComputer, DirtyDiff } from './diff-computer';
-import { Emitter, Event, Disposable, DisposableCollection } from '@theia/core';
+import { Emitter, Event, Disposable, DisposableCollection } from '@devpodio/core';
 import { GitPreferences, GitConfiguration } from '../git-preferences';
-import { PreferenceChangeEvent } from '@theia/core/lib/browser';
+import { PreferenceChangeEvent } from '@devpodio/core/lib/browser';
 import { GitResourceResolver, GIT_RESOURCE_SCHEME } from '../git-resource';
 import { WorkingDirectoryStatus, GitFileStatus, GitFileChange, Repository, Git } from '../../common';
 import { GitRepositoryTracker } from '../git-repository-tracker';

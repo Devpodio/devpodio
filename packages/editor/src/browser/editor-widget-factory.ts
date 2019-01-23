@@ -15,9 +15,9 @@
  ********************************************************************************/
 
 import { injectable, inject, } from 'inversify';
-import URI from '@theia/core/lib/common/uri';
-import { SelectionService } from '@theia/core/lib/common';
-import { NavigatableWidgetOptions, WidgetFactory, LabelProvider } from '@theia/core/lib/browser';
+import URI from '@devpodio/core/lib/common/uri';
+import { SelectionService } from '@devpodio/core/lib/common';
+import { NavigatableWidgetOptions, WidgetFactory, LabelProvider } from '@devpodio/core/lib/browser';
 import { EditorWidget } from './editor-widget';
 import { TextEditorProvider } from './editor';
 

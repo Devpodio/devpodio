@@ -19,7 +19,7 @@
 
 // adjusted to Theia APIs
 
-import { Event } from '@theia/core/lib/common';
+import { Event } from '@devpodio/core/lib/common';
 
 export const enum ContextKeyExprType {
     Defined = 1,

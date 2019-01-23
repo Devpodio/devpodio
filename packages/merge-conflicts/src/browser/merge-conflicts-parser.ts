@@ -16,7 +16,7 @@
 
 import { injectable } from 'inversify';
 import { MergeConflict } from './merge-conflict';
-import { Range } from '@theia/editor/lib/browser';
+import { Range } from '@devpodio/editor/lib/browser';
 
 @injectable()
 export class MergeConflictsParser {

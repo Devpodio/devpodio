@@ -16,7 +16,7 @@
 
 import * as yargs from 'yargs';
 import { injectable, inject } from 'inversify';
-import { CliContribution, BackendApplicationCliContribution } from '@theia/core/lib/node';
+import { CliContribution, BackendApplicationCliContribution } from '@devpodio/core/lib/node';
 import { ApplicationProjectOptions } from './application-project';
 import { NpmClientOptions } from './npm-client';
 

@@ -15,9 +15,9 @@
  ********************************************************************************/
 
 import { interfaces } from 'inversify';
-import { FrontendApplicationContribution, isBasicWasmSupported } from '@theia/core/lib/browser';
-import { bindContributionProvider } from '@theia/core';
-import { ThemeService } from '@theia/core/lib/browser/theming';
+import { FrontendApplicationContribution, isBasicWasmSupported } from '@devpodio/core/lib/browser';
+import { bindContributionProvider } from '@devpodio/core';
+import { ThemeService } from '@devpodio/core/lib/browser/theming';
 import { BuiltinTextmateThemeProvider } from './monaco-textmate-builtin-theme-provider';
 import { TextmateRegistry } from './textmate-registry';
 import { LanguageGrammarDefinitionContribution } from './textmate-contribution';

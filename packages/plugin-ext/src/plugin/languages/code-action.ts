@@ -14,7 +14,7 @@
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  ********************************************************************************/
 
-import * as theia from '@theia/plugin';
+import * as theia from '@devpodio/plugin';
 import URI from 'vscode-uri/lib/umd';
 import { Selection } from '../../api/plugin-api';
 import { Range } from '../../api/model';

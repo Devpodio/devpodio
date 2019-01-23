@@ -17,13 +17,13 @@
 /* tslint:disable:no-any */
 
 import { createProxyIdentifier, ProxyIdentifier } from './rpc-protocol';
-import * as theia from '@theia/plugin';
+import * as theia from '@devpodio/plugin';
 import { PluginLifecycle, PluginModel, PluginMetadata, PluginPackage } from '../common/plugin-protocol';
 import { QueryParameters } from '../common/env';
 import { TextEditorCursorStyle } from '../common/editor-options';
 import { TextEditorLineNumbersStyle, EndOfLine, OverviewRulerLane, IndentAction, FileOperationOptions } from '../plugin/types-impl';
 import { UriComponents } from '../common/uri-components';
-import { PreferenceChange } from '@theia/core/lib/browser';
+import { PreferenceChange } from '@devpodio/core/lib/browser';
 import { ConfigurationTarget } from '../plugin/types-impl';
 import {
     SerializedDocumentFilter,
@@ -57,9 +57,9 @@ import {
 } from './model';
 import { ExtPluginApi } from '../common/plugin-ext-api-contribution';
 import { KeysToAnyValues, KeysToKeysToAnyValue } from '../common/types';
-import { CancellationToken, Progress, ProgressOptions } from '@theia/plugin';
-import { IJSONSchema, IJSONSchemaSnippet } from '@theia/core/lib/common/json-schema';
-import { DebuggerDescription } from '@theia/debug/lib/common/debug-service';
+import { CancellationToken, Progress, ProgressOptions } from '@devpodio/plugin';
+import { IJSONSchema, IJSONSchemaSnippet } from '@devpodio/core/lib/common/json-schema';
+import { DebuggerDescription } from '@devpodio/debug/lib/common/debug-service';
 import { DebugProtocol } from 'vscode-debugprotocol';
 import { SymbolInformation } from 'vscode-languageserver-types';
 

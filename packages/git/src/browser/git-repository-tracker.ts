@@ -16,10 +16,10 @@
 
 import { injectable, inject, postConstruct } from 'inversify';
 import { Git, Repository, WorkingDirectoryStatus } from '../common';
-import { Event, Emitter, DisposableCollection } from '@theia/core';
+import { Event, Emitter, DisposableCollection } from '@devpodio/core';
 import { GitRepositoryProvider } from './git-repository-provider';
 import { GitWatcher, GitStatusChangeEvent } from '../common/git-watcher';
-import URI from '@theia/core/lib/common/uri';
+import URI from '@devpodio/core/lib/common/uri';
 
 /**
  * The repository tracker watches the selected repository for status changes. It provides a convenient way to listen on status updates.

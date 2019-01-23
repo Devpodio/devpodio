@@ -16,13 +16,13 @@
 
 import { injectable, inject, postConstruct } from 'inversify';
 import { DebugProtocol } from 'vscode-debugprotocol/lib/debugProtocol';
-import { MessageType } from '@theia/core/lib/common';
-import { ConsoleSession, ConsoleItem } from '@theia/console/lib/browser/console-session';
-import { AnsiConsoleItem } from '@theia/console/lib/browser/ansi-console-item';
+import { MessageType } from '@devpodio/core/lib/common';
+import { ConsoleSession, ConsoleItem } from '@devpodio/console/lib/browser/console-session';
+import { AnsiConsoleItem } from '@devpodio/console/lib/browser/ansi-console-item';
 import { DebugSession } from '../debug-session';
 import { DebugSessionManager } from '../debug-session-manager';
-import { Languages, CompletionItem, CompletionItemKind, Position, Range, TextEdit, Workspace, TextDocument, CompletionParams } from '@theia/languages/lib/browser';
-import URI from '@theia/core/lib/common/uri';
+import { Languages, CompletionItem, CompletionItemKind, Position, Range, TextEdit, Workspace, TextDocument, CompletionParams } from '@devpodio/languages/lib/browser';
+import URI from '@devpodio/core/lib/common/uri';
 import { ExpressionContainer, ExpressionItem } from './debug-console-items';
 
 @injectable()

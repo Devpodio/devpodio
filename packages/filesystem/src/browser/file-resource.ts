@@ -18,8 +18,8 @@ import { injectable, inject } from 'inversify';
 import { TextDocumentContentChangeEvent } from 'vscode-languageserver-types';
 import {
     Resource, ResourceResolver, Emitter, Event, DisposableCollection, ResourceError
-} from '@theia/core';
-import URI from '@theia/core/lib/common/uri';
+} from '@devpodio/core';
+import URI from '@devpodio/core/lib/common/uri';
 import { FileSystem, FileStat, FileSystemError } from '../common/filesystem';
 import { FileSystemWatcher, FileChangeEvent } from './filesystem-watcher';
 

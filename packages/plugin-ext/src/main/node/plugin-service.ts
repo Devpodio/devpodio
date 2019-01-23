@@ -14,7 +14,7 @@
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  ********************************************************************************/
 import * as express from 'express';
-import { BackendApplicationContribution } from '@theia/core/lib/node/backend-application';
+import { BackendApplicationContribution } from '@devpodio/core/lib/node/backend-application';
 import { injectable } from 'inversify';
 
 const pluginPath = (process.env.HOME || process.env.HOMEPATH || process.env.USERPROFILE) + './theia/plugins/';

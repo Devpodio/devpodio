@@ -15,7 +15,7 @@
  ********************************************************************************/
 
 import { ContainerModule } from 'inversify';
-import { CommandContribution } from '@theia/core';
+import { CommandContribution } from '@devpodio/core';
 import { PluginVscodeCommandsContribution } from './plugin-vscode-commands-contribution';
 
 export default new ContainerModule(bind => {

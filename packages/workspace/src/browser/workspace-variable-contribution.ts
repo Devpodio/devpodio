@@ -15,9 +15,9 @@
  ********************************************************************************/
 
 import { injectable, inject, postConstruct } from 'inversify';
-import URI from '@theia/core/lib/common/uri';
-import { ApplicationShell, NavigatableWidget } from '@theia/core/lib/browser';
-import { VariableContribution, VariableRegistry } from '@theia/variable-resolver/lib/browser';
+import URI from '@devpodio/core/lib/common/uri';
+import { ApplicationShell, NavigatableWidget } from '@devpodio/core/lib/browser';
+import { VariableContribution, VariableRegistry } from '@devpodio/variable-resolver/lib/browser';
 import { WorkspaceService } from './workspace-service';
 
 @injectable()

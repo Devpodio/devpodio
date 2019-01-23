@@ -16,9 +16,9 @@
 
 import { inject, injectable } from 'inversify';
 import { Minimatch } from 'minimatch';
-import { MaybePromise } from '@theia/core/lib/common/types';
-import { Event, Emitter } from '@theia/core/lib/common/event';
-import { PreferenceChangeEvent } from '@theia/core/lib/browser/preferences';
+import { MaybePromise } from '@devpodio/core/lib/common/types';
+import { Event, Emitter } from '@devpodio/core/lib/common/event';
+import { PreferenceChangeEvent } from '@devpodio/core/lib/browser/preferences';
 import { FileNavigatorPreferences, FileNavigatorConfiguration } from './navigator-preferences';
 
 /**

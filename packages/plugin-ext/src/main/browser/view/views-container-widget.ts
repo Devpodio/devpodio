@@ -16,7 +16,7 @@
 
 import { ViewContainer, View } from '../../../common';
 import { TreeViewWidget } from './tree-views-main';
-import { BaseWidget, Widget } from '@theia/core/lib/browser';
+import { BaseWidget, Widget } from '@devpodio/core/lib/browser';
 
 export function createElement(className?: string): HTMLDivElement {
     const div = document.createElement('div');

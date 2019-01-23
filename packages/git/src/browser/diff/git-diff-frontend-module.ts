@@ -16,7 +16,7 @@
 
 import { interfaces } from 'inversify';
 import { GitDiffContribution } from './git-diff-contribution';
-import { WidgetFactory, bindViewContribution } from '@theia/core/lib/browser';
+import { WidgetFactory, bindViewContribution } from '@devpodio/core/lib/browser';
 import { GitDiffWidget, GIT_DIFF } from './git-diff-widget';
 
 import '../../../src/browser/style/diff.css';

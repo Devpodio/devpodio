@@ -16,8 +16,8 @@
 
 import * as chai from 'chai';
 import { Container, ContainerModule } from 'inversify';
-import { ILogger } from '@theia/core/lib/common';
-import { MockLogger } from '@theia/core/lib/common/test/mock-logger';
+import { ILogger } from '@devpodio/core/lib/common';
+import { MockLogger } from '@devpodio/core/lib/common/test/mock-logger';
 import { Variable, VariableRegistry } from './variable';
 import { VariableResolverService } from './variable-resolver-service';
 

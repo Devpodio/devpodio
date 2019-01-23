@@ -14,10 +14,10 @@
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  ********************************************************************************/
 
-import { LabelProviderContribution } from '@theia/core/lib/browser/label-provider';
-import URI from '@theia/core/lib/common/uri';
+import { LabelProviderContribution } from '@devpodio/core/lib/browser/label-provider';
+import URI from '@devpodio/core/lib/common/uri';
 import { JAVA_SCHEME } from '../common/index';
-import { MaybePromise } from '@theia/core/lib/common';
+import { MaybePromise } from '@devpodio/core/lib/common';
 import { injectable } from 'inversify';
 
 @injectable()

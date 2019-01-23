@@ -15,11 +15,11 @@
  ********************************************************************************/
 
 import { injectable, inject } from 'inversify';
-import { FileStat } from '@theia/filesystem/lib/common/filesystem';
-import { WorkspaceService } from '@theia/workspace/lib/browser';
-import { Deferred } from '@theia/core/lib/common/promise-util';
+import { FileStat } from '@devpodio/filesystem/lib/common/filesystem';
+import { WorkspaceService } from '@devpodio/workspace/lib/browser';
+import { Deferred } from '@devpodio/core/lib/common/promise-util';
 import { PluginPathsService } from '../common/plugin-paths-protocol';
-import { Emitter, Event } from '@theia/core';
+import { Emitter, Event } from '@devpodio/core';
 
 @injectable()
 export class StoragePathService {

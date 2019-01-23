@@ -18,7 +18,7 @@ import * as fs from 'fs-extra';
 import * as temp from 'temp';
 import * as path from 'path';
 import { expect } from 'chai';
-import { FileUri } from '@theia/core/lib/node/file-uri';
+import { FileUri } from '@devpodio/core/lib/node/file-uri';
 import { Git } from '../common/git';
 import { DugiteGit } from './dugite-git';
 import { Repository } from '../common';

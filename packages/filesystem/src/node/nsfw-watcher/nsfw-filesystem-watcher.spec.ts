@@ -18,8 +18,8 @@ import * as temp from 'temp';
 import * as chai from 'chai';
 import * as fs from 'fs-extra';
 import * as assert from 'assert';
-import URI from '@theia/core/lib/common/uri';
-import { FileUri } from '@theia/core/lib/node';
+import URI from '@devpodio/core/lib/common/uri';
+import { FileUri } from '@devpodio/core/lib/node';
 import { NsfwFileSystemWatcherServer } from './nsfw-filesystem-watcher';
 import { DidFilesChangedParams } from '../../common/filesystem-watcher-protocol';
 // tslint:disable:no-unused-expression

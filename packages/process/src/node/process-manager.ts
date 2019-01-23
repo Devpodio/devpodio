@@ -15,9 +15,9 @@
  ********************************************************************************/
 import { injectable, inject, named } from 'inversify';
 import { Process } from './process';
-import { Emitter, Event } from '@theia/core/lib/common';
-import { ILogger } from '@theia/core/lib/common/logger';
-import { BackendApplicationContribution } from '@theia/core/lib/node';
+import { Emitter, Event } from '@devpodio/core/lib/common';
+import { ILogger } from '@devpodio/core/lib/common/logger';
+import { BackendApplicationContribution } from '@devpodio/core/lib/node';
 
 @injectable()
 export class ProcessManager implements BackendApplicationContribution {

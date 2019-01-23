@@ -17,9 +17,9 @@
 import '../../../src/main/style/status-bar.css';
 
 import { ContainerModule } from 'inversify';
-import { FrontendApplicationContribution, FrontendApplication, WidgetFactory, bindViewContribution } from '@theia/core/lib/browser';
-import { MaybePromise, CommandContribution, ResourceResolver, bindContributionProvider } from '@theia/core/lib/common';
-import { WebSocketConnectionProvider } from '@theia/core/lib/browser/messaging';
+import { FrontendApplicationContribution, FrontendApplication, WidgetFactory, bindViewContribution } from '@devpodio/core/lib/browser';
+import { MaybePromise, CommandContribution, ResourceResolver, bindContributionProvider } from '@devpodio/core/lib/common';
+import { WebSocketConnectionProvider } from '@devpodio/core/lib/browser/messaging';
 import { HostedPluginSupport } from '../../hosted/browser/hosted-plugin';
 import { HostedPluginWatcher } from '../../hosted/browser/hosted-plugin-watcher';
 import { HostedPluginLogViewer } from '../../hosted/browser/hosted-plugin-log-viewer';
@@ -49,15 +49,15 @@ import { TextContentResourceResolver } from './workspace-main';
 import { MainPluginApiProvider } from '../../common/plugin-ext-api-contribution';
 import { PluginPathsService, pluginPathsServicePath } from '../common/plugin-paths-protocol';
 import { KeybindingsContributionPointHandler } from './keybindings/keybindings-contribution-handler';
-import { LanguageClientProvider } from '@theia/languages/lib/browser/language-client-provider';
+import { LanguageClientProvider } from '@devpodio/languages/lib/browser/language-client-provider';
 import { LanguageClientProviderImpl } from './language-provider/plugin-language-client-provider';
 import { LanguageClientContributionProviderImpl } from './language-provider/language-client-contribution-provider-impl';
 import { LanguageClientContributionProvider } from './language-provider/language-client-contribution-provider';
 import { StoragePathService } from './storage-path-service';
-import { DebugSessionContributionRegistry } from '@theia/debug/lib/browser/debug-session-contribution';
+import { DebugSessionContributionRegistry } from '@devpodio/debug/lib/browser/debug-session-contribution';
 import { PluginDebugSessionContributionRegistry } from './debug/plugin-debug-session-contribution-registry';
 import { PluginDebugService } from './debug/plugin-debug-service';
-import { DebugService } from '@theia/debug/lib/common/debug-service';
+import { DebugService } from '@devpodio/debug/lib/common/debug-service';
 
 export default new ContainerModule((bind, unbind, isBound, rebind) => {
     bindHostedPluginPreferences(bind);

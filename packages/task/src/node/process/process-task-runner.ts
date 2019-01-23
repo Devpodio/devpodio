@@ -15,8 +15,8 @@
  ********************************************************************************/
 
 import { injectable, inject, named } from 'inversify';
-import { isWindows, ILogger } from '@theia/core';
-import { FileUri } from '@theia/core/lib/node';
+import { isWindows, ILogger } from '@devpodio/core';
+import { FileUri } from '@devpodio/core/lib/node';
 import {
     TerminalProcess,
     RawProcess,
@@ -24,7 +24,7 @@ import {
     RawProcessOptions,
     RawProcessFactory,
     TerminalProcessFactory
-} from '@theia/process/lib/node';
+} from '@devpodio/process/lib/node';
 import { TaskFactory } from './process-task';
 import { TaskRunner } from '../task-runner';
 import { Task } from '../task';

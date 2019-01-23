@@ -17,12 +17,12 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import { injectable } from 'inversify';
-import { RecursivePartial } from '@theia/core';
+import { RecursivePartial } from '@devpodio/core';
 import {
     PluginDeployerDirectoryHandler,
     PluginDeployerEntry, PluginDeployerDirectoryHandlerContext,
     PluginDeployerEntryType, PluginPackage
-} from '@theia/plugin-ext';
+} from '@devpodio/plugin-ext';
 
 @injectable()
 export class PluginVsCodeDirectoryHandler implements PluginDeployerDirectoryHandler {

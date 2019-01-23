@@ -21,15 +21,15 @@ import * as net from 'net';
 import * as path from 'path';
 import * as request from 'request';
 
-import URI from '@theia/core/lib/common/uri';
-import { ContributionProvider } from '@theia/core/lib/common/contribution-provider';
+import URI from '@devpodio/core/lib/common/uri';
+import { ContributionProvider } from '@devpodio/core/lib/common/contribution-provider';
 import { LogType } from './../../common/types';
 import { HostedPluginUriPostProcessor, HostedPluginUriPostProcessorSymbolName } from './hosted-plugin-uri-postprocessor';
 import { HostedPluginSupport } from './hosted-plugin';
 import { DebugConfiguration } from '../../common';
-import { environment } from '@theia/core';
+import { environment } from '@devpodio/core';
 import { MetadataScanner } from './metadata-scanner';
-import { FileUri } from '@theia/core/lib/node/file-uri';
+import { FileUri } from '@devpodio/core/lib/node/file-uri';
 const processTree = require('ps-tree');
 
 export const HostedInstanceManager = Symbol('HostedInstanceManager');

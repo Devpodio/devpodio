@@ -16,9 +16,9 @@
 
 import { injectable, inject, decorate } from 'inversify';
 import { MonacoToProtocolConverter } from 'monaco-languageclient';
-import URI from '@theia/core/lib/common/uri';
-import { OpenerService, open, WidgetOpenMode, ApplicationShell } from '@theia/core/lib/browser';
-import { EditorWidget, EditorOpenerOptions, EditorManager } from '@theia/editor/lib/browser';
+import URI from '@devpodio/core/lib/common/uri';
+import { OpenerService, open, WidgetOpenMode, ApplicationShell } from '@devpodio/core/lib/browser';
+import { EditorWidget, EditorOpenerOptions, EditorManager } from '@devpodio/editor/lib/browser';
 import { MonacoEditor } from './monaco-editor';
 
 import ICodeEditor = monaco.editor.ICodeEditor;

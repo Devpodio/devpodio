@@ -14,8 +14,8 @@
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  ********************************************************************************/
 
-import * as theia from '@theia/plugin';
-import { DocumentsExtImpl } from '@theia/plugin-ext/src/plugin/documents';
+import * as theia from '@devpodio/plugin';
+import { DocumentsExtImpl } from '@devpodio/plugin-ext/src/plugin/documents';
 import URI from 'vscode-uri/lib/umd';
 import * as Converter from '../type-converters';
 import * as model from '../../api/model';

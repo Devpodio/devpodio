@@ -15,9 +15,9 @@
  ********************************************************************************/
 
 import { injectable, inject } from 'inversify';
-import { DisposableCollection } from '@theia/core';
-import { FrontendApplicationContribution, FrontendApplication, StatusBar, StatusBarAlignment } from '@theia/core/lib/browser';
-import { EditorCommands, EditorManager, EditorWidget } from '@theia/editor/lib/browser';
+import { DisposableCollection } from '@devpodio/core';
+import { FrontendApplicationContribution, FrontendApplication, StatusBar, StatusBarAlignment } from '@devpodio/core/lib/browser';
+import { EditorCommands, EditorManager, EditorWidget } from '@devpodio/editor/lib/browser';
 import { MonacoEditor } from './monaco-editor';
 
 @injectable()

@@ -14,10 +14,10 @@
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  ********************************************************************************/
 
-import { ILogger } from '@theia/core';
-import { RawProcess, RawProcessFactory, RawProcessOptions } from '@theia/process/lib/node';
-import { FileUri } from '@theia/core/lib/node/file-uri';
-import URI from '@theia/core/lib/common/uri';
+import { ILogger } from '@devpodio/core';
+import { RawProcess, RawProcessFactory, RawProcessOptions } from '@devpodio/process/lib/node';
+import { FileUri } from '@devpodio/core/lib/node/file-uri';
+import URI from '@devpodio/core/lib/common/uri';
 import { inject, injectable } from 'inversify';
 import { SearchInWorkspaceServer, SearchInWorkspaceOptions, SearchInWorkspaceResult, SearchInWorkspaceClient } from '../common/search-in-workspace-interface';
 

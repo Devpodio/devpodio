@@ -13,4 +13,4 @@
  *
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  ********************************************************************************/
-/// <reference types="@theia/core/src/typings/nsfw/index"/>
+/// <reference types="@devpodio/core/src/typings/nsfw/index"/>

@@ -15,7 +15,7 @@
  ********************************************************************************/
 
 import { injectable, postConstruct, inject, interfaces, Container } from 'inversify';
-import { BaseWidget, PanelLayout, Message, ApplicationShell, Widget } from '@theia/core/lib/browser';
+import { BaseWidget, PanelLayout, Message, ApplicationShell, Widget } from '@devpodio/core/lib/browser';
 import { DebugSessionWidget } from './debug-session-widget';
 import { DebugConfigurationWidget } from './debug-configuration-widget';
 import { DebugViewModel } from './debug-view-model';

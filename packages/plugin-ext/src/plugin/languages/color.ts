@@ -14,12 +14,12 @@
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  ********************************************************************************/
 
-import * as theia from '@theia/plugin';
+import * as theia from '@devpodio/plugin';
 import URI from 'vscode-uri/lib/umd';
-import { DocumentsExtImpl } from '@theia/plugin-ext/src/plugin/documents';
+import { DocumentsExtImpl } from '@devpodio/plugin-ext/src/plugin/documents';
 import { createToken } from '../token-provider';
 import * as Converter from '../type-converters';
-import { RawColorInfo } from '@theia/plugin-ext/src/api/plugin-api';
+import { RawColorInfo } from '@devpodio/plugin-ext/src/api/plugin-api';
 import { ColorPresentation } from '../../api/model';
 
 export class ColorProviderAdapter {

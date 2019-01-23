@@ -16,7 +16,7 @@
 
 import { injectable, unmanaged } from 'inversify';
 import { ProcessManager } from './process-manager';
-import { ILogger, Emitter, Event } from '@theia/core/lib/common';
+import { ILogger, Emitter, Event } from '@devpodio/core/lib/common';
 
 export interface IProcessExitEvent {
     // Exactly one of code and signal will be set.

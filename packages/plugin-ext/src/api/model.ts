@@ -14,9 +14,9 @@
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  ********************************************************************************/
 
-import * as theia from '@theia/plugin';
+import * as theia from '@devpodio/plugin';
 import { UriComponents } from '../common/uri-components';
-import { FileStat } from '@theia/filesystem/lib/common';
+import { FileStat } from '@devpodio/filesystem/lib/common';
 import { SymbolInformation } from 'vscode-languageserver-types';
 
 // Should contains internal Plugin API types

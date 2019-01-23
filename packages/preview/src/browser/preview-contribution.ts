@@ -16,11 +16,11 @@
 
 import { injectable, inject } from 'inversify';
 import { Widget } from '@phosphor/widgets';
-import { FrontendApplicationContribution, WidgetOpenerOptions, NavigatableWidgetOpenHandler } from '@theia/core/lib/browser';
-import { EditorManager, TextEditor, EditorWidget, EditorContextMenu } from '@theia/editor/lib/browser';
-import { DisposableCollection, CommandContribution, CommandRegistry, Command, MenuContribution, MenuModelRegistry, Disposable } from '@theia/core/lib/common';
-import { TabBarToolbarContribution, TabBarToolbarRegistry } from '@theia/core/lib/browser/shell/tab-bar-toolbar';
-import URI from '@theia/core/lib/common/uri';
+import { FrontendApplicationContribution, WidgetOpenerOptions, NavigatableWidgetOpenHandler } from '@devpodio/core/lib/browser';
+import { EditorManager, TextEditor, EditorWidget, EditorContextMenu } from '@devpodio/editor/lib/browser';
+import { DisposableCollection, CommandContribution, CommandRegistry, Command, MenuContribution, MenuModelRegistry, Disposable } from '@devpodio/core/lib/common';
+import { TabBarToolbarContribution, TabBarToolbarRegistry } from '@devpodio/core/lib/browser/shell/tab-bar-toolbar';
+import URI from '@devpodio/core/lib/common/uri';
 import { Position } from 'vscode-languageserver-types';
 import { PreviewWidget } from './preview-widget';
 import { PreviewHandlerProvider, } from './preview-handler';

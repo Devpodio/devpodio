@@ -20,7 +20,7 @@ import {
     LanguagesContributionMain
 } from '../api/plugin-api';
 import { RPCProtocol } from '../api/rpc-protocol';
-import * as theia from '@theia/plugin';
+import * as theia from '@devpodio/plugin';
 import { ConnectionExtImpl } from './connection-ext';
 import { ChildProcess, spawn, SpawnOptions } from 'child_process';
 import { StreamMessageReader, StreamMessageWriter, Message } from 'vscode-jsonrpc';

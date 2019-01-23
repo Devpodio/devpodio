@@ -16,10 +16,10 @@
 
 import { inject, injectable, postConstruct } from 'inversify';
 import { Message } from '@phosphor/messaging';
-import URI from '@theia/core/lib/common/uri';
-import { NavigatableWidget, StatefulWidget } from '@theia/core/lib/browser';
-import { DisposableCollection } from '@theia/core/lib/common/disposable';
-import { BaseWidget, PanelLayout } from '@theia/core/lib/browser/widgets/widget';
+import URI from '@devpodio/core/lib/common/uri';
+import { NavigatableWidget, StatefulWidget } from '@devpodio/core/lib/browser';
+import { DisposableCollection } from '@devpodio/core/lib/common/disposable';
+import { BaseWidget, PanelLayout } from '@devpodio/core/lib/browser/widgets/widget';
 import { MiniBrowserProps, MiniBrowserContentFactory } from './mini-browser-content';
 
 export { MiniBrowserProps };

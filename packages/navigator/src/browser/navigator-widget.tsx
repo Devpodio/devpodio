@@ -16,21 +16,21 @@
 
 import { injectable, inject, postConstruct } from 'inversify';
 import { Message } from '@phosphor/messaging';
-import URI from '@theia/core/lib/common/uri';
-import { CommandService, SelectionService } from '@theia/core/lib/common';
-import { CommonCommands, CorePreferences } from '@theia/core/lib/browser';
+import URI from '@devpodio/core/lib/common/uri';
+import { CommandService, SelectionService } from '@devpodio/core/lib/common';
+import { CommonCommands, CorePreferences } from '@devpodio/core/lib/browser';
 import {
     ContextMenuRenderer, ExpandableTreeNode,
     TreeProps, TreeModel, TreeNode,
     SelectableTreeNode, CompositeTreeNode
-} from '@theia/core/lib/browser';
-import { FileTreeWidget, FileNode } from '@theia/filesystem/lib/browser';
-import { WorkspaceService, WorkspaceCommands } from '@theia/workspace/lib/browser';
-import { ApplicationShell } from '@theia/core/lib/browser/shell/application-shell';
+} from '@devpodio/core/lib/browser';
+import { FileTreeWidget, FileNode } from '@devpodio/filesystem/lib/browser';
+import { WorkspaceService, WorkspaceCommands } from '@devpodio/workspace/lib/browser';
+import { ApplicationShell } from '@devpodio/core/lib/browser/shell/application-shell';
 import { WorkspaceNode } from './navigator-tree';
 import { FileNavigatorModel } from './navigator-model';
-import { FileSystem } from '@theia/filesystem/lib/common/filesystem';
-import { isOSX, environment } from '@theia/core';
+import { FileSystem } from '@devpodio/filesystem/lib/common/filesystem';
+import { isOSX, environment } from '@devpodio/core';
 import * as React from 'react';
 
 export const FILE_NAVIGATOR_ID = 'files';

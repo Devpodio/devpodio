@@ -16,9 +16,9 @@
 
 import { inject, injectable, postConstruct } from 'inversify';
 import { MergeConflict } from './merge-conflict';
-import { TextEditor, EditorManager, EditorWidget } from '@theia/editor/lib/browser';
-import { Emitter, Event } from '@theia/core';
-import { Deferred } from '@theia/core/lib/common/promise-util';
+import { TextEditor, EditorManager, EditorWidget } from '@devpodio/editor/lib/browser';
+import { Emitter, Event } from '@devpodio/core';
+import { Deferred } from '@devpodio/core/lib/common/promise-util';
 import { MergeConflictsParser } from './merge-conflicts-parser';
 
 import debounce = require('lodash.debounce');

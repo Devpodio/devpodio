@@ -15,11 +15,11 @@
  ********************************************************************************/
 
 import { injectable, inject } from 'inversify';
-import { isOSX } from '@theia/core/lib/common/os';
-import { EditorManager } from '@theia/editor/lib/browser';
+import { isOSX } from '@devpodio/core/lib/common/os';
+import { EditorManager } from '@devpodio/editor/lib/browser';
 import {
     KeybindingContext, Keybinding, KeybindingContribution, KeybindingRegistry
-} from '@theia/core/lib/browser';
+} from '@devpodio/core/lib/browser';
 import { editorContainsCppFiles } from './cpp-commands';
 
 @injectable()

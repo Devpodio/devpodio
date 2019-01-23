@@ -15,9 +15,9 @@
  ********************************************************************************/
 
 import * as React from 'react';
-import { Event, Emitter } from '@theia/core';
+import { Event, Emitter } from '@devpodio/core';
 import { DebugProtocol } from 'vscode-debugprotocol/lib/debugProtocol';
-import { TreeElement } from '@theia/core/lib/browser/source-tree';
+import { TreeElement } from '@devpodio/core/lib/browser/source-tree';
 import { DebugStackFrame } from './debug-stack-frame';
 import { DebugSession } from '../debug-session';
 

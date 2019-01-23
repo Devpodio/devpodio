@@ -22,7 +22,7 @@ import {
     PreferenceContribution,
     PreferenceSchema,
     PreferenceChangeEvent
-} from '@theia/core/lib/browser/preferences';
+} from '@devpodio/core/lib/browser/preferences';
 
 export const typescriptPreferenceSchema: PreferenceSchema = {
     'type': 'object',

@@ -15,7 +15,7 @@
  ********************************************************************************/
 
 import { injectable, inject } from 'inversify';
-import { EditorManager, TextEditor } from '@theia/editor/lib/browser';
+import { EditorManager, TextEditor } from '@devpodio/editor/lib/browser';
 import { Location } from 'vscode-languageserver-types';
 
 @injectable()

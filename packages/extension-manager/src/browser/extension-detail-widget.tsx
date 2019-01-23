@@ -16,8 +16,8 @@
 
 import { Extension, ResolvedExtension } from '../common/extension-manager';
 import { Message } from '@phosphor/messaging/lib';
-import { DISABLED_CLASS } from '@theia/core/lib/browser';
-import { ReactWidget } from '@theia/core/lib/browser/widgets/react-widget';
+import { DISABLED_CLASS } from '@devpodio/core/lib/browser';
+import { ReactWidget } from '@devpodio/core/lib/browser/widgets/react-widget';
 import * as React from 'react';
 
 export class ExtensionDetailWidget extends ReactWidget {

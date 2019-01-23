@@ -15,7 +15,7 @@
  ********************************************************************************/
 
 import * as React from 'react';
-import { TreeSource, TreeElement } from '@theia/core/lib/browser/source-tree';
+import { TreeSource, TreeElement } from '@devpodio/core/lib/browser/source-tree';
 import { ExpressionContainer, ExpressionItem, DebugVariable } from '../console/debug-console-items';
 import { DebugSessionManager } from '../debug-session-manager';
 import { injectable, inject } from 'inversify';

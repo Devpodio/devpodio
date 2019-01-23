@@ -15,7 +15,7 @@
  ********************************************************************************/
 
 import * as assert from 'assert';
-import { FileUri } from '@theia/core/lib/node/file-uri';
+import { FileUri } from '@devpodio/core/lib/node/file-uri';
 import { FileChangeCollection } from './file-change-collection';
 import { FileChangeType } from '../common/filesystem-watcher-protocol';
 

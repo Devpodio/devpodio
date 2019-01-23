@@ -15,7 +15,7 @@
  ********************************************************************************/
 
 import { injectable, inject, postConstruct } from 'inversify';
-import { TreeSource, TreeElement } from '@theia/core/lib/browser/source-tree';
+import { TreeSource, TreeElement } from '@devpodio/core/lib/browser/source-tree';
 import { DebugViewModel } from './debug-view-model';
 
 @injectable()

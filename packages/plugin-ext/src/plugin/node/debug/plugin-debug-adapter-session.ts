@@ -14,9 +14,9 @@
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  ********************************************************************************/
 
-import * as theia from '@theia/plugin';
-import { CommunicationProvider } from '@theia/debug/lib/common/debug-model';
-import { DebugAdapterSessionImpl } from '@theia/debug/lib/node/debug-adapter-session';
+import * as theia from '@devpodio/plugin';
+import { CommunicationProvider } from '@devpodio/debug/lib/common/debug-model';
+import { DebugAdapterSessionImpl } from '@devpodio/debug/lib/node/debug-adapter-session';
 import { DebugProtocol } from 'vscode-debugprotocol';
 
 // tslint:disable

@@ -28,7 +28,7 @@ import {
     WorkspaceEditDto,
 } from '../api/plugin-api';
 import { RPCProtocol } from '../api/rpc-protocol';
-import * as theia from '@theia/plugin';
+import * as theia from '@devpodio/plugin';
 import { DocumentsExtImpl } from './documents';
 import { PluginModel } from '../common/plugin-protocol';
 import { Disposable } from './types-impl';

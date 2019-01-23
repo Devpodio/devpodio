@@ -1,12 +1,13 @@
 {
-  "name": "@theia/tslint",
-  "version": "0.3.18",
+  "name": "@devpodio/tslint",
+  "version": "1.0.14",
   "description": "Theia - TSLint Extension",
   "publishConfig": {
     "access": "public"
   },
   "dependencies": {
-    "tslint-language-service": "^0.9.9"
+    "tslint": "^5.12.0",
+    "typescript-tslint-plugin": "^0.2.1"
   },
   "keywords": [
     "theia-extension"
@@ -34,7 +35,7 @@
     "docs": "theiaext docs"
   },
   "devDependencies": {
-    "@theia/ext-scripts": "^0.3.18"
+    "@devpodio/ext-scripts": "^1.0.14"
   },
   "nyc": {
     "extends": "../../configs/nyc.json"
@@ -42,7 +43,7 @@
   "contributes": {
     "typescriptServerPlugins": [
       {
-        "name": "tslint-language-service"
+        "name": "typescript-tslint-plugin"
       }
     ]
   }

@@ -15,8 +15,8 @@
  ********************************************************************************/
 
 import { injectable, inject } from 'inversify';
-import URI from '@theia/core/lib/common/uri';
-import { Resource, ResourceResolver } from '@theia/core/lib/common';
+import URI from '@devpodio/core/lib/common/uri';
+import { Resource, ResourceResolver } from '@devpodio/core/lib/common';
 import { JAVA_SCHEME } from '../common';
 import { ClassFileContentsRequest } from './java-protocol';
 import { JavaClientContribution } from './java-client-contribution';

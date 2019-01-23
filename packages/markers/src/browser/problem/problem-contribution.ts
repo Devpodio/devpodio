@@ -15,14 +15,14 @@
  ********************************************************************************/
 
 import { injectable, inject } from 'inversify';
-import { FrontendApplication, FrontendApplicationContribution, CompositeTreeNode, SelectableTreeNode } from '@theia/core/lib/browser';
-import { StatusBar, StatusBarAlignment } from '@theia/core/lib/browser/status-bar/status-bar';
-import { AbstractViewContribution } from '@theia/core/lib/browser/shell/view-contribution';
+import { FrontendApplication, FrontendApplicationContribution, CompositeTreeNode, SelectableTreeNode } from '@devpodio/core/lib/browser';
+import { StatusBar, StatusBarAlignment } from '@devpodio/core/lib/browser/status-bar/status-bar';
+import { AbstractViewContribution } from '@devpodio/core/lib/browser/shell/view-contribution';
 import { PROBLEM_KIND } from '../../common/problem-marker';
 import { ProblemManager, ProblemStat } from './problem-manager';
 import { ProblemWidget } from './problem-widget';
-import { MenuPath, MenuModelRegistry } from '@theia/core/lib/common/menu';
-import { Command, CommandRegistry } from '@theia/core/lib/common';
+import { MenuPath, MenuModelRegistry } from '@devpodio/core/lib/common/menu';
+import { Command, CommandRegistry } from '@devpodio/core/lib/common';
 
 export const PROBLEMS_CONTEXT_MENU: MenuPath = [PROBLEM_KIND];
 

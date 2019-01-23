@@ -15,9 +15,9 @@
  ********************************************************************************/
 
 import { MonacoToProtocolConverter, ProtocolToMonacoConverter } from 'monaco-languageclient';
-import URI from '@theia/core/lib/common/uri';
-import { Disposable } from '@theia/core/lib/common';
-import { Dimension, DiffNavigator, DeltaDecorationParams } from '@theia/editor/lib/browser';
+import URI from '@devpodio/core/lib/common/uri';
+import { Disposable } from '@devpodio/core/lib/common';
+import { Dimension, DiffNavigator, DeltaDecorationParams } from '@devpodio/editor/lib/browser';
 import { MonacoEditorModel } from './monaco-editor-model';
 import { MonacoEditor } from './monaco-editor';
 import { MonacoDiffNavigatorFactory } from './monaco-diff-navigator-factory';

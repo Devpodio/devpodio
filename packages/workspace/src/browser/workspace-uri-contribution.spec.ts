@@ -14,19 +14,19 @@
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  ********************************************************************************/
 
-import { enableJSDOM } from '@theia/core/lib/browser/test/jsdom';
+import { enableJSDOM } from '@devpodio/core/lib/browser/test/jsdom';
 const disableJSDOM = enableJSDOM();
 
 import { expect } from 'chai';
 import * as sinon from 'sinon';
 import { Container } from 'inversify';
 import { Signal } from '@phosphor/signaling';
-import { ApplicationShell } from '@theia/core/lib/browser';
-import { FileStat, FileSystem } from '@theia/filesystem/lib/common/filesystem';
-import { MockFilesystem } from '@theia/filesystem/lib/common/test';
-import { FOLDER_ICON, FILE_ICON, DefaultUriLabelProviderContribution } from '@theia/core/lib/browser/label-provider';
+import { ApplicationShell } from '@devpodio/core/lib/browser';
+import { FileStat, FileSystem } from '@devpodio/filesystem/lib/common/filesystem';
+import { MockFilesystem } from '@devpodio/filesystem/lib/common/test';
+import { FOLDER_ICON, FILE_ICON, DefaultUriLabelProviderContribution } from '@devpodio/core/lib/browser/label-provider';
 import { WorkspaceUriLabelProviderContribution } from './workspace-uri-contribution';
-import URI from '@theia/core/lib/common/uri';
+import URI from '@devpodio/core/lib/common/uri';
 import { WorkspaceVariableContribution } from './workspace-variable-contribution';
 import { WorkspaceService } from './workspace-service';
 

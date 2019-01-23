@@ -17,7 +17,7 @@
 import * as path from 'path';
 import * as fs from 'fs-extra';
 import * as cp from 'child_process';
-import { ApplicationPackage, ApplicationPackageOptions } from '@theia/application-package';
+import { ApplicationPackage, ApplicationPackageOptions } from '@devpodio/application-package';
 import { WebpackGenerator, FrontendGenerator, BackendGenerator } from './generator';
 import { ApplicationProcess } from './application-process';
 
@@ -59,14 +59,9 @@ export class ApplicationPackageManager {
         await this.frontend.generate();
     }
 
-    async copy(): Promise<void> {
-        await fs.ensureDir(this.pck.lib());
-        await fs.copy(this.pck.frontend('index.html'), this.pck.lib('index.html'));
-    }
-
     async build(args: string[] = []): Promise<void> {
         await this.generate();
-        await this.copy();
+        await fs.ensureDir(this.pck.lib());
         return this.__process.run('webpack', args);
     }
 

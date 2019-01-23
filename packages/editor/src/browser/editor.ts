@@ -16,9 +16,9 @@
 
 import { Position, Range } from 'vscode-languageserver-types';
 import * as lsp from 'vscode-languageserver-types';
-import URI from '@theia/core/lib/common/uri';
-import { Event, Disposable } from '@theia/core/lib/common';
-import { Saveable } from '@theia/core/lib/browser';
+import URI from '@devpodio/core/lib/common/uri';
+import { Event, Disposable } from '@devpodio/core/lib/common';
+import { Saveable } from '@devpodio/core/lib/browser';
 import { EditorDecoration } from './decorations';
 
 export {

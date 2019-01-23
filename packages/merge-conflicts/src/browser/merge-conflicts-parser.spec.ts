@@ -19,7 +19,7 @@ import { expect } from 'chai';
 chai.use(require('chai-string'));
 
 import { MergeConflictsParser } from './merge-conflicts-parser';
-import { Range, Position } from '@theia/editor/lib/browser';
+import { Range, Position } from '@devpodio/editor/lib/browser';
 import { MergeConflict } from './merge-conflict';
 
 let parser: MergeConflictsParser;

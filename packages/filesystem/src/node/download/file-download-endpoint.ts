@@ -17,7 +17,7 @@
 import { injectable, inject, named } from 'inversify';
 import { json } from 'body-parser';
 import { Application, Router } from 'express';
-import { BackendApplicationContribution } from '@theia/core/lib/node/backend-application';
+import { BackendApplicationContribution } from '@devpodio/core/lib/node/backend-application';
 import { FileDownloadHandler } from './file-download-handler';
 
 @injectable()

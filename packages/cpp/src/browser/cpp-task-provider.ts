@@ -16,10 +16,10 @@
 
 import parseArgv = require('string-argv');
 import { inject, injectable } from 'inversify';
-import { ProcessTaskConfiguration } from '@theia/task/lib/common/process/task-protocol';
-import { TaskContribution, TaskProvider, TaskProviderRegistry, TaskResolver, TaskResolverRegistry } from '@theia/task/lib/browser/task-contribution';
+import { ProcessTaskConfiguration } from '@devpodio/task/lib/common/process/task-protocol';
+import { TaskContribution, TaskProvider, TaskProviderRegistry, TaskResolver, TaskResolverRegistry } from '@devpodio/task/lib/browser/task-contribution';
 import { CppBuildConfigurationManager, CppBuildConfiguration } from './cpp-build-configurations';
-import { TaskConfiguration } from '@theia/task/lib/common/task-protocol';
+import { TaskConfiguration } from '@devpodio/task/lib/common/task-protocol';
 
 /**
  * Data required to define a C/C++ build task the user could run.

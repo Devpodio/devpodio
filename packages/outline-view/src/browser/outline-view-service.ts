@@ -15,8 +15,8 @@
  ********************************************************************************/
 
 import { injectable, inject } from 'inversify';
-import { Event, Emitter, DisposableCollection } from '@theia/core';
-import { WidgetFactory } from '@theia/core/lib/browser';
+import { Event, Emitter, DisposableCollection } from '@devpodio/core';
+import { WidgetFactory } from '@devpodio/core/lib/browser';
 import { OutlineViewWidget, OutlineViewWidgetFactory, OutlineSymbolInformationNode } from './outline-view-widget';
 import { Widget } from '@phosphor/widgets';
 

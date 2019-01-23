@@ -15,7 +15,7 @@
  ********************************************************************************/
 
 import { injectable, postConstruct } from 'inversify';
-import { Disposable } from '@theia/core/lib/common/disposable';
+import { Disposable } from '@devpodio/core/lib/common/disposable';
 import { TaskConfiguration } from '../common/task-protocol';
 
 export const TaskContribution = Symbol('TaskContribution');

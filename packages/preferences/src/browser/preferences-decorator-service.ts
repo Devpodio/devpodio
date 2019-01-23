@@ -15,7 +15,7 @@
  ********************************************************************************/
 
 import { inject, injectable } from 'inversify';
-import { AbstractTreeDecoratorService } from '@theia/core/lib/browser/tree/tree-decorator';
+import { AbstractTreeDecoratorService } from '@devpodio/core/lib/browser/tree/tree-decorator';
 import { PreferencesDecorator } from './preferences-decorator';
 
 @injectable()

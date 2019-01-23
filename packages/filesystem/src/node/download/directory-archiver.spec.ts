@@ -19,7 +19,7 @@ import * as path from 'path';
 import * as temp from 'temp';
 import { extract } from 'tar-fs';
 import { expect } from 'chai';
-import URI from '@theia/core/lib/common/uri';
+import URI from '@devpodio/core/lib/common/uri';
 import { MockDirectoryArchiver } from './test/mock-directory-archiver';
 
 // tslint:disable:no-unused-expression

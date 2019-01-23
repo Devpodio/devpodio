@@ -14,12 +14,12 @@
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  ********************************************************************************/
 
-import { DisposableCollection, ILogger, Emitter, Event } from '@theia/core/lib/common';
+import { DisposableCollection, ILogger, Emitter, Event } from '@devpodio/core/lib/common';
 import { UserStorageChangeEvent, UserStorageService } from './user-storage-service';
 import { injectable, inject } from 'inversify';
-import { FileSystemWatcher, FileChangeEvent } from '@theia/filesystem/lib/browser/filesystem-watcher';
-import { FileSystem } from '@theia/filesystem/lib/common';
-import URI from '@theia/core/lib/common/uri';
+import { FileSystemWatcher, FileChangeEvent } from '@devpodio/filesystem/lib/browser/filesystem-watcher';
+import { FileSystem } from '@devpodio/filesystem/lib/common';
+import URI from '@devpodio/core/lib/common/uri';
 import { UserStorageUri } from './user-storage-uri';
 
 export const THEIA_USER_STORAGE_FOLDER = '.theia';

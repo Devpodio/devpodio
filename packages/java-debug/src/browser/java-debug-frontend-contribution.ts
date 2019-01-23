@@ -18,16 +18,16 @@ import * as _ from 'lodash';
 import { injectable, inject } from 'inversify';
 // tslint:disable:no-implicit-dependencies
 import { Range, CodeLens } from 'vscode-languageserver-types';
-import URI from '@theia/core/lib/common/uri';
-import { MessageService, CommandContribution, CommandRegistry, Command, DisposableCollection } from '@theia/core/lib/common';
-import { FrontendApplicationContribution, } from '@theia/core/lib/browser';
-import { Workspace, Languages } from '@theia/languages/lib/browser';
-import { WorkspaceService } from '@theia/workspace/lib/browser';
+import URI from '@devpodio/core/lib/common/uri';
+import { MessageService, CommandContribution, CommandRegistry, Command, DisposableCollection } from '@devpodio/core/lib/common';
+import { FrontendApplicationContribution, } from '@devpodio/core/lib/browser';
+import { Workspace, Languages } from '@devpodio/languages/lib/browser';
+import { WorkspaceService } from '@devpodio/workspace/lib/browser';
 // tslint:enable:no-implicit-dependencies
-import { DebugConfiguration } from '@theia/debug/lib/common/debug-common';
-import { DebugSession } from '@theia/debug/lib/browser/debug-session';
-import { DebugSessionManager } from '@theia/debug/lib/browser/debug-session-manager';
-import { DebugConfigurationManager } from '@theia/debug/lib/browser/debug-configuration-manager';
+import { DebugConfiguration } from '@devpodio/debug/lib/common/debug-common';
+import { DebugSession } from '@devpodio/debug/lib/browser/debug-session';
+import { DebugSessionManager } from '@devpodio/debug/lib/browser/debug-session-manager';
+import { DebugConfigurationManager } from '@devpodio/debug/lib/browser/debug-configuration-manager';
 import { JavaDebugPreferences } from './java-debug-preferences';
 
 enum HcrChangeType {

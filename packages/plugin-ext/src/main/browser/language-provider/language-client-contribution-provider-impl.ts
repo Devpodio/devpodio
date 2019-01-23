@@ -15,12 +15,12 @@
  ********************************************************************************/
 
 import { injectable, inject, postConstruct, named } from 'inversify';
-import { ContributionProvider } from '@theia/core/lib/common';
-import { Disposable } from '@theia/core/lib/common/disposable';
-import { FrontendApplication } from '@theia/core/lib/browser';
+import { ContributionProvider } from '@devpodio/core/lib/common';
+import { Disposable } from '@devpodio/core/lib/common/disposable';
+import { FrontendApplication } from '@devpodio/core/lib/browser';
 import { LanguageClientContributionProvider } from './language-client-contribution-provider';
-import { ILogger } from '@theia/core/lib/common/logger';
-import { LanguageClientContribution } from '@theia/languages/lib/browser';
+import { ILogger } from '@devpodio/core/lib/common/logger';
+import { LanguageClientContribution } from '@devpodio/languages/lib/browser';
 
 @injectable()
 export class LanguageClientContributionProviderImpl implements LanguageClientContributionProvider {

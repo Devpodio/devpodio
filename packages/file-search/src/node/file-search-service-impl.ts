@@ -18,11 +18,11 @@ import * as readline from 'readline';
 import * as fuzzy from 'fuzzy';
 import { injectable, inject } from 'inversify';
 import { FileSearchService } from '../common/file-search-service';
-import { RawProcessFactory } from '@theia/process/lib/node';
+import { RawProcessFactory } from '@devpodio/process/lib/node';
 import { rgPath } from 'vscode-ripgrep';
-import { Deferred } from '@theia/core/lib/common/promise-util';
-import { FileUri } from '@theia/core/lib/node/file-uri';
-import { CancellationToken, ILogger } from '@theia/core';
+import { Deferred } from '@devpodio/core/lib/common/promise-util';
+import { FileUri } from '@devpodio/core/lib/node/file-uri';
+import { CancellationToken, ILogger } from '@devpodio/core';
 
 @injectable()
 export class FileSearchServiceImpl implements FileSearchService {

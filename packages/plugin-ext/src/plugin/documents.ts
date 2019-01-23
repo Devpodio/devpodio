@@ -17,12 +17,12 @@ import { DocumentsExt, ModelChangedEvent, PLUGIN_RPC_CONTEXT, DocumentsMain } fr
 import URI from 'vscode-uri';
 import { UriComponents } from '../common/uri-components';
 import { RPCProtocol } from '../api/rpc-protocol';
-import { Emitter, Event } from '@theia/core/lib/common/event';
-import * as theia from '@theia/plugin';
+import { Emitter, Event } from '@devpodio/core/lib/common/event';
+import * as theia from '@devpodio/plugin';
 import { DocumentDataExt, setWordDefinitionFor } from './document-data';
 import { EditorsAndDocumentsExtImpl } from './editors-and-documents';
 import * as Converter from './type-converters';
-import { DisposableCollection } from '@theia/core/lib/common/disposable';
+import { DisposableCollection } from '@devpodio/core/lib/common/disposable';
 import { Range, TextDocumentShowOptions } from '../api/model';
 
 export class DocumentsExtImpl implements DocumentsExt {

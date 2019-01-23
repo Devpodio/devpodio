@@ -23,7 +23,7 @@ import {
     TreeDecoratorService,
     TreeProps,
     TreeWidget
-} from '@theia/core/lib/browser';
+} from '@devpodio/core/lib/browser';
 import { PreferencesTreeWidget } from './preferences-tree-widget';
 
 export function createPreferencesTreeWidget(parent: interfaces.Container): PreferencesTreeWidget {

@@ -15,7 +15,7 @@
  ********************************************************************************/
 
 import { inject, injectable } from 'inversify';
-import { QuickOpenService, QuickOpenModel, QuickOpenItem, QuickOpenMode } from '@theia/core/lib/browser/quick-open/';
+import { QuickOpenService, QuickOpenModel, QuickOpenItem, QuickOpenMode } from '@devpodio/core/lib/browser/quick-open/';
 import { VariableRegistry } from './variable';
 
 @injectable()

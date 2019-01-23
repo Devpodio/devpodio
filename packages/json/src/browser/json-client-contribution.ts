@@ -22,13 +22,13 @@ import {
     LanguageClientFactory,
     ILanguageClient,
     DocumentSelector
-} from '@theia/languages/lib/browser';
+} from '@devpodio/languages/lib/browser';
 import { JSON_LANGUAGE_ID, JSON_LANGUAGE_NAME, JSONC_LANGUAGE_ID } from '../common';
-import { ResourceProvider } from '@theia/core';
-import URI from '@theia/core/lib/common/uri';
+import { ResourceProvider } from '@devpodio/core';
+import URI from '@devpodio/core/lib/common/uri';
 import { JsonPreferences } from './json-preferences';
-import { JsonSchemaStore } from '@theia/core/lib/browser/json-schema-store';
-import { Endpoint } from '@theia/core/lib/browser';
+import { JsonSchemaStore } from '@devpodio/core/lib/browser/json-schema-store';
+import { Endpoint } from '@devpodio/core/lib/browser';
 
 @injectable()
 export class JsonClientContribution extends BaseLanguageClientContribution {

@@ -15,7 +15,7 @@
  ********************************************************************************/
 
 import * as request from 'request';
-import { NodePackage } from '@theia/application-package';
+import { NodePackage } from '@devpodio/application-package';
 
 export function search(query: string, from?: number, size?: number): Promise<NodePackage[]> {
     return new Promise((resolve, reject) => {

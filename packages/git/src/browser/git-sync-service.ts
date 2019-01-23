@@ -15,8 +15,8 @@
  ********************************************************************************/
 
 import { injectable, inject } from 'inversify';
-import { MessageService, Emitter, Event } from '@theia/core';
-import { QuickPickService, ConfirmDialog } from '@theia/core/lib/browser';
+import { MessageService, Emitter, Event } from '@devpodio/core';
+import { QuickPickService, ConfirmDialog } from '@devpodio/core/lib/browser';
 import { GitRepositoryTracker } from './git-repository-tracker';
 import { Git, Repository, WorkingDirectoryStatus } from '../common';
 import { GitErrorHandler } from './git-error-handler';

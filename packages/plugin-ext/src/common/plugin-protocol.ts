@@ -13,14 +13,14 @@
  *
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  ********************************************************************************/
-import { JsonRpcServer } from '@theia/core/lib/common/messaging/proxy-factory';
+import { JsonRpcServer } from '@devpodio/core/lib/common/messaging/proxy-factory';
 import { RPCProtocol } from '../api/rpc-protocol';
-import { Disposable } from '@theia/core/lib/common/disposable';
+import { Disposable } from '@devpodio/core/lib/common/disposable';
 import { LogPart, KeysToAnyValues, KeysToKeysToAnyValue } from './types';
 import { CharacterPair, CommentRule, PluginAPIFactory, Plugin } from '../api/plugin-api';
-import { PreferenceSchema } from '@theia/core/lib/browser/preferences';
+import { PreferenceSchema } from '@devpodio/core/lib/browser/preferences';
 import { ExtPluginApi } from './plugin-ext-api-contribution';
-import { IJSONSchema, IJSONSchemaSnippet } from '@theia/core/lib/common/json-schema';
+import { IJSONSchema, IJSONSchemaSnippet } from '@devpodio/core/lib/common/json-schema';
 
 export const hostedServicePath = '/services/hostedPlugin';
 

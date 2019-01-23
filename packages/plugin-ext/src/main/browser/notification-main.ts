@@ -15,10 +15,10 @@
  ********************************************************************************/
 
 import { MAIN_RPC_CONTEXT, NotificationExt, NotificationMain } from '../../api/plugin-api';
-import { MessageService, Progress } from '@theia/core/lib/common';
+import { MessageService, Progress } from '@devpodio/core/lib/common';
 import { interfaces } from 'inversify';
 import { RPCProtocol } from '../../api/rpc-protocol';
-import { Deferred } from '@theia/core/lib/common/promise-util';
+import { Deferred } from '@devpodio/core/lib/common/promise-util';
 
 export class NotificationMainImpl implements NotificationMain {
 

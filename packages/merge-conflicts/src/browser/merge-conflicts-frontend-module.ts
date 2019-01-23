@@ -15,8 +15,8 @@
  ********************************************************************************/
 
 import { ContainerModule } from 'inversify';
-import { FrontendApplicationContribution } from '@theia/core/lib/browser';
-import { CommandContribution } from '@theia/core/lib/common';
+import { FrontendApplicationContribution } from '@devpodio/core/lib/browser';
+import { CommandContribution } from '@devpodio/core/lib/common';
 import { MergeConflictsFrontendContribution } from './merge-conflicts-frontend-contribution';
 import { MergeConflictsCodeLensProvider } from './merge-conflicts-code-lense-provider';
 import { MergeConflictsParser } from './merge-conflicts-parser';

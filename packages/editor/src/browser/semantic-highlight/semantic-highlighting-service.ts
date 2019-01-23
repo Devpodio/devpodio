@@ -17,18 +17,18 @@
 import { inject, injectable } from 'inversify';
 import { decode as base64Decode, encode as base64Encode } from 'base64-arraybuffer';
 import { Position, Range } from 'vscode-languageserver-types';
-import URI from '@theia/core/lib/common/uri';
-import { Disposable } from '@theia/core/lib/common/disposable';
-import { ILogger } from '@theia/core/lib/common/logger';
-import { ILanguageClient } from '@theia/languages/lib/browser/language-client-services';
-import { SemanticHighlightFeature } from '@theia/languages/lib/browser/semantic-highlighting/semantic-highlighting-feature';
-import { SemanticHighlightingParams } from '@theia/languages/lib/browser/semantic-highlighting/semantic-highlighting-protocol';
+import URI from '@devpodio/core/lib/common/uri';
+import { Disposable } from '@devpodio/core/lib/common/disposable';
+import { ILogger } from '@devpodio/core/lib/common/logger';
+import { ILanguageClient } from '@devpodio/languages/lib/browser/language-client-services';
+import { SemanticHighlightFeature } from '@devpodio/languages/lib/browser/semantic-highlighting/semantic-highlighting-feature';
+import { SemanticHighlightingParams } from '@devpodio/languages/lib/browser/semantic-highlighting/semantic-highlighting-protocol';
 
 /**
  * Service for registering and managing semantic highlighting decorations in the code editors for multiple languages.
  *
  * The current, default implementation does nothing at all, because the unique identifier of the `EditorDecoration` is not
- * exposed via the API. A working example is available as the `MonacoSemanticHighlightingService` from the `@theia/monaco` extension.
+ * exposed via the API. A working example is available as the `MonacoSemanticHighlightingService` from the `@devpodio/monaco` extension.
  */
 @injectable()
 export class SemanticHighlightingService implements Disposable {

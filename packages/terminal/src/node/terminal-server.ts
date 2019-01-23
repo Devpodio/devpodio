@@ -15,13 +15,13 @@
  ********************************************************************************/
 
 import { inject, injectable, named } from 'inversify';
-import { ILogger } from '@theia/core/lib/common/logger';
+import { ILogger } from '@devpodio/core/lib/common/logger';
 import {
     ITerminalServer,
     ITerminalServerOptions
 } from '../common/terminal-protocol';
 import { BaseTerminalServer } from './base-terminal-server';
-import { TerminalProcessFactory, ProcessManager } from '@theia/process/lib/node';
+import { TerminalProcessFactory, ProcessManager } from '@devpodio/process/lib/node';
 
 @injectable()
 export class TerminalServer extends BaseTerminalServer implements ITerminalServer {

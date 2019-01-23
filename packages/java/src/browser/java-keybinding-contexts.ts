@@ -15,7 +15,7 @@
  ********************************************************************************/
 
 import { injectable } from 'inversify';
-import { EditorTextFocusContext, EditorWidget } from '@theia/editor/lib/browser';
+import { EditorTextFocusContext, EditorWidget } from '@devpodio/editor/lib/browser';
 import { JAVA_LANGUAGE_ID } from '../common';
 
 export namespace JavaKeybindingContexts {

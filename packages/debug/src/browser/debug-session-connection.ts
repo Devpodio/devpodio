@@ -17,9 +17,9 @@
 // tslint:disable:no-any
 
 import { DebugProtocol } from 'vscode-debugprotocol';
-import { Deferred } from '@theia/core/lib/common/promise-util';
-import { Event, Emitter, DisposableCollection, Disposable } from '@theia/core';
-import { OutputChannel } from '@theia/output/lib/common/output-channel';
+import { Deferred } from '@devpodio/core/lib/common/promise-util';
+import { Event, Emitter, DisposableCollection, Disposable } from '@devpodio/core';
+import { OutputChannel } from '@devpodio/output/lib/common/output-channel';
 import { IWebSocket } from 'vscode-ws-jsonrpc/lib/socket/socket';
 
 export interface DebugExitEvent {

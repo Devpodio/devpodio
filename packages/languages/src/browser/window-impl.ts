@@ -15,10 +15,10 @@
  ********************************************************************************/
 
 import { injectable, inject } from 'inversify';
-import { MessageService } from '@theia/core/lib/common';
+import { MessageService } from '@devpodio/core/lib/common';
 import { Window, OutputChannel, MessageActionItem, MessageType } from 'monaco-languageclient/lib/services';
-import { OutputChannelManager } from '@theia/output/lib/common/output-channel';
-import { OutputContribution } from '@theia/output/lib/browser/output-contribution';
+import { OutputChannelManager } from '@devpodio/output/lib/common/output-channel';
+import { OutputContribution } from '@devpodio/output/lib/browser/output-contribution';
 
 @injectable()
 export class WindowImpl implements Window {

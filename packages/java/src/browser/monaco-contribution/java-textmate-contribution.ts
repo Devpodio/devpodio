@@ -16,7 +16,7 @@
 
 import { injectable } from 'inversify';
 import { JAVA_LANGUAGE_ID } from '../../common';
-import { LanguageGrammarDefinitionContribution, TextmateRegistry } from '@theia/monaco/lib/browser/textmate';
+import { LanguageGrammarDefinitionContribution, TextmateRegistry } from '@devpodio/monaco/lib/browser/textmate';
 
 @injectable()
 export class JavaTextmateContribution implements LanguageGrammarDefinitionContribution {

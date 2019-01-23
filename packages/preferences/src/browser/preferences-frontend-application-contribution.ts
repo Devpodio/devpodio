@@ -14,11 +14,11 @@
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  ********************************************************************************/
 
-import { FrontendApplicationContribution, PreferenceSchemaProvider } from '@theia/core/lib/browser';
+import { FrontendApplicationContribution, PreferenceSchemaProvider } from '@devpodio/core/lib/browser';
 import { inject, injectable } from 'inversify';
-import URI from '@theia/core/lib/common/uri';
-import { InMemoryResources } from '@theia/core';
-import { JsonSchemaStore } from '@theia/core/lib/browser/json-schema-store';
+import URI from '@devpodio/core/lib/common/uri';
+import { InMemoryResources } from '@devpodio/core';
+import { JsonSchemaStore } from '@devpodio/core/lib/browser/json-schema-store';
 import { USER_PREFERENCE_URI } from './user-preference-provider';
 
 @injectable()

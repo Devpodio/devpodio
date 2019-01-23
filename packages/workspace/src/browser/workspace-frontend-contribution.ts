@@ -15,17 +15,17 @@
  ********************************************************************************/
 
 import { injectable, inject } from 'inversify';
-import { CommandContribution, CommandRegistry, MenuContribution, MenuModelRegistry } from '@theia/core/lib/common';
-import { isOSX, environment, OS } from '@theia/core';
-import { open, OpenerService, CommonMenus, StorageService, LabelProvider, ConfirmDialog, KeybindingRegistry, KeybindingContribution } from '@theia/core/lib/browser';
-import { FileDialogService, OpenFileDialogProps, FileDialogTreeFilters } from '@theia/filesystem/lib/browser';
-import { FileSystem } from '@theia/filesystem/lib/common';
+import { CommandContribution, CommandRegistry, MenuContribution, MenuModelRegistry } from '@devpodio/core/lib/common';
+import { isOSX, environment, OS } from '@devpodio/core';
+import { open, OpenerService, CommonMenus, StorageService, LabelProvider, ConfirmDialog, KeybindingRegistry, KeybindingContribution } from '@devpodio/core/lib/browser';
+import { FileDialogService, OpenFileDialogProps, FileDialogTreeFilters } from '@devpodio/filesystem/lib/browser';
+import { FileSystem } from '@devpodio/filesystem/lib/common';
 import { WorkspaceService } from './workspace-service';
 import { THEIA_EXT, VSCODE_EXT } from '../common';
 import { WorkspaceCommands } from './workspace-commands';
 import { QuickOpenWorkspace } from './quick-open-workspace';
 import { WorkspacePreferences } from './workspace-preferences';
-import URI from '@theia/core/lib/common/uri';
+import URI from '@devpodio/core/lib/common/uri';
 
 @injectable()
 export class WorkspaceFrontendContribution implements CommandContribution, KeybindingContribution, MenuContribution {

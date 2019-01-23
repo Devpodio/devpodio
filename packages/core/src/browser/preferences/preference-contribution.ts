@@ -49,6 +49,7 @@ export interface PreferenceItem {
 }
 
 export interface PreferenceProperty extends PreferenceItem {
+    enumDescriptions?: string[];
     description: string;
 }
 

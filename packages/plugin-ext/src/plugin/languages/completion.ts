@@ -15,7 +15,7 @@
  ********************************************************************************/
 
 import URI from 'vscode-uri/lib/umd';
-import * as theia from '@theia/plugin';
+import * as theia from '@devpodio/plugin';
 import { CompletionList, Range, SnippetString } from '../types-impl';
 import { DocumentsExtImpl } from '../documents';
 import * as Converter from '../type-converters';

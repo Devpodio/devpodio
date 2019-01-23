@@ -15,11 +15,11 @@
  ********************************************************************************/
 
 import { injectable, inject } from 'inversify';
-import { CommandRegistry, CommandContribution } from '@theia/core/lib/common';
+import { CommandRegistry, CommandContribution } from '@devpodio/core/lib/common';
 import { HostedPluginManagerClient, HostedPluginCommands } from '../../hosted/browser/hosted-plugin-manager-client';
 import { PluginExtDeployCommandService } from './plugin-ext-deploy-command';
 import { OpenUriCommandHandler } from './commands';
-import URI from '@theia/core/lib/common/uri';
+import URI from '@devpodio/core/lib/common/uri';
 
 @injectable()
 export class PluginApiFrontendContribution implements CommandContribution {

@@ -18,7 +18,7 @@ import { Container, interfaces } from 'inversify';
 import { Git } from '../../common/git';
 import { DugiteGit } from '../dugite-git';
 import { bindGit, GitBindingOptions } from '../git-backend-module';
-import { bindLogger } from '@theia/core/lib/node/logger-backend-module';
+import { bindLogger } from '@devpodio/core/lib/node/logger-backend-module';
 import { NoSyncRepositoryManager } from '.././test/no-sync-repository-manager';
 import { GitEnvProvider, DefaultGitEnvProvider } from '../env/git-env-provider';
 import { GitInit, DefaultGitInit } from '../init/git-init';

@@ -15,7 +15,7 @@
  ********************************************************************************/
 
 import { ContainerModule } from 'inversify';
-import { BackendApplicationContribution } from '@theia/core/lib/node/backend-application';
+import { BackendApplicationContribution } from '@devpodio/core/lib/node/backend-application';
 import { FileDownloadEndpoint } from './file-download-endpoint';
 import { FileDownloadHandler, SingleFileDownloadHandler, MultiFileDownloadHandler } from './file-download-handler';
 import { DirectoryArchiver } from './directory-archiver';

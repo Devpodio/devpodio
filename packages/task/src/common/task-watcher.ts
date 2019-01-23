@@ -15,7 +15,7 @@
  ********************************************************************************/
 
 import { injectable } from 'inversify';
-import { Emitter, Event } from '@theia/core/lib/common/event';
+import { Emitter, Event } from '@devpodio/core/lib/common/event';
 import { TaskClient, TaskExitedEvent, TaskInfo } from './task-protocol';
 
 @injectable()

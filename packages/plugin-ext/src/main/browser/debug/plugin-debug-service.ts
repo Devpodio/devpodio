@@ -14,14 +14,14 @@
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  ********************************************************************************/
 
-import { DebugService, DebuggerDescription, DebugPath } from '@theia/debug/lib/common/debug-service';
-import { Disposable, DisposableCollection } from '@theia/core/lib/common/disposable';
-import { DebugConfiguration } from '@theia/debug/lib/common/debug-configuration';
-import { IJSONSchema, IJSONSchemaSnippet } from '@theia/core/lib/common/json-schema';
+import { DebugService, DebuggerDescription, DebugPath } from '@devpodio/debug/lib/common/debug-service';
+import { Disposable, DisposableCollection } from '@devpodio/core/lib/common/disposable';
+import { DebugConfiguration } from '@devpodio/debug/lib/common/debug-configuration';
+import { IJSONSchema, IJSONSchemaSnippet } from '@devpodio/core/lib/common/json-schema';
 import { PluginDebugAdapterContribution } from './plugin-debug-adapter-contribution';
 import { injectable, inject, postConstruct } from 'inversify';
-import { WebSocketConnectionProvider } from '@theia/core/lib/browser/messaging/ws-connection-provider';
-import { WorkspaceService } from '@theia/workspace/lib/browser';
+import { WebSocketConnectionProvider } from '@devpodio/core/lib/browser/messaging/ws-connection-provider';
+import { WorkspaceService } from '@devpodio/workspace/lib/browser';
 
 /**
  * Debug adapter contribution registrator.

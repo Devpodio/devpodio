@@ -14,19 +14,19 @@
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  ********************************************************************************/
 
-import { enableJSDOM } from '@theia/core/lib/browser/test/jsdom';
+import { enableJSDOM } from '@devpodio/core/lib/browser/test/jsdom';
 let disableJSDOM = enableJSDOM();
 
 import { Container } from 'inversify';
-import { Emitter } from '@theia/core';
-import { CompositeTreeNode, LabelProvider, TreeNode } from '@theia/core/lib/browser';
-import { FileSystem, FileStat } from '@theia/filesystem/lib/common';
-import { FileSystemNode } from '@theia/filesystem/lib/node/node-filesystem';
-import { DirNode, FileTree } from '@theia/filesystem/lib/browser';
+import { Emitter } from '@devpodio/core';
+import { CompositeTreeNode, LabelProvider, TreeNode } from '@devpodio/core/lib/browser';
+import { FileSystem, FileStat } from '@devpodio/filesystem/lib/common';
+import { FileSystemNode } from '@devpodio/filesystem/lib/node/node-filesystem';
+import { DirNode, FileTree } from '@devpodio/filesystem/lib/browser';
 import { FileNavigatorTree, WorkspaceNode, WorkspaceRootNode } from './navigator-tree';
 import { FileNavigatorFilter } from './navigator-filter';
 import { expect } from 'chai';
-import URI from '@theia/core/lib/common/uri';
+import URI from '@devpodio/core/lib/common/uri';
 import * as sinon from 'sinon';
 
 disableJSDOM();

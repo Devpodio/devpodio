@@ -19,11 +19,11 @@ import '../../src/browser/style/symbol-sprite.svg';
 import '../../src/browser/style/symbol-icons.css';
 
 import { ContainerModule, decorate, injectable } from 'inversify';
-import { MenuContribution, CommandContribution } from '@theia/core/lib/common';
-import { QuickOpenService, FrontendApplicationContribution, KeybindingContribution } from '@theia/core/lib/browser';
-import { Languages, Workspace } from '@theia/languages/lib/browser';
-import { TextEditorProvider, DiffNavigatorProvider } from '@theia/editor/lib/browser';
-import { StrictEditorTextFocusContext } from '@theia/editor/lib/browser/editor-keybinding-contexts';
+import { MenuContribution, CommandContribution } from '@devpodio/core/lib/common';
+import { QuickOpenService, FrontendApplicationContribution, KeybindingContribution } from '@devpodio/core/lib/browser';
+import { Languages, Workspace } from '@devpodio/languages/lib/browser';
+import { TextEditorProvider, DiffNavigatorProvider } from '@devpodio/editor/lib/browser';
+import { StrictEditorTextFocusContext } from '@devpodio/editor/lib/browser/editor-keybinding-contexts';
 import { MonacoToProtocolConverter, ProtocolToMonacoConverter } from 'monaco-languageclient';
 import { MonacoEditorProvider } from './monaco-editor-provider';
 import { MonacoEditorMenuContribution } from './monaco-menu';
@@ -45,10 +45,10 @@ import { MonacoStrictEditorTextFocusContext } from './monaco-keybinding-contexts
 import { MonacoFrontendApplicationContribution } from './monaco-frontend-application-contribution';
 import MonacoTextmateModuleBinder from './textmate/monaco-textmate-frontend-bindings';
 import { MonacoSemanticHighlightingService } from './monaco-semantic-highlighting-service';
-import { SemanticHighlightingService } from '@theia/editor/lib/browser/semantic-highlight/semantic-highlighting-service';
+import { SemanticHighlightingService } from '@devpodio/editor/lib/browser/semantic-highlight/semantic-highlighting-service';
 import { MonacoBulkEditService } from './monaco-bulk-edit-service';
 import { MonacoOutlineDecorator } from './monaco-outline-decorator';
-import { OutlineTreeDecorator } from '@theia/outline-view/lib/browser/outline-decorator-service';
+import { OutlineTreeDecorator } from '@devpodio/outline-view/lib/browser/outline-decorator-service';
 import { MonacoSnippetSuggestProvider } from './monaco-snippet-suggest-provider';
 
 decorate(injectable(), MonacoToProtocolConverter);

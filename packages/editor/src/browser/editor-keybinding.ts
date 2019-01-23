@@ -15,8 +15,8 @@
  ********************************************************************************/
 
 import { injectable } from 'inversify';
-import { isOSX, isWindows } from '@theia/core/lib/common/os';
-import { KeybindingContribution, KeybindingRegistry } from '@theia/core/lib/browser/keybinding';
+import { isOSX, isWindows } from '@devpodio/core/lib/common/os';
+import { KeybindingContribution, KeybindingRegistry } from '@devpodio/core/lib/browser/keybinding';
 import { EditorCommands } from './editor-command';
 
 @injectable()

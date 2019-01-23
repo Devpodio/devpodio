@@ -23,31 +23,31 @@ import {
     DebugExt,
     MAIN_RPC_CONTEXT
 } from '../../../api/plugin-api';
-import { DebugSessionManager } from '@theia/debug/lib/browser/debug-session-manager';
+import { DebugSessionManager } from '@devpodio/debug/lib/browser/debug-session-manager';
 import { Breakpoint, WorkspaceFolder } from '../../../api/model';
-import { LabelProvider } from '@theia/core/lib/browser';
-import { EditorManager } from '@theia/editor/lib/browser';
-import { BreakpointManager } from '@theia/debug/lib/browser/breakpoint/breakpoint-manager';
-import { DebugBreakpoint } from '@theia/debug/lib/browser/model/debug-breakpoint';
+import { LabelProvider } from '@devpodio/core/lib/browser';
+import { EditorManager } from '@devpodio/editor/lib/browser';
+import { BreakpointManager } from '@devpodio/debug/lib/browser/breakpoint/breakpoint-manager';
+import { DebugBreakpoint } from '@devpodio/debug/lib/browser/model/debug-breakpoint';
 import Uri from 'vscode-uri';
-import { DebugConsoleSession } from '@theia/debug/lib/browser/console/debug-console-session';
-import { SourceBreakpoint } from '@theia/debug/lib/browser/breakpoint/breakpoint-marker';
-import { DebugConfiguration } from '@theia/debug/lib/common/debug-configuration';
+import { DebugConsoleSession } from '@devpodio/debug/lib/browser/console/debug-console-session';
+import { SourceBreakpoint } from '@devpodio/debug/lib/browser/breakpoint/breakpoint-marker';
+import { DebugConfiguration } from '@devpodio/debug/lib/common/debug-configuration';
 import { ConnectionMainImpl } from '../connection-main';
-import { DebuggerDescription } from '@theia/debug/lib/common/debug-service';
+import { DebuggerDescription } from '@devpodio/debug/lib/common/debug-service';
 import { DebugProtocol } from 'vscode-debugprotocol';
-import { DebugConfigurationManager } from '@theia/debug/lib/browser/debug-configuration-manager';
-import { TerminalService } from '@theia/terminal/lib/browser/base/terminal-service';
-import { MessageClient } from '@theia/core/lib/common/message-service-protocol';
-import { OutputChannelManager } from '@theia/output/lib/common/output-channel';
-import { DebugPreferences } from '@theia/debug/lib/browser/debug-preferences';
+import { DebugConfigurationManager } from '@devpodio/debug/lib/browser/debug-configuration-manager';
+import { TerminalService } from '@devpodio/terminal/lib/browser/base/terminal-service';
+import { MessageClient } from '@devpodio/core/lib/common/message-service-protocol';
+import { OutputChannelManager } from '@devpodio/output/lib/common/output-channel';
+import { DebugPreferences } from '@devpodio/debug/lib/browser/debug-preferences';
 import { PluginDebugAdapterContribution } from './plugin-debug-adapter-contribution';
 import { PluginDebugSessionContributionRegistrator, PluginDebugSessionContributionRegistry } from './plugin-debug-session-contribution-registry';
-import { DisposableCollection } from '@theia/core/lib/common/disposable';
+import { DisposableCollection } from '@devpodio/core/lib/common/disposable';
 import { PluginDebugSessionFactory } from './plugin-debug-session-factory';
 import { PluginWebSocketChannel } from '../../../common/connection';
 import { PluginDebugAdapterContributionRegistrator, PluginDebugService } from './plugin-debug-service';
-import { DebugSchemaUpdater } from '@theia/debug/lib/browser/debug-schema-updater';
+import { DebugSchemaUpdater } from '@devpodio/debug/lib/browser/debug-schema-updater';
 
 export class DebugMainImpl implements DebugMain {
     private readonly debugExt: DebugExt;

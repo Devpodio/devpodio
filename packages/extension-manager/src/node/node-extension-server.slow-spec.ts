@@ -49,8 +49,8 @@ describe('node-extension-server', function () {
         appProjectPath = temp.mkdirSync({ dir });
         fs.writeJsonSync(path.resolve(appProjectPath, 'package.json'), {
             'dependencies': {
-                '@theia/core': '0.1.0',
-                '@theia/extension-manager': '0.1.0'
+                '@devpodio/core': '0.1.0',
+                '@devpodio/extension-manager': '0.1.0'
             }
         });
 
@@ -78,7 +78,7 @@ describe('node-extension-server', function () {
             query: 'filesystem scope:theia'
         }).then(extensions => {
             assert.equal(extensions.length, 1, JSON.stringify(extensions, undefined, 2));
-            assert.equal(extensions[0].name, '@theia/filesystem');
+            assert.equal(extensions[0].name, '@devpodio/filesystem');
         });
     });
 
@@ -87,9 +87,9 @@ describe('node-extension-server', function () {
 
         return server.installed().then(extensions => {
             assert.equal(true, extensions.length >= 3, JSON.stringify(extensions, undefined, 2));
-            assert.equal(true, extensions.some(e => e.name === '@theia/core'), JSON.stringify(before, undefined, 2));
-            assert.equal(true, extensions.some(e => e.name === '@theia/filesystem'), JSON.stringify(before, undefined, 2));
-            assert.equal(true, extensions.some(e => e.name === '@theia/extension-manager'), JSON.stringify(before, undefined, 2));
+            assert.equal(true, extensions.some(e => e.name === '@devpodio/core'), JSON.stringify(before, undefined, 2));
+            assert.equal(true, extensions.some(e => e.name === '@devpodio/filesystem'), JSON.stringify(before, undefined, 2));
+            assert.equal(true, extensions.some(e => e.name === '@devpodio/extension-manager'), JSON.stringify(before, undefined, 2));
         });
     });
 
@@ -97,15 +97,15 @@ describe('node-extension-server', function () {
         this.timeout(10000);
 
         const before = await server.installed();
-        assert.equal(false, before.some(e => e.name === '@theia/editor'), JSON.stringify(before, undefined, 2));
+        assert.equal(false, before.some(e => e.name === '@devpodio/editor'), JSON.stringify(before, undefined, 2));
 
         const onDidChangePackage = waitForDidChange();
 
-        await server.install('@theia/editor');
+        await server.install('@devpodio/editor');
 
         await onDidChangePackage;
         return server.installed().then(after => {
-            assert.equal(true, after.some(e => e.name === '@theia/editor'), JSON.stringify(after, undefined, 2));
+            assert.equal(true, after.some(e => e.name === '@devpodio/editor'), JSON.stringify(after, undefined, 2));
         });
     });
 
@@ -113,15 +113,15 @@ describe('node-extension-server', function () {
         this.timeout(10000);
 
         const before = await server.installed();
-        assert.equal(true, before.some(e => e.name === '@theia/extension-manager'), JSON.stringify(before, undefined, 2));
+        assert.equal(true, before.some(e => e.name === '@devpodio/extension-manager'), JSON.stringify(before, undefined, 2));
 
         const onDidChangePackage = waitForDidChange();
 
-        await server.uninstall('@theia/extension-manager');
+        await server.uninstall('@devpodio/extension-manager');
 
         await onDidChangePackage;
         return server.installed().then(after => {
-            assert.equal(false, after.some(e => e.name === '@theia/extension-manager'), JSON.stringify(after, undefined, 2));
+            assert.equal(false, after.some(e => e.name === '@devpodio/extension-manager'), JSON.stringify(after, undefined, 2));
         });
     });
 
@@ -130,7 +130,7 @@ describe('node-extension-server', function () {
 
         return server.outdated().then(extensions => {
             assert.equal(extensions.length, 2, JSON.stringify(extensions, undefined, 2));
-            assert.deepEqual(extensions.map(e => e.name).sort(), ['@theia/core', '@theia/extension-manager']);
+            assert.deepEqual(extensions.map(e => e.name).sort(), ['@devpodio/core', '@devpodio/extension-manager']);
         });
     });
 
@@ -138,15 +138,15 @@ describe('node-extension-server', function () {
         this.timeout(10000);
 
         const before = await server.outdated();
-        assert.equal(true, before.some(e => e.name === '@theia/core'), JSON.stringify(before, undefined, 2));
+        assert.equal(true, before.some(e => e.name === '@devpodio/core'), JSON.stringify(before, undefined, 2));
 
         const onDidChangePackage = waitForDidChange();
 
-        await server.update('@theia/core');
+        await server.update('@devpodio/core');
 
         await onDidChangePackage;
         return server.outdated().then(after => {
-            assert.equal(false, after.some(e => e.name === '@theia/core'), JSON.stringify(after, undefined, 2));
+            assert.equal(false, after.some(e => e.name === '@devpodio/core'), JSON.stringify(after, undefined, 2));
         });
     });
 
@@ -155,21 +155,21 @@ describe('node-extension-server', function () {
 
         return server.list().then(extensions => {
             assertExtension({
-                name: '@theia/core',
+                name: '@devpodio/core',
                 installed: true,
                 outdated: true,
                 dependent: undefined
             }, extensions);
 
             assertExtension({
-                name: '@theia/filesystem',
+                name: '@devpodio/filesystem',
                 installed: true,
                 outdated: false,
-                dependent: '@theia/extension-manager'
+                dependent: '@devpodio/extension-manager'
             }, extensions);
 
             assertExtension({
-                name: '@theia/extension-manager',
+                name: '@devpodio/extension-manager',
                 installed: true,
                 outdated: true,
                 dependent: undefined
@@ -183,17 +183,17 @@ describe('node-extension-server', function () {
         return server.list({
             query: 'scope:theia file'
         }).then(extensions => {
-            const filtered = extensions.filter(e => ['@theia/filesystem', '@theia/file-search'].indexOf(e.name) !== -1);
+            const filtered = extensions.filter(e => ['@devpodio/filesystem', '@devpodio/file-search'].indexOf(e.name) !== -1);
 
             assertExtension({
-                name: '@theia/filesystem',
+                name: '@devpodio/filesystem',
                 installed: true,
                 outdated: false,
-                dependent: '@theia/extension-manager'
+                dependent: '@devpodio/extension-manager'
             }, filtered);
 
             assertExtension({
-                name: '@theia/file-search',
+                name: '@devpodio/file-search',
                 installed: false,
                 outdated: false,
                 dependent: undefined

@@ -16,7 +16,7 @@
 
 import { ContainerModule, interfaces } from 'inversify';
 import { OutputWidget, OUTPUT_WIDGET_KIND } from './output-widget';
-import { WidgetFactory, bindViewContribution } from '@theia/core/lib/browser';
+import { WidgetFactory, bindViewContribution } from '@devpodio/core/lib/browser';
 import { OutputContribution } from './output-contribution';
 import { OutputChannelManager } from '../common/output-channel';
 import { bindOutputPreferences } from '../common/output-preferences';

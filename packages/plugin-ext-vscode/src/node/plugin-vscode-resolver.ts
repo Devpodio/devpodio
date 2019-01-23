@@ -16,7 +16,7 @@
 
 // tslint:disable:no-any
 
-import { PluginDeployerResolver, PluginDeployerResolverContext } from '@theia/plugin-ext';
+import { PluginDeployerResolver, PluginDeployerResolverContext } from '@devpodio/plugin-ext';
 import { injectable } from 'inversify';
 import * as request from 'request';
 import * as fs from 'fs';

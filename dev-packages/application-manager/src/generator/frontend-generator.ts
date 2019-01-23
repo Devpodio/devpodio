@@ -32,11 +32,27 @@ export class FrontendGenerator extends AbstractGenerator {
 <html>
 
 <head>${this.compileIndexHead(frontendModules)}
-  <script type="text/javascript" src="./bundle.js" charset="utf-8"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<link rel="icon" type="image/png" sizes="32x32" href="img/devpod-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="144x144" href="img/devpod-144x144.png">
+<link rel="icon" type="image/png" sizes="192x192" href="img/devpod-192x192.png">
+<link rel="apple-touch-icon" type="image/png" sizes="512x512" href="img/devpod-512x512.png">
+<link rel="manifest"  href="/json/manifest.json">
 </head>
 
 <body>
-  <div class="theia-preload"></div>
+    <div class="theia-preload"></div>
+    <script type="application/javascript">
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('sw.js').then(registration => {
+                console.log('SW registered: ', registration);
+            }).catch(registrationError => {
+                console.log('SW registration failed: ', registrationError);
+            });
+        });
+    }
+    </script>
 </body>
 
 </html>`;
@@ -52,12 +68,12 @@ export class FrontendGenerator extends AbstractGenerator {
 ${this.ifBrowser("require('es6-promise/auto');")}
 require('reflect-metadata');
 const { Container } = require('inversify');
-const { FrontendApplication } = require('@theia/core/lib/browser');
-const { frontendApplicationModule } = require('@theia/core/lib/browser/frontend-application-module');
-const { messagingFrontendModule } = require('@theia/core/lib/browser/messaging/messaging-frontend-module');
-const { loggerFrontendModule } = require('@theia/core/lib/browser/logger-frontend-module');
-const { ThemeService } = require('@theia/core/lib/browser/theming');
-const { FrontendApplicationConfigProvider } = require('@theia/core/lib/browser/frontend-application-config-provider');
+const { FrontendApplication } = require('@devpodio/core/lib/browser');
+const { frontendApplicationModule } = require('@devpodio/core/lib/browser/frontend-application-module');
+const { messagingFrontendModule } = require('@devpodio/core/lib/browser/messaging/messaging-frontend-module');
+const { loggerFrontendModule } = require('@devpodio/core/lib/browser/logger-frontend-module');
+const { ThemeService } = require('@devpodio/core/lib/browser/theming');
+const { FrontendApplicationConfigProvider } = require('@devpodio/core/lib/browser/frontend-application-config-provider');
 
 FrontendApplicationConfigProvider.set(${this.prettyStringify(this.pck.props.frontend.config)});
 

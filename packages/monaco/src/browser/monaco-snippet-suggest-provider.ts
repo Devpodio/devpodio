@@ -15,8 +15,8 @@
  ********************************************************************************/
 import * as jsoncparser from 'jsonc-parser';
 import { injectable, inject } from 'inversify';
-import URI from '@theia/core/lib/common/uri';
-import { FileSystem, FileSystemError } from '@theia/filesystem/lib/common';
+import URI from '@devpodio/core/lib/common/uri';
+import { FileSystem, FileSystemError } from '@devpodio/filesystem/lib/common';
 
 @injectable()
 export class MonacoSnippetSuggestProvider implements monaco.modes.ISuggestSupport {

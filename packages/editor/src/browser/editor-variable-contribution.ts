@@ -15,7 +15,7 @@
  ********************************************************************************/
 
 import { injectable, inject } from 'inversify';
-import { VariableRegistry, VariableContribution } from '@theia/variable-resolver/lib/browser';
+import { VariableRegistry, VariableContribution } from '@devpodio/variable-resolver/lib/browser';
 import { TextEditor } from './editor';
 import { EditorManager } from './editor-manager';
 

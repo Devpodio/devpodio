@@ -15,7 +15,7 @@
  ********************************************************************************/
 
 import { injectable, inject } from 'inversify';
-import { WidgetFactory, FrontendApplication } from '@theia/core/lib/browser';
+import { WidgetFactory, FrontendApplication } from '@devpodio/core/lib/browser';
 import { ExtensionManager } from '../common';
 import { ExtensionUri } from './extension-uri';
 import { ExtensionDetailWidget } from './extension-detail-widget';

@@ -19,9 +19,9 @@ import { HostedPluginReader } from './plugin-reader';
 import { HostedInstanceManager } from './hosted-instance-manager';
 import { HostedPluginSupport } from './hosted-plugin';
 import { HostedPluginsManager } from './hosted-plugins-manager';
-import URI from '@theia/core/lib/common/uri';
-import { ILogger } from '@theia/core';
-import { ContributionProvider } from '@theia/core';
+import URI from '@devpodio/core/lib/common/uri';
+import { ILogger } from '@devpodio/core';
+import { ContributionProvider } from '@devpodio/core';
 import { ExtPluginApiProvider, ExtPluginApi } from '../../common/plugin-ext-api-contribution';
 
 @injectable()

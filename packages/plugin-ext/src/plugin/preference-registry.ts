@@ -16,8 +16,8 @@
 
 /* tslint:disable:no-any */
 
-import { Emitter, Event } from '@theia/core/lib/common/event';
-import * as theia from '@theia/plugin';
+import { Emitter, Event } from '@devpodio/core/lib/common/event';
+import * as theia from '@devpodio/plugin';
 import {
     PLUGIN_RPC_CONTEXT,
     PreferenceRegistryExt,
@@ -25,7 +25,7 @@ import {
 } from '../api/plugin-api';
 import { RPCProtocol } from '../api/rpc-protocol';
 import { isObject } from '../common/types';
-import { PreferenceChange } from '@theia/core/lib/browser';
+import { PreferenceChange } from '@devpodio/core/lib/browser';
 import { ConfigurationTarget } from './types-impl';
 
 import cloneDeep = require('lodash.clonedeep');

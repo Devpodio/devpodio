@@ -13,7 +13,7 @@
  *
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  ********************************************************************************/
-import { MonacoEditor } from '@theia/monaco/lib/browser/monaco-editor';
+import { MonacoEditor } from '@devpodio/monaco/lib/browser/monaco-editor';
 import {
     TextEditorConfiguration,
     EditorChangedPropertiesData,
@@ -26,7 +26,7 @@ import {
     DecorationOptions
 } from '../../api/plugin-api';
 import { Range } from '../../api/model';
-import { DisposableCollection, Emitter, Event } from '@theia/core';
+import { DisposableCollection, Emitter, Event } from '@devpodio/core';
 import { TextEditorCursorStyle, cursorStyleToString } from '../../common/editor-options';
 import { TextEditorLineNumbersStyle, EndOfLine } from '../../plugin/types-impl';
 

@@ -15,8 +15,8 @@
  ********************************************************************************/
 
 import { ContainerModule } from 'inversify';
-import { JsonRpcConnectionHandler, ConnectionHandler } from '@theia/core/lib/common';
-import { LanguageServerContribution } from '@theia/languages/lib/node';
+import { JsonRpcConnectionHandler, ConnectionHandler } from '@devpodio/core/lib/common';
+import { LanguageServerContribution } from '@devpodio/languages/lib/node';
 import { TypeScriptContribution } from './typescript-contribution';
 import { typescriptVersionPath, TypescriptVersionService } from '../common/typescript-version-service';
 import { TypescriptVersionServiceImpl } from './typescript-version-service-impl';

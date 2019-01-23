@@ -15,17 +15,19 @@
  ********************************************************************************/
 
 import { injectable, inject } from 'inversify';
-import URI from '@theia/core/lib/common/uri';
-import { MaybePromise } from '@theia/core/lib/common';
+import URI from '@devpodio/core/lib/common/uri';
+import { MaybePromise, DisposableCollection } from '@devpodio/core/lib/common';
 import {
     FrontendApplicationContribution, ApplicationShell,
     NavigatableWidget, NavigatableWidgetOptions,
     Saveable, WidgetManager, StatefulWidget
-} from '@theia/core/lib/browser';
+} from '@devpodio/core/lib/browser';
 import { FileSystemWatcher, FileChangeEvent, FileMoveEvent, FileChangeType } from './filesystem-watcher';
 
 @injectable()
 export class FileSystemFrontendContribution implements FrontendApplicationContribution {
+
+    protected readonly toDispose = new DisposableCollection();
 
     @inject(ApplicationShell)
     protected readonly shell: ApplicationShell;
@@ -37,8 +39,8 @@ export class FileSystemFrontendContribution implements FrontendApplicationContri
     protected readonly fileSystemWatcher: FileSystemWatcher;
 
     initialize(): void {
-        this.fileSystemWatcher.onFilesChanged(event => this.run(() => this.updateWidgets(event)));
-        this.fileSystemWatcher.onDidMove(event => this.run(() => this.moveWidgets(event)));
+        this.toDispose.push(this.fileSystemWatcher.onFilesChanged(event => this.run(() => this.updateWidgets(event))));
+        this.toDispose.push(this.fileSystemWatcher.onDidMove(event => this.run(() => this.moveWidgets(event))));
     }
 
     protected pendingOperation = Promise.resolve();

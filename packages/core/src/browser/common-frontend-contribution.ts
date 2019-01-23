@@ -33,14 +33,16 @@ export namespace CommonMenus {
 
     export const FILE = [...MAIN_MENU_BAR, '1_file'];
     export const FILE_NEW = [...FILE, '1_new'];
-    export const FILE_OPEN = [...FILE, '2_open'];
-    export const FILE_SAVE = [...FILE, '3_save'];
-    export const FILE_AUTOSAVE = [...FILE, '4_autosave'];
-    export const FILE_SETTINGS = [...FILE, '5_settings'];
+    export const FILE_NEW_WINDOW = [...FILE, '2_new_window'];
+    export const FILE_OPEN = [...FILE, '3_open'];
+    export const FILE_SAVE = [...FILE, '4_save'];
+    export const FILE_AUTOSAVE = [...FILE, '5_autosave'];
+    export const FILE_SETTINGS = [...FILE, '6_settings'];
     export const FILE_SETTINGS_SUBMENU = [...FILE_SETTINGS, '1_settings_submenu'];
     export const FILE_SETTINGS_SUBMENU_OPEN = [...FILE_SETTINGS_SUBMENU, '1_settings_submenu_open'];
     export const FILE_SETTINGS_SUBMENU_THEME = [...FILE_SETTINGS_SUBMENU, '2_settings_submenu_theme'];
-    export const FILE_CLOSE = [...FILE, '6_close'];
+    export const FILE_RELOAD = [...FILE, '7_reload'];
+    export const FILE_CLOSE = [...FILE, '8_close'];
 
     export const EDIT = [...MAIN_MENU_BAR, '2_edit'];
     export const EDIT_UNDO = [...EDIT, '1_undo'];
@@ -178,6 +180,16 @@ export namespace CommonCommands {
         label: 'Open Preferences',
     };
 
+    export const RELOAD: Command = {
+        id: 'core.reload',
+        category: FILE_CATEGORY,
+        label: 'Reload',
+    };
+    export const NEW_WINDOW: Command = {
+        id: 'core.newWindow',
+        category: FILE_CATEGORY,
+        label: 'New Window'
+    };
 }
 
 export const supportCut = browser.isNative || document.queryCommandSupported('cut');
@@ -214,7 +226,12 @@ export class CommonFrontendContribution implements FrontendApplicationContributi
         registry.registerMenuAction(CommonMenus.FILE_AUTOSAVE, {
             commandId: CommonCommands.AUTO_SAVE.id
         });
-
+        registry.registerMenuAction(CommonMenus.FILE_RELOAD, {
+            commandId: CommonCommands.RELOAD.id
+        });
+        registry.registerMenuAction(CommonMenus.FILE_NEW_WINDOW, {
+            commandId: CommonCommands.NEW_WINDOW.id
+        });
         registry.registerSubmenu(CommonMenus.FILE_SETTINGS_SUBMENU, 'Settings');
 
         registry.registerMenuAction(CommonMenus.EDIT_UNDO, {
@@ -340,7 +357,7 @@ export class CommonFrontendContribution implements FrontendApplicationContributi
             execute: () => {
                 const tabBar = this.shell.currentTabBar!;
                 const currentTitle = tabBar.currentTitle;
-                this.shell.closeTabs(tabBar, (title, index) => title === currentTitle);
+                this.shell.closeTabs(tabBar, title => title === currentTitle);
             }
         });
         commandRegistry.registerCommand(CommonCommands.CLOSE_OTHER_TABS, {
@@ -354,7 +371,7 @@ export class CommonFrontendContribution implements FrontendApplicationContributi
             execute: () => {
                 const tabBar = this.shell.currentTabBar!;
                 const currentTitle = tabBar.currentTitle;
-                this.shell.closeTabs(this.shell.currentTabArea!, (title, index) => title !== currentTitle);
+                this.shell.closeTabs(this.shell.currentTabArea!, title => title !== currentTitle);
             }
         });
         commandRegistry.registerCommand(CommonCommands.CLOSE_RIGHT_TABS, {
@@ -415,6 +432,15 @@ export class CommonFrontendContribution implements FrontendApplicationContributi
         });
         commandRegistry.registerCommand(CommonCommands.ABOUT_COMMAND, {
             execute: () => this.openAbout()
+        });
+        commandRegistry.registerCommand(CommonCommands.RELOAD, {
+            execute: () => window.location.reload()
+        });
+        commandRegistry.registerCommand(CommonCommands.NEW_WINDOW, {
+            execute: () => window.open(
+                window.location.href,
+                '_blank'
+            )
         });
     }
 
@@ -505,6 +531,10 @@ export class CommonFrontendContribution implements FrontendApplicationContributi
             {
                 command: CommonCommands.SAVE_ALL.id,
                 keybinding: 'ctrlcmd+alt+s'
+            },
+            {
+                command: CommonCommands.RELOAD.id,
+                keybinding: 'ctrlcmd+f5'
             }
         );
     }

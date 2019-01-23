@@ -15,7 +15,7 @@
  ********************************************************************************/
 
 import { RequestType, NotificationType } from 'vscode-jsonrpc';
-import { VersionedTextDocumentIdentifier, TextDocumentIdentifier, Command, MessageType, ExecuteCommandParams } from '@theia/languages/lib/browser';
+import { VersionedTextDocumentIdentifier, TextDocumentIdentifier, Command, MessageType, ExecuteCommandParams } from '@devpodio/languages/lib/browser';
 
 export interface StatusReport {
     message: string;

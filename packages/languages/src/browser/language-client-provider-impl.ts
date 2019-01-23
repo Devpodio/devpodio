@@ -15,7 +15,7 @@
  ********************************************************************************/
 
 import { injectable, inject, named } from 'inversify';
-import { ContributionProvider } from '@theia/core/lib/common';
+import { ContributionProvider } from '@devpodio/core/lib/common';
 import { LanguageClientContribution } from './language-client-contribution';
 import { ILanguageClient } from './language-client-services';
 import { LanguageClientProvider } from './language-client-provider';

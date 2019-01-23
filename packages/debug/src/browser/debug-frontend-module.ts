@@ -20,7 +20,7 @@ import { ContainerModule, interfaces } from 'inversify';
 import { DebugConfigurationManager } from './debug-configuration-manager';
 import { DebugWidget } from './view/debug-widget';
 import { DebugPath, DebugService } from '../common/debug-service';
-import { WidgetFactory, WebSocketConnectionProvider, FrontendApplicationContribution, bindViewContribution, KeybindingContext } from '@theia/core/lib/browser';
+import { WidgetFactory, WebSocketConnectionProvider, FrontendApplicationContribution, bindViewContribution, KeybindingContext } from '@devpodio/core/lib/browser';
 import { DebugSessionManager } from './debug-session-manager';
 import { DebugResourceResolver } from './debug-resource';
 import {
@@ -30,7 +30,7 @@ import {
     DebugSessionContributionRegistry,
     DebugSessionContributionRegistryImpl
 } from './debug-session-contribution';
-import { bindContributionProvider, ResourceResolver } from '@theia/core';
+import { bindContributionProvider, ResourceResolver } from '@devpodio/core';
 import { DebugFrontendApplicationContribution } from './debug-frontend-application-contribution';
 import { DebugConsoleContribution } from './console/debug-console-contribution';
 import { BreakpointManager } from './breakpoint/breakpoint-manager';

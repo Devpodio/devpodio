@@ -15,7 +15,7 @@
  ********************************************************************************/
 
 import { interfaces } from 'inversify';
-import { ILogger } from '@theia/core';
+import { ILogger } from '@devpodio/core';
 
 /**
  * Create the bindings common to node and browser.

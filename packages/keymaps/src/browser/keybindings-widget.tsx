@@ -18,12 +18,12 @@ import React = require('react');
 import debounce = require('lodash.debounce');
 import * as fuzzy from 'fuzzy';
 import { injectable, inject, postConstruct } from 'inversify';
-import { CommandRegistry, Command } from '@theia/core/lib/common';
-import { ReactWidget } from '@theia/core/lib/browser/widgets/react-widget';
-import { KeybindingRegistry, SingleTextInputDialog, KeySequence, ConfirmDialog, Message, KeybindingScope } from '@theia/core/lib/browser';
+import { CommandRegistry, Command } from '@devpodio/core/lib/common';
+import { ReactWidget } from '@devpodio/core/lib/browser/widgets/react-widget';
+import { KeybindingRegistry, SingleTextInputDialog, KeySequence, ConfirmDialog, Message, KeybindingScope } from '@devpodio/core/lib/browser';
 import { KeymapsParser } from './keymaps-parser';
 import { KeymapsService, KeybindingJson } from './keymaps-service';
-import { AlertMessage } from '@theia/core/lib/browser/widgets/alert-message';
+import { AlertMessage } from '@devpodio/core/lib/browser/widgets/alert-message';
 
 export interface KeybindingItem {
     id: string,

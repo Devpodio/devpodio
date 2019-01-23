@@ -17,10 +17,10 @@
 import {
     ApplicationShell, BaseWidget,  DockPanel, Navigatable, PanelLayout, Saveable,
      StatefulWidget, Title,  Widget, WidgetConstructionOptions, WidgetManager
-} from '@theia/core/lib/browser';
-import { Emitter, DisposableCollection } from '@theia/core/lib/common';
-import URI from '@theia/core/lib/common/uri';
-import { EditorWidget } from '@theia/editor/lib/browser';
+} from '@devpodio/core/lib/browser';
+import { Emitter, DisposableCollection } from '@devpodio/core/lib/common';
+import URI from '@devpodio/core/lib/common/uri';
+import { EditorWidget } from '@devpodio/editor/lib/browser';
 import { Message, MessageLoop } from '@phosphor/messaging';
 import { find } from '@phosphor/algorithm';
 

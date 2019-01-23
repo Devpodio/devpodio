@@ -13,7 +13,7 @@
  *
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  ********************************************************************************/
-import { Emitter } from '@theia/core/lib/common/event';
+import { Emitter } from '@devpodio/core/lib/common/event';
 import { Disposable } from '../../types-impl';
 import { Breakpoint } from '../../../api/model';
 import { RPCProtocol } from '../../../api/rpc-protocol';
@@ -22,19 +22,19 @@ import {
     DebugMain,
     DebugExt
 } from '../../../api/plugin-api';
-import * as theia from '@theia/plugin';
+import * as theia from '@devpodio/plugin';
 import uuid = require('uuid');
 import { ConnectionExtImpl } from '../../connection-ext';
 import { CommandRegistryImpl } from '../../command-registry';
 import { DebuggerContribution } from '../../../common';
 import { PluginWebSocketChannel } from '../../../common/connection';
-import { DebugAdapterExecutable } from '@theia/debug/lib/common/debug-model';
-import { IJSONSchema, IJSONSchemaSnippet } from '@theia/core/lib/common/json-schema';
+import { DebugAdapterExecutable } from '@devpodio/debug/lib/common/debug-model';
+import { IJSONSchema, IJSONSchemaSnippet } from '@devpodio/core/lib/common/json-schema';
 import { PluginDebugAdapterSession } from './plugin-debug-adapter-session';
 import { startDebugAdapter } from './plugin-debug-adapter-starter';
 import { resolveDebugAdapterExecutable } from './plugin-debug-adapter-executable-resolver';
 import URI from 'vscode-uri';
-import { Path } from '@theia/core/lib/common/path';
+import { Path } from '@devpodio/core/lib/common/path';
 
 // tslint:disable:no-any
 

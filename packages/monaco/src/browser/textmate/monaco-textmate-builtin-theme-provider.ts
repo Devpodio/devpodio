@@ -14,7 +14,7 @@
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  ********************************************************************************/
 
-import { BuiltinThemeProvider } from '@theia/core/lib/browser/theming';
+import { BuiltinThemeProvider } from '@devpodio/core/lib/browser/theming';
 import { MonacoThemeRegistry } from './monaco-theme-registry';
 
 export class BuiltinTextmateThemeProvider {

@@ -19,12 +19,12 @@ import * as fs from 'fs-extra';
 import * as cp from 'child_process';
 import * as commandExists from 'command-exists';
 import { injectable, inject } from 'inversify';
-import URI from '@theia/core/lib/common/uri';
-import { isWindows, Path } from '@theia/core/lib/common';
-import { FileUri } from '@theia/core/lib/node';
+import URI from '@devpodio/core/lib/common/uri';
+import { isWindows, Path } from '@devpodio/core/lib/common';
+import { FileUri } from '@devpodio/core/lib/node';
 import { TypescriptVersion, TypescriptVersionService, TypescriptVersionOptions } from '../common/typescript-version-service';
 // tslint:disable-next-line:no-implicit-dependencies
-import { ApplicationPackage } from '@theia/application-package';
+import { ApplicationPackage } from '@devpodio/application-package';
 
 export namespace TypescriptVersionURI {
     const scheme = 'tsversion';

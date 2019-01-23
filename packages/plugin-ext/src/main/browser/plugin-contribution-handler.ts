@@ -16,14 +16,14 @@
 
 import { injectable, inject } from 'inversify';
 import { ITokenTypeMap, IEmbeddedLanguagesMap, StandardTokenType } from 'vscode-textmate';
-import { TextmateRegistry, getEncodedLanguageId, MonacoTextmateService } from '@theia/monaco/lib/browser/textmate';
+import { TextmateRegistry, getEncodedLanguageId, MonacoTextmateService } from '@devpodio/monaco/lib/browser/textmate';
 import { MenusContributionPointHandler } from './menus/menus-contribution-handler';
 import { ViewRegistry } from './view/view-registry';
 import { PluginContribution, IndentationRules, FoldingRules, ScopeMap } from '../../common';
-import { PreferenceSchemaProvider } from '@theia/core/lib/browser';
-import { PreferenceSchema } from '@theia/core/lib/browser/preferences';
+import { PreferenceSchemaProvider } from '@devpodio/core/lib/browser';
+import { PreferenceSchema } from '@devpodio/core/lib/browser/preferences';
 import { KeybindingsContributionPointHandler } from './keybindings/keybindings-contribution-handler';
-import { MonacoSnippetSuggestProvider } from '@theia/monaco/lib/browser/monaco-snippet-suggest-provider';
+import { MonacoSnippetSuggestProvider } from '@devpodio/monaco/lib/browser/monaco-snippet-suggest-provider';
 
 @injectable()
 export class PluginContributionHandler {

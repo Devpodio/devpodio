@@ -15,22 +15,22 @@
  ********************************************************************************/
 
 import * as paths from 'path';
-import * as theia from '@theia/plugin';
-import { Event, Emitter } from '@theia/core/lib/common/event';
-import { CancellationToken } from '@theia/core/lib/common/cancellation';
+import * as theia from '@devpodio/plugin';
+import { Event, Emitter } from '@devpodio/core/lib/common/event';
+import { CancellationToken } from '@devpodio/core/lib/common/cancellation';
 import {
     WorkspaceExt,
     WorkspaceFolderPickOptionsMain,
     WorkspaceMain,
     PLUGIN_RPC_CONTEXT as Ext
 } from '../api/plugin-api';
-import { Path } from '@theia/core/lib/common/path';
+import { Path } from '@devpodio/core/lib/common/path';
 import { RPCProtocol } from '../api/rpc-protocol';
 import { WorkspaceRootsChangeEvent, FileChangeEvent } from '../api/model';
 import { EditorsAndDocumentsExtImpl } from './editors-and-documents';
 import { InPluginFileSystemWatcherProxy } from './in-plugin-filesystem-watcher-proxy';
 import URI from 'vscode-uri';
-import { FileStat } from '@theia/filesystem/lib/common';
+import { FileStat } from '@devpodio/filesystem/lib/common';
 import { normalize } from '../common/paths';
 import { relative } from '../common/paths-util';
 

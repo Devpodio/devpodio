@@ -15,23 +15,23 @@
  ********************************************************************************/
 
 import { inject, injectable } from 'inversify';
-import URI from '@theia/core/lib/common/uri';
-import { DiffUris } from '@theia/core/lib/browser/diff-uris';
-import { SelectionService } from '@theia/core/lib/common/selection-service';
-import { Command, CommandContribution, CommandRegistry } from '@theia/core/lib/common/command';
-import { MenuContribution, MenuModelRegistry } from '@theia/core/lib/common/menu';
-import { CommonMenus } from '@theia/core/lib/browser/common-frontend-contribution';
-import { FileSystem, FileStat } from '@theia/filesystem/lib/common/filesystem';
-import { FileDialogService } from '@theia/filesystem/lib/browser';
-import { SingleTextInputDialog, ConfirmDialog } from '@theia/core/lib/browser/dialogs';
-import { OpenerService, OpenHandler, open, FrontendApplication } from '@theia/core/lib/browser';
-import { UriCommandHandler, UriAwareCommandHandler } from '@theia/core/lib/common/uri-command-handler';
+import URI from '@devpodio/core/lib/common/uri';
+import { DiffUris } from '@devpodio/core/lib/browser/diff-uris';
+import { SelectionService } from '@devpodio/core/lib/common/selection-service';
+import { Command, CommandContribution, CommandRegistry } from '@devpodio/core/lib/common/command';
+import { MenuContribution, MenuModelRegistry } from '@devpodio/core/lib/common/menu';
+import { CommonMenus } from '@devpodio/core/lib/browser/common-frontend-contribution';
+import { FileSystem, FileStat } from '@devpodio/filesystem/lib/common/filesystem';
+import { FileDialogService } from '@devpodio/filesystem/lib/browser';
+import { SingleTextInputDialog, ConfirmDialog } from '@devpodio/core/lib/browser/dialogs';
+import { OpenerService, OpenHandler, open, FrontendApplication } from '@devpodio/core/lib/browser';
+import { UriCommandHandler, UriAwareCommandHandler } from '@devpodio/core/lib/common/uri-command-handler';
 import { WorkspaceService } from './workspace-service';
-import { MessageService } from '@theia/core/lib/common/message-service';
+import { MessageService } from '@devpodio/core/lib/common/message-service';
 import { WorkspacePreferences } from './workspace-preferences';
 import { WorkspaceDeleteHandler } from './workspace-delete-handler';
 import { WorkspaceDuplicateHandler } from './workspace-duplicate-handler';
-import { FileSystemUtils } from '@theia/filesystem/lib/common';
+import { FileSystemUtils } from '@devpodio/filesystem/lib/common';
 
 const validFilename: (arg: string) => boolean = require('valid-filename');
 

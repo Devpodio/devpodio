@@ -21,9 +21,9 @@ import * as os from 'os';
 import * as jsoncparser from 'jsonc-parser';
 
 import { injectable, inject, postConstruct } from 'inversify';
-import { FileUri } from '@theia/core/lib/node';
-import { CliContribution } from '@theia/core/lib/node/cli';
-import { Deferred } from '@theia/core/lib/common/promise-util';
+import { FileUri } from '@devpodio/core/lib/node';
+import { CliContribution } from '@devpodio/core/lib/node/cli';
+import { Deferred } from '@devpodio/core/lib/common/promise-util';
 import { WorkspaceServer } from '../common';
 
 @injectable()
@@ -168,6 +168,6 @@ interface RecentWorkspacePathsData {
 
 namespace RecentWorkspacePathsData {
     export function is(data: Object | undefined): data is RecentWorkspacePathsData {
-        return !!data && typeof data === 'object' && ('recentRoots' in data) && Array.isArray(data['recentRoots']);
+        return !!data && typeof data === 'object' && ('recentRoots' in data);
     }
 }

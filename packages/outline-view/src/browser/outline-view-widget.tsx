@@ -24,10 +24,10 @@ import {
     ContextMenuRenderer,
     TreeModel,
     ExpandableTreeNode
-} from '@theia/core/lib/browser';
+} from '@devpodio/core/lib/browser';
 import { Message } from '@phosphor/messaging';
-import { Emitter } from '@theia/core';
-import { CompositeTreeNode } from '@theia/core/lib/browser';
+import { Emitter } from '@devpodio/core';
+import { CompositeTreeNode } from '@devpodio/core/lib/browser';
 import * as React from 'react';
 
 export interface OutlineSymbolInformationNode extends CompositeTreeNode, SelectableTreeNode, ExpandableTreeNode {

@@ -15,8 +15,8 @@
  ********************************************************************************/
 
 import { interfaces } from 'inversify';
-import { KeybindingContribution, KeybindingContext } from '@theia/core/lib/browser';
-import { CommandContribution, MenuContribution } from '@theia/core/lib/common';
+import { KeybindingContribution, KeybindingContext } from '@devpodio/core/lib/browser';
+import { CommandContribution, MenuContribution } from '@devpodio/core/lib/common';
 import { BlameContribution, BlameAnnotationsKeybindingContext } from './blame-contribution';
 import { BlameDecorator } from './blame-decorator';
 import { BlameManager } from './blame-manager';

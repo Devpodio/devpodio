@@ -15,7 +15,7 @@
  ********************************************************************************/
 
 import { injectable } from 'inversify';
-import { BaseLanguageServerContribution, IConnection } from '@theia/languages/lib/node';
+import { BaseLanguageServerContribution, IConnection } from '@devpodio/languages/lib/node';
 import { JSON_LANGUAGE_ID, JSON_LANGUAGE_NAME } from '../common';
 import * as path from 'path';
 

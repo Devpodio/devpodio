@@ -15,22 +15,47 @@
  ********************************************************************************/
 
 import * as paths from 'path';
+import * as fs from 'fs-extra';
 import { AbstractGenerator } from './abstract-generator';
 
 export class WebpackGenerator extends AbstractGenerator {
 
     async generate(): Promise<void> {
         await this.write(this.configPath, this.compileWebpackConfig());
+        await this.write(this.manifestPath, `${this.compileManifest()}`);
+        await this.write(this.swPath, `${this.compileServiceWorker()}`);
     }
 
     get configPath(): string {
         return this.pck.path('webpack.config.js');
     }
 
+    get manifestPath(): string {
+        return this.pck.path('lib/json/manifest.json');
+    }
+
+    get swPath(): string {
+        return this.pck.path('lib/sw.js');
+    }
+
+    protected getTemplate(templateName: string): string {
+        return paths.resolve(__dirname, '../../src/generator/templates', templateName + '.template');
+    }
+
     protected resolve(moduleName: string, path: string): string {
         return this.pck.resolveModulePath(moduleName, path).split(paths.sep).join('/');
     }
+    protected resolveLogo(): string {
+        return paths.resolve(__dirname, '../../src/generator/templates', 'pwa-logo');
+    }
 
+    protected compileManifest(): string {
+        return fs.readFileSync(this.getTemplate('manifest')).toString();
+    }
+
+    protected compileServiceWorker(): string {
+        return fs.readFileSync(this.getTemplate('serviceWorker')).toString();
+    }
     protected compileWebpackConfig(): string {
         return `// @ts-check
 const path = require('path');
@@ -38,23 +63,34 @@ const webpack = require('webpack');
 const yargs = require('yargs');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const CircularDependencyPlugin = require('circular-dependency-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const TerserWebpackPlugin = require('terser-webpack-plugin');
+const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const ManifestPlugin = require('webpack-manifest-plugin');
 
 const outputPath = path.resolve(__dirname, 'lib');
-const { mode }  = yargs.option('mode', {
+const { mode, env: { hashed } } = yargs.option('mode', {
     description: "Mode to use",
     choices: ["development", "production"],
     default: "production"
+}).option('env.hashed', {
+    description: "Append the content hash to the bundle's filename",
+    type: "boolean",
+    default: false
 }).argv;
 const development = mode === 'development';${this.ifMonaco(() => `
 
 const monacoEditorCorePath = development ? '${this.resolve('@typefox/monaco-editor-core', 'dev/vs')}' : '${this.resolve('@typefox/monaco-editor-core', 'min/vs')}';
 const monacoCssLanguagePath = '${this.resolve('monaco-css', 'release/min')}';
-const monacoHtmlLanguagePath = '${this.resolve('monaco-html', 'release/min')}';`)}
+const monacoHtmlLanguagePath = '${this.resolve('monaco-html', 'release/min')}';
+const iconPath = '${this.resolveLogo()}'
+`)}
 
 module.exports = {
     entry: path.resolve(__dirname, 'src-gen/frontend/index.js'),
     output: {
-        filename: 'bundle.js',
+        filename: hashed ? '[contenthash].js' : 'bundle.js',
         path: outputPath
     },
     target: '${this.ifBrowser('web', 'electron-renderer')}',
@@ -66,6 +102,34 @@ module.exports = {
         child_process: 'empty',
         net: 'empty',
         crypto: 'empty'`)}
+    },
+    optimization: {
+        runtimeChunk: 'single',
+        splitChunks: {
+            cacheGroups: {
+                commons: {
+                    test: /[\\/]node_modules[\\/]/,
+                    name: 'vendors',
+                    chunks: 'all',
+                    reuseExistingChunk: true
+                },
+                styles: {
+                    name: 'styles',
+                    test: /\\.css$/,
+                    chunks: 'all',
+                    enforce: true
+                }
+            }
+        },
+        minimizer: [
+            new TerserWebpackPlugin({
+                parallel: true,
+                cache: true,
+                sourceMap: false,
+                extractComments: 'all'
+            }),
+            new OptimizeCSSAssetsPlugin({})
+        ]
     },
     module: {
         rules: [
@@ -79,19 +143,19 @@ module.exports = {
             {
                 test: /\\.css$/,
                 exclude: /\\.useable\\.css$/,
-                loader: 'style-loader!css-loader'
+                loader: [
+                    MiniCssExtractPlugin.loader,
+                    "css-loader"
+                ]
             },
             {
                 test: /\\.useable\\.css$/,
                 use: [
-                  {
-                    loader: 'style-loader/useable',
-                    options: {
-                      singleton: true,
-                      attrs: { id: 'theia-theme' },
-                    }
-                  },
-                  'css-loader'
+                    {
+                        loader: 'style-loader/useable',
+                        options: { singleton: true }
+                    },
+                    { loader: 'css-loader' },
                 ]
             },
             {
@@ -121,7 +185,7 @@ module.exports = {
                 loader: "url-loader?limit=10000&mimetype=application/font-woff"
             },
             {
-                test: /node_modules[\\\\|\/](vscode-languageserver-types|vscode-uri|jsonc-parser)/,
+                test: /node_modules[\\\\/](vscode-languageserver-types|vscode-uri|jsonc-parser)/,
                 use: { loader: 'umd-compat-loader' }
             },
             {
@@ -144,6 +208,19 @@ module.exports = {
     },
     devtool: 'source-map',
     plugins: [
+        new ManifestPlugin({
+            fileName: 'pwa.manifest.json'
+        }),
+        new MiniCssExtractPlugin({
+            filename: "[contenthash].css",
+        }),
+        new webpack.optimize.ModuleConcatenationPlugin(),
+        new HtmlWebpackPlugin({
+            filename: 'index.html',
+            template: 'src-gen/frontend/index.html',
+            inject: 'head'
+        }),
+        new webpack.HashedModuleIdsPlugin(),
         new CopyWebpackPlugin([${this.ifMonaco(() => `
             {
                 from: monacoEditorCorePath,
@@ -156,6 +233,10 @@ module.exports = {
             {
                 from: monacoHtmlLanguagePath,
                 to: 'vs/language/html'
+            },
+            {
+                from: iconPath,
+                to: 'img'
             }`)}
         ]),
         new CircularDependencyPlugin({

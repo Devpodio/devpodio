@@ -15,19 +15,19 @@
  ********************************************************************************/
 
 import { inject, injectable, postConstruct } from 'inversify';
-import URI from '@theia/core/lib/common/uri';
-import { ILogger } from '@theia/core/lib/common/logger';
-import { Event, Emitter } from '@theia/core/lib/common/event';
-import { Tree } from '@theia/core/lib/browser/tree/tree';
-import { DepthFirstTreeIterator } from '@theia/core/lib/browser/tree/tree-iterator';
-import { PreferenceChangeEvent } from '@theia/core/lib/browser/preferences/preference-proxy';
-import { TreeDecorator, TreeDecoration } from '@theia/core/lib/browser/tree/tree-decorator';
+import URI from '@devpodio/core/lib/common/uri';
+import { ILogger } from '@devpodio/core/lib/common/logger';
+import { Event, Emitter } from '@devpodio/core/lib/common/event';
+import { Tree } from '@devpodio/core/lib/browser/tree/tree';
+import { DepthFirstTreeIterator } from '@devpodio/core/lib/browser/tree/tree-iterator';
+import { PreferenceChangeEvent } from '@devpodio/core/lib/browser/preferences/preference-proxy';
+import { TreeDecorator, TreeDecoration } from '@devpodio/core/lib/browser/tree/tree-decorator';
 import { Git } from '../common/git';
 import { WorkingDirectoryStatus } from '../common/git-model';
 import { GitFileChange, GitFileStatus } from '../common/git-model';
 import { GitPreferences, GitConfiguration } from './git-preferences';
 import { GitRepositoryTracker } from './git-repository-tracker';
-import { FileStatNode } from '@theia/filesystem/lib/browser';
+import { FileStatNode } from '@devpodio/filesystem/lib/browser';
 
 @injectable()
 export class GitDecorator implements TreeDecorator {

@@ -16,18 +16,18 @@
 
 import * as path from 'path';
 import { injectable, inject, postConstruct } from 'inversify';
-import URI from '@theia/core/lib/common/uri';
-import { MessageService, Command, Emitter, Event, UriSelection } from '@theia/core/lib/common';
-import { LabelProvider, isNative, AbstractDialog } from '@theia/core/lib/browser';
-import { WindowService } from '@theia/core/lib/browser/window/window-service';
-import { WorkspaceService } from '@theia/workspace/lib/browser';
-import { FileSystem } from '@theia/filesystem/lib/common';
-import { OpenFileDialogFactory, DirNode } from '@theia/filesystem/lib/browser';
+import URI from '@devpodio/core/lib/common/uri';
+import { MessageService, Command, Emitter, Event, UriSelection } from '@devpodio/core/lib/common';
+import { LabelProvider, isNative, AbstractDialog } from '@devpodio/core/lib/browser';
+import { WindowService } from '@devpodio/core/lib/browser/window/window-service';
+import { WorkspaceService } from '@devpodio/workspace/lib/browser';
+import { FileSystem } from '@devpodio/filesystem/lib/common';
+import { OpenFileDialogFactory, DirNode } from '@devpodio/filesystem/lib/browser';
 import { HostedPluginServer } from '../../common/plugin-protocol';
 import { DebugConfiguration as HostedDebugConfig } from '../../common';
-import { DebugSessionManager } from '@theia/debug/lib/browser/debug-session-manager';
+import { DebugSessionManager } from '@devpodio/debug/lib/browser/debug-session-manager';
 import { HostedPluginPreferences } from './hosted-plugin-preferences';
-import { FileUri } from '@theia/core/lib/node/file-uri';
+import { FileUri } from '@devpodio/core/lib/node/file-uri';
 
 /**
  * Commands to control Hosted plugin instances.

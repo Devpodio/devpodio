@@ -15,9 +15,9 @@
  ********************************************************************************/
 
 import { Container, interfaces } from 'inversify';
-import { Tree, TreeModel, TreeProps, defaultTreeProps, TreeDecoratorService } from '@theia/core/lib/browser';
-import { createFileTreeContainer, FileTree, FileTreeModel, FileTreeWidget } from '@theia/filesystem/lib/browser';
-import { bindContributionProvider } from '@theia/core/lib/common/contribution-provider';
+import { Tree, TreeModel, TreeProps, defaultTreeProps, TreeDecoratorService } from '@devpodio/core/lib/browser';
+import { createFileTreeContainer, FileTree, FileTreeModel, FileTreeWidget } from '@devpodio/filesystem/lib/browser';
+import { bindContributionProvider } from '@devpodio/core/lib/common/contribution-provider';
 import { FileNavigatorTree } from './navigator-tree';
 import { FileNavigatorModel } from './navigator-model';
 import { FileNavigatorWidget } from './navigator-widget';

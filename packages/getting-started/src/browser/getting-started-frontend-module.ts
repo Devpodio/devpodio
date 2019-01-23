@@ -17,7 +17,7 @@
 import { GettingStartedContribution } from './getting-started-contribution';
 import { ContainerModule } from 'inversify';
 import { GettingStartedWidget } from './getting-started-widget';
-import { WidgetFactory, FrontendApplicationContribution, bindViewContribution } from '@theia/core/lib/browser';
+import { WidgetFactory, FrontendApplicationContribution, bindViewContribution } from '@devpodio/core/lib/browser';
 
 import '../../src/browser/style/index.css';
 

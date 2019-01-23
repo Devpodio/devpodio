@@ -21,7 +21,7 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 import './theia-proposed';
-declare module '@theia/plugin' {
+declare module '@devpodio/plugin' {
 
     /**
      * The version of the Theia API.

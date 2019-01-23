@@ -17,9 +17,9 @@
 // tslint:disable:no-any
 
 import { injectable, inject } from 'inversify';
-import { MaybePromise, MessageService, CommandRegistry } from '@theia/core';
-import { Disposable, DisposableCollection } from '@theia/core/lib/common';
-import { FrontendApplication, WebSocketConnectionProvider } from '@theia/core/lib/browser';
+import { MaybePromise, MessageService, CommandRegistry } from '@devpodio/core';
+import { Disposable, DisposableCollection } from '@devpodio/core/lib/common';
+import { FrontendApplication, WebSocketConnectionProvider } from '@devpodio/core/lib/browser';
 import {
     LanguageContribution, ILanguageClient, LanguageClientOptions,
     DocumentSelector, TextDocument, FileSystemWatcher,
@@ -27,9 +27,9 @@ import {
 } from './language-client-services';
 import { MessageConnection, ResponseError } from 'vscode-jsonrpc';
 import { LanguageClientFactory } from './language-client-factory';
-import { WorkspaceService } from '@theia/workspace/lib/browser';
+import { WorkspaceService } from '@devpodio/workspace/lib/browser';
 import { InitializeParams } from 'monaco-languageclient';
-import { Deferred } from '@theia/core/lib/common/promise-util';
+import { Deferred } from '@devpodio/core/lib/common/promise-util';
 
 export const LanguageClientContribution = Symbol('LanguageClientContribution');
 export interface LanguageClientContribution extends LanguageContribution {

@@ -14,7 +14,7 @@
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  ********************************************************************************/
 import { injectable } from 'inversify';
-import { Emitter } from '@theia/core/lib/common/event';
+import { Emitter } from '@devpodio/core/lib/common/event';
 import { RPCProtocol, RPCProtocolImpl } from '../../api/rpc-protocol';
 
 @injectable()

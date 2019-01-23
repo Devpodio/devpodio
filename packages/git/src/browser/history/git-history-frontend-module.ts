@@ -16,7 +16,7 @@
 
 import { GitHistoryContribution, GIT_HISTORY_ID } from './git-history-contribution';
 import { interfaces, Container } from 'inversify';
-import { WidgetFactory, OpenHandler, bindViewContribution } from '@theia/core/lib/browser';
+import { WidgetFactory, OpenHandler, bindViewContribution } from '@devpodio/core/lib/browser';
 import { GitHistoryWidget } from './git-history-widget';
 import { GIT_COMMIT_DETAIL, GitCommitDetailWidget, GitCommitDetails, GitCommitDetailWidgetOptions } from './git-commit-detail-widget';
 import { GitAvatarService } from './git-avatar-service';

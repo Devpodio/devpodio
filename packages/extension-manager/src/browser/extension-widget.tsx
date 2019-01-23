@@ -16,11 +16,11 @@
 
 import { injectable, inject } from 'inversify';
 import { Message } from '@phosphor/messaging';
-import { DisposableCollection, Disposable } from '@theia/core';
-import { OpenerService, open, DISABLED_CLASS } from '@theia/core/lib/browser';
+import { DisposableCollection, Disposable } from '@devpodio/core';
+import { OpenerService, open, DISABLED_CLASS } from '@devpodio/core/lib/browser';
 import { Extension, ExtensionManager } from '../common';
 import { ExtensionUri } from './extension-uri';
-import { ReactWidget } from '@theia/core/lib/browser/widgets/react-widget';
+import { ReactWidget } from '@devpodio/core/lib/browser/widgets/react-widget';
 import * as React from 'react';
 
 @injectable()

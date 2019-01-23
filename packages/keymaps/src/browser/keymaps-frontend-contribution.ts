@@ -21,11 +21,11 @@ import {
     CommandRegistry,
     MenuContribution,
     MenuModelRegistry
-} from '@theia/core/lib/common';
-import { CommonMenus } from '@theia/core/lib/browser/common-frontend-contribution';
+} from '@devpodio/core/lib/common';
+import { CommonMenus } from '@devpodio/core/lib/browser/common-frontend-contribution';
 import { KeymapsService } from './keymaps-service';
-import { KeybindingRegistry } from '@theia/core/lib/browser/keybinding';
-import { AbstractViewContribution } from '@theia/core/lib/browser';
+import { KeybindingRegistry } from '@devpodio/core/lib/browser/keybinding';
+import { AbstractViewContribution } from '@devpodio/core/lib/browser';
 import { KeybindingWidget } from './keybindings-widget';
 export namespace KeymapsCommands {
     export const OPEN_KEYMAPS: Command = {

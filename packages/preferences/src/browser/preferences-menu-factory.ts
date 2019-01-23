@@ -17,7 +17,7 @@
 import { injectable } from 'inversify';
 import { Menu } from '@phosphor/widgets';
 import { CommandRegistry } from '@phosphor/commands';
-import { PreferenceProperty } from '@theia/core/lib/browser';
+import { PreferenceProperty } from '@devpodio/core/lib/browser';
 
 @injectable()
 export class PreferencesMenuFactory {
@@ -29,13 +29,15 @@ export class PreferencesMenuFactory {
         if (property) {
             const enumConst = property.enum;
             if (enumConst) {
-                enumConst.forEach(enumValue => {
+                enumConst
+                .map(this.escapeInvisibleChars)
+                .forEach(enumValue => {
                     const commandId = id + '-' + enumValue;
                     if (!commands.hasCommand(commandId)) {
                         commands.addCommand(commandId, {
                             label: enumValue,
-                            iconClass: savedPreference === enumValue || !savedPreference && property.default === enumValue ? 'fa fa-check' : '',
-                            execute: () => execute(id, enumValue)
+                            iconClass: this.escapeInvisibleChars(savedPreference) === enumValue || !savedPreference && property.default === enumValue ? 'fa fa-check' : '',
+                            execute: () => execute(id, this.unescapeInvisibleChars(enumValue))
                         });
                         menu.addItem({
                             type: 'command',
@@ -78,5 +80,13 @@ export class PreferencesMenuFactory {
             }
         }
         return menu;
+    }
+    // tslint:disable-next-line:no-any
+    escapeInvisibleChars(prefValue: any): any {
+        return prefValue && typeof prefValue === 'string' ? prefValue.replace(/\n/g, '\\n').replace(/\r/g, '\\r') : prefValue;
+    }
+    // tslint:disable-next-line:no-any
+    unescapeInvisibleChars(prefValue: any): any {
+        return prefValue && typeof prefValue === 'string' ? prefValue.replace(/\\n/g, '\n').replace(/\\r/g, '\r') : prefValue;
     }
 }

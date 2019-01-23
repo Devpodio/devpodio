@@ -14,11 +14,11 @@
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  ********************************************************************************/
 
-import { DefaultUriLabelProviderContribution, FOLDER_ICON, FILE_ICON } from '@theia/core/lib/browser/label-provider';
-import URI from '@theia/core/lib/common/uri';
+import { DefaultUriLabelProviderContribution, FOLDER_ICON, FILE_ICON } from '@devpodio/core/lib/browser/label-provider';
+import URI from '@devpodio/core/lib/common/uri';
 import { injectable, inject, postConstruct } from 'inversify';
-import { FileSystem, FileStat } from '@theia/filesystem/lib/common';
-import { MaybePromise } from '@theia/core';
+import { FileSystem, FileStat } from '@devpodio/filesystem/lib/common';
+import { MaybePromise } from '@devpodio/core';
 import { WorkspaceVariableContribution } from './workspace-variable-contribution';
 
 @injectable()

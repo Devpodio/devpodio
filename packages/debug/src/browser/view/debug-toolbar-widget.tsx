@@ -16,8 +16,8 @@
 
 import * as React from 'react';
 import { inject, postConstruct, injectable } from 'inversify';
-import { Disposable } from '@theia/core';
-import { ReactWidget } from '@theia/core/lib/browser/widgets';
+import { Disposable } from '@devpodio/core';
+import { ReactWidget } from '@devpodio/core/lib/browser/widgets';
 import { DebugViewModel } from './debug-view-model';
 import { DebugState } from '../debug-session';
 import { DebugAction } from './debug-action';

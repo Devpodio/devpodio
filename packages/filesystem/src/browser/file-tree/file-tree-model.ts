@@ -15,13 +15,13 @@
  ********************************************************************************/
 
 import { injectable, inject, postConstruct } from 'inversify';
-import URI from '@theia/core/lib/common/uri';
-import { CompositeTreeNode, TreeModelImpl, TreeNode, ConfirmDialog } from '@theia/core/lib/browser';
+import URI from '@devpodio/core/lib/common/uri';
+import { CompositeTreeNode, TreeModelImpl, TreeNode, ConfirmDialog } from '@devpodio/core/lib/browser';
 import { FileSystem } from '../../common';
 import { FileSystemWatcher, FileChangeType, FileChange, FileMoveEvent } from '../filesystem-watcher';
 import { FileStatNode, DirNode, FileNode } from './file-tree';
 import { LocationService } from '../location';
-import { LabelProvider } from '@theia/core/lib/browser/label-provider';
+import { LabelProvider } from '@devpodio/core/lib/browser/label-provider';
 import * as base64 from 'base64-js';
 
 @injectable()

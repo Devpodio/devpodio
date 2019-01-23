@@ -14,10 +14,10 @@
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  ********************************************************************************/
 
-import { DebugSessionContributionRegistry, DebugSessionContribution } from '@theia/debug/lib/browser/debug-session-contribution';
+import { DebugSessionContributionRegistry, DebugSessionContribution } from '@devpodio/debug/lib/browser/debug-session-contribution';
 import { injectable, inject, named, postConstruct } from 'inversify';
-import { ContributionProvider } from '@theia/core/lib/common/contribution-provider';
-import { Disposable } from '@theia/core/lib/common/disposable';
+import { ContributionProvider } from '@devpodio/core/lib/common/contribution-provider';
+import { Disposable } from '@devpodio/core/lib/common/disposable';
 
 /**
  * Debug session contribution registrator.

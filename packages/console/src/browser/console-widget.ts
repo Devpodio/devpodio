@@ -16,11 +16,11 @@
 
 import { ElementExt } from '@phosphor/domutils';
 import { injectable, inject, postConstruct, interfaces, Container } from 'inversify';
-import { TreeSourceNode } from '@theia/core/lib/browser/source-tree';
-import { BaseWidget, PanelLayout, Widget, Message, MessageLoop, StatefulWidget, CompositeTreeNode } from '@theia/core/lib/browser';
-import { MonacoEditor } from '@theia/monaco/lib/browser/monaco-editor';
-import URI from '@theia/core/lib/common/uri';
-import { MonacoEditorProvider } from '@theia/monaco/lib/browser/monaco-editor-provider';
+import { TreeSourceNode } from '@devpodio/core/lib/browser/source-tree';
+import { BaseWidget, PanelLayout, Widget, Message, MessageLoop, StatefulWidget, CompositeTreeNode } from '@devpodio/core/lib/browser';
+import { MonacoEditor } from '@devpodio/monaco/lib/browser/monaco-editor';
+import URI from '@devpodio/core/lib/common/uri';
+import { MonacoEditorProvider } from '@devpodio/monaco/lib/browser/monaco-editor-provider';
 import { ProtocolToMonacoConverter, MonacoToProtocolConverter } from 'monaco-languageclient/lib';
 import { ConsoleHistory } from './console-history';
 import { ConsoleContentWidget } from './console-content-widget';

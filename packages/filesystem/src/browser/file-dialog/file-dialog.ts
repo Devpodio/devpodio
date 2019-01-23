@@ -16,15 +16,15 @@
 
 import { injectable, inject } from 'inversify';
 import { Message } from '@phosphor/messaging';
-import { Disposable, MaybeArray } from '@theia/core/lib/common';
-import { Key } from '@theia/core/lib/browser';
-import { AbstractDialog, DialogProps, setEnabled, createIconButton, Widget } from '@theia/core/lib/browser';
+import { Disposable, MaybeArray } from '@devpodio/core/lib/common';
+import { Key } from '@devpodio/core/lib/browser';
+import { AbstractDialog, DialogProps, setEnabled, createIconButton, Widget } from '@devpodio/core/lib/browser';
 import { FileStatNode } from '../file-tree';
 import { LocationListRenderer } from '../location';
 import { FileDialogModel } from './file-dialog-model';
 import { FileDialogWidget } from './file-dialog-widget';
 import { FileDialogTreeFiltersRenderer, FileDialogTreeFilters } from './file-dialog-tree-filters-renderer';
-import URI from '@theia/core/lib/common/uri';
+import URI from '@devpodio/core/lib/common/uri';
 import { Panel } from '@phosphor/widgets';
 
 export const OpenFileDialogFactory = Symbol('OpenFileDialogFactory');

@@ -16,7 +16,7 @@
  ********************************************************************************/
 
 import URI from 'vscode-uri/lib/umd';
-import * as theia from '@theia/plugin';
+import * as theia from '@devpodio/plugin';
 import { DocumentsExtImpl } from '../documents';
 import { Hover } from '../../api/model';
 import * as Converter from '../type-converters';

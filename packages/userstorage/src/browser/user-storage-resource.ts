@@ -15,8 +15,8 @@
  ********************************************************************************/
 
 import { injectable, inject } from 'inversify';
-import URI from '@theia/core/lib/common/uri';
-import { Resource, ResourceResolver, Emitter, Event, MaybePromise, DisposableCollection } from '@theia/core/lib/common';
+import URI from '@devpodio/core/lib/common/uri';
+import { Resource, ResourceResolver, Emitter, Event, MaybePromise, DisposableCollection } from '@devpodio/core/lib/common';
 import { UserStorageService } from './user-storage-service';
 import { UserStorageUri } from './user-storage-uri';
 

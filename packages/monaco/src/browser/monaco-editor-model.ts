@@ -16,8 +16,8 @@
 
 import { TextDocumentSaveReason, Position, TextDocumentContentChangeEvent } from 'vscode-languageserver-types';
 import { MonacoToProtocolConverter, ProtocolToMonacoConverter } from 'monaco-languageclient';
-import { TextEditorDocument } from '@theia/editor/lib/browser';
-import { DisposableCollection, Disposable, Emitter, Event, Resource, CancellationTokenSource, CancellationToken, ResourceError } from '@theia/core';
+import { TextEditorDocument } from '@devpodio/editor/lib/browser';
+import { DisposableCollection, Disposable, Emitter, Event, Resource, CancellationTokenSource, CancellationToken, ResourceError } from '@devpodio/core';
 import ITextEditorModel = monaco.editor.ITextEditorModel;
 
 export {
@@ -308,7 +308,7 @@ export class MonacoEditorModel implements ITextEditorModel, TextEditorDocument {
     }
 
     protected async doSave(reason: TextDocumentSaveReason, token: CancellationToken): Promise<void> {
-        if (token.isCancellationRequested || !this.resource.saveContents || !this.dirty) {
+        if (token.isCancellationRequested || !this.resource.saveContents) {
             return;
         }
 

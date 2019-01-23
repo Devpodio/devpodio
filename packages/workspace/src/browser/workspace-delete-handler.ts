@@ -15,10 +15,10 @@
  ********************************************************************************/
 
 import { injectable, inject } from 'inversify';
-import URI from '@theia/core/lib/common/uri';
-import { ConfirmDialog, ApplicationShell, SaveableWidget, NavigatableWidget } from '@theia/core/lib/browser';
-import { FileSystem } from '@theia/filesystem/lib/common';
-import { UriCommandHandler } from '@theia/core/lib/common/uri-command-handler';
+import URI from '@devpodio/core/lib/common/uri';
+import { ConfirmDialog, ApplicationShell, SaveableWidget, NavigatableWidget } from '@devpodio/core/lib/browser';
+import { FileSystem } from '@devpodio/filesystem/lib/common';
+import { UriCommandHandler } from '@devpodio/core/lib/common/uri-command-handler';
 import { WorkspaceService } from './workspace-service';
 import { WorkspaceUtils } from './workspace-utils';
 

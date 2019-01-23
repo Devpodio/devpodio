@@ -15,9 +15,9 @@
  ********************************************************************************/
 
 import { ContainerModule } from 'inversify';
-import { CommandContribution, MenuContribution } from '@theia/core/lib/common';
-import { OpenHandler, WidgetFactory, FrontendApplicationContribution, KeybindingContext, KeybindingContribution } from '@theia/core/lib/browser';
-import { VariableContribution } from '@theia/variable-resolver/lib/browser';
+import { CommandContribution, MenuContribution } from '@devpodio/core/lib/common';
+import { OpenHandler, WidgetFactory, FrontendApplicationContribution, KeybindingContext, KeybindingContribution } from '@devpodio/core/lib/browser';
+import { VariableContribution } from '@devpodio/variable-resolver/lib/browser';
 import { EditorManager } from './editor-manager';
 import { EditorContribution } from './editor-contribution';
 import { EditorMenuContribution } from './editor-menu';

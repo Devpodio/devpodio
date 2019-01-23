@@ -14,9 +14,9 @@
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  ********************************************************************************/
 
-import { LabelProvider } from '@theia/core/lib/browser';
-import { EditorManager, EditorOpenerOptions, EditorWidget } from '@theia/editor/lib/browser';
-import URI from '@theia/core/lib/common/uri';
+import { LabelProvider } from '@devpodio/core/lib/browser';
+import { EditorManager, EditorOpenerOptions, EditorWidget } from '@devpodio/editor/lib/browser';
+import URI from '@devpodio/core/lib/common/uri';
 import { DebugProtocol } from 'vscode-debugprotocol/lib/debugProtocol';
 import { DebugSession } from '../debug-session';
 

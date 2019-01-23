@@ -15,8 +15,8 @@
  ********************************************************************************/
 
 import { injectable, inject } from 'inversify';
-import { FrontendApplicationContribution } from '@theia/core/lib/browser';
-import { ThemeService } from '@theia/core/lib/browser/theming';
+import { FrontendApplicationContribution } from '@devpodio/core/lib/browser';
+import { ThemeService } from '@devpodio/core/lib/browser/theming';
 import { MonacoSnippetSuggestProvider } from './monaco-snippet-suggest-provider';
 
 @injectable()

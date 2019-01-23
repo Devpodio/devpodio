@@ -14,7 +14,7 @@
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  ********************************************************************************/
 
-import { ThemeService } from '@theia/core/lib/browser/theming';
+import { ThemeService } from '@devpodio/core/lib/browser/theming';
 
 export const ThemeRulesServiceSymbol = Symbol('ThemeRulesService');
 

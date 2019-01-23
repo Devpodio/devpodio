@@ -15,11 +15,11 @@
  ********************************************************************************/
 
 import { injectable } from 'inversify';
-import { AbstractDefaultCallHierarchyService, ExtendedDocumentSymbol } from '@theia/callhierarchy/lib/browser/callhierarchy-service-impl';
-import { CallHierarchyContext } from '@theia/callhierarchy/lib/browser/callhierarchy-context';
+import { AbstractDefaultCallHierarchyService, ExtendedDocumentSymbol } from '@devpodio/callhierarchy/lib/browser/callhierarchy-service-impl';
+import { CallHierarchyContext } from '@devpodio/callhierarchy/lib/browser/callhierarchy-context';
 import { TYPESCRIPT_LANGUAGE_ID } from '../common';
 import { SymbolInformation, Range, Location, DocumentSymbol } from 'vscode-languageserver-types';
-import * as utils from '@theia/callhierarchy/lib/browser/utils';
+import * as utils from '@devpodio/callhierarchy/lib/browser/utils';
 
 @injectable()
 export class TypeScriptCallHierarchyService extends AbstractDefaultCallHierarchyService {

@@ -16,8 +16,8 @@
 
 import { MonacoToProtocolConverter, ProtocolToMonacoConverter, TextEdit } from 'monaco-languageclient';
 import { ElementExt } from '@phosphor/domutils';
-import URI from '@theia/core/lib/common/uri';
-import { DisposableCollection, Disposable, Emitter, Event } from '@theia/core/lib/common';
+import URI from '@devpodio/core/lib/common/uri';
+import { DisposableCollection, Disposable, Emitter, Event } from '@devpodio/core/lib/common';
 import {
     Dimension,
     EditorManager,
@@ -33,7 +33,7 @@ import {
     ReplaceTextParams,
     EditorDecoration,
     EditorMouseEvent
-} from '@theia/editor/lib/browser';
+} from '@devpodio/editor/lib/browser';
 import { MonacoEditorModel } from './monaco-editor-model';
 
 import IEditorConstructionOptions = monaco.editor.IEditorConstructionOptions;

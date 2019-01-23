@@ -15,9 +15,9 @@
  ********************************************************************************/
 
 import { injectable } from 'inversify';
-import { MaybePromise } from '@theia/core/lib/common/types';
-import { MessageType } from '@theia/core/lib/common/message-service-protocol';
-import { TreeSource, TreeElement, CompositeTreeElement } from '@theia/core/lib/browser/source-tree';
+import { MaybePromise } from '@devpodio/core/lib/common/types';
+import { MessageType } from '@devpodio/core/lib/common/message-service-protocol';
+import { TreeSource, TreeElement, CompositeTreeElement } from '@devpodio/core/lib/browser/source-tree';
 
 export interface ConsoleItem extends TreeElement {
     readonly severity?: MessageType

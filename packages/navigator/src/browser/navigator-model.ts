@@ -15,11 +15,11 @@
  ********************************************************************************/
 
 import { injectable, inject, postConstruct } from 'inversify';
-import URI from '@theia/core/lib/common/uri';
-import { FileNode, FileTreeModel } from '@theia/filesystem/lib/browser';
-import { OpenerService, open, TreeNode, ExpandableTreeNode } from '@theia/core/lib/browser';
+import URI from '@devpodio/core/lib/common/uri';
+import { FileNode, FileTreeModel } from '@devpodio/filesystem/lib/browser';
+import { OpenerService, open, TreeNode, ExpandableTreeNode } from '@devpodio/core/lib/browser';
 import { FileNavigatorTree, WorkspaceRootNode, WorkspaceNode } from './navigator-tree';
-import { WorkspaceService } from '@theia/workspace/lib/browser';
+import { WorkspaceService } from '@devpodio/workspace/lib/browser';
 
 @injectable()
 export class FileNavigatorModel extends FileTreeModel {

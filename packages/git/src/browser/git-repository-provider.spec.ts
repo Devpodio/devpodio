@@ -14,19 +14,19 @@
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  ********************************************************************************/
 
-import { enableJSDOM } from '@theia/core/lib/browser/test/jsdom';
+import { enableJSDOM } from '@devpodio/core/lib/browser/test/jsdom';
 let disableJSDOM = enableJSDOM();
 
 import { Container } from 'inversify';
 import { Git, Repository } from '../common';
 import { DugiteGit } from '../node/dugite-git';
-import { WorkspaceService } from '@theia/workspace/lib/browser/workspace-service';
-import { FileSystem, FileStat } from '@theia/filesystem/lib/common';
-import { FileSystemWatcher } from '@theia/filesystem/lib/browser/filesystem-watcher';
-import { FileSystemNode } from '@theia/filesystem/lib/node/node-filesystem';
-import { FileChange } from '@theia/filesystem/lib/browser';
-import { Emitter } from '@theia/core';
-import { LocalStorageService } from '@theia/core/lib/browser';
+import { WorkspaceService } from '@devpodio/workspace/lib/browser/workspace-service';
+import { FileSystem, FileStat } from '@devpodio/filesystem/lib/common';
+import { FileSystemWatcher } from '@devpodio/filesystem/lib/browser/filesystem-watcher';
+import { FileSystemNode } from '@devpodio/filesystem/lib/node/node-filesystem';
+import { FileChange } from '@devpodio/filesystem/lib/browser';
+import { Emitter } from '@devpodio/core';
+import { LocalStorageService } from '@devpodio/core/lib/browser';
 import { GitRepositoryProvider } from './git-repository-provider';
 import * as sinon from 'sinon';
 import * as chai from 'chai';

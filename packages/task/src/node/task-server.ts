@@ -15,7 +15,7 @@
  ********************************************************************************/
 
 import { inject, injectable, named } from 'inversify';
-import { ILogger } from '@theia/core/lib/common/';
+import { ILogger } from '@devpodio/core/lib/common/';
 import { TaskClient, TaskExitedEvent, TaskInfo, TaskServer, TaskConfiguration } from '../common/task-protocol';
 import { TaskManager } from './task-manager';
 import { TaskRunnerRegistry } from './task-runner';

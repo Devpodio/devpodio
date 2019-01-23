@@ -18,13 +18,13 @@ import * as fs from 'fs-extra';
 import { lookup } from 'mime-types';
 import { injectable, inject, named } from 'inversify';
 import { Application, Request, Response } from 'express';
-import URI from '@theia/core/lib/common/uri';
-import { FileUri } from '@theia/core/lib/node/file-uri';
-import { ILogger } from '@theia/core/lib/common/logger';
-import { MaybePromise } from '@theia/core/lib/common/types';
-import { FileSystem, FileStat } from '@theia/filesystem/lib/common';
-import { ContributionProvider } from '@theia/core/lib/common/contribution-provider';
-import { BackendApplicationContribution } from '@theia/core/lib/node/backend-application';
+import URI from '@devpodio/core/lib/common/uri';
+import { FileUri } from '@devpodio/core/lib/node/file-uri';
+import { ILogger } from '@devpodio/core/lib/common/logger';
+import { MaybePromise } from '@devpodio/core/lib/common/types';
+import { FileSystem, FileStat } from '@devpodio/filesystem/lib/common';
+import { ContributionProvider } from '@devpodio/core/lib/common/contribution-provider';
+import { BackendApplicationContribution } from '@devpodio/core/lib/node/backend-application';
 import { MiniBrowserService } from '../common/mini-browser-service';
 
 /**

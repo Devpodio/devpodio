@@ -18,7 +18,7 @@ import { injectable } from 'inversify';
 import { MarkerManager } from '../marker-manager';
 import { PROBLEM_KIND } from '../../common/problem-marker';
 import { Marker } from '../../common/marker';
-import URI from '@theia/core/lib/common/uri';
+import URI from '@devpodio/core/lib/common/uri';
 import { Diagnostic } from 'vscode-languageserver-types';
 
 export interface ProblemStat {

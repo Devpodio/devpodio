@@ -14,7 +14,7 @@
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  ********************************************************************************/
 
-import { OpenHandler, WidgetFactory } from '@theia/core/lib/browser';
+import { OpenHandler, WidgetFactory } from '@devpodio/core/lib/browser';
 import {ContainerModule} from 'inversify';
 import { EditorPreviewManager } from './editor-preview-manager';
 import { EditorPreviewWidgetFactory } from './editor-preview-factory';

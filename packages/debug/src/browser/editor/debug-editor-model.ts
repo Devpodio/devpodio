@@ -16,9 +16,9 @@
 
 import debounce = require('p-debounce');
 import { injectable, inject, postConstruct, interfaces, Container } from 'inversify';
-import URI from '@theia/core/lib/common/uri';
-import { Disposable, DisposableCollection, MenuPath, isOSX } from '@theia/core';
-import { ContextMenuRenderer } from '@theia/core/lib/browser';
+import URI from '@devpodio/core/lib/common/uri';
+import { Disposable, DisposableCollection, MenuPath, isOSX } from '@devpodio/core';
+import { ContextMenuRenderer } from '@devpodio/core/lib/browser';
 import { BreakpointManager } from '../breakpoint/breakpoint-manager';
 import { DebugBreakpoint } from '../model/debug-breakpoint';
 import { DebugSessionManager } from '../debug-session-manager';

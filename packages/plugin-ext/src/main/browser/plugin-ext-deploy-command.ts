@@ -15,9 +15,9 @@
  ********************************************************************************/
 
 import { injectable, inject } from 'inversify';
-import { QuickOpenService, QuickOpenItem, QuickOpenModel, QuickOpenMode } from '@theia/core/lib/browser';
+import { QuickOpenService, QuickOpenItem, QuickOpenModel, QuickOpenMode } from '@devpodio/core/lib/browser';
 import { PluginServer } from '../../common';
-import { Command } from '@theia/core';
+import { Command } from '@devpodio/core';
 import { HostedPluginSupport } from '../../hosted/browser/hosted-plugin';
 import { PluginWidget } from './plugin-ext-widget';
 

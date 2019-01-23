@@ -15,7 +15,7 @@
  ********************************************************************************/
 
 import { ContainerModule } from 'inversify';
-import { LanguageServerContribution } from '@theia/languages/lib/node';
+import { LanguageServerContribution } from '@devpodio/languages/lib/node';
 import { JsonContribution } from './json-contribution';
 
 export default new ContainerModule(bind => {

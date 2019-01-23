@@ -15,13 +15,13 @@
  ********************************************************************************/
 
 import { injectable, inject, postConstruct } from 'inversify';
-import URI from '@theia/core/lib/common/uri';
-import { Emitter, Event } from '@theia/core/lib/common/event';
-import { Deferred } from '@theia/core/lib/common/promise-util';
-import { PreferenceService, PreferenceScope } from '@theia/core/lib/browser/preferences';
-import { BaseLanguageClientContribution, Workspace, Languages, LanguageClientFactory, ILanguageClient, State } from '@theia/languages/lib/browser';
-import { WorkspaceService } from '@theia/workspace/lib/browser';
-import { WorkspaceVariableContribution } from '@theia/workspace/lib/browser/workspace-variable-contribution';
+import URI from '@devpodio/core/lib/common/uri';
+import { Emitter, Event } from '@devpodio/core/lib/common/event';
+import { Deferred } from '@devpodio/core/lib/common/promise-util';
+import { PreferenceService, PreferenceScope } from '@devpodio/core/lib/browser/preferences';
+import { BaseLanguageClientContribution, Workspace, Languages, LanguageClientFactory, ILanguageClient, State } from '@devpodio/languages/lib/browser';
+import { WorkspaceService } from '@devpodio/workspace/lib/browser';
+import { WorkspaceVariableContribution } from '@devpodio/workspace/lib/browser/workspace-variable-contribution';
 import { TypeScriptInitializationOptions, TypeScriptInitializeResult } from 'typescript-language-server/lib/ts-protocol';
 import {
     TYPESCRIPT_LANGUAGE_ID, TYPESCRIPT_LANGUAGE_NAME, TYPESCRIPT_REACT_LANGUAGE_ID, JAVASCRIPT_LANGUAGE_ID, JAVASCRIPT_REACT_LANGUAGE_ID, TypescriptStartParams

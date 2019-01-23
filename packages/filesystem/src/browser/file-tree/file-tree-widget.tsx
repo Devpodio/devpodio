@@ -15,11 +15,11 @@
  ********************************************************************************/
 
 import { injectable, inject } from 'inversify';
-import { ContextMenuRenderer, NodeProps, TreeProps, TreeNode, TreeWidget } from '@theia/core/lib/browser';
+import { ContextMenuRenderer, NodeProps, TreeProps, TreeNode, TreeWidget } from '@devpodio/core/lib/browser';
 import { DirNode, FileStatNode } from './file-tree';
 import { FileTreeModel } from './file-tree-model';
-import { DisposableCollection, Disposable } from '@theia/core/lib/common';
-import { UriSelection } from '@theia/core/lib/common/selection';
+import { DisposableCollection, Disposable } from '@devpodio/core/lib/common';
+import { UriSelection } from '@devpodio/core/lib/common/selection';
 import * as React from 'react';
 
 export const FILE_TREE_CLASS = 'theia-FileTree';

@@ -15,8 +15,8 @@
  ********************************************************************************/
 
 import { injectable, postConstruct, inject } from 'inversify';
-import { ApplicationPackage } from '@theia/application-package';
-import { BaseLanguageServerContribution, IConnection, LanguageServerStartOptions } from '@theia/languages/lib/node';
+import { ApplicationPackage } from '@devpodio/application-package';
+import { BaseLanguageServerContribution, IConnection, LanguageServerStartOptions } from '@devpodio/languages/lib/node';
 import { TYPESCRIPT_LANGUAGE_ID, TYPESCRIPT_LANGUAGE_NAME, TypescriptStartParams } from '../common';
 import { TypeScriptPlugin, TypeScriptInitializeParams, TypeScriptInitializationOptions } from 'typescript-language-server/lib/ts-protocol';
 import { isRequestMessage, Message } from 'vscode-ws-jsonrpc';

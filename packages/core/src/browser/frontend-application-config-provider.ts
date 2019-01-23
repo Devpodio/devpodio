@@ -14,7 +14,7 @@
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  ********************************************************************************/
 
-import { FrontendApplicationConfig } from '@theia/application-package/lib/application-props';
+import { FrontendApplicationConfig } from '@devpodio/application-package/lib/application-props';
 
 export class FrontendApplicationConfigProvider {
 

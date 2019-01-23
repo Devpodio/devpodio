@@ -16,7 +16,7 @@
 
 import * as assert from 'assert';
 import * as Converter from './type-converters';
-import * as theia from '@theia/plugin';
+import * as theia from '@devpodio/plugin';
 import * as types from './types-impl';
 import * as model from '../api/model';
 import { MarkdownString, isMarkdownString } from './markdown-string';

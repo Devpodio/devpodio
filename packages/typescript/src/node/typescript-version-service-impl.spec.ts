@@ -17,9 +17,9 @@
 import * as os from 'os';
 import * as path from 'path';
 import * as assert from 'assert';
-import URI from '@theia/core/lib/common/uri';
-import { isWindows } from '@theia/core/lib/common/os';
-import { FileUri } from '@theia/core/lib/node';
+import URI from '@devpodio/core/lib/common/uri';
+import { isWindows } from '@devpodio/core/lib/common/os';
+import { FileUri } from '@devpodio/core/lib/node';
 import { TypescriptVersionServiceImpl, TypescriptVersionURI } from './typescript-version-service-impl';
 
 describe('TypescriptVersionServiceImpl', function () {

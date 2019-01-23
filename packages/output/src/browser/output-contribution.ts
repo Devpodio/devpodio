@@ -15,7 +15,7 @@
  ********************************************************************************/
 
 import { injectable } from 'inversify';
-import { AbstractViewContribution } from '@theia/core/lib/browser/shell/view-contribution';
+import { AbstractViewContribution } from '@devpodio/core/lib/browser/shell/view-contribution';
 import { OUTPUT_WIDGET_KIND, OutputWidget } from './output-widget';
 
 @injectable()

@@ -15,8 +15,8 @@
  ********************************************************************************/
 
 import { ContainerModule, interfaces } from 'inversify';
-import { CommandContribution, MenuContribution } from '@theia/core/lib/common';
-import { WebSocketConnectionProvider, FrontendApplicationContribution, KeybindingContribution } from '@theia/core/lib/browser';
+import { CommandContribution, MenuContribution } from '@devpodio/core/lib/common';
+import { WebSocketConnectionProvider, FrontendApplicationContribution, KeybindingContribution } from '@devpodio/core/lib/browser';
 import {
     OpenFileDialogFactory,
     SaveFileDialogFactory,
@@ -26,10 +26,10 @@ import {
     createSaveFileDialogContainer,
     OpenFileDialog,
     SaveFileDialog
-} from '@theia/filesystem/lib/browser';
-import { StorageService } from '@theia/core/lib/browser/storage-service';
-import { LabelProviderContribution } from '@theia/core/lib/browser/label-provider';
-import { VariableContribution } from '@theia/variable-resolver/lib/browser';
+} from '@devpodio/filesystem/lib/browser';
+import { StorageService } from '@devpodio/core/lib/browser/storage-service';
+import { LabelProviderContribution } from '@devpodio/core/lib/browser/label-provider';
+import { VariableContribution } from '@devpodio/variable-resolver/lib/browser';
 import { WorkspaceServer, workspacePath } from '../common';
 import { WorkspaceFrontendContribution } from './workspace-frontend-contribution';
 import { WorkspaceService } from './workspace-service';

@@ -19,9 +19,9 @@ import { ProblemManager } from './problem-manager';
 import { MarkerNode, MarkerTree, MarkerOptions, MarkerInfoNode } from '../marker-tree';
 import { MarkerTreeModel } from '../marker-tree-model';
 import { injectable, inject } from 'inversify';
-import { OpenerOptions, TreeNode } from '@theia/core/lib/browser';
+import { OpenerOptions, TreeNode } from '@devpodio/core/lib/browser';
 import { Diagnostic } from 'vscode-languageserver-types';
-import { LabelProvider } from '@theia/core/lib/browser/label-provider';
+import { LabelProvider } from '@devpodio/core/lib/browser/label-provider';
 
 @injectable()
 export class ProblemTree extends MarkerTree<Diagnostic> {

@@ -15,12 +15,12 @@
  ********************************************************************************/
 
 import { injectable, inject, named } from 'inversify';
-import { ContributionProvider } from '@theia/core';
+import { ContributionProvider } from '@devpodio/core';
 import { DebugConfiguration } from '../common/debug-configuration';
 import { DebuggerDescription, DebugError } from '../common/debug-service';
 
 import { DebugAdapterContribution, DebugAdapterExecutable, DebugAdapterSessionFactory } from '../common/debug-model';
-import { IJSONSchema, IJSONSchemaSnippet } from '@theia/core/lib/common/json-schema';
+import { IJSONSchema, IJSONSchemaSnippet } from '@devpodio/core/lib/common/json-schema';
 
 /**
  * Contributions registry.

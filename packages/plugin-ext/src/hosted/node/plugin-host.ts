@@ -14,7 +14,7 @@
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  ********************************************************************************/
 
-import { Emitter } from '@theia/core/lib/common/event';
+import { Emitter } from '@devpodio/core/lib/common/event';
 import { RPCProtocolImpl } from '../../api/rpc-protocol';
 import { PluginHostRPC } from './plugin-host-rpc';
 console.log('PLUGIN_HOST(' + process.pid + ') starting instance');

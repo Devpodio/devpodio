@@ -15,10 +15,10 @@
  ********************************************************************************/
 
 import { Container } from 'inversify';
-import { ILogger, isWindows } from '@theia/core';
-import { FileUri } from '@theia/core/lib/node/file-uri';
-import { MockLogger } from '@theia/core/lib/common/test/mock-logger';
-import { RawProcessFactory, RawProcessOptions, RawProcess, ProcessManager } from '@theia/process/lib/node';
+import { ILogger, isWindows } from '@devpodio/core';
+import { FileUri } from '@devpodio/core/lib/node/file-uri';
+import { MockLogger } from '@devpodio/core/lib/common/test/mock-logger';
+import { RawProcessFactory, RawProcessOptions, RawProcess, ProcessManager } from '@devpodio/process/lib/node';
 import { RipgrepSearchInWorkspaceServer, RgPath } from './ripgrep-search-in-workspace-server';
 import { SearchInWorkspaceClient, SearchInWorkspaceResult } from '../common/search-in-workspace-interface';
 import * as path from 'path';

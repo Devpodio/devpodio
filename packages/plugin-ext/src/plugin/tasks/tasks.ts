@@ -21,12 +21,12 @@ import {
     TaskDto,
     TaskExecutionDto
 } from '../../api/plugin-api';
-import * as theia from '@theia/plugin';
+import * as theia from '@devpodio/plugin';
 import * as converter from '../type-converters';
 import { Disposable } from '../types-impl';
 import { RPCProtocol } from '../../api/rpc-protocol';
 import { TaskProviderAdapter } from './task-provider';
-import { Emitter, Event } from '@theia/core/lib/common/event';
+import { Emitter, Event } from '@devpodio/core/lib/common/event';
 
 export class TasksExtImpl implements TasksExt {
     private proxy: TasksMain;

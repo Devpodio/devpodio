@@ -14,8 +14,8 @@
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  ********************************************************************************/
 
-import { Range } from '@theia/languages/lib/browser';
-import { Command } from '@theia/core/lib/common';
+import { Range } from '@devpodio/languages/lib/browser';
+import { Command } from '@devpodio/core/lib/common';
 
 export interface MarkedRegion {
     marker?: Range;

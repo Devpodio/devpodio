@@ -15,9 +15,9 @@
  ********************************************************************************/
 
 import { inject, injectable, postConstruct } from 'inversify';
-import URI from '@theia/core/lib/common/uri';
-import { StatefulWidget, SELECTED_CLASS, DiffUris } from '@theia/core/lib/browser';
-import { EditorManager, EditorOpenerOptions, EditorWidget, DiffNavigatorProvider, DiffNavigator } from '@theia/editor/lib/browser';
+import URI from '@devpodio/core/lib/common/uri';
+import { StatefulWidget, SELECTED_CLASS, DiffUris } from '@devpodio/core/lib/browser';
+import { EditorManager, EditorOpenerOptions, EditorWidget, DiffNavigatorProvider, DiffNavigator } from '@devpodio/editor/lib/browser';
 import { GitFileChange, GitFileStatus, Git, WorkingDirectoryStatus } from '../../common';
 import { GitWatcher } from '../../common';
 import { GIT_RESOURCE_SCHEME } from '../git-resource';

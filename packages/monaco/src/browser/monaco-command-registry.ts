@@ -15,8 +15,8 @@
  ********************************************************************************/
 
 import { injectable, inject } from 'inversify';
-import { Command, CommandHandler, CommandRegistry, SelectionService } from '@theia/core';
-import { EditorManager, TextEditorSelection } from '@theia/editor/lib/browser';
+import { Command, CommandHandler, CommandRegistry, SelectionService } from '@devpodio/core';
+import { EditorManager, TextEditorSelection } from '@devpodio/editor/lib/browser';
 import { MonacoEditor } from './monaco-editor';
 
 export interface MonacoEditorCommandHandler {

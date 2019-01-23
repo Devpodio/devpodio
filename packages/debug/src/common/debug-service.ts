@@ -16,9 +16,9 @@
 
 // tslint:disable:no-any
 
-import { Disposable } from '@theia/core';
-import { ApplicationError } from '@theia/core/lib/common/application-error';
-import { IJSONSchema, IJSONSchemaSnippet } from '@theia/core/lib/common/json-schema';
+import { Disposable } from '@devpodio/core';
+import { ApplicationError } from '@devpodio/core/lib/common/application-error';
+import { IJSONSchema, IJSONSchemaSnippet } from '@devpodio/core/lib/common/json-schema';
 import { DebugConfiguration } from './debug-configuration';
 
 export interface DebuggerDescription {

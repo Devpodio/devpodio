@@ -15,12 +15,12 @@
  ********************************************************************************/
 
 import { ContainerModule } from 'inversify';
-import { KeybindingContext, bindViewContribution, FrontendApplicationContribution } from '@theia/core/lib/browser';
+import { KeybindingContext, bindViewContribution, FrontendApplicationContribution } from '@devpodio/core/lib/browser';
 import { FileNavigatorWidget, FILE_NAVIGATOR_ID } from './navigator-widget';
 import { NavigatorActiveContext } from './navigator-keybinding-context';
 import { FileNavigatorContribution } from './navigator-contribution';
 import { createFileNavigatorWidget } from './navigator-container';
-import { WidgetFactory } from '@theia/core/lib/browser/widget-manager';
+import { WidgetFactory } from '@devpodio/core/lib/browser/widget-manager';
 import { bindFileNavigatorPreferences } from './navigator-preferences';
 import { FileNavigatorFilter } from './navigator-filter';
 import '../../src/browser/style/index.css';

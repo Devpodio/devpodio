@@ -15,14 +15,14 @@
  ********************************************************************************/
 
 import { injectable, inject, postConstruct } from 'inversify';
-import URI from '@theia/core/lib/common/uri';
-import { ApplicationShell, DockPanel } from '@theia/core/lib/browser';
-import { EditorManager,  EditorOpenerOptions, EditorWidget } from '@theia/editor/lib/browser';
+import URI from '@devpodio/core/lib/common/uri';
+import { ApplicationShell, DockPanel } from '@devpodio/core/lib/browser';
+import { EditorManager,  EditorOpenerOptions, EditorWidget } from '@devpodio/editor/lib/browser';
 import { EditorPreviewWidget } from './editor-preview-widget';
 import { EditorPreviewWidgetFactory, EditorPreviewWidgetOptions } from './editor-preview-factory';
 import { EditorPreviewPreferences } from './editor-preview-preferences';
-import { WidgetOpenHandler, WidgetOpenerOptions } from '@theia/core/lib/browser';
-import { Deferred } from '@theia/core/lib/common/promise-util';
+import { WidgetOpenHandler, WidgetOpenerOptions } from '@devpodio/core/lib/browser';
+import { Deferred } from '@devpodio/core/lib/common/promise-util';
 
 /**
  * Opener options containing an optional preview flag.

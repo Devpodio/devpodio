@@ -15,21 +15,21 @@
  ********************************************************************************/
 
 import { ContainerModule } from 'inversify';
-import { CommandContribution } from '@theia/core/lib/common';
-import { KeybindingContribution, KeybindingContext } from '@theia/core/lib/browser';
+import { CommandContribution } from '@devpodio/core/lib/common';
+import { KeybindingContribution, KeybindingContext } from '@devpodio/core/lib/browser';
 import { CppCommandContribution } from './cpp-commands';
 
-import { LanguageClientContribution } from '@theia/languages/lib/browser';
+import { LanguageClientContribution } from '@devpodio/languages/lib/browser';
 import { CppLanguageClientContribution } from './cpp-language-client-contribution';
 import { CppKeybindingContribution, CppKeybindingContext } from './cpp-keybinding';
 import { bindCppPreferences } from './cpp-preferences';
 import { CppBuildConfigurationsContributions, CppBuildConfigurationChanger } from './cpp-build-configurations-ui';
 import { CppBuildConfigurationManager, CppBuildConfigurationManagerImpl } from './cpp-build-configurations';
-import { LanguageGrammarDefinitionContribution } from '@theia/monaco/lib/browser/textmate';
+import { LanguageGrammarDefinitionContribution } from '@devpodio/monaco/lib/browser/textmate';
 import { CppGrammarContribution } from './cpp-grammar-contribution';
 import { CppBuildConfigurationsStatusBarElement } from './cpp-build-configurations-statusbar-element';
 import { CppTaskProvider } from './cpp-task-provider';
-import { TaskContribution } from '@theia/task/lib/browser/task-contribution';
+import { TaskContribution } from '@devpodio/task/lib/browser/task-contribution';
 
 export default new ContainerModule(bind => {
     bind(CommandContribution).to(CppCommandContribution).inSingletonScope();

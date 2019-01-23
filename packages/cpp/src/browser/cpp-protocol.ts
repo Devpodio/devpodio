@@ -15,7 +15,7 @@
  ********************************************************************************/
 
 import { RequestType } from 'vscode-jsonrpc';
-import { TextDocumentIdentifier } from '@theia/languages/lib/browser';
+import { TextDocumentIdentifier } from '@devpodio/languages/lib/browser';
 
 export namespace SwitchSourceHeaderRequest {
     export const type = new RequestType<TextDocumentIdentifier, string | undefined, void, void>('textDocument/switchSourceHeader');

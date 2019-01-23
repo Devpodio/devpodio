@@ -16,7 +16,7 @@
 
 import { JAVASCRIPT_LANGUAGE_ID, JAVASCRIPT_LANGUAGE_NAME, JAVASCRIPT_REACT_LANGUAGE_ID, JAVASCRIPT_REACT_LANGUAGE_NAME } from '../common';
 import { injectable } from 'inversify';
-import { LanguageGrammarDefinitionContribution, TextmateRegistry, getEncodedLanguageId } from '@theia/monaco/lib/browser/textmate';
+import { LanguageGrammarDefinitionContribution, TextmateRegistry, getEncodedLanguageId } from '@devpodio/monaco/lib/browser/textmate';
 import { StandardTokenType } from 'vscode-textmate';
 
 @injectable()

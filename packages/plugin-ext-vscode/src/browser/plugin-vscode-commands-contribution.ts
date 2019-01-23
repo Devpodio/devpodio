@@ -15,9 +15,9 @@
  ********************************************************************************/
 
 import { injectable, inject } from 'inversify';
-import { CommandContribution, CommandRegistry, Command } from '@theia/core';
-import { CommandService } from '@theia/core/lib/common/command';
-import TheiaURI from '@theia/core/lib/common/uri';
+import { CommandContribution, CommandRegistry, Command } from '@devpodio/core';
+import { CommandService } from '@devpodio/core/lib/common/command';
+import TheiaURI from '@devpodio/core/lib/common/uri';
 import URI from 'vscode-uri';
 
 export namespace VscodeCommands {

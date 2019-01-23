@@ -14,8 +14,8 @@
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  ********************************************************************************/
 
-import * as theia from '@theia/plugin';
-import { Event, Emitter } from '@theia/core/lib/common/event';
+import * as theia from '@devpodio/plugin';
+import { Event, Emitter } from '@devpodio/core/lib/common/event';
 import { StorageMain, StorageExt } from '../api/plugin-api';
 import { KeysToAnyValues, KeysToKeysToAnyValue } from '../common/types';
 

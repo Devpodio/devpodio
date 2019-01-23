@@ -15,20 +15,20 @@
  ********************************************************************************/
 
 import { injectable, inject, named, postConstruct } from 'inversify';
-import { MessageClient } from '@theia/core/lib/common';
-import { LabelProvider } from '@theia/core/lib/browser';
-import { EditorManager } from '@theia/editor/lib/browser';
-import { TerminalService } from '@theia/terminal/lib/browser/base/terminal-service';
-import { WebSocketConnectionProvider } from '@theia/core/lib/browser/messaging/ws-connection-provider';
+import { MessageClient } from '@devpodio/core/lib/common';
+import { LabelProvider } from '@devpodio/core/lib/browser';
+import { EditorManager } from '@devpodio/editor/lib/browser';
+import { TerminalService } from '@devpodio/terminal/lib/browser/base/terminal-service';
+import { WebSocketConnectionProvider } from '@devpodio/core/lib/browser/messaging/ws-connection-provider';
 import { DebugSession } from './debug-session';
 import { BreakpointManager } from './breakpoint/breakpoint-manager';
 import { DebugSessionOptions } from './debug-session-options';
-import { OutputChannelManager, OutputChannel } from '@theia/output/lib/common/output-channel';
+import { OutputChannelManager, OutputChannel } from '@devpodio/output/lib/common/output-channel';
 import { DebugPreferences } from './debug-preferences';
 import { DebugSessionConnection } from './debug-session-connection';
 import { IWebSocket } from 'vscode-ws-jsonrpc/lib/socket/socket';
 import { DebugAdapterPath } from '../common/debug-service';
-import { ContributionProvider } from '@theia/core/lib/common/contribution-provider';
+import { ContributionProvider } from '@devpodio/core/lib/common/contribution-provider';
 
 /**
  * DebugSessionContribution symbol for DI.

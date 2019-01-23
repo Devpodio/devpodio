@@ -16,9 +16,9 @@
 
 import { injectable, inject, named } from 'inversify';
 import { Registry, IOnigLib, IRawGrammar, parseRawGrammar } from 'vscode-textmate';
-import { ILogger, ContributionProvider } from '@theia/core';
-import { FrontendApplicationContribution, isBasicWasmSupported } from '@theia/core/lib/browser';
-import { ThemeService } from '@theia/core/lib/browser/theming';
+import { ILogger, ContributionProvider } from '@devpodio/core';
+import { FrontendApplicationContribution, isBasicWasmSupported } from '@devpodio/core/lib/browser';
+import { ThemeService } from '@devpodio/core/lib/browser/theming';
 import { LanguageGrammarDefinitionContribution, getEncodedLanguageId } from './textmate-contribution';
 import { createTextmateTokenizer, TokenizerOption } from './textmate-tokenizer';
 import { TextmateRegistry } from './textmate-registry';

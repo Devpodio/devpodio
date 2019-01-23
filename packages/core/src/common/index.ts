@@ -35,5 +35,5 @@ export * from './selection';
 export * from './strings';
 export * from './application-error';
 
-import { environment } from '@theia/application-package/lib/environment';
+import { environment } from '@devpodio/application-package/lib/environment';
 export { environment };

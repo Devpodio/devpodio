@@ -14,7 +14,7 @@
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  ********************************************************************************/
 
-import { PreferenceSchema, PreferenceProxy, PreferenceService, createPreferenceProxy, PreferenceContribution } from '@theia/core/lib/browser/preferences';
+import { PreferenceSchema, PreferenceProxy, PreferenceService, createPreferenceProxy, PreferenceContribution } from '@devpodio/core/lib/browser/preferences';
 import { interfaces } from 'inversify';
 import { CppBuildConfiguration } from './cpp-build-configurations';
 import { CLANGD_EXECUTABLE_DEFAULT } from '../common';

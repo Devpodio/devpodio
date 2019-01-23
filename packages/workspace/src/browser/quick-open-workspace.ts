@@ -15,12 +15,12 @@
  ********************************************************************************/
 
 import { injectable, inject } from 'inversify';
-import { QuickOpenService, QuickOpenModel, QuickOpenItem, QuickOpenGroupItem, QuickOpenMode, LabelProvider } from '@theia/core/lib/browser';
+import { QuickOpenService, QuickOpenModel, QuickOpenItem, QuickOpenGroupItem, QuickOpenMode, LabelProvider } from '@devpodio/core/lib/browser';
 import { WorkspaceService } from './workspace-service';
 import { getTemporaryWorkspaceFileUri } from '../common';
 import { WorkspacePreferences } from './workspace-preferences';
-import URI from '@theia/core/lib/common/uri';
-import { FileSystem, FileSystemUtils } from '@theia/filesystem/lib/common';
+import URI from '@devpodio/core/lib/common/uri';
+import { FileSystem, FileSystemUtils } from '@devpodio/filesystem/lib/common';
 import * as moment from 'moment';
 
 @injectable()

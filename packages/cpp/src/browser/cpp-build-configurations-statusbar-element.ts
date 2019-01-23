@@ -15,7 +15,7 @@
  ********************************************************************************/
 
 import { injectable, inject } from 'inversify';
-import { StatusBar, StatusBarAlignment } from '@theia/core/lib/browser';
+import { StatusBar, StatusBarAlignment } from '@devpodio/core/lib/browser';
 import { CppBuildConfigurationManager } from './cpp-build-configurations';
 import { CPP_CHANGE_BUILD_CONFIGURATION } from './cpp-build-configurations-ui';
 

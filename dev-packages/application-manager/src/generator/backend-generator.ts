@@ -29,12 +29,13 @@ export class BackendGenerator extends AbstractGenerator {
 require('reflect-metadata');
 const path = require('path');
 const express = require('express');
+const cors = require('cors');
 const { Container, injectable } = require('inversify');
 
-const { BackendApplication, CliManager } = require('@theia/core/lib/node');
-const { backendApplicationModule } = require('@theia/core/lib/node/backend-application-module');
-const { messagingBackendModule } = require('@theia/core/lib/node/messaging/messaging-backend-module');
-const { loggerBackendModule } = require('@theia/core/lib/node/logger-backend-module');
+const { BackendApplication, CliManager } = require('@devpodio/core/lib/node');
+const { backendApplicationModule } = require('@devpodio/core/lib/node/backend-application-module');
+const { messagingBackendModule } = require('@devpodio/core/lib/node/messaging/messaging-backend-module');
+const { loggerBackendModule } = require('@devpodio/core/lib/node/logger-backend-module');
 
 const container = new Container();
 container.load(backendApplicationModule);
@@ -55,8 +56,15 @@ function start(port, host, argv) {
     const cliManager = container.get(CliManager);
     return cliManager.initializeCli(argv).then(function () {
         const application = container.get(BackendApplication);
+        application.use(cors());
         application.use(express.static(path.join(__dirname, '../../lib'), {
-            index: 'index.html'
+            index: 'index.html',
+            maxAge: '1d',
+            setHeaders: function(res, path) {
+                if (express.static.mime.lookup(path) === 'text/html') {
+                    res.setHeader('Cache-Control', 'public, max-age=0')
+                }
+            }
         }));
         return application.start(port, host);
     });
@@ -74,11 +82,11 @@ module.exports = (port, host, argv) => Promise.resolve()${this.compileBackendMod
 
     protected compileMain(backendModules: Map<string, string>): string {
         return `// @ts-check
-const { BackendApplicationConfigProvider } = require('@theia/core/lib/node/backend-application-config-provider');
+const { BackendApplicationConfigProvider } = require('@devpodio/core/lib/node/backend-application-config-provider');
 BackendApplicationConfigProvider.set(${this.prettyStringify(this.pck.props.backend.config)});
 
 const serverPath = require('path').resolve(__dirname, 'server');
-const address = require('@theia/core/lib/node/cluster/main').default(serverPath);
+const address = require('@devpodio/core/lib/node/cluster/main').default(serverPath);
 address.then(function (address) {
     if (process && process.send) {
         process.send(address.port.toString());

@@ -18,7 +18,7 @@ import {
     PreferenceService,
     PreferenceServiceImpl,
     PreferenceScope
-} from '@theia/core/lib/browser/preferences';
+} from '@devpodio/core/lib/browser/preferences';
 import { interfaces } from 'inversify';
 import {
     MAIN_RPC_CONTEXT,

@@ -17,8 +17,8 @@
 import * as showdown from 'showdown';
 import * as sanitize from 'sanitize-html';
 import { injectable, inject } from 'inversify';
-import { DisposableCollection } from '@theia/core';
-import { PublishedNodePackage, ExtensionPackage } from '@theia/application-package';
+import { DisposableCollection } from '@devpodio/core';
+import { PublishedNodePackage, ExtensionPackage } from '@devpodio/application-package';
 import {
     RawExtension, ResolvedRawExtension, ResolvedExtension, Extension, ExtensionServer, ExtensionClient, SearchParam, ExtensionChange
 } from '../common/extension-protocol';

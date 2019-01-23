@@ -14,12 +14,12 @@
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  ********************************************************************************/
 
-import URI from '@theia/core/lib/common/uri';
-import { WidgetFactory, WidgetManager } from '@theia/core/lib/browser';
-import { MaybePromise } from  '@theia/core/lib/common/types';
+import URI from '@devpodio/core/lib/common/uri';
+import { WidgetFactory, WidgetManager } from '@devpodio/core/lib/browser';
+import { MaybePromise } from  '@devpodio/core/lib/common/types';
 import { EditorPreviewWidget } from './editor-preview-widget';
 import { inject, injectable } from 'inversify';
-import { EditorManager } from '@theia/editor/lib/browser';
+import { EditorManager } from '@devpodio/editor/lib/browser';
 import { UUID } from '@phosphor/coreutils';
 
 export interface EditorPreviewWidgetOptions {

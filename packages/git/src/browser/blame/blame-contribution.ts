@@ -15,12 +15,12 @@
  ********************************************************************************/
 
 import { inject, injectable } from 'inversify';
-import { KeybindingContribution, KeybindingRegistry } from '@theia/core/lib/browser';
-import { CommandContribution, CommandRegistry, Command, MenuContribution, MenuModelRegistry, Disposable, DisposableCollection } from '@theia/core/lib/common';
+import { KeybindingContribution, KeybindingRegistry } from '@devpodio/core/lib/browser';
+import { CommandContribution, CommandRegistry, Command, MenuContribution, MenuModelRegistry, Disposable, DisposableCollection } from '@devpodio/core/lib/common';
 import { BlameDecorator } from './blame-decorator';
-import { EditorManager, EditorKeybindingContexts, EditorWidget, EditorTextFocusContext, StrictEditorTextFocusContext } from '@theia/editor/lib/browser';
+import { EditorManager, EditorKeybindingContexts, EditorWidget, EditorTextFocusContext, StrictEditorTextFocusContext } from '@devpodio/editor/lib/browser';
 import { BlameManager } from './blame-manager';
-import URI from '@theia/core/lib/common/uri';
+import URI from '@devpodio/core/lib/common/uri';
 import { EDITOR_CONTEXT_MENU_GIT } from '../git-view-contribution';
 
 import debounce = require('lodash.debounce');

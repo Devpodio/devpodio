@@ -15,10 +15,10 @@
  ********************************************************************************/
 
 import { injectable, inject } from 'inversify';
-import { LabelProviderContribution, LabelProvider } from '@theia/core/lib/browser/label-provider';
-import URI from '@theia/core/lib/common/uri';
+import { LabelProviderContribution, LabelProvider } from '@devpodio/core/lib/browser/label-provider';
+import URI from '@devpodio/core/lib/common/uri';
 import { GIT_RESOURCE_SCHEME } from './git-resource';
-import { MaybePromise } from '@theia/core';
+import { MaybePromise } from '@devpodio/core';
 
 @injectable()
 export class GitUriLabelProviderContribution implements LabelProviderContribution {

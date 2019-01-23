@@ -15,9 +15,9 @@
  ********************************************************************************/
 
 import { injectable, inject, postConstruct } from 'inversify';
-import { Event, Emitter } from '@theia/core/lib/common';
-import URI from '@theia/core/lib/common/uri';
-import { FileSystemWatcher, FileChangeEvent, FileChangeType } from '@theia/filesystem/lib/browser/filesystem-watcher';
+import { Event, Emitter } from '@devpodio/core/lib/common';
+import URI from '@devpodio/core/lib/common/uri';
+import { FileSystemWatcher, FileChangeEvent, FileChangeType } from '@devpodio/filesystem/lib/browser/filesystem-watcher';
 import { Marker } from '../common/marker';
 
 /*

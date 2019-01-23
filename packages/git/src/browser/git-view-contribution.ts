@@ -14,20 +14,20 @@
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  ********************************************************************************/
 import { injectable, inject } from 'inversify';
-import URI from '@theia/core/lib/common/uri';
-import { DisposableCollection, CommandRegistry, MenuModelRegistry, CommandContribution, MenuContribution, Command } from '@theia/core';
+import URI from '@devpodio/core/lib/common/uri';
+import { DisposableCollection, CommandRegistry, MenuModelRegistry, CommandContribution, MenuContribution, Command } from '@devpodio/core';
 import {
     AbstractViewContribution, StatusBar, StatusBarAlignment, DiffUris, StatusBarEntry,
     FrontendApplicationContribution, FrontendApplication, Widget
-} from '@theia/core/lib/browser';
-import { TabBarToolbarContribution, TabBarToolbarRegistry } from '@theia/core/lib/browser/shell/tab-bar-toolbar';
-import { EditorManager, EditorWidget, EditorOpenerOptions, EditorContextMenu, EDITOR_CONTEXT_MENU } from '@theia/editor/lib/browser';
+} from '@devpodio/core/lib/browser';
+import { TabBarToolbarContribution, TabBarToolbarRegistry } from '@devpodio/core/lib/browser/shell/tab-bar-toolbar';
+import { EditorManager, EditorWidget, EditorOpenerOptions, EditorContextMenu, EDITOR_CONTEXT_MENU } from '@devpodio/editor/lib/browser';
 import { GitFileChange, GitFileStatus } from '../common';
 import { GitWidget } from './git-widget';
 import { GitRepositoryTracker } from './git-repository-tracker';
 import { GitQuickOpenService, GitAction } from './git-quick-open-service';
 import { GitSyncService } from './git-sync-service';
-import { WorkspaceService } from '@theia/workspace/lib/browser';
+import { WorkspaceService } from '@devpodio/workspace/lib/browser';
 import { GitPrompt } from '../common/git-prompt';
 
 export const GIT_WIDGET_FACTORY_ID = 'git';

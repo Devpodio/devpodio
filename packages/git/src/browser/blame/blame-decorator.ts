@@ -15,12 +15,12 @@
  ********************************************************************************/
 
 import { inject, injectable } from 'inversify';
-import { EditorManager, TextEditor, EditorDecoration, EditorDecorationOptions, Range, Position, EditorDecorationStyle } from '@theia/editor/lib/browser';
+import { EditorManager, TextEditor, EditorDecoration, EditorDecorationOptions, Range, Position, EditorDecorationStyle } from '@devpodio/editor/lib/browser';
 import { GitFileBlame, Commit } from '../../common';
-import { Disposable, DisposableCollection } from '@theia/core';
+import { Disposable, DisposableCollection } from '@devpodio/core';
 import * as moment from 'moment';
-import { HoverProvider, TextDocumentPositionParams, Hover, CancellationToken, Languages } from '@theia/languages/lib/browser';
-import URI from '@theia/core/lib/common/uri';
+import { HoverProvider, TextDocumentPositionParams, Hover, CancellationToken, Languages } from '@devpodio/languages/lib/browser';
+import URI from '@devpodio/core/lib/common/uri';
 
 @injectable()
 export class BlameDecorator implements HoverProvider {

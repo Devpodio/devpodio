@@ -15,11 +15,11 @@
  ********************************************************************************/
 
 import { injectable } from 'inversify';
-import { MessageType } from '@theia/core/lib/common/message-service-protocol';
+import { MessageType } from '@devpodio/core/lib/common/message-service-protocol';
 import {
     QuickOpenService, QuickOpenModel, QuickOpenOptions,
     QuickOpenItem, QuickOpenGroupItem, QuickOpenMode, KeySequence
-} from '@theia/core/lib/browser';
+} from '@devpodio/core/lib/browser';
 import { KEY_CODE_MAP } from './monaco-keycode-map';
 
 export interface MonacoQuickOpenControllerOpts extends monaco.quickOpen.IQuickOpenControllerOpts {

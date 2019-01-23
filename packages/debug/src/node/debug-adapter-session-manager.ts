@@ -16,7 +16,7 @@
 
 import { UUID } from '@phosphor/coreutils';
 import { injectable, inject } from 'inversify';
-import { MessagingService } from '@theia/core/lib/node/messaging/messaging-service';
+import { MessagingService } from '@devpodio/core/lib/node/messaging/messaging-service';
 
 import { DebugAdapterPath } from '../common/debug-service';
 import { DebugConfiguration } from '../common/debug-configuration';

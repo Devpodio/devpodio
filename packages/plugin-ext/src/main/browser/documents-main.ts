@@ -16,17 +16,17 @@
 import { DocumentsMain, MAIN_RPC_CONTEXT, DocumentsExt } from '../../api/plugin-api';
 import { UriComponents } from '../../common/uri-components';
 import { EditorsAndDocumentsMain } from './editors-and-documents-main';
-import { DisposableCollection, Disposable } from '@theia/core';
-import { MonacoEditorModel } from '@theia/monaco/lib/browser/monaco-editor-model';
+import { DisposableCollection, Disposable } from '@devpodio/core';
+import { MonacoEditorModel } from '@devpodio/monaco/lib/browser/monaco-editor-model';
 import { RPCProtocol } from '../../api/rpc-protocol';
 import { EditorModelService } from './text-editor-model-service';
 import { createUntitledResource } from './editor/untitled-resource';
-import { EditorManager } from '@theia/editor/lib/browser';
-import URI from '@theia/core/lib/common/uri';
-import { ApplicationShell, OpenerOptions, Saveable } from '@theia/core/lib/browser';
+import { EditorManager } from '@devpodio/editor/lib/browser';
+import URI from '@devpodio/core/lib/common/uri';
+import { ApplicationShell, OpenerOptions, Saveable } from '@devpodio/core/lib/browser';
 import { TextDocumentShowOptions } from '../../api/model';
 import { Range } from 'vscode-languageserver-types';
-import { OpenerService } from '@theia/core/lib/browser/opener-service';
+import { OpenerService } from '@devpodio/core/lib/browser/opener-service';
 import { ViewColumn } from '../../plugin/types-impl';
 
 export class DocumentsMainImpl implements DocumentsMain {

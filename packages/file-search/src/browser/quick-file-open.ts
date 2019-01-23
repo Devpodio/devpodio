@@ -18,17 +18,17 @@ import { inject, injectable } from 'inversify';
 import {
     QuickOpenModel, QuickOpenItem, QuickOpenMode, PrefixQuickOpenService,
     OpenerService, KeybindingRegistry, QuickOpenGroupItem, QuickOpenGroupItemOptions, QuickOpenItemOptions, QuickOpenHandler, QuickOpenOptions, Keybinding
-} from '@theia/core/lib/browser';
-import { FileSystem } from '@theia/filesystem/lib/common/filesystem';
-import { WorkspaceService } from '@theia/workspace/lib/browser/workspace-service';
-import URI from '@theia/core/lib/common/uri';
+} from '@devpodio/core/lib/browser';
+import { FileSystem } from '@devpodio/filesystem/lib/common/filesystem';
+import { WorkspaceService } from '@devpodio/workspace/lib/browser/workspace-service';
+import URI from '@devpodio/core/lib/common/uri';
 import { FileSearchService } from '../common/file-search-service';
-import { CancellationTokenSource } from '@theia/core/lib/common';
-import { LabelProvider } from '@theia/core/lib/browser/label-provider';
-import { Command } from '@theia/core/lib/common';
-import { NavigationLocationService } from '@theia/editor/lib/browser/navigation/navigation-location-service';
+import { CancellationTokenSource } from '@devpodio/core/lib/common';
+import { LabelProvider } from '@devpodio/core/lib/browser/label-provider';
+import { Command } from '@devpodio/core/lib/common';
+import { NavigationLocationService } from '@devpodio/editor/lib/browser/navigation/navigation-location-service';
 import * as fuzzy from 'fuzzy';
-import { MessageService } from '@theia/core/lib/common/message-service';
+import { MessageService } from '@devpodio/core/lib/common/message-service';
 
 export const quickFileOpen: Command = {
     id: 'file-search.openFile',

@@ -15,9 +15,9 @@
  ********************************************************************************/
 
 import { injectable } from 'inversify';
-import { AbstractViewContribution } from '@theia/core/lib/browser/shell/view-contribution';
+import { AbstractViewContribution } from '@devpodio/core/lib/browser/shell/view-contribution';
 import { OutlineViewWidget } from './outline-view-widget';
-import { FrontendApplicationContribution, FrontendApplication } from '@theia/core/lib/browser/frontend-application';
+import { FrontendApplicationContribution, FrontendApplication } from '@devpodio/core/lib/browser/frontend-application';
 
 export const OUTLINE_WIDGET_FACTORY_ID = 'outline-view';
 

@@ -15,7 +15,7 @@
  ********************************************************************************/
 import { injectable, inject } from 'inversify';
 import { MetricsContribution } from './metrics-contribution';
-import { ApplicationPackage } from '@theia/application-package';
+import { ApplicationPackage } from '@devpodio/application-package';
 import { PROMETHEUS_REGEXP, toPrometheusValidName } from './prometheus';
 
 const metricsName = 'theia_extension_version';

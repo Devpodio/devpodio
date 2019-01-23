@@ -13,15 +13,15 @@
 
 ## Getting started
 
-Install `@theia/cli` as a dev dependency in your application.
+Install `@devpodio/cli` as a dev dependency in your application.
 
 With yarn:
 
-    yarn add @theia/cli@next --dev
+    yarn add @devpodio/cli@next --dev
 
 With npm:
 
-    npm install @theia/cli@next --save-dev
+    npm install @devpodio/cli@next --save-dev
 
 ## Configure
 

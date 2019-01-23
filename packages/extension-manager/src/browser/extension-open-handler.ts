@@ -15,8 +15,8 @@
  ********************************************************************************/
 
 import { injectable } from 'inversify';
-import URI from '@theia/core/lib/common/uri';
-import { WidgetOpenHandler } from '@theia/core/lib/browser';
+import URI from '@devpodio/core/lib/common/uri';
+import { WidgetOpenHandler } from '@devpodio/core/lib/browser';
 import { ExtensionUri } from './extension-uri';
 import { ExtensionWidgetOptions } from './extension-widget-factory';
 import { ExtensionDetailWidget } from './extension-detail-widget';

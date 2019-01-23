@@ -15,8 +15,8 @@
  ********************************************************************************/
 
 import { ContainerModule, interfaces } from 'inversify';
-import { ConnectionHandler, JsonRpcConnectionHandler } from '@theia/core';
-import { CliContribution } from '@theia/core/lib/node';
+import { ConnectionHandler, JsonRpcConnectionHandler } from '@devpodio/core';
+import { CliContribution } from '@devpodio/core/lib/node';
 import { ExtensionServer, ExtensionClient, extensionPath } from '../common/extension-protocol';
 import { ExtensionKeywords, NodeExtensionServer } from './node-extension-server';
 import { ApplicationProject, ApplicationProjectOptions } from './application-project';

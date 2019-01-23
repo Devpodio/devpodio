@@ -83,7 +83,7 @@ export class IPCConnectionProvider {
             log: (message: string) => this.logger.info(`[${options.serverName}: ${childProcess.pid}] ${message}`)
         });
         connection.trace(Trace.Off, {
-            log: (message, data) => this.logger.info(`[${options.serverName}: ${childProcess.pid}] ${message} ${data}`)
+            log: (message: string, data?: string) => this.logger.info(`[${options.serverName}: ${childProcess.pid}] ${message} ${data}`)
         });
         return connection;
     }

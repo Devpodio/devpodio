@@ -17,12 +17,12 @@
 import { ContainerModule } from 'inversify';
 import { KeymapsService } from './keymaps-service';
 import { KeymapsFrontendContribution } from './keymaps-frontend-contribution';
-import { CommandContribution, MenuContribution } from '@theia/core/lib/common';
-import { KeybindingContribution } from '@theia/core/lib/browser/keybinding';
+import { CommandContribution, MenuContribution } from '@devpodio/core/lib/common';
+import { KeybindingContribution } from '@devpodio/core/lib/browser/keybinding';
 import { KeymapsParser } from './keymaps-parser';
 
 import './keymaps-monaco-contribution';
-import { WidgetFactory } from '@theia/core/lib/browser';
+import { WidgetFactory } from '@devpodio/core/lib/browser';
 import { KeybindingWidget } from './keybindings-widget';
 
 import '../../src/browser/style/index.css';

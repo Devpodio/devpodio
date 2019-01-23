@@ -15,7 +15,7 @@
  ********************************************************************************/
 
 import { injectable, inject, postConstruct } from 'inversify';
-import { Disposable } from '@theia/core/lib/common/disposable';
+import { Disposable } from '@devpodio/core/lib/common/disposable';
 import { ProcessTaskRunner } from './process/process-task-runner';
 import { Task } from './task';
 import { TaskConfiguration } from '../common/task-protocol';

@@ -15,9 +15,9 @@
  ********************************************************************************/
 
 import { ContainerModule } from 'inversify';
-import { bindContributionProvider } from '@theia/core/lib/common/contribution-provider';
-import { BackendApplicationContribution } from '@theia/core/lib/node/backend-application';
-import { ConnectionHandler, JsonRpcConnectionHandler } from '@theia/core/lib/common';
+import { bindContributionProvider } from '@devpodio/core/lib/common/contribution-provider';
+import { BackendApplicationContribution } from '@devpodio/core/lib/node/backend-application';
+import { ConnectionHandler, JsonRpcConnectionHandler } from '@devpodio/core/lib/common';
 import { MiniBrowserService, MiniBrowserServicePath } from '../common/mini-browser-service';
 import { MiniBrowserEndpoint, MiniBrowserEndpointHandler, HtmlHandler, ImageHandler, PdfHandler, SvgHandler } from './mini-browser-endpoint';
 

@@ -15,13 +15,13 @@
  ********************************************************************************/
 
 import * as React from 'react';
-import { WidgetOpenerOptions, DISABLED_CLASS } from '@theia/core/lib/browser';
-import { EditorWidget, Range, Position } from '@theia/editor/lib/browser';
+import { WidgetOpenerOptions, DISABLED_CLASS } from '@devpodio/core/lib/browser';
+import { EditorWidget, Range, Position } from '@devpodio/editor/lib/browser';
 import { DebugProtocol } from 'vscode-debugprotocol/lib/debugProtocol';
-import { TreeElement } from '@theia/core/lib/browser/source-tree';
+import { TreeElement } from '@devpodio/core/lib/browser/source-tree';
 import { DebugScope } from '../console/debug-console-items';
 import { DebugSource } from './debug-source';
-import { RecursivePartial } from '@theia/core';
+import { RecursivePartial } from '@devpodio/core';
 import { DebugSession } from '../debug-session';
 import { DebugThread } from './debug-thread';
 

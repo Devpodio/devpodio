@@ -15,8 +15,8 @@
  ********************************************************************************/
 
 import { injectable } from 'inversify';
-import { Disposable, DisposableCollection, MaybePromise } from '@theia/core';
-import URI from '@theia/core/lib/common/uri';
+import { Disposable, DisposableCollection, MaybePromise } from '@devpodio/core';
+import URI from '@devpodio/core/lib/common/uri';
 
 /**
  * Variable can be used inside of strings using ${variableName} syntax.

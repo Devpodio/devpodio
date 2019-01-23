@@ -15,9 +15,9 @@
  ********************************************************************************/
 
 import { injectable } from 'inversify';
-import { BaseLanguageServerContribution, IConnection } from '@theia/languages/lib/node';
+import { BaseLanguageServerContribution, IConnection } from '@devpodio/languages/lib/node';
 import { PYTHON_LANGUAGE_ID, PYTHON_LANGUAGE_NAME } from '../common';
-import { parseArgs } from '@theia/process/lib/node/utils';
+import { parseArgs } from '@devpodio/process/lib/node/utils';
 import { SpawnOptions } from 'child_process';
 
 @injectable()

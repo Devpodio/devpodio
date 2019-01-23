@@ -46,7 +46,7 @@ import { ShellContribution } from './shell';
 import { TclContribution } from './tcl';
 import { XmlContribution } from './xml';
 import { XslContribution } from './xsl';
-import { LanguageGrammarDefinitionContribution } from '@theia/monaco/lib/browser/textmate/textmate-contribution';
+import { LanguageGrammarDefinitionContribution } from '@devpodio/monaco/lib/browser/textmate/textmate-contribution';
 
 export default new ContainerModule(bind => {
     bind(BatContribution).toSelf().inSingletonScope();

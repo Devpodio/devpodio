@@ -15,7 +15,7 @@
  ********************************************************************************/
 
 import { injectable, inject } from 'inversify';
-import { ApplicationShell } from '@theia/core/lib/browser';
+import { ApplicationShell } from '@devpodio/core/lib/browser';
 import { ConsoleWidget } from './console-widget';
 
 @injectable()

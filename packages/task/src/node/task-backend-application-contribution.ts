@@ -15,8 +15,8 @@
  ********************************************************************************/
 
 import { injectable, inject, named } from 'inversify';
-import { ContributionProvider } from '@theia/core';
-import { BackendApplicationContribution } from '@theia/core/lib/node';
+import { ContributionProvider } from '@devpodio/core';
+import { BackendApplicationContribution } from '@devpodio/core/lib/node';
 import { TaskRunnerContribution, TaskRunnerRegistry } from './task-runner';
 
 @injectable()

@@ -8,10 +8,10 @@
 import { injectable, postConstruct, inject } from 'inversify';
 import * as path from 'path';
 import * as http from 'http';
-import { ILogger } from '@theia/core/lib/common/logger';
-import { Disposable } from '@theia/core/lib/common/disposable';
-import { MaybePromise } from '@theia/core/lib/common/types';
-import { Deferred } from '@theia/core/lib/common/promise-util';
+import { ILogger } from '@devpodio/core/lib/common/logger';
+import { Disposable } from '@devpodio/core/lib/common/disposable';
+import { MaybePromise } from '@devpodio/core/lib/common/types';
+import { Deferred } from '@devpodio/core/lib/common/promise-util';
 import { GitPrompt } from '../../common/git-prompt';
 import { DugiteGitPromptServer } from '../../node/dugite-git-prompt';
 

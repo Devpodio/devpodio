@@ -15,10 +15,10 @@
  ********************************************************************************/
 
 import { inject, injectable } from 'inversify';
-import { CommandContribution, CommandRegistry, Command } from '@theia/core/lib/common';
-import URI from '@theia/core/lib/common/uri';
-import { CommonCommands, PreferenceService, QuickPickItem, QuickPickService, LabelProvider, QuickPickValue } from '@theia/core/lib/browser';
-import { Languages, Language } from '@theia/languages/lib/browser';
+import { CommandContribution, CommandRegistry, Command } from '@devpodio/core/lib/common';
+import URI from '@devpodio/core/lib/common/uri';
+import { CommonCommands, PreferenceService, QuickPickItem, QuickPickService, LabelProvider, QuickPickValue } from '@devpodio/core/lib/browser';
+import { Languages, Language } from '@devpodio/languages/lib/browser';
 import { EditorManager } from './editor-manager';
 
 export namespace EditorCommands {

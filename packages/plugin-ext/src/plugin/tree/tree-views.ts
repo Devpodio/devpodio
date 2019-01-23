@@ -16,8 +16,8 @@
 
 // tslint:disable:no-any
 
-import { TreeDataProvider, TreeView, TreeViewExpansionEvent, TreeItem } from '@theia/plugin';
-import { Emitter } from '@theia/core/lib/common/event';
+import { TreeDataProvider, TreeView, TreeViewExpansionEvent, TreeItem } from '@devpodio/plugin';
+import { Emitter } from '@devpodio/core/lib/common/event';
 import { Disposable } from '../types-impl';
 import { PLUGIN_RPC_CONTEXT, TreeViewsExt, TreeViewsMain, TreeViewItem } from '../../api/plugin-api';
 import { RPCProtocol } from '../../api/rpc-protocol';

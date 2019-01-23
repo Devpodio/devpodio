@@ -22,8 +22,8 @@ import {
     ProgressMessage,
     ProgressUpdate,
     CancellationToken
-} from '@theia/core/lib/common';
-import { Notifications, NotificationAction, NotificationProperties, ProgressNotification} from './notifications';
+} from '@devpodio/core/lib/common';
+import { Notifications, NotificationAction, NotificationProperties, ProgressNotification } from './notifications';
 import { NotificationPreferences } from './notification-preferences';
 
 @injectable()
@@ -99,7 +99,7 @@ export class NotificationsMessageClient extends MessageClient {
         const text = message.text;
         const actions = (message.actions || []).map(action => <NotificationAction>{
             label: action,
-            fn: element => onCloseFn(action)
+            fn: () => onCloseFn(action)
         });
 
         const timeout = actions.length > 0 ? undefined
@@ -109,7 +109,7 @@ export class NotificationsMessageClient extends MessageClient {
 
         actions.push(<NotificationAction>{
             label: 'Close',
-            fn: element => onCloseFn(undefined)
+            fn: () => onCloseFn(undefined)
         });
         return {
             id,

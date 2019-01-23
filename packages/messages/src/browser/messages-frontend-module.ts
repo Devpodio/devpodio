@@ -15,7 +15,7 @@
  ********************************************************************************/
 
 import { ContainerModule } from 'inversify';
-import { MessageClient } from '@theia/core/lib/common';
+import { MessageClient } from '@devpodio/core/lib/common';
 
 import { NotificationsMessageClient } from './notifications-message-client';
 

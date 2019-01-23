@@ -14,8 +14,8 @@
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  ********************************************************************************/
 import { QuickOpenExt, PLUGIN_RPC_CONTEXT as Ext, QuickOpenMain, PickOpenItem } from '../api/plugin-api';
-import { QuickPickOptions, QuickPickItem, InputBoxOptions } from '@theia/plugin';
-import { CancellationToken } from '@theia/core/lib/common/cancellation';
+import { QuickPickOptions, QuickPickItem, InputBoxOptions } from '@devpodio/plugin';
+import { CancellationToken } from '@devpodio/core/lib/common/cancellation';
 import { RPCProtocol } from '../api/rpc-protocol';
 import { anyPromise } from '../api/async-util';
 import { hookCancellationToken } from '../api/async-util';

@@ -18,13 +18,13 @@ import { WebviewsMain, WebviewPanelShowOptions, MAIN_RPC_CONTEXT, WebviewsExt } 
 import { interfaces } from 'inversify';
 import { RPCProtocol } from '../../api/rpc-protocol';
 import { UriComponents } from '../../common/uri-components';
-import { WebviewOptions, WebviewPanelOptions } from '@theia/plugin';
-import { ApplicationShell } from '@theia/core/lib/browser/shell/application-shell';
-import { KeybindingRegistry } from '@theia/core/lib/browser/keybinding';
+import { WebviewOptions, WebviewPanelOptions } from '@devpodio/plugin';
+import { ApplicationShell } from '@devpodio/core/lib/browser/shell/application-shell';
+import { KeybindingRegistry } from '@devpodio/core/lib/browser/keybinding';
 import { WebviewWidget } from './webview/webview';
-import { ThemeService } from '@theia/core/lib/browser/theming';
+import { ThemeService } from '@devpodio/core/lib/browser/theming';
 import { ThemeRulesService } from './webview/theme-rules-service';
-import { DisposableCollection } from '@theia/core';
+import { DisposableCollection } from '@devpodio/core';
 
 export class WebviewsMainImpl implements WebviewsMain {
     private readonly proxy: WebviewsExt;

@@ -17,7 +17,7 @@
 import { injectable, inject } from 'inversify';
 import * as fs from 'fs-extra';
 import { pack } from 'tar-fs';
-import URI from '@theia/core/lib/common/uri';
+import URI from '@devpodio/core/lib/common/uri';
 import { FileSystem } from '../../common/filesystem';
 
 @injectable()

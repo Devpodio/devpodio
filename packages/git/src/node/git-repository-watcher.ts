@@ -15,7 +15,7 @@
  ********************************************************************************/
 
 import { injectable, inject } from 'inversify';
-import { Disposable, Event, Emitter, ILogger, DisposableCollection } from '@theia/core';
+import { Disposable, Event, Emitter, ILogger, DisposableCollection } from '@devpodio/core';
 import { Git, Repository, WorkingDirectoryStatus, GitUtils } from '../common';
 import { GitStatusChangeEvent } from '../common/git-watcher';
 

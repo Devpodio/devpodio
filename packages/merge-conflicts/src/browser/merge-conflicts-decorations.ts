@@ -15,7 +15,7 @@
  ********************************************************************************/
 
 import { injectable } from 'inversify';
-import { OverviewRulerLane, EditorDecoration, EditorDecorationOptions, EditorDecorator } from '@theia/editor/lib/browser';
+import { OverviewRulerLane, EditorDecoration, EditorDecorationOptions, EditorDecorator } from '@devpodio/editor/lib/browser';
 import { MergeConflictsUpdate } from './merge-conflicts-provider';
 
 @injectable()

@@ -18,14 +18,14 @@ import * as os from 'os';
 import * as paths from 'path';
 import * as fs from 'fs-extra';
 import { injectable, inject } from 'inversify';
-import { ApplicationPackageOptions, NpmRegistry } from '@theia/application-package';
-import { ApplicationPackageManager } from '@theia/application-manager';
+import { ApplicationPackageOptions, NpmRegistry } from '@devpodio/application-package';
+import { ApplicationPackageManager } from '@devpodio/application-manager';
 import {
     Disposable, DisposableCollection, Event, Emitter, ILogger,
     CancellationTokenSource, CancellationToken, isCancelled, checkCancelled
-} from '@theia/core';
-import { FileUri, ServerProcess } from '@theia/core/lib/node';
-import { FileSystemWatcherServer, DidFilesChangedParams } from '@theia/filesystem/lib/common/filesystem-watcher-protocol';
+} from '@devpodio/core';
+import { FileUri, ServerProcess } from '@devpodio/core/lib/node';
+import { FileSystemWatcherServer, DidFilesChangedParams } from '@devpodio/filesystem/lib/common/filesystem-watcher-protocol';
 import { InstallationResult, InstallationParam } from '../common/extension-protocol';
 import { NpmClient } from './npm-client';
 

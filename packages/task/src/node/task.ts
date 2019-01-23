@@ -15,7 +15,7 @@
  ********************************************************************************/
 
 import { injectable } from 'inversify';
-import { ILogger, Emitter, Event, MaybePromise } from '@theia/core/lib/common/';
+import { ILogger, Emitter, Event, MaybePromise } from '@devpodio/core/lib/common/';
 import { TaskManager } from './task-manager';
 import { TaskInfo, TaskExitedEvent, TaskConfiguration } from '../common/task-protocol';
 

@@ -18,7 +18,7 @@ import { interfaces, Container } from 'inversify';
 import { MarkerOptions } from '../marker-tree';
 import { ProblemWidget } from './problem-widget';
 import { ProblemTreeModel, ProblemTree } from './problem-tree-model';
-import { TreeWidget, TreeProps, defaultTreeProps, TreeModel, createTreeContainer, TreeModelImpl, TreeImpl, Tree } from '@theia/core/lib/browser';
+import { TreeWidget, TreeProps, defaultTreeProps, TreeModel, createTreeContainer, TreeModelImpl, TreeImpl, Tree } from '@devpodio/core/lib/browser';
 import { PROBLEM_KIND } from '../../common/problem-marker';
 
 export const PROBLEM_TREE_PROPS = <TreeProps>{

@@ -15,10 +15,10 @@
  ********************************************************************************/
 
 import * as yargs from 'yargs';
-import { JsonRpcProxyFactory } from '@theia/core';
+import { JsonRpcProxyFactory } from '@devpodio/core';
 import { FileSystemWatcherClient } from '../../common/filesystem-watcher-protocol';
 import { NsfwFileSystemWatcherServer } from './nsfw-filesystem-watcher';
-import { IPCEntryPoint } from '@theia/core/lib/node/messaging/ipc-protocol';
+import { IPCEntryPoint } from '@devpodio/core/lib/node/messaging/ipc-protocol';
 
 // tslint:disable:no-any
 

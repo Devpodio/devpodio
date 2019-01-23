@@ -37,9 +37,9 @@ describe('extension-package', function () {
         testOutdated(async extensionPackage => {
             const latestVersion = await extensionPackage.getLatestVersion();
             return latestVersion ? semver.gt(latestVersion, extensionPackage.raw.version) : false;
-        }, '@theia/core', 'next');
-        testOutdated(() => false, '@theia/core', 'latest');
-        testOutdated(() => true, '@theia/core', '0.1.0');
+        }, '@devpodio/core', 'next');
+        testOutdated(() => false, '@devpodio/core', 'latest');
+        testOutdated(() => true, '@devpodio/core', '0.1.0');
     });
 
 });

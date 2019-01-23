@@ -8,7 +8,7 @@ For instance, if you want add a new `hello` script that prints `Hello World`:
 
 ```json
 {
-    "name": "@theia/ext-scripts",
+    "name": "@devpodio/ext-scripts",
     "scripts": {
         "ext:hello": "echo 'Hello World'"
     }
@@ -19,9 +19,9 @@ For instance, if you want add a new `hello` script that prints `Hello World`:
 
 ```json
 {
-    "name": "@theia/myextension",
+    "name": "@devpodio/myextension",
     "devDependencies": {
-        "@theia/ext-scripts": "^0.1.1"
+        "@devpodio/ext-scripts": "^0.1.1"
     }
 }
 ```
@@ -36,7 +36,7 @@ For instance, if you want add a new `hello` script that prints `Hello World`:
 
 ```json
 {
-    "name": "@theia/myextension",
+    "name": "@devpodio/myextension",
     "scripts": {
         "hello": "theiaext hello"
     }

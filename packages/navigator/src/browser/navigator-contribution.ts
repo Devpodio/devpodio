@@ -15,15 +15,15 @@
  ********************************************************************************/
 
 import { injectable, inject, postConstruct } from 'inversify';
-import { AbstractViewContribution } from '@theia/core/lib/browser/shell/view-contribution';
+import { AbstractViewContribution } from '@devpodio/core/lib/browser/shell/view-contribution';
 import {
     Navigatable, SelectableTreeNode, Widget, KeybindingRegistry, CommonCommands,
     OpenerService, FrontendApplicationContribution, FrontendApplication, CompositeTreeNode
-} from '@theia/core/lib/browser';
-import { FileDownloadCommands } from '@theia/filesystem/lib/browser/download/file-download-command-contribution';
-import { CommandRegistry, MenuModelRegistry, MenuPath, isOSX, Command } from '@theia/core/lib/common';
-import { SHELL_TABBAR_CONTEXT_MENU } from '@theia/core/lib/browser';
-import { WorkspaceCommands, WorkspaceService, WorkspacePreferences } from '@theia/workspace/lib/browser';
+} from '@devpodio/core/lib/browser';
+import { FileDownloadCommands } from '@devpodio/filesystem/lib/browser/download/file-download-command-contribution';
+import { CommandRegistry, MenuModelRegistry, MenuPath, isOSX, Command } from '@devpodio/core/lib/common';
+import { SHELL_TABBAR_CONTEXT_MENU } from '@devpodio/core/lib/browser';
+import { WorkspaceCommands, WorkspaceService, WorkspacePreferences } from '@devpodio/workspace/lib/browser';
 import { FILE_NAVIGATOR_ID, FileNavigatorWidget } from './navigator-widget';
 import { FileNavigatorPreferences } from './navigator-preferences';
 import { NavigatorKeybindingContexts } from './navigator-keybinding-context';

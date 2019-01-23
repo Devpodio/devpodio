@@ -15,13 +15,13 @@
  ********************************************************************************/
 
 import { inject, injectable, postConstruct } from 'inversify';
-import URI from '@theia/core/lib/common/uri';
-import { ResourceProvider, Resource } from '@theia/core/lib/common';
-import { Keybinding, KeybindingRegistry, KeybindingScope, OpenerService, open, WidgetOpenerOptions, Widget } from '@theia/core/lib/browser';
-import { UserStorageUri } from '@theia/userstorage/lib/browser';
+import URI from '@devpodio/core/lib/common/uri';
+import { ResourceProvider, Resource } from '@devpodio/core/lib/common';
+import { Keybinding, KeybindingRegistry, KeybindingScope, OpenerService, open, WidgetOpenerOptions, Widget } from '@devpodio/core/lib/browser';
+import { UserStorageUri } from '@devpodio/userstorage/lib/browser';
 import { KeymapsParser } from './keymaps-parser';
 import * as jsoncparser from 'jsonc-parser';
-import { Emitter } from '@theia/core/lib/common/';
+import { Emitter } from '@devpodio/core/lib/common/';
 
 export interface KeybindingJson {
     command: string,

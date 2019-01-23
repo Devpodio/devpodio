@@ -25,10 +25,10 @@ import {
     forward,
     IConnection
 } from 'vscode-ws-jsonrpc/lib/server';
-import { MaybePromise } from '@theia/core/lib/common';
+import { MaybePromise } from '@devpodio/core/lib/common';
 import { LanguageContribution } from '../common';
-import { RawProcess, RawProcessFactory } from '@theia/process/lib/node/raw-process';
-import { ProcessManager } from '@theia/process/lib/node/process-manager';
+import { RawProcess, RawProcessFactory } from '@devpodio/process/lib/node/raw-process';
+import { ProcessManager } from '@devpodio/process/lib/node/process-manager';
 
 export {
     LanguageContribution, IConnection, Message

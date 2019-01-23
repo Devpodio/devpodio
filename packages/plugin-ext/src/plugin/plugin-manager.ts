@@ -25,10 +25,10 @@ import {
     ConfigStorage
 } from '../api/plugin-api';
 import { PluginMetadata } from '../common/plugin-protocol';
-import * as theia from '@theia/plugin';
+import * as theia from '@devpodio/plugin';
 import { join } from 'path';
 import { dispose } from '../common/disposable-util';
-import { Deferred } from '@theia/core/lib/common/promise-util';
+import { Deferred } from '@devpodio/core/lib/common/promise-util';
 import { EnvExtImpl } from './env';
 import { PreferenceRegistryExtImpl } from './preference-registry';
 import { Memento, KeyValueStorageProxy } from './plugin-storage';

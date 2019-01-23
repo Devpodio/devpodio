@@ -14,7 +14,7 @@
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  ********************************************************************************/
 import { PLUGIN_RPC_CONTEXT as Ext, OpenDialogOptionsMain, DialogsMain, SaveDialogOptionsMain } from '../api/plugin-api';
-import { OpenDialogOptions, SaveDialogOptions } from '@theia/plugin';
+import { OpenDialogOptions, SaveDialogOptions } from '@devpodio/plugin';
 import { RPCProtocol } from '../api/rpc-protocol';
 import Uri from 'vscode-uri';
 

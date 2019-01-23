@@ -15,10 +15,10 @@
  ********************************************************************************/
 
 import { injectable, inject } from 'inversify';
-import URI from '@theia/core/lib/common/uri';
-import { Command, CommandService } from '@theia/core/lib/common/command';
-import { AbstractDialog } from '@theia/core/lib/browser';
-import { WindowService } from '@theia/core/lib/browser/window/window-service';
+import URI from '@devpodio/core/lib/common/uri';
+import { Command, CommandService } from '@devpodio/core/lib/common/command';
+import { AbstractDialog } from '@devpodio/core/lib/browser';
+import { WindowService } from '@devpodio/core/lib/browser/window/window-service';
 
 @injectable()
 export class OpenUriCommandHandler {

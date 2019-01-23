@@ -15,9 +15,9 @@
  ********************************************************************************/
 
 import { injectable, inject } from 'inversify';
-import { FrontendApplication, FrontendApplicationContribution } from '@theia/core/lib/browser';
-import { CommandContribution, CommandRegistry } from '@theia/core/lib/common';
-import { Languages } from '@theia/languages/lib/browser';
+import { FrontendApplication, FrontendApplicationContribution } from '@devpodio/core/lib/browser';
+import { CommandContribution, CommandRegistry } from '@devpodio/core/lib/common';
+import { Languages } from '@devpodio/languages/lib/browser';
 import { MergeConflictsCodeLensProvider } from './merge-conflicts-code-lense-provider';
 import { MergeConflictResolver } from './merge-conflict-resolver';
 import { MergeConflictsCommands as Commands } from './merge-conflict';

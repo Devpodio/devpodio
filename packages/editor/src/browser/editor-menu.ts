@@ -15,8 +15,8 @@
  ********************************************************************************/
 
 import { injectable } from 'inversify';
-import { MenuContribution, MenuModelRegistry, MenuPath, MAIN_MENU_BAR } from '@theia/core';
-import { CommonCommands } from '@theia/core/lib/browser';
+import { MenuContribution, MenuModelRegistry, MenuPath, MAIN_MENU_BAR } from '@devpodio/core';
+import { CommonCommands } from '@devpodio/core/lib/browser';
 import { EditorCommands } from './editor-command';
 
 export const EDITOR_CONTEXT_MENU: MenuPath = ['editor_context_menu'];

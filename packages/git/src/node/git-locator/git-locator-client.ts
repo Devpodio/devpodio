@@ -16,8 +16,8 @@
 
 import * as paths from 'path';
 import { inject, injectable } from 'inversify';
-import { JsonRpcProxyFactory, DisposableCollection } from '@theia/core';
-import { IPCConnectionProvider } from '@theia/core/lib/node';
+import { JsonRpcProxyFactory, DisposableCollection } from '@devpodio/core';
+import { IPCConnectionProvider } from '@devpodio/core/lib/node';
 import { GitLocator, GitLocateOptions } from './git-locator-protocol';
 
 @injectable()

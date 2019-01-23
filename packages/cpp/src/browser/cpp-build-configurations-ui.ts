@@ -14,16 +14,16 @@
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  ********************************************************************************/
 
-import { Command, CommandContribution, CommandRegistry, CommandService } from '@theia/core';
+import { Command, CommandContribution, CommandRegistry, CommandService } from '@devpodio/core';
 import { injectable, inject } from 'inversify';
-import { QuickOpenService } from '@theia/core/lib/browser/quick-open/quick-open-service';
-import { QuickOpenModel, QuickOpenItem, QuickOpenMode, } from '@theia/core/lib/browser/quick-open/quick-open-model';
-import { FileSystem, FileSystemUtils } from '@theia/filesystem/lib/common';
-import URI from '@theia/core/lib/common/uri';
-import { PreferenceScope, PreferenceService } from '@theia/preferences/lib/browser';
+import { QuickOpenService } from '@devpodio/core/lib/browser/quick-open/quick-open-service';
+import { QuickOpenModel, QuickOpenItem, QuickOpenMode, } from '@devpodio/core/lib/browser/quick-open/quick-open-model';
+import { FileSystem, FileSystemUtils } from '@devpodio/filesystem/lib/common';
+import URI from '@devpodio/core/lib/common/uri';
+import { PreferenceScope, PreferenceService } from '@devpodio/preferences/lib/browser';
 import { CppBuildConfigurationManager, CppBuildConfiguration, CPP_BUILD_CONFIGURATIONS_PREFERENCE_KEY } from './cpp-build-configurations';
-import { EditorManager } from '@theia/editor/lib/browser';
-import { CommonCommands } from '@theia/core/lib/browser';
+import { EditorManager } from '@devpodio/editor/lib/browser';
+import { CommonCommands } from '@devpodio/core/lib/browser';
 
 @injectable()
 export class CppBuildConfigurationChanger implements QuickOpenModel {

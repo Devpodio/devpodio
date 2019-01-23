@@ -14,12 +14,12 @@
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  ********************************************************************************/
 
-import { AbstractViewContribution, ApplicationShell, KeybindingRegistry } from '@theia/core/lib/browser';
+import { AbstractViewContribution, ApplicationShell, KeybindingRegistry } from '@devpodio/core/lib/browser';
 import { injectable, inject } from 'inversify';
-import { ThemeService } from '@theia/core/lib/browser/theming';
-import { MenuModelRegistry, CommandRegistry, MAIN_MENU_BAR, Command } from '@theia/core/lib/common';
+import { ThemeService } from '@devpodio/core/lib/browser/theming';
+import { MenuModelRegistry, CommandRegistry, MAIN_MENU_BAR, Command } from '@devpodio/core/lib/common';
 import { DebugViewLocation } from '../common/debug-configuration';
-import { EditorKeybindingContexts } from '@theia/editor/lib/browser';
+import { EditorKeybindingContexts } from '@devpodio/editor/lib/browser';
 import { DebugSessionManager } from './debug-session-manager';
 import { DebugWidget } from './view/debug-widget';
 import { BreakpointManager } from './breakpoint/breakpoint-manager';

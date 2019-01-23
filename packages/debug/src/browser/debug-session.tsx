@@ -17,12 +17,12 @@
 // tslint:disable:no-any
 
 import * as React from 'react';
-import { LabelProvider } from '@theia/core/lib/browser';
+import { LabelProvider } from '@devpodio/core/lib/browser';
 import { DebugProtocol } from 'vscode-debugprotocol';
-import { Emitter, Event, DisposableCollection, Disposable, MessageClient, MessageType, Mutable } from '@theia/core/lib/common';
-import { TerminalService } from '@theia/terminal/lib/browser/base/terminal-service';
-import { EditorManager } from '@theia/editor/lib/browser';
-import { CompositeTreeElement } from '@theia/core/lib/browser/source-tree';
+import { Emitter, Event, DisposableCollection, Disposable, MessageClient, MessageType, Mutable } from '@devpodio/core/lib/common';
+import { TerminalService } from '@devpodio/terminal/lib/browser/base/terminal-service';
+import { EditorManager } from '@devpodio/editor/lib/browser';
+import { CompositeTreeElement } from '@devpodio/core/lib/browser/source-tree';
 import { DebugSessionConnection, DebugRequestTypes, DebugEventTypes } from './debug-session-connection';
 import { DebugThread, StoppedDetails, DebugThreadData } from './model/debug-thread';
 import { DebugScope } from './console/debug-console-items';
@@ -30,7 +30,7 @@ import { DebugStackFrame } from './model/debug-stack-frame';
 import { DebugSource } from './model/debug-source';
 import { DebugBreakpoint } from './model/debug-breakpoint';
 import debounce = require('p-debounce');
-import URI from '@theia/core/lib/common/uri';
+import URI from '@devpodio/core/lib/common/uri';
 import { BreakpointManager } from './breakpoint/breakpoint-manager';
 import { DebugSessionOptions, InternalDebugSessionOptions } from './debug-session-options';
 import { DebugConfiguration } from '../common/debug-common';

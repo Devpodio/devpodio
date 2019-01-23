@@ -15,7 +15,7 @@
  ********************************************************************************/
 
 import { ChildProcess } from 'child_process';
-import { Disposable } from '@theia/core';
+import { Disposable } from '@devpodio/core';
 import { Repository, WorkingDirectoryStatus, Branch, GitResult, GitError, GitFileStatus, GitFileChange, CommitWithChanges, GitFileBlame } from './git-model';
 
 /**

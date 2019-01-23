@@ -47,9 +47,9 @@ import { isObject } from 'util';
 import { GrammarsReader } from './grammars-reader';
 import { CharacterPair } from '../../../api/plugin-api';
 import * as jsoncparser from 'jsonc-parser';
-import { IJSONSchema } from '@theia/core/lib/common/json-schema';
-import { deepClone } from '@theia/core/lib/common/objects';
-import { FileUri } from '@theia/core/lib/node/file-uri';
+import { IJSONSchema } from '@devpodio/core/lib/common/json-schema';
+import { deepClone } from '@devpodio/core/lib/common/objects';
+import { FileUri } from '@devpodio/core/lib/node/file-uri';
 
 namespace nls {
     export function localize(key: string, _default: string) {

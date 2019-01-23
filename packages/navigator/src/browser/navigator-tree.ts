@@ -15,10 +15,10 @@
  ********************************************************************************/
 
 import { injectable, inject, postConstruct } from 'inversify';
-import { FileTree, DirNode } from '@theia/filesystem/lib/browser';
-import { FileStat } from '@theia/filesystem/lib/common';
-import URI from '@theia/core/lib/common/uri';
-import { TreeNode, CompositeTreeNode, SelectableTreeNode } from '@theia/core/lib/browser';
+import { FileTree, DirNode } from '@devpodio/filesystem/lib/browser';
+import { FileStat } from '@devpodio/filesystem/lib/common';
+import URI from '@devpodio/core/lib/common/uri';
+import { TreeNode, CompositeTreeNode, SelectableTreeNode } from '@devpodio/core/lib/browser';
 import { FileNavigatorFilter } from './navigator-filter';
 
 @injectable()

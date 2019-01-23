@@ -15,9 +15,9 @@
  ********************************************************************************/
 
 import { injectable, inject, postConstruct } from 'inversify';
-import { MonacoEditor } from '@theia/monaco/lib/browser/monaco-editor';
-import { TextDocumentSaveReason } from '@theia/languages/lib/browser';
-import { EditorManager, EditorWidget, TextEditor } from '@theia/editor/lib/browser';
+import { MonacoEditor } from '@devpodio/monaco/lib/browser/monaco-editor';
+import { TextDocumentSaveReason } from '@devpodio/languages/lib/browser';
+import { EditorManager, EditorWidget, TextEditor } from '@devpodio/editor/lib/browser';
 import { EditorconfigService } from '../common/editorconfig-interface';
 import { KnownProps } from 'editorconfig';
 

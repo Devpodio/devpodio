@@ -16,9 +16,9 @@
 
 import { injectable, inject } from 'inversify';
 import { PluginContribution } from '../../../common';
-import { Keybinding, KeybindingRegistry, KeybindingScope } from '@theia/core/lib/browser/keybinding';
-import { KeySequence } from '@theia/core/lib/browser';
-import { ILogger } from '@theia/core/lib/common/logger';
+import { Keybinding, KeybindingRegistry, KeybindingScope } from '@devpodio/core/lib/browser/keybinding';
+import { KeySequence } from '@devpodio/core/lib/browser';
+import { ILogger } from '@devpodio/core/lib/common/logger';
 
 @injectable()
 export class KeybindingsContributionPointHandler {

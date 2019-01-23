@@ -15,8 +15,8 @@
  ********************************************************************************/
 
 import * as yargs from 'yargs';
-import { ApplicationPackageManager, rebuild } from '@theia/application-manager';
-import { ApplicationProps } from '@theia/application-package';
+import { ApplicationPackageManager, rebuild } from '@devpodio/application-manager';
+import { ApplicationProps } from '@devpodio/application-package';
 
 process.on('unhandledRejection', (reason, promise) => {
     throw reason;
@@ -76,17 +76,6 @@ function rebuildCommand(command: string, target: ApplicationProps.Target): yargs
             handler: () => {
                 try {
                     manager.clean();
-                } catch (err) {
-                    console.error(err);
-                    process.exit(1);
-                }
-            }
-        })
-        .command({
-            command: 'copy',
-            handler: () => {
-                try {
-                    manager.copy();
                 } catch (err) {
                     console.error(err);
                     process.exit(1);

@@ -15,13 +15,13 @@
  ********************************************************************************/
 
 import { injectable, inject } from 'inversify';
-import { KeybindingContribution, KeybindingRegistry, Key, KeyCode, Keystroke, KeyModifier } from '@theia/core/lib/browser';
-import { EditorKeybindingContexts } from '@theia/editor/lib/browser';
+import { KeybindingContribution, KeybindingRegistry, Key, KeyCode, Keystroke, KeyModifier } from '@devpodio/core/lib/browser';
+import { EditorKeybindingContexts } from '@devpodio/editor/lib/browser';
 import { MonacoCommands } from './monaco-command';
 import { MonacoCommandRegistry } from './monaco-command-registry';
 import { KEY_CODE_MAP } from './monaco-keycode-map';
 import KeybindingsRegistry = monaco.keybindings.KeybindingsRegistry;
-import { isOSX } from '@theia/core';
+import { isOSX } from '@devpodio/core';
 
 function monaco2BrowserKeyCode(keyCode: monaco.KeyCode): number {
     for (let i = 0; i < KEY_CODE_MAP.length; i++) {

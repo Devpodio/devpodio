@@ -19,10 +19,10 @@
 import * as path from 'path';
 import * as fs from 'fs-extra';
 import * as express from 'express';
-import { ILogger } from '@theia/core';
+import { ILogger } from '@devpodio/core';
 import { inject, injectable, optional, multiInject } from 'inversify';
-import { Deferred } from '@theia/core/lib/common/promise-util';
-import { BackendApplicationContribution } from '@theia/core/lib/node/backend-application';
+import { Deferred } from '@devpodio/core/lib/common/promise-util';
+import { BackendApplicationContribution } from '@devpodio/core/lib/node/backend-application';
 import { PluginMetadata, getPluginId, MetadataProcessor } from '../../common/plugin-protocol';
 import { MetadataScanner } from './metadata-scanner';
 

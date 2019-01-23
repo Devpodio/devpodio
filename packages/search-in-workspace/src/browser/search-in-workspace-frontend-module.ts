@@ -17,8 +17,8 @@
 import { ContainerModule, interfaces } from 'inversify';
 import { SearchInWorkspaceService, SearchInWorkspaceClientImpl } from './search-in-workspace-service';
 import { SearchInWorkspaceServer } from '../common/search-in-workspace-interface';
-import { WebSocketConnectionProvider, WidgetFactory, createTreeContainer, TreeWidget, bindViewContribution, FrontendApplicationContribution } from '@theia/core/lib/browser';
-import { ResourceResolver } from '@theia/core';
+import { WebSocketConnectionProvider, WidgetFactory, createTreeContainer, TreeWidget, bindViewContribution, FrontendApplicationContribution } from '@devpodio/core/lib/browser';
+import { ResourceResolver } from '@devpodio/core';
 import { SearchInWorkspaceWidget } from './search-in-workspace-widget';
 import { SearchInWorkspaceResultTreeWidget } from './search-in-workspace-result-tree-widget';
 import { SearchInWorkspaceFrontendContribution } from './search-in-workspace-frontend-contribution';

@@ -15,16 +15,16 @@
  ********************************************************************************/
 
 import { injectable, inject } from 'inversify';
-import { DiffUris } from '@theia/core/lib/browser/diff-uris';
-import { OpenerService, open, StatefulWidget, SELECTED_CLASS, WidgetManager, ApplicationShell } from '@theia/core/lib/browser';
-import { CancellationTokenSource } from '@theia/core/lib/common/cancellation';
+import { DiffUris } from '@devpodio/core/lib/browser/diff-uris';
+import { OpenerService, open, StatefulWidget, SELECTED_CLASS, WidgetManager, ApplicationShell } from '@devpodio/core/lib/browser';
+import { CancellationTokenSource } from '@devpodio/core/lib/common/cancellation';
 import { Message } from '@phosphor/messaging';
 import { AutoSizer, List, ListRowRenderer, ListRowProps, InfiniteLoader, IndexRange, ScrollParams } from 'react-virtualized';
 import { GIT_RESOURCE_SCHEME } from '../git-resource';
-import URI from '@theia/core/lib/common/uri';
+import URI from '@devpodio/core/lib/common/uri';
 import { GIT_HISTORY_ID, GIT_HISTORY_MAX_COUNT, GIT_HISTORY_LABEL } from './git-history-contribution';
 import { GitFileStatus, Git, GitFileChange, Repository } from '../../common';
-import { FileSystem } from '@theia/filesystem/lib/common';
+import { FileSystem } from '@devpodio/filesystem/lib/common';
 import { GitDiffContribution } from '../diff/git-diff-contribution';
 import { GitAvatarService } from './git-avatar-service';
 import { GitCommitDetailUri, GitCommitDetailOpenerOptions, GitCommitDetailOpenHandler } from './git-commit-detail-open-handler';
@@ -32,7 +32,7 @@ import { GitCommitDetails } from './git-commit-detail-widget';
 import { GitNavigableListWidget } from '../git-navigable-list-widget';
 import { GitFileChangeNode } from '../git-file-change-node';
 import * as React from 'react';
-import { AlertMessage } from '@theia/core/lib/browser/widgets/alert-message';
+import { AlertMessage } from '@devpodio/core/lib/browser/widgets/alert-message';
 
 export interface GitCommitNode extends GitCommitDetails {
     fileChanges?: GitFileChange[];

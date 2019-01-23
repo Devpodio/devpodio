@@ -15,8 +15,8 @@
  ********************************************************************************/
 
 import { ContainerModule } from 'inversify';
-import { BackendApplicationContribution } from '@theia/core/lib/node';
-import { bindContributionProvider } from '@theia/core/lib/common';
+import { BackendApplicationContribution } from '@devpodio/core/lib/node';
+import { bindContributionProvider } from '@devpodio/core/lib/common';
 import { MetricsContribution } from './metrics-contribution';
 import { NodeMetricsContribution } from './node-metrics-contribution';
 import { ExtensionMetricsContribution } from './extensions-metrics-contribution';

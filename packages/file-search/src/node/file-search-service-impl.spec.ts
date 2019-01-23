@@ -17,11 +17,11 @@
 import { expect } from 'chai';
 import * as path from 'path';
 import { FileSearchServiceImpl } from './file-search-service-impl';
-import { FileUri } from '@theia/core/lib/node';
+import { FileUri } from '@devpodio/core/lib/node';
 import { Container, ContainerModule } from 'inversify';
-import { CancellationTokenSource } from '@theia/core';
-import { bindLogger } from '@theia/core/lib/node/logger-backend-module';
-import processBackendModule from '@theia/process/lib/node/process-backend-module';
+import { CancellationTokenSource } from '@devpodio/core';
+import { bindLogger } from '@devpodio/core/lib/node/logger-backend-module';
+import processBackendModule from '@devpodio/process/lib/node/process-backend-module';
 
 // tslint:disable:no-unused-expression
 

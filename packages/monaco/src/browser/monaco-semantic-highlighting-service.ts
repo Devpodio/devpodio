@@ -15,12 +15,12 @@
  ********************************************************************************/
 
 import { inject, injectable } from 'inversify';
-import URI from '@theia/core/lib/common/uri';
-import { ILogger } from '@theia/core/lib/common/logger';
-import { EditorManager } from '@theia/editor/lib/browser/editor-manager';
-import { Disposable, DisposableCollection } from '@theia/core/lib/common/disposable';
-import { EditorDecoration, EditorDecorationOptions } from '@theia/editor/lib/browser/decorations';
-import { SemanticHighlightingService, SemanticHighlightingRange, Range } from '@theia/editor/lib/browser/semantic-highlight/semantic-highlighting-service';
+import URI from '@devpodio/core/lib/common/uri';
+import { ILogger } from '@devpodio/core/lib/common/logger';
+import { EditorManager } from '@devpodio/editor/lib/browser/editor-manager';
+import { Disposable, DisposableCollection } from '@devpodio/core/lib/common/disposable';
+import { EditorDecoration, EditorDecorationOptions } from '@devpodio/editor/lib/browser/decorations';
+import { SemanticHighlightingService, SemanticHighlightingRange, Range } from '@devpodio/editor/lib/browser/semantic-highlight/semantic-highlighting-service';
 import { MonacoEditor } from './monaco-editor';
 
 @injectable()

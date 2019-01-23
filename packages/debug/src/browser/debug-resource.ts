@@ -15,8 +15,8 @@
  ********************************************************************************/
 
 import { injectable, inject } from 'inversify';
-import { Resource, ResourceResolver } from '@theia/core';
-import URI from '@theia/core/lib/common/uri';
+import { Resource, ResourceResolver } from '@devpodio/core';
+import URI from '@devpodio/core/lib/common/uri';
 import { DebugSessionManager } from './debug-session-manager';
 import { DebugSource } from './model/debug-source';
 

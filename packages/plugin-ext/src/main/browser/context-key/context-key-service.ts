@@ -20,8 +20,8 @@
 // adjusted to Theia APIs
 
 import { injectable, unmanaged, inject } from 'inversify';
-import { PreferenceService } from '@theia/core/lib/browser';
-import { Event, Emitter, DisposableCollection, Disposable } from '@theia/core/lib/common';
+import { PreferenceService } from '@devpodio/core/lib/browser';
+import { Event, Emitter, DisposableCollection, Disposable } from '@devpodio/core/lib/common';
 import { ContextKeyExpr, Context, ContextKey, ContextKeyChangeEvent, ContextKeyService, ContextKeyServiceTarget, ReadableSet } from './context-key';
 
 const KEYBINDING_CONTEXT_ATTR = 'data-keybinding-context';

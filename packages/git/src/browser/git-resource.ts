@@ -16,8 +16,8 @@
 
 import { injectable, inject } from 'inversify';
 import { Git, Repository } from '../common';
-import { Resource, ResourceResolver } from '@theia/core';
-import URI from '@theia/core/lib/common/uri';
+import { Resource, ResourceResolver } from '@devpodio/core';
+import URI from '@devpodio/core/lib/common/uri';
 import { GitRepositoryProvider } from './git-repository-provider';
 
 export const GIT_RESOURCE_SCHEME = 'gitrev';

@@ -2,7 +2,7 @@
  * google-material-color v1.2.6
  * https://github.com/danlevan/google-material-color
  */
-:root { 
+:root {
   --md-red-50: #FFEBEE;
   --md-red-100: #FFCDD2;
   --md-red-200: #EF9A9A;
@@ -85,7 +85,7 @@
   --md-blue-400: #42A5F5;
   --md-blue-500: #2196F3;
   --md-blue-600: #1E88E5;
-  --md-blue-700: #1976D2;
+  --md-blue-700: #699737;
   --md-blue-800: #1565C0;
   --md-blue-900: #0D47A1;
   --md-blue-A100: #82B1FF;

@@ -18,11 +18,11 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { DebugProtocol } from 'vscode-debugprotocol';
 import { injectable, postConstruct, inject } from 'inversify';
-import { Disposable, DisposableCollection } from '@theia/core';
-import URI from '@theia/core/lib/common/uri';
-import { MonacoEditorProvider } from '@theia/monaco/lib/browser/monaco-editor-provider';
-import { MonacoEditorZoneWidget } from '@theia/monaco/lib/browser/monaco-editor-zone-widget';
-import { MonacoEditor } from '@theia/monaco/lib/browser/monaco-editor';
+import { Disposable, DisposableCollection } from '@devpodio/core';
+import URI from '@devpodio/core/lib/common/uri';
+import { MonacoEditorProvider } from '@devpodio/monaco/lib/browser/monaco-editor-provider';
+import { MonacoEditorZoneWidget } from '@devpodio/monaco/lib/browser/monaco-editor-zone-widget';
+import { MonacoEditor } from '@devpodio/monaco/lib/browser/monaco-editor';
 import { DebugEditor } from './debug-editor';
 import { DebugBreakpoint } from '../model/debug-breakpoint';
 

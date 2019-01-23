@@ -17,9 +17,9 @@
 import * as fs from 'fs-extra';
 import * as path from 'path';
 import { DebugAdapterExecutable, DebugAdapterContribution } from '../../common/debug-model';
-import { isWindows, isOSX } from '@theia/core/lib/common/os';
-import { IJSONSchema, IJSONSchemaSnippet } from '@theia/core/lib/common/json-schema';
-import { deepClone } from '@theia/core/lib/common/objects';
+import { isWindows, isOSX } from '@devpodio/core/lib/common/os';
+import { IJSONSchema, IJSONSchemaSnippet } from '@devpodio/core/lib/common/json-schema';
+import { deepClone } from '@devpodio/core/lib/common/objects';
 import { injectable, unmanaged } from 'inversify';
 
 namespace nls {

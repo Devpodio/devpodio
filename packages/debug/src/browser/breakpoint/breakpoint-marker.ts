@@ -15,8 +15,8 @@
  ********************************************************************************/
 
 import { UUID } from '@phosphor/coreutils';
-import URI from '@theia/core/lib/common/uri';
-import { Marker } from '@theia/markers/lib/common/marker';
+import URI from '@devpodio/core/lib/common/uri';
+import { Marker } from '@devpodio/markers/lib/common/marker';
 import { DebugProtocol } from 'vscode-debugprotocol/lib/debugProtocol';
 
 export const BREAKPOINT_KIND = 'breakpoint';

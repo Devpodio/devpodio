@@ -15,8 +15,8 @@
  ********************************************************************************/
 import {injectable} from 'inversify';
 import {Message} from '@phosphor/messaging';
-import {Key} from '@theia/core/lib/browser';
-import {AbstractDialog} from '@theia/core/lib/browser/dialogs';
+import {Key} from '@devpodio/core/lib/browser';
+import {AbstractDialog} from '@devpodio/core/lib/browser/dialogs';
 import '../../../../src/main/browser/dialogs/style/modal-notification.css';
 
 export enum MessageType {

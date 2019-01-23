@@ -15,7 +15,7 @@
  ********************************************************************************/
 
 import { inject, injectable } from 'inversify';
-import { CommandRegistry, Emitter, DisposableCollection } from '@theia/core/lib/common';
+import { CommandRegistry, Emitter, DisposableCollection } from '@devpodio/core/lib/common';
 import ICommandEvent = monaco.commands.ICommandEvent;
 import ICommandService = monaco.commands.ICommandService;
 

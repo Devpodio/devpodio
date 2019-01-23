@@ -16,12 +16,12 @@
 
 import { Container, injectable } from 'inversify';
 import { CppTaskProvider } from './cpp-task-provider';
-import { TaskResolverRegistry } from '@theia/task/lib/browser/task-contribution';
+import { TaskResolverRegistry } from '@devpodio/task/lib/browser/task-contribution';
 import { CppBuildConfigurationManager, CppBuildConfiguration } from './cpp-build-configurations';
-import { Event } from '@theia/core';
+import { Event } from '@devpodio/core';
 import { expect } from 'chai';
-import { TaskConfiguration } from '@theia/task/src/common';
-import { ProcessTaskConfiguration } from '@theia/task/lib/common/process/task-protocol';
+import { TaskConfiguration } from '@devpodio/task/src/common';
+import { ProcessTaskConfiguration } from '@devpodio/task/lib/common/process/task-protocol';
 
 // The object under test.
 let taskProvider: CppTaskProvider;

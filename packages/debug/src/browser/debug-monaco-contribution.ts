@@ -21,7 +21,7 @@
 // tslint:disable:no-any
 
 import { visit } from 'jsonc-parser';
-import URI from '@theia/core/lib/common/uri';
+import URI from '@devpodio/core/lib/common/uri';
 
 monaco.languages.register({
     id: 'jsonc',

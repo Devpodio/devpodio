@@ -17,7 +17,7 @@
 import * as os from 'os';
 import * as fs from 'fs-extra';
 import * as yargs from 'yargs';
-import { ApplicationPackage } from '@theia/application-package';
+import { ApplicationPackage } from '@devpodio/application-package';
 
 const argv = yargs.option('mode', {
     description: 'Mode to use',
@@ -76,7 +76,7 @@ export abstract class AbstractGenerator {
     }
 
     protected ifMonaco(value: () => string, defaultValue: () => string = () => '') {
-        return (this.pck.extensionPackages.some(e => e.name === '@theia/monaco') ? value : defaultValue)();
+        return (this.pck.extensionPackages.some(e => e.name === '@devpodio/monaco') ? value : defaultValue)();
     }
 
     protected prettyStringify(object: object): string {

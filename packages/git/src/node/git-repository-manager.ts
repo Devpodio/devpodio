@@ -15,7 +15,7 @@
  ********************************************************************************/
 
 import { injectable, inject } from 'inversify';
-import { ReferenceCollection, Reference } from '@theia/core';
+import { ReferenceCollection, Reference } from '@devpodio/core';
 import { Repository } from '../common';
 import { GitRepositoryWatcher, GitRepositoryWatcherFactory } from './git-repository-watcher';
 

@@ -15,7 +15,7 @@
  ********************************************************************************/
 
 import { interfaces, Container } from 'inversify';
-import { createTreeContainer, Tree, TreeImpl, TreeModel, TreeModelImpl, TreeWidget } from '@theia/core/lib/browser';
+import { createTreeContainer, Tree, TreeImpl, TreeModel, TreeModelImpl, TreeWidget } from '@devpodio/core/lib/browser';
 import { FileTree } from './file-tree';
 import { FileTreeModel } from './file-tree-model';
 import { FileTreeWidget } from './file-tree-widget';

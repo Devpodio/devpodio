@@ -14,7 +14,7 @@
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  ********************************************************************************/
 
-import { CommunicationProvider, DebugAdapterExecutable } from '@theia/debug/lib/common/debug-model';
+import { CommunicationProvider, DebugAdapterExecutable } from '@devpodio/debug/lib/common/debug-model';
 import { ChildProcess, spawn, fork } from 'child_process';
 
 /**

@@ -14,13 +14,13 @@
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  ********************************************************************************/
 
-import { InputBoxOptions } from '@theia/plugin';
+import { InputBoxOptions } from '@devpodio/plugin';
 import { interfaces } from 'inversify';
-import { QuickOpenModel, QuickOpenItem, QuickOpenMode } from '@theia/core/lib/browser/quick-open/quick-open-model';
+import { QuickOpenModel, QuickOpenItem, QuickOpenMode } from '@devpodio/core/lib/browser/quick-open/quick-open-model';
 import { RPCProtocol } from '../../api/rpc-protocol';
 import { QuickOpenExt, QuickOpenMain, MAIN_RPC_CONTEXT, PickOptions, PickOpenItem } from '../../api/plugin-api';
-import { MonacoQuickOpenService } from '@theia/monaco/lib/browser/monaco-quick-open-service';
-import { QuickInputService } from '@theia/core/lib/browser';
+import { MonacoQuickOpenService } from '@devpodio/monaco/lib/browser/monaco-quick-open-service';
+import { QuickInputService } from '@devpodio/core/lib/browser';
 
 export class QuickOpenMainImpl implements QuickOpenMain, QuickOpenModel {
 

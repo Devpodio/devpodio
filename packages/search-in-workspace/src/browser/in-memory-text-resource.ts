@@ -15,8 +15,8 @@
  ********************************************************************************/
 
 import { injectable } from 'inversify';
-import { ResourceResolver, Resource } from '@theia/core';
-import URI from '@theia/core/lib/common/uri';
+import { ResourceResolver, Resource } from '@devpodio/core';
+import URI from '@devpodio/core/lib/common/uri';
 
 export const MEMORY_TEXT = 'mem-txt';
 

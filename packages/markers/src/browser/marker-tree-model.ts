@@ -16,7 +16,7 @@
 
 import { injectable, inject } from 'inversify';
 import { MarkerNode } from './marker-tree';
-import { TreeModelImpl, OpenerService, open, TreeNode, OpenerOptions } from '@theia/core/lib/browser';
+import { TreeModelImpl, OpenerService, open, TreeNode, OpenerOptions } from '@devpodio/core/lib/browser';
 
 @injectable()
 export class MarkerTreeModel extends TreeModelImpl {

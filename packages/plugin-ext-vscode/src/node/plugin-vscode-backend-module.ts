@@ -15,7 +15,7 @@
  ********************************************************************************/
 
 import { ContainerModule } from 'inversify';
-import { PluginDeployerFileHandler, PluginDeployerDirectoryHandler, PluginScanner, PluginDeployerResolver } from '@theia/plugin-ext';
+import { PluginDeployerFileHandler, PluginDeployerDirectoryHandler, PluginScanner, PluginDeployerResolver } from '@devpodio/plugin-ext';
 import { PluginVsCodeFileHandler } from './plugin-vscode-file-handler';
 import { PluginVsCodeDirectoryHandler } from './plugin-vscode-directory-handler';
 import { VsCodePluginScanner } from './scanner-vscode';

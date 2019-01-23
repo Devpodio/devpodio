@@ -22,11 +22,11 @@ import { injectable, inject, named } from 'inversify';
 import { Message, isRequestMessage } from 'vscode-ws-jsonrpc';
 import { InitializeParams, InitializeRequest } from 'vscode-languageserver-protocol';
 import { createSocketConnection } from 'vscode-ws-jsonrpc/lib/server';
-import { DEBUG_MODE } from '@theia/core/lib/node';
-import { IConnection, BaseLanguageServerContribution, LanguageServerStartOptions } from '@theia/languages/lib/node';
+import { DEBUG_MODE } from '@devpodio/core/lib/node';
+import { IConnection, BaseLanguageServerContribution, LanguageServerStartOptions } from '@devpodio/languages/lib/node';
 import { JAVA_LANGUAGE_ID, JAVA_LANGUAGE_NAME, JavaStartParams } from '../common';
 import { JavaCliContribution } from './java-cli-contribution';
-import { ContributionProvider } from '@theia/core';
+import { ContributionProvider } from '@devpodio/core';
 import { JavaExtensionContribution } from './java-extension-model';
 const sha1 = require('sha1');
 

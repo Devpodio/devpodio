@@ -15,7 +15,7 @@
  ********************************************************************************/
 
 import { injectable } from 'inversify';
-import { Range, Position, EditorDecoration, EditorDecorationOptions, OverviewRulerLane, EditorDecorator } from '@theia/editor/lib/browser';
+import { Range, Position, EditorDecoration, EditorDecorationOptions, OverviewRulerLane, EditorDecorator } from '@devpodio/editor/lib/browser';
 import { DirtyDiffUpdate } from './dirty-diff-manager';
 import { LineRange } from './diff-computer';
 

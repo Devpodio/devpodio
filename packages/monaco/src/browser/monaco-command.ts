@@ -16,12 +16,12 @@
 
 import { injectable, inject } from 'inversify';
 import { ProtocolToMonacoConverter } from 'monaco-languageclient/lib';
-import { Position, Location } from '@theia/languages/lib/browser';
-import { Command, CommandContribution } from '@theia/core';
-import { CommonCommands } from '@theia/core/lib/browser';
-import { QuickOpenService } from '@theia/core/lib/browser/quick-open/quick-open-service';
-import { QuickOpenItem, QuickOpenMode } from '@theia/core/lib/browser/quick-open/quick-open-model';
-import { EditorCommands } from '@theia/editor/lib/browser';
+import { Position, Location } from '@devpodio/languages/lib/browser';
+import { Command, CommandContribution } from '@devpodio/core';
+import { CommonCommands } from '@devpodio/core/lib/browser';
+import { QuickOpenService } from '@devpodio/core/lib/browser/quick-open/quick-open-service';
+import { QuickOpenItem, QuickOpenMode } from '@devpodio/core/lib/browser/quick-open/quick-open-model';
+import { EditorCommands } from '@devpodio/editor/lib/browser';
 import { MonacoEditor } from './monaco-editor';
 import { MonacoCommandRegistry, MonacoEditorCommandHandler } from './monaco-command-registry';
 import MenuRegistry = monaco.actions.MenuRegistry;

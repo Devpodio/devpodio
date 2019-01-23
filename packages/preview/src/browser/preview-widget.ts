@@ -15,15 +15,15 @@
  ********************************************************************************/
 
 import { inject, injectable } from 'inversify';
-import { Resource, MaybePromise } from '@theia/core';
-import { Navigatable } from '@theia/core/lib/browser/navigatable';
-import { BaseWidget, Message, addEventListener } from '@theia/core/lib/browser';
-import URI from '@theia/core/lib/common/uri';
-import { Event, Emitter } from '@theia/core/lib/common';
-import { Workspace, Location, Range } from '@theia/languages/lib/browser';
+import { Resource, MaybePromise } from '@devpodio/core';
+import { Navigatable } from '@devpodio/core/lib/browser/navigatable';
+import { BaseWidget, Message, addEventListener } from '@devpodio/core/lib/browser';
+import URI from '@devpodio/core/lib/common/uri';
+import { Event, Emitter } from '@devpodio/core/lib/common';
+import { Workspace, Location, Range } from '@devpodio/languages/lib/browser';
 import { PreviewHandler, PreviewHandlerProvider } from './preview-handler';
-import { ThemeService } from '@theia/core/lib/browser/theming';
-import { EditorPreferences } from '@theia/editor/lib/browser';
+import { ThemeService } from '@devpodio/core/lib/browser/theming';
+import { EditorPreferences } from '@devpodio/editor/lib/browser';
 
 import throttle = require('lodash.throttle');
 
@@ -208,7 +208,7 @@ export class PreviewWidget extends BaseWidget implements Navigatable {
         const elementToReveal = this.previewHandler.findElementForFragment(this.node, uri.fragment);
         if (elementToReveal) {
             this.preventScrollNotification = true;
-            elementToReveal.scrollIntoView({ behavior: 'instant' });
+            elementToReveal.scrollIntoView({ behavior: 'auto' });
             window.setTimeout(() => {
                 this.preventScrollNotification = false;
             }, 50);
@@ -225,7 +225,7 @@ export class PreviewWidget extends BaseWidget implements Navigatable {
         const elementToReveal = this.previewHandler.findElementForSourceLine(this.node, sourceLine);
         if (elementToReveal) {
             this.preventScrollNotification = true;
-            elementToReveal.scrollIntoView({ behavior: 'instant' });
+            elementToReveal.scrollIntoView({ behavior: 'auto' });
             window.setTimeout(() => {
                 this.preventScrollNotification = false;
             }, 50);

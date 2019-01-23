@@ -15,7 +15,7 @@
  ********************************************************************************/
 
 import { injectable, inject } from 'inversify';
-import { MessageService } from '@theia/core';
+import { MessageService } from '@devpodio/core';
 
 @injectable()
 export class GitErrorHandler {

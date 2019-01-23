@@ -16,8 +16,8 @@
 
 // tslint:disable:no-any
 
-import * as theia from '@theia/plugin';
-import { BackendInitializationFn, PluginAPIFactory, Plugin, emptyPlugin } from '@theia/plugin-ext';
+import * as theia from '@devpodio/plugin';
+import { BackendInitializationFn, PluginAPIFactory, Plugin, emptyPlugin } from '@devpodio/plugin-ext';
 
 /** Set up en as a default locale for VS Code extensions using vscode-nls */
 process.env['VSCODE_NLS_CONFIG'] = JSON.stringify({ locale: 'en', availableLanguages: {} });

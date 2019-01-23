@@ -16,8 +16,8 @@
 
 import { injectable, inject, postConstruct } from 'inversify';
 import { SearchInWorkspaceServer, SearchInWorkspaceClient, SearchInWorkspaceResult, SearchInWorkspaceOptions } from '../common/search-in-workspace-interface';
-import { WorkspaceService } from '@theia/workspace/lib/browser';
-import { ILogger } from '@theia/core';
+import { WorkspaceService } from '@devpodio/workspace/lib/browser';
+import { ILogger } from '@devpodio/core';
 
 /**
  * Class that will receive the search results from the server.  This is separate

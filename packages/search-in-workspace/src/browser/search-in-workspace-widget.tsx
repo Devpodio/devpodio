@@ -14,14 +14,14 @@
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  ********************************************************************************/
 
-import { Widget, Message, BaseWidget, Key, StatefulWidget, MessageLoop } from '@theia/core/lib/browser';
+import { Widget, Message, BaseWidget, Key, StatefulWidget, MessageLoop } from '@devpodio/core/lib/browser';
 import { inject, injectable, postConstruct } from 'inversify';
 import { SearchInWorkspaceResultTreeWidget } from './search-in-workspace-result-tree-widget';
 import { SearchInWorkspaceOptions } from '../common/search-in-workspace-interface';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import { Disposable } from '@theia/core/lib/common';
-import { WorkspaceService } from '@theia/workspace/lib/browser';
+import { Disposable } from '@devpodio/core/lib/common';
+import { WorkspaceService } from '@devpodio/workspace/lib/browser';
 
 export interface SearchFieldState {
     className: string;

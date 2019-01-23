@@ -15,7 +15,7 @@
  ********************************************************************************/
 
 import { ContainerModule } from 'inversify';
-import { ConnectionHandler, JsonRpcConnectionHandler } from '@theia/core/lib/common';
+import { ConnectionHandler, JsonRpcConnectionHandler } from '@devpodio/core/lib/common';
 import { FileSearchServiceImpl } from './file-search-service-impl';
 import { fileSearchServicePath, FileSearchService } from '../common/file-search-service';
 

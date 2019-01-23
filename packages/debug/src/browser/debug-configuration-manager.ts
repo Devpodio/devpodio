@@ -22,12 +22,12 @@
 import debounce = require('p-debounce');
 import { visit } from 'jsonc-parser';
 import { injectable, inject, postConstruct } from 'inversify';
-import URI from '@theia/core/lib/common/uri';
-import { Event, Emitter, ResourceProvider } from '@theia/core';
-import { EditorManager, EditorWidget } from '@theia/editor/lib/browser';
-import { MonacoEditor } from '@theia/monaco/lib/browser/monaco-editor';
-import { QuickPickService, StorageService } from '@theia/core/lib/browser';
-import { WorkspaceService } from '@theia/workspace/lib/browser/workspace-service';
+import URI from '@devpodio/core/lib/common/uri';
+import { Event, Emitter, ResourceProvider } from '@devpodio/core';
+import { EditorManager, EditorWidget } from '@devpodio/editor/lib/browser';
+import { MonacoEditor } from '@devpodio/monaco/lib/browser/monaco-editor';
+import { QuickPickService, StorageService } from '@devpodio/core/lib/browser';
+import { WorkspaceService } from '@devpodio/workspace/lib/browser/workspace-service';
 import { DebugConfiguration } from '../common/debug-configuration';
 import { DebugConfigurationModel } from './debug-configuration-model';
 import { DebugSessionOptions } from './debug-session-options';

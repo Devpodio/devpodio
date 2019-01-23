@@ -15,8 +15,8 @@
  ********************************************************************************/
 
 import { injectable, inject, postConstruct, interfaces, Container } from 'inversify';
-import { MenuPath } from '@theia/core/lib/common';
-import { SourceTreeWidget } from '@theia/core/lib/browser/source-tree';
+import { MenuPath } from '@devpodio/core/lib/common';
+import { SourceTreeWidget } from '@devpodio/core/lib/browser/source-tree';
 import { DebugVariablesSource } from './debug-variables-source';
 import { DebugViewModel } from './debug-view-model';
 

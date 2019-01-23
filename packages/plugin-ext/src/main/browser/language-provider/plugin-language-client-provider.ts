@@ -15,8 +15,8 @@
  ********************************************************************************/
 
 import { inject, injectable } from 'inversify';
-import { LanguageClientProvider } from '@theia/languages/lib/browser/language-client-provider';
-import { ILanguageClient, LanguageClientContribution } from '@theia/languages/lib/browser';
+import { LanguageClientProvider } from '@devpodio/languages/lib/browser/language-client-provider';
+import { ILanguageClient, LanguageClientContribution } from '@devpodio/languages/lib/browser';
 import { LanguageClientContributionProvider } from './language-client-contribution-provider';
 
 @injectable()

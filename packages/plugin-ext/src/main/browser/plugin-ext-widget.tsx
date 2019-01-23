@@ -16,11 +16,11 @@
 
 import { injectable, inject } from 'inversify';
 import { Message } from '@phosphor/messaging';
-import { DisposableCollection } from '@theia/core';
-import { OpenerService } from '@theia/core/lib/browser';
+import { DisposableCollection } from '@devpodio/core';
+import { OpenerService } from '@devpodio/core/lib/browser';
 import { HostedPluginServer, PluginMetadata } from '../../common/plugin-protocol';
-import { ReactWidget } from '@theia/core/lib/browser/widgets/react-widget';
-import { AlertMessage } from '@theia/core/lib/browser/widgets/alert-message';
+import { ReactWidget } from '@devpodio/core/lib/browser/widgets/react-widget';
+import { AlertMessage } from '@devpodio/core/lib/browser/widgets/alert-message';
 import * as React from 'react';
 
 @injectable()

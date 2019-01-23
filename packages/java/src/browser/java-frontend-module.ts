@@ -15,10 +15,10 @@
  ********************************************************************************/
 
 import { ContainerModule } from 'inversify';
-import { ResourceResolver, CommandContribution, MenuContribution } from '@theia/core/lib/common';
-import { KeybindingContribution, KeybindingContext } from '@theia/core/lib/browser';
-import { LanguageClientContribution } from '@theia/languages/lib/browser';
-import { LabelProviderContribution } from '@theia/core/lib/browser/label-provider';
+import { ResourceResolver, CommandContribution, MenuContribution } from '@devpodio/core/lib/common';
+import { KeybindingContribution, KeybindingContext } from '@devpodio/core/lib/browser';
+import { LanguageClientContribution } from '@devpodio/languages/lib/browser';
+import { LabelProviderContribution } from '@devpodio/core/lib/browser/label-provider';
 
 import { JavaClientContribution } from './java-client-contribution';
 import { JavaCommandContribution } from './java-commands';
@@ -26,7 +26,7 @@ import { JavaLabelProviderContribution } from './java-label-provider';
 import { JavaResourceResolver } from './java-resource';
 import { JavaEditorTextFocusContext } from './java-keybinding-contexts';
 import { JavaTextmateContribution } from './monaco-contribution/java-textmate-contribution';
-import { LanguageGrammarDefinitionContribution } from '@theia/monaco/lib/browser/textmate/textmate-contribution';
+import { LanguageGrammarDefinitionContribution } from '@devpodio/monaco/lib/browser/textmate/textmate-contribution';
 import { bindJavaPreferences } from './java-preferences';
 
 import './monaco-contribution';

@@ -16,10 +16,10 @@
 
 import * as React from 'react';
 import { injectable, inject, postConstruct } from 'inversify';
-import { Disposable } from '@theia/core/lib/common';
-import URI from '@theia/core/lib/common/uri';
-import { ReactWidget } from '@theia/core/lib/browser';
-import { WorkspaceService } from '@theia/workspace/lib/browser';
+import { Disposable } from '@devpodio/core/lib/common';
+import URI from '@devpodio/core/lib/common/uri';
+import { ReactWidget } from '@devpodio/core/lib/browser';
+import { WorkspaceService } from '@devpodio/workspace/lib/browser';
 import { DebugConsoleContribution } from '../console/debug-console-contribution';
 import { DebugConfigurationManager } from '../debug-configuration-manager';
 import { DebugSessionManager } from '../debug-session-manager';

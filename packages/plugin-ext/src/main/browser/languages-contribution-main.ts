@@ -19,16 +19,16 @@ import {
     LanguagesContributionMain, MAIN_RPC_CONTEXT
 } from '../../api/plugin-api';
 import { RPCProtocol } from '../../api/rpc-protocol';
-import * as theia from '@theia/plugin';
-import { Workspace, Languages, MessageReader, MessageWriter } from '@theia/languages/lib/browser/language-client-services';
-import { LanguageClientFactory, BaseLanguageClientContribution } from '@theia/languages/lib/browser';
-import { MessageService, CommandRegistry } from '@theia/core';
-import { WorkspaceService } from '@theia/workspace/lib/browser';
-import { DisposableCollection, Disposable } from '@theia/core';
-import { WebSocketConnectionProvider } from '@theia/core/lib/browser';
+import * as theia from '@devpodio/plugin';
+import { Workspace, Languages, MessageReader, MessageWriter } from '@devpodio/languages/lib/browser/language-client-services';
+import { LanguageClientFactory, BaseLanguageClientContribution } from '@devpodio/languages/lib/browser';
+import { MessageService, CommandRegistry } from '@devpodio/core';
+import { WorkspaceService } from '@devpodio/workspace/lib/browser';
+import { DisposableCollection, Disposable } from '@devpodio/core';
+import { WebSocketConnectionProvider } from '@devpodio/core/lib/browser';
 import { createMessageConnection, MessageConnection } from 'vscode-jsonrpc';
 import { ConnectionMainImpl } from './connection-main';
-import { Deferred } from '@theia/core/lib/common/promise-util';
+import { Deferred } from '@devpodio/core/lib/common/promise-util';
 import { LanguageClientContributionProvider } from './language-provider/language-client-contribution-provider';
 
 /**

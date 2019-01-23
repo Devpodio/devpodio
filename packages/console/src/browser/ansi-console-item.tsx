@@ -15,7 +15,7 @@
  ********************************************************************************/
 
 import * as React from 'react';
-import { MessageType } from '@theia/core/lib/common';
+import { MessageType } from '@devpodio/core/lib/common';
 import { ConsoleItem } from './console-session';
 import { ansiToHtml } from 'anser';
 

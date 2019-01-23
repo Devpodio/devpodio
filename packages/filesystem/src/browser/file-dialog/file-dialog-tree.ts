@@ -16,7 +16,7 @@
 
 import { injectable } from 'inversify';
 import { DirNode, FileTree } from '../file-tree';
-import { TreeNode, CompositeTreeNode } from '@theia/core/lib/browser/tree/tree';
+import { TreeNode, CompositeTreeNode } from '@devpodio/core/lib/browser/tree/tree';
 import { FileStat } from '../../common';
 
 @injectable()

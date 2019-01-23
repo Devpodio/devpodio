@@ -15,8 +15,8 @@
  ********************************************************************************/
 
 import { inject, injectable, named } from 'inversify';
-import { ContributionProvider } from '@theia/core/lib/common/contribution-provider';
-import { TreeDecorator, AbstractTreeDecoratorService } from '@theia/core/lib/browser/tree/tree-decorator';
+import { ContributionProvider } from '@devpodio/core/lib/common/contribution-provider';
+import { TreeDecorator, AbstractTreeDecoratorService } from '@devpodio/core/lib/browser/tree/tree-decorator';
 
 /**
  * Symbol for all decorators that would like to contribute into the navigator.

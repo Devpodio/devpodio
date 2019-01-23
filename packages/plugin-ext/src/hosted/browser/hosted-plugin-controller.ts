@@ -16,13 +16,13 @@
 
 import { injectable, inject } from 'inversify';
 import { setTimeout } from 'timers';
-import { StatusBar } from '@theia/core/lib/browser/status-bar/status-bar';
-import { StatusBarAlignment, StatusBarEntry, FrontendApplicationContribution, PreferenceServiceImpl, PreferenceChange } from '@theia/core/lib/browser';
-import { MessageService } from '@theia/core/lib/common';
+import { StatusBar } from '@devpodio/core/lib/browser/status-bar/status-bar';
+import { StatusBarAlignment, StatusBarEntry, FrontendApplicationContribution, PreferenceServiceImpl, PreferenceChange } from '@devpodio/core/lib/browser';
+import { MessageService } from '@devpodio/core/lib/common';
 import { CommandRegistry } from '@phosphor/commands';
 import { Menu } from '@phosphor/widgets';
-import { FrontendApplicationStateService } from '@theia/core/lib/browser/frontend-application-state';
-import { ConnectionStatusService, ConnectionStatus } from '@theia/core/lib/browser/connection-status-service';
+import { FrontendApplicationStateService } from '@devpodio/core/lib/browser/frontend-application-state';
+import { ConnectionStatusService, ConnectionStatus } from '@devpodio/core/lib/browser/connection-status-service';
 import { HostedPluginServer } from '../../common/plugin-protocol';
 import { HostedPluginManagerClient, HostedInstanceState, HostedPluginCommands, HostedInstanceData } from './hosted-plugin-manager-client';
 import { HostedPluginLogViewer } from './hosted-plugin-log-viewer';

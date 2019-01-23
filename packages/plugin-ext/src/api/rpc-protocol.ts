@@ -22,10 +22,10 @@
 
 /* tslint:disable:no-any */
 
-import { Event } from '@theia/core/lib/common/event';
-import { Deferred } from '@theia/core/lib/common/promise-util';
+import { Event } from '@devpodio/core/lib/common/event';
+import { Deferred } from '@devpodio/core/lib/common/promise-util';
 import VSCodeURI from 'vscode-uri';
-import URI from '@theia/core/lib/common/uri';
+import URI from '@devpodio/core/lib/common/uri';
 
 export interface MessageConnection {
     send(msg: {}): void;

@@ -17,9 +17,9 @@
 // tslint:disable:no-any
 
 import { injectable, inject, postConstruct } from 'inversify';
-import { Emitter, Event, DisposableCollection, MessageService } from '@theia/core';
-import { LabelProvider } from '@theia/core/lib/browser';
-import { EditorManager } from '@theia/editor/lib/browser';
+import { Emitter, Event, DisposableCollection, MessageService } from '@devpodio/core';
+import { LabelProvider } from '@devpodio/core/lib/browser';
+import { EditorManager } from '@devpodio/editor/lib/browser';
 import { DebugError, DebugService } from '../common/debug-service';
 import { DebugState, DebugSession } from './debug-session';
 import { DebugSessionFactory, DebugSessionContributionRegistry } from './debug-session-contribution';
@@ -27,8 +27,8 @@ import { DebugThread } from './model/debug-thread';
 import { DebugStackFrame } from './model/debug-stack-frame';
 import { DebugBreakpoint } from './model/debug-breakpoint';
 import { BreakpointManager } from './breakpoint/breakpoint-manager';
-import URI from '@theia/core/lib/common/uri';
-import { VariableResolverService } from '@theia/variable-resolver/lib/browser';
+import URI from '@devpodio/core/lib/common/uri';
+import { VariableResolverService } from '@devpodio/variable-resolver/lib/browser';
 import { DebugSessionOptions, InternalDebugSessionOptions } from './debug-session-options';
 
 export interface DidChangeActiveDebugSession {

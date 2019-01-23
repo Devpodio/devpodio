@@ -27,7 +27,7 @@ import { PluginDeployerResolverContextImpl, PluginDeployerResolverInitImpl } fro
 import { ProxyPluginDeployerEntry } from './plugin-deployer-proxy-entry-impl';
 import { PluginDeployerFileHandlerContextImpl } from './plugin-deployer-file-handler-context-impl';
 import { PluginDeployerDirectoryHandlerContextImpl } from './plugin-deployer-directory-handler-context-impl';
-import { ILogger } from '@theia/core';
+import { ILogger } from '@devpodio/core';
 
 @injectable()
 export class PluginDeployerImpl implements PluginDeployer {

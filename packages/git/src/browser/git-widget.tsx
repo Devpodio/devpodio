@@ -15,11 +15,11 @@
  ********************************************************************************/
 
 import { injectable, inject, postConstruct } from 'inversify';
-import URI from '@theia/core/lib/common/uri';
-import { ResourceProvider, CommandService, MenuPath } from '@theia/core';
-import { ContextMenuRenderer, LabelProvider, DiffUris, StatefulWidget, Message, SELECTED_CLASS, Key, ConfirmDialog } from '@theia/core/lib/browser';
-import { EditorManager, EditorWidget, EditorOpenerOptions } from '@theia/editor/lib/browser';
-import { WorkspaceCommands } from '@theia/workspace/lib/browser';
+import URI from '@devpodio/core/lib/common/uri';
+import { ResourceProvider, CommandService, MenuPath } from '@devpodio/core';
+import { ContextMenuRenderer, LabelProvider, DiffUris, StatefulWidget, Message, SELECTED_CLASS, Key, ConfirmDialog } from '@devpodio/core/lib/browser';
+import { EditorManager, EditorWidget, EditorOpenerOptions } from '@devpodio/editor/lib/browser';
+import { WorkspaceCommands } from '@devpodio/workspace/lib/browser';
 import { Git, GitFileChange, GitFileStatus, Repository, WorkingDirectoryStatus, CommitWithChanges } from '../common';
 import { GitWatcher, GitStatusChangeEvent } from '../common/git-watcher';
 import { GIT_RESOURCE_SCHEME } from './git-resource';
@@ -29,9 +29,9 @@ import { GitAvatarService } from './history/git-avatar-service';
 import * as React from 'react';
 import { GitErrorHandler } from './git-error-handler';
 import { GitDiffWidget } from './diff/git-diff-widget';
-import { AlertMessage } from '@theia/core/lib/browser/widgets/alert-message';
+import { AlertMessage } from '@devpodio/core/lib/browser/widgets/alert-message';
 import { GitFileChangeNode } from './git-file-change-node';
-import { FileSystem } from '@theia/filesystem/lib/common';
+import { FileSystem } from '@devpodio/filesystem/lib/common';
 
 @injectable()
 export class GitWidget extends GitDiffWidget implements StatefulWidget {

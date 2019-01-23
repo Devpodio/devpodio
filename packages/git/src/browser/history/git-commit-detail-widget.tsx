@@ -16,7 +16,7 @@
 
 import { injectable, inject } from 'inversify';
 import { Widget } from '@phosphor/widgets';
-import { LabelProvider } from '@theia/core/lib/browser';
+import { LabelProvider } from '@devpodio/core/lib/browser';
 import { Git, GitFileChange } from '../../common';
 import { GitDiffWidget } from '../diff/git-diff-widget';
 import { GitRepositoryProvider } from '../git-repository-provider';

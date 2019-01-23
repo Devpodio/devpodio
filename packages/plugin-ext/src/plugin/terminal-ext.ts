@@ -14,12 +14,12 @@
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  ********************************************************************************/
 import { UUID } from '@phosphor/coreutils/lib/uuid';
-import { Terminal, TerminalOptions } from '@theia/plugin';
+import { Terminal, TerminalOptions } from '@devpodio/plugin';
 import { TerminalServiceExt, TerminalServiceMain, PLUGIN_RPC_CONTEXT } from '../api/plugin-api';
 import { RPCProtocol } from '../api/rpc-protocol';
-import { Emitter } from '@theia/core/lib/common/event';
-import { Deferred } from '@theia/core/lib/common/promise-util';
-import * as theia from '@theia/plugin';
+import { Emitter } from '@devpodio/core/lib/common/event';
+import { Deferred } from '@devpodio/core/lib/common/promise-util';
+import * as theia from '@devpodio/plugin';
 
 /**
  * Provides high level terminal plugin api to use in the Theia plugins.

@@ -15,8 +15,8 @@
  ********************************************************************************/
 
 import { interfaces } from 'inversify';
-import * as theia from '@theia/plugin';
-import { MessageService } from '@theia/core/lib/common/message-service';
+import * as theia from '@devpodio/plugin';
+import { MessageService } from '@devpodio/core/lib/common/message-service';
 import { MessageRegistryMain } from '../../api/plugin-api';
 import { ModalNotification, MessageType } from './dialogs/modal-notification';
 

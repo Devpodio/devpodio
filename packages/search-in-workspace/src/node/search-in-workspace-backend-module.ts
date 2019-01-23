@@ -15,7 +15,7 @@
  ********************************************************************************/
 
 import { ContainerModule } from 'inversify';
-import { ConnectionHandler, JsonRpcConnectionHandler } from '@theia/core/lib/common';
+import { ConnectionHandler, JsonRpcConnectionHandler } from '@devpodio/core/lib/common';
 import { SearchInWorkspaceServer, SearchInWorkspaceClient } from '../common/search-in-workspace-interface';
 import { RipgrepSearchInWorkspaceServer, RgPath } from './ripgrep-search-in-workspace-server';
 import { rgPath } from 'vscode-ripgrep';

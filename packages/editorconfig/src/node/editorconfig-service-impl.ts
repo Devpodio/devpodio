@@ -18,7 +18,7 @@ import { injectable } from 'inversify';
 import * as editorconfig from 'editorconfig';
 import { KnownProps } from 'editorconfig';
 import { EditorconfigService } from '../common/editorconfig-interface';
-import { FileUri } from '@theia/core/lib/node';
+import { FileUri } from '@devpodio/core/lib/node';
 
 @injectable()
 export class EditorconfigServiceImpl implements EditorconfigService {

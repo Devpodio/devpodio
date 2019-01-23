@@ -16,26 +16,26 @@
 
 import * as common from '../../common/quick-pick-service';
 /**
- * @deprecated import from `@theia/core/lib/common/quick-pick-service` instead
+ * @deprecated import from `@devpodio/core/lib/common/quick-pick-service` instead
  */
 export const QuickPickService = common.QuickPickService;
 /**
- * @deprecated import from `@theia/core/lib/common/quick-pick-service` instead
+ * @deprecated import from `@devpodio/core/lib/common/quick-pick-service` instead
  */
 export type QuickPickService = common.QuickPickService;
 /**
- * @deprecated import from `@theia/core/lib/common/quick-pick-service` instead
+ * @deprecated import from `@devpodio/core/lib/common/quick-pick-service` instead
  */
 export type QuickPickOptions = common.QuickPickOptions;
 /**
- * @deprecated import from `@theia/core/lib/common/quick-pick-service` instead
+ * @deprecated import from `@devpodio/core/lib/common/quick-pick-service` instead
  */
 export type QuickPickItem<T> = common.QuickPickItem<T>;
 /**
- * @deprecated import from `@theia/core/lib/common/quick-pick-service` instead
+ * @deprecated import from `@devpodio/core/lib/common/quick-pick-service` instead
  */
 export type QuickPickSeparator = common.QuickPickSeparator;
 /**
- * @deprecated import from `@theia/core/lib/common/quick-pick-service` instead
+ * @deprecated import from `@devpodio/core/lib/common/quick-pick-service` instead
  */
 export type QuickPickValue<T> = common.QuickPickValue<T>;

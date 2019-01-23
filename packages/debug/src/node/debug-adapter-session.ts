@@ -27,7 +27,7 @@ import {
 } from '../common/debug-model';
 import { DebugProtocol } from 'vscode-debugprotocol';
 import { IWebSocket } from 'vscode-ws-jsonrpc/lib/socket/socket';
-import { DisposableCollection, Disposable } from '@theia/core/lib/common/disposable';
+import { DisposableCollection, Disposable } from '@devpodio/core/lib/common/disposable';
 
 /**
  * [DebugAdapterSession](#DebugAdapterSession) implementation.

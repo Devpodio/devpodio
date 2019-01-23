@@ -17,18 +17,18 @@
 import * as Xterm from 'xterm';
 import { proposeGeometry } from 'xterm/lib/addons/fit/fit';
 import { inject, injectable, named, postConstruct } from 'inversify';
-import { Disposable, Event, Emitter, ILogger, DisposableCollection } from '@theia/core';
-import { Widget, Message, WebSocketConnectionProvider, StatefulWidget, isFirefox, MessageLoop, KeyCode } from '@theia/core/lib/browser';
-import { isOSX } from '@theia/core/lib/common';
-import { WorkspaceService } from '@theia/workspace/lib/browser';
+import { Disposable, Event, Emitter, ILogger, DisposableCollection } from '@devpodio/core';
+import { Widget, Message, WebSocketConnectionProvider, StatefulWidget, isFirefox, MessageLoop, KeyCode } from '@devpodio/core/lib/browser';
+import { isOSX } from '@devpodio/core/lib/common';
+import { WorkspaceService } from '@devpodio/workspace/lib/browser';
 import { ShellTerminalServerProxy } from '../common/shell-terminal-protocol';
 import { terminalsPath } from '../common/terminal-protocol';
 import { IBaseTerminalServer } from '../common/base-terminal-protocol';
 import { TerminalWatcher } from '../common/terminal-watcher';
-import { ThemeService } from '@theia/core/lib/browser/theming';
+import { ThemeService } from '@devpodio/core/lib/browser/theming';
 import { TerminalWidgetOptions, TerminalWidget } from './base/terminal-widget';
 import { MessageConnection } from 'vscode-jsonrpc';
-import { Deferred } from '@theia/core/lib/common/promise-util';
+import { Deferred } from '@devpodio/core/lib/common/promise-util';
 import { TerminalPreferences } from './terminal-preferences';
 
 export const TERMINAL_WIDGET_FACTORY_ID = 'terminal';
@@ -46,13 +46,7 @@ interface TerminalCSSProperties {
     fontSize: number;
 
     /* The text color, as a CSS color string.  */
-    foreground: string;
-
-    /* The background color, as a CSS color string.  */
-    background: string;
-
-    /* The color of selections. Bla */
-    selection: string;
+    termTheme: object;
 }
 
 @injectable()
@@ -89,7 +83,7 @@ export class TerminalWidgetImpl extends TerminalWidget implements StatefulWidget
 
         if (this.options.destroyTermOnClose === true) {
             this.toDispose.push(Disposable.create(() =>
-                this.term.destroy()
+                this.term.dispose()
             ));
         }
 
@@ -104,22 +98,12 @@ export class TerminalWidgetImpl extends TerminalWidget implements StatefulWidget
             cursorBlink: false,
             fontFamily: cssProps.fontFamily,
             fontSize: cssProps.fontSize,
-            theme: {
-                foreground: cssProps.foreground,
-                background: cssProps.background,
-                cursor: cssProps.foreground,
-                selection: cssProps.selection
-            },
+            theme: cssProps.termTheme,
         });
 
-        this.toDispose.push(this.themeService.onThemeChange(c => {
+        this.toDispose.push(this.themeService.onThemeChange(() => {
             const changedProps = this.getCSSPropertiesFromPage();
-            this.term.setOption('theme', {
-                foreground: changedProps.foreground,
-                background: changedProps.background,
-                cursor: changedProps.foreground,
-                selection: cssProps.selection
-            });
+            this.term.setOption('theme', changedProps.termTheme);
         }));
         this.attachCustomKeyEventHandler();
         this.term.on('title', (title: string) => {
@@ -203,10 +187,27 @@ export class TerminalWidgetImpl extends TerminalWidget implements StatefulWidget
 
         const fontFamily = lookup(htmlElementProps, '--theia-terminal-font-family');
         const fontSizeStr = lookup(htmlElementProps, '--theia-code-font-size');
-        const foreground = lookup(htmlElementProps, '--theia-ui-font-color1');
-        const background = lookup(htmlElementProps, '--theia-layout-color0');
-        const selection = lookup(htmlElementProps, '--theia-transparent-accent-color2');
-
+        const foreground = lookup(htmlElementProps, '--theia-terminal-foreground');
+        const background = lookup(htmlElementProps, '--theia-terminal-background');
+        const cursor = lookup(htmlElementProps, '--theia-terminal-cursor');
+        const cursorAccent = lookup(htmlElementProps, '--theia-terminal-cursorAccent');
+        const selection = lookup(htmlElementProps, '--theia-terminal-selection');
+        const black = lookup(htmlElementProps, '--theia-terminal-black');
+        const red = lookup(htmlElementProps, '--theia-terminal-red');
+        const green = lookup(htmlElementProps, '--theia-terminal-green');
+        const yellow = lookup(htmlElementProps, '--theia-terminal-yellow');
+        const blue = lookup(htmlElementProps, '--theia-terminal-blue');
+        const magenta = lookup(htmlElementProps, '--theia-terminal-magenta');
+        const cyan = lookup(htmlElementProps, '--theia-terminal-cyan');
+        const white = lookup(htmlElementProps, '--theia-terminal-white');
+        const brightBlack = lookup(htmlElementProps, '--theia-terminal-brightBlack');
+        const brightRed = lookup(htmlElementProps, '--theia-terminal-brightRed');
+        const brightGreen = lookup(htmlElementProps, '--theia-terminal-brightGreen');
+        const brightYellow = lookup(htmlElementProps, '--theia-terminal-brightYellow');
+        const brightBlue = lookup(htmlElementProps, '--theia-terminal-brightBlue');
+        const brightMagenta = lookup(htmlElementProps, '--theia-terminal-brightMagenta');
+        const brightCyan = lookup(htmlElementProps, '--theia-terminal-brightCyan');
+        const brightWhite = lookup(htmlElementProps, '--theia-terminal-brightWhite');
         /* The font size is returned as a string, such as ' 13px').  We want to
            return just the number of px.  */
         const fontSizeMatch = fontSizeStr.trim().match(/^(\d+)px$/);
@@ -228,11 +229,11 @@ export class TerminalWidgetImpl extends TerminalWidget implements StatefulWidget
         }
 
         return {
-            fontSize,
-            fontFamily,
-            foreground,
-            background,
-            selection
+            fontSize, fontFamily, termTheme: {
+                foreground, background, cursor, cursorAccent,
+                selection, black, red, green, yellow, blue, magenta, cyan, white, brightBlack,
+                brightRed, brightGreen, brightYellow, brightBlue, brightMagenta, brightCyan, brightWhite
+            }
         };
     }
 
@@ -287,25 +288,25 @@ export class TerminalWidgetImpl extends TerminalWidget implements StatefulWidget
         super.processMessage(msg);
         switch (msg.type) {
             case 'fit-request':
-                this.onFitRequest(msg);
+                this.onFitRequest();
                 break;
             default:
                 break;
         }
     }
-    protected onFitRequest(msg: Message): void {
+    protected onFitRequest(): void {
         MessageLoop.sendMessage(this, Widget.ResizeMessage.UnknownSize);
     }
-    protected onActivateRequest(msg: Message): void {
+    protected onActivateRequest(): void {
         this.term.focus();
     }
-    protected onAfterShow(msg: Message): void {
+    protected onAfterShow(): void {
         this.update();
     }
-    protected onAfterAttach(msg: Message): void {
+    protected onAfterAttach(): void {
         this.update();
     }
-    protected onResize(msg: Widget.ResizeMessage): void {
+    protected onResize(): void {
         this.needsResize = true;
         this.update();
     }

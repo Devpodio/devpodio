@@ -14,12 +14,12 @@
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  ********************************************************************************/
 
-import { MenuModelRegistry, CommandRegistry, Command, SelectionService } from '@theia/core';
-import { AbstractViewContribution, OpenViewArguments } from '@theia/core/lib/browser';
+import { MenuModelRegistry, CommandRegistry, Command, SelectionService } from '@devpodio/core';
+import { AbstractViewContribution, OpenViewArguments } from '@devpodio/core/lib/browser';
 import { injectable, inject, postConstruct } from 'inversify';
-import { NAVIGATOR_CONTEXT_MENU } from '@theia/navigator/lib/browser/navigator-contribution';
-import { UriCommandHandler, UriAwareCommandHandler } from '@theia/core/lib/common/uri-command-handler';
-import URI from '@theia/core/lib/common/uri';
+import { NAVIGATOR_CONTEXT_MENU } from '@devpodio/navigator/lib/browser/navigator-contribution';
+import { UriCommandHandler, UriAwareCommandHandler } from '@devpodio/core/lib/common/uri-command-handler';
+import URI from '@devpodio/core/lib/common/uri';
 import { GitHistoryWidget } from './git-history-widget';
 import { Git } from '../../common';
 import { GitRepositoryTracker } from '../git-repository-tracker';

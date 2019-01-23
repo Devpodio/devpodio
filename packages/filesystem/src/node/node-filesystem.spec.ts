@@ -18,12 +18,12 @@ import * as os from 'os';
 import * as temp from 'temp';
 import * as chai from 'chai';
 import * as fs from 'fs-extra';
-import URI from '@theia/core/lib/common/uri';
-import { FileUri } from '@theia/core/lib/node';
-import { isWindows } from '@theia/core/lib/common/os';
+import URI from '@devpodio/core/lib/common/uri';
+import { FileUri } from '@devpodio/core/lib/node';
+import { isWindows } from '@devpodio/core/lib/common/os';
 import { FileSystem } from '../common/filesystem';
 import { FileSystemNode } from './node-filesystem';
-import { expectThrowsAsync } from '@theia/core/lib/common/test/expect';
+import { expectThrowsAsync } from '@devpodio/core/lib/common/test/expect';
 
 // tslint:disable:no-unused-expression
 

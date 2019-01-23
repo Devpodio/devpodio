@@ -15,14 +15,14 @@
  ********************************************************************************/
 
 import { inject, injectable, postConstruct, interfaces, Container } from 'inversify';
-import { Message, ApplicationShell, Widget, SplitPanel, BaseWidget, PanelLayout } from '@theia/core/lib/browser';
+import { Message, ApplicationShell, Widget, SplitPanel, BaseWidget, PanelLayout } from '@devpodio/core/lib/browser';
 import { DebugThreadsWidget } from './debug-threads-widget';
 import { DebugStackFramesWidget } from './debug-stack-frames-widget';
 import { DebugBreakpointsWidget } from './debug-breakpoints-widget';
 import { DebugVariablesWidget } from './debug-variables-widget';
 import { DebugToolBar } from './debug-toolbar-widget';
 import { DebugViewModel, DebugViewOptions } from './debug-view-model';
-import { ViewContainer } from '@theia/core/lib/browser/view-container';
+import { ViewContainer } from '@devpodio/core/lib/browser/view-container';
 
 export const DebugSessionWidgetFactory = Symbol('DebugSessionWidgetFactory');
 export type DebugSessionWidgetFactory = (options: DebugViewOptions) => DebugSessionWidget;

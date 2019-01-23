@@ -16,7 +16,7 @@
 
 import * as React from 'react';
 import { injectable, inject, postConstruct } from 'inversify';
-import { TreeSource, TreeElement } from '@theia/core/lib/browser/source-tree';
+import { TreeSource, TreeElement } from '@devpodio/core/lib/browser/source-tree';
 import { DebugThread } from '../model/debug-thread';
 import { DebugViewModel } from './debug-view-model';
 import debounce = require('p-debounce');

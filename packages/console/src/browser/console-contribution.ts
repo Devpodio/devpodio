@@ -15,8 +15,8 @@
  ********************************************************************************/
 
 import { injectable, inject } from 'inversify';
-import { Command, CommandContribution, CommandRegistry, MenuContribution, MenuModelRegistry, CommandHandler } from '@theia/core';
-import { FrontendApplicationContribution, KeybindingContribution, KeybindingRegistry, CommonCommands } from '@theia/core/lib/browser';
+import { Command, CommandContribution, CommandRegistry, MenuContribution, MenuModelRegistry, CommandHandler } from '@devpodio/core';
+import { FrontendApplicationContribution, KeybindingContribution, KeybindingRegistry, CommonCommands } from '@devpodio/core/lib/browser';
 import { ConsoleManager } from './console-manager';
 import { ConsoleKeybindingContexts } from './console-keybinding-contexts';
 import { ConsoleWidget } from './console-widget';

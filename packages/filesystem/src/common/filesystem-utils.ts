@@ -15,8 +15,8 @@
  ********************************************************************************/
 
 import { FileStat } from './filesystem';
-import URI from '@theia/core/lib/common/uri';
-import { Path } from '@theia/core/lib/common';
+import URI from '@devpodio/core/lib/common/uri';
+import { Path } from '@devpodio/core/lib/common';
 
 export namespace FileSystemUtils {
 

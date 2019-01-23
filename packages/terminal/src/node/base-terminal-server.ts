@@ -15,9 +15,9 @@
  ********************************************************************************/
 
 import { inject, injectable, named } from 'inversify';
-import { ILogger, DisposableCollection } from '@theia/core/lib/common';
+import { ILogger, DisposableCollection } from '@devpodio/core/lib/common';
 import { IBaseTerminalServer, IBaseTerminalServerOptions, IBaseTerminalClient } from '../common/base-terminal-protocol';
-import { TerminalProcess, ProcessManager } from '@theia/process/lib/node';
+import { TerminalProcess, ProcessManager } from '@devpodio/process/lib/node';
 
 @injectable()
 export abstract class BaseTerminalServer implements IBaseTerminalServer {

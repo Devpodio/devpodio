@@ -18,7 +18,7 @@ import { inject, injectable } from 'inversify';
 import findGit from 'find-git-exec';
 import { dirname } from 'path';
 import { pathExists } from 'fs-extra';
-import { ILogger } from '@theia/core/lib/common/logger';
+import { ILogger } from '@devpodio/core/lib/common/logger';
 import { DefaultGitInit } from '../../node/init/git-init';
 
 /**

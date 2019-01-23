@@ -16,7 +16,7 @@
 
 import { interfaces, injectable, inject, Container } from 'inversify';
 import { MAIN_RPC_CONTEXT, TreeViewsMain, TreeViewsExt } from '../../../api/plugin-api';
-import { RPCProtocol } from '@theia/plugin-ext/src/api/rpc-protocol';
+import { RPCProtocol } from '@devpodio/plugin-ext/src/api/rpc-protocol';
 import { ViewRegistry } from './view-registry';
 import { Message } from '@phosphor/messaging';
 import {
@@ -34,9 +34,9 @@ import {
     Tree,
     TREE_NODE_SEGMENT_CLASS,
     TREE_NODE_SEGMENT_GROW_CLASS
-} from '@theia/core/lib/browser';
+} from '@devpodio/core/lib/browser';
 import { TreeViewItem, TreeViewItemCollapsibleState } from '../../../api/plugin-api';
-import { MenuPath } from '@theia/core/lib/common/menu';
+import { MenuPath } from '@devpodio/core/lib/common/menu';
 import * as ReactDOM from 'react-dom';
 import * as React from 'react';
 import { ContextKeyService, ContextKey } from '../context-key/context-key';

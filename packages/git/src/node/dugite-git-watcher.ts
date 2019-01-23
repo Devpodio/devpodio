@@ -15,7 +15,7 @@
  ********************************************************************************/
 
 import { injectable, inject } from 'inversify';
-import { DisposableCollection, Disposable } from '@theia/core';
+import { DisposableCollection, Disposable } from '@devpodio/core';
 import { Repository } from '../common';
 import { GitWatcherServer, GitWatcherClient } from '../common/git-watcher';
 import { GitRepositoryManager } from './git-repository-manager';

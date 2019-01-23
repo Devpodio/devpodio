@@ -15,10 +15,10 @@
  ********************************************************************************/
 
 import { injectable, inject, postConstruct } from 'inversify';
-import URI from '@theia/core/lib/common/uri';
-import { EditorManager, EditorWidget } from '@theia/editor/lib/browser';
-import { ContextMenuRenderer } from '@theia/core/lib/browser';
-import { MonacoEditor } from '@theia/monaco/lib/browser/monaco-editor';
+import URI from '@devpodio/core/lib/common/uri';
+import { EditorManager, EditorWidget } from '@devpodio/editor/lib/browser';
+import { ContextMenuRenderer } from '@devpodio/core/lib/browser';
+import { MonacoEditor } from '@devpodio/monaco/lib/browser/monaco-editor';
 import { DebugSessionManager } from '../debug-session-manager';
 import { DebugEditorModel, DebugEditorModelFactory } from './debug-editor-model';
 import { BreakpointManager, BreakpointsChangeEvent } from '../breakpoint/breakpoint-manager';

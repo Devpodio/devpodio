@@ -14,20 +14,20 @@
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  ********************************************************************************/
 
-import * as theia from '@theia/plugin';
+import * as theia from '@devpodio/plugin';
 import { interfaces, injectable } from 'inversify';
 import { WorkspaceExt, StorageExt, MAIN_RPC_CONTEXT, WorkspaceMain, WorkspaceFolderPickOptionsMain } from '../../api/plugin-api';
 import { RPCProtocol } from '../../api/rpc-protocol';
 import Uri from 'vscode-uri';
 import { UriComponents } from '../../common/uri-components';
-import { QuickOpenModel, QuickOpenItem, QuickOpenMode } from '@theia/core/lib/browser/quick-open/quick-open-model';
-import { MonacoQuickOpenService } from '@theia/monaco/lib/browser/monaco-quick-open-service';
-import { FileStat } from '@theia/filesystem/lib/common';
-import { FileSearchService } from '@theia/file-search/lib/common/file-search-service';
-import URI from '@theia/core/lib/common/uri';
-import { WorkspaceService } from '@theia/workspace/lib/browser';
-import { Resource } from '@theia/core/lib/common/resource';
-import { Emitter, Event, Disposable, ResourceResolver } from '@theia/core';
+import { QuickOpenModel, QuickOpenItem, QuickOpenMode } from '@devpodio/core/lib/browser/quick-open/quick-open-model';
+import { MonacoQuickOpenService } from '@devpodio/monaco/lib/browser/monaco-quick-open-service';
+import { FileStat } from '@devpodio/filesystem/lib/common';
+import { FileSearchService } from '@devpodio/file-search/lib/common/file-search-service';
+import URI from '@devpodio/core/lib/common/uri';
+import { WorkspaceService } from '@devpodio/workspace/lib/browser';
+import { Resource } from '@devpodio/core/lib/common/resource';
+import { Emitter, Event, Disposable, ResourceResolver } from '@devpodio/core';
 import { FileWatcherSubscriberOptions } from '../../api/model';
 import { InPluginFileSystemWatcherManager } from './in-plugin-filesystem-watcher-manager';
 import { StoragePathService } from './storage-path-service';

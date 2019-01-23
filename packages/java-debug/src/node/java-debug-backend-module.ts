@@ -15,9 +15,9 @@
  ********************************************************************************/
 
 import { ContainerModule } from 'inversify';
-import { JavaExtensionContribution } from '@theia/java/lib/node';
+import { JavaExtensionContribution } from '@devpodio/java/lib/node';
 import { JavaDebugAdapterContribution, JavaDebugExtensionContribution } from './java-debug-adapter-contribution';
-import { DebugAdapterContribution } from '@theia/debug/lib/common/debug-model';
+import { DebugAdapterContribution } from '@devpodio/debug/lib/common/debug-model';
 
 export default new ContainerModule(bind => {
     /* explcit inTransientScope because it is very important, that

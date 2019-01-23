@@ -15,10 +15,10 @@
  ********************************************************************************/
 
 import { DebugExt, } from '../../../api/plugin-api';
-import { DebugConfiguration } from '@theia/debug/lib/common/debug-configuration';
-import { IJSONSchemaSnippet, IJSONSchema } from '@theia/core/lib/common/json-schema';
-import { MaybePromise } from '@theia/core/lib/common/types';
-import { DebuggerDescription } from '@theia/debug/lib/common/debug-service';
+import { DebugConfiguration } from '@devpodio/debug/lib/common/debug-configuration';
+import { IJSONSchemaSnippet, IJSONSchema } from '@devpodio/core/lib/common/json-schema';
+import { MaybePromise } from '@devpodio/core/lib/common/types';
+import { DebuggerDescription } from '@devpodio/debug/lib/common/debug-service';
 
 /**
  * Plugin [DebugAdapterContribution](#DebugAdapterContribution).

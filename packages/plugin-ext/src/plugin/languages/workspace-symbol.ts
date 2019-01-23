@@ -15,7 +15,7 @@
  ********************************************************************************/
 
 import { SymbolInformation } from 'vscode-languageserver-types';
-import * as theia from '@theia/plugin';
+import * as theia from '@devpodio/plugin';
 import * as Converter from '../type-converters';
 import { createToken } from '../token-provider';
 

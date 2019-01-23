@@ -22,8 +22,8 @@ import {
     PreferenceContribution,
     PreferenceSchema,
     PreferenceChangeEvent
-} from '@theia/core/lib/browser/preferences';
-import { isOSX } from '@theia/core/lib/common/os';
+} from '@devpodio/core/lib/browser/preferences';
+import { isOSX } from '@devpodio/core/lib/common/os';
 
 export const editorPreferenceSchema: PreferenceSchema = {
     'type': 'object',
@@ -247,6 +247,11 @@ export const editorPreferenceSchema: PreferenceSchema = {
             'type': 'boolean',
             'default': false,
             'description': 'Enable auto indentation adjustment.'
+        },
+        'editor.formatOnSave': {
+            'type': 'boolean',
+            'default': false,
+            'description': 'Enable format on manual save.'
         },
         'editor.formatOnType': {
             'type': 'boolean',
@@ -520,6 +525,7 @@ export interface EditorConfiguration {
     'editor.autoIndent'?: boolean
     'editor.formatOnType'?: boolean
     'editor.formatOnPaste'?: boolean
+    'editor.formatOnSave'?: boolean
     'editor.dragAndDrop'?: boolean
     'editor.suggestOnTriggerCharacters'?: boolean
     'editor.acceptSuggestionOnEnter'?: 'on' | 'smart' | 'off'

@@ -15,11 +15,11 @@
  ********************************************************************************/
 
 import * as fs from 'fs';
-import * as nsfw from 'vscode-nsfw';
+import * as nsfw from 'nsfw';
 import * as paths from 'path';
 import { IMinimatch, Minimatch } from 'minimatch';
-import { Disposable, DisposableCollection } from '@theia/core/lib/common/disposable';
-import { FileUri } from '@theia/core/lib/node/file-uri';
+import { Disposable, DisposableCollection } from '@devpodio/core/lib/common/disposable';
+import { FileUri } from '@devpodio/core/lib/node/file-uri';
 import {
     FileChangeType,
     FileSystemWatcherClient,
@@ -29,7 +29,7 @@ import {
 import { FileChangeCollection } from '../file-change-collection';
 import { setInterval, clearInterval } from 'timers';
 
-const debounce = require('lodash.debounce');
+import debounce = require('lodash.debounce');
 
 // tslint:disable:no-any
 

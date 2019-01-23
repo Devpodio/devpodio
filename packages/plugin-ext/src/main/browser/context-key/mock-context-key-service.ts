@@ -15,7 +15,7 @@
  ********************************************************************************/
 
 import { injectable } from 'inversify';
-import { Event } from '@theia/core/lib/common';
+import { Event } from '@devpodio/core/lib/common';
 import { ContextKeyService, ContextKey, ContextKeyChangeEvent, ContextKeyExpr, ContextKeyServiceTarget, Context } from './context-key';
 
 @injectable()

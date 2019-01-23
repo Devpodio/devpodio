@@ -15,16 +15,16 @@
  ********************************************************************************/
 
 import { createTaskTestContainer } from './test/task-test-container';
-import { BackendApplication } from '@theia/core/lib/node/backend-application';
+import { BackendApplication } from '@devpodio/core/lib/node/backend-application';
 import { TaskExitedEvent, TaskInfo, TaskServer, TaskWatcher, TaskConfiguration } from '../common';
 import { ProcessType, ProcessTaskConfiguration } from '../common/process/task-protocol';
 import * as http from 'http';
 import * as https from 'https';
-import { isWindows } from '@theia/core/lib/common/os';
-import { FileUri } from '@theia/core/lib/node';
-import { terminalsPath } from '@theia/terminal/lib/common/terminal-protocol';
-import { expectThrowsAsync } from '@theia/core/lib/common/test/expect';
-import { TestWebSocketChannel } from '@theia/core/lib/node/messaging/test/test-web-socket-channel';
+import { isWindows } from '@devpodio/core/lib/common/os';
+import { FileUri } from '@devpodio/core/lib/node';
+import { terminalsPath } from '@devpodio/terminal/lib/common/terminal-protocol';
+import { expectThrowsAsync } from '@devpodio/core/lib/common/test/expect';
+import { TestWebSocketChannel } from '@devpodio/core/lib/node/messaging/test/test-web-socket-channel';
 import { expect } from 'chai';
 
 /**

@@ -15,9 +15,9 @@
  ********************************************************************************/
 
 import { injectable, inject } from 'inversify';
-import { JsonRpcServer, JsonRpcProxy } from '@theia/core';
+import { JsonRpcServer, JsonRpcProxy } from '@devpodio/core';
 import { Repository, WorkingDirectoryStatus } from './git-model';
-import { Disposable, DisposableCollection, Emitter, Event } from '@theia/core/lib/common';
+import { Disposable, DisposableCollection, Emitter, Event } from '@devpodio/core/lib/common';
 
 /**
  * An event representing a `Git` status change in one of the watched local working directory.

@@ -15,8 +15,8 @@
  ********************************************************************************/
 
 import { interfaces, injectable } from 'inversify';
-import { AbstractViewContribution, bindViewContribution, WidgetFactory } from '@theia/core/lib/browser';
-import { ConsoleWidget, ConsoleOptions } from '@theia/console/lib/browser/console-widget';
+import { AbstractViewContribution, bindViewContribution, WidgetFactory } from '@devpodio/core/lib/browser';
+import { ConsoleWidget, ConsoleOptions } from '@devpodio/console/lib/browser/console-widget';
 import { DebugConsoleSession } from './debug-console-session';
 
 @injectable()

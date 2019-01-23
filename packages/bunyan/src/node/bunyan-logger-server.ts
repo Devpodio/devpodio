@@ -16,9 +16,9 @@
 
 import * as bunyan from 'bunyan';
 import { inject, injectable, postConstruct } from 'inversify';
-import { LoggerWatcher } from '@theia/core/lib/common/logger-watcher';
-import { LogLevelCliContribution } from '@theia/core/lib/node/logger-cli-contribution';
-import { ILoggerServer, ILoggerClient, ILogLevelChangedEvent, LogLevel, rootLoggerName } from '@theia/core/lib/common/logger-protocol';
+import { LoggerWatcher } from '@devpodio/core/lib/common/logger-watcher';
+import { LogLevelCliContribution } from '@devpodio/core/lib/node/logger-cli-contribution';
+import { ILoggerServer, ILoggerClient, ILogLevelChangedEvent, LogLevel, rootLoggerName } from '@devpodio/core/lib/common/logger-protocol';
 
 @injectable()
 export class BunyanLoggerServer implements ILoggerServer {

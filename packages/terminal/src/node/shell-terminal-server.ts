@@ -15,11 +15,11 @@
  ********************************************************************************/
 
 import { inject, injectable, named } from 'inversify';
-import { ILogger } from '@theia/core/lib/common/logger';
+import { ILogger } from '@devpodio/core/lib/common/logger';
 import { IShellTerminalServerOptions } from '../common/shell-terminal-protocol';
 import { BaseTerminalServer } from '../node/base-terminal-server';
 import { ShellProcessFactory } from '../node/shell-process';
-import { ProcessManager } from '@theia/process/lib/node';
+import { ProcessManager } from '@devpodio/process/lib/node';
 
 @injectable()
 export class ShellTerminalServer extends BaseTerminalServer {

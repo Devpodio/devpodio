@@ -13,9 +13,9 @@
  *
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  ********************************************************************************/
-import { BaseWidget } from '@theia/core/lib/browser/widgets/widget';
+import { BaseWidget } from '@devpodio/core/lib/browser/widgets/widget';
 import { IdGenerator } from '../../../common/id-generator';
-import { Disposable, DisposableCollection } from '@theia/core';
+import { Disposable, DisposableCollection } from '@devpodio/core';
 
 // tslint:disable:no-any
 

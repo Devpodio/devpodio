@@ -17,15 +17,15 @@
 import { injectable, inject } from 'inversify';
 import DocumentSymbol = monaco.languages.DocumentSymbol;
 import SymbolKind = monaco.languages.SymbolKind;
-import { FrontendApplicationContribution, FrontendApplication, TreeNode } from '@theia/core/lib/browser';
-import { Range, EditorManager, EditorOpenerOptions } from '@theia/editor/lib/browser';
+import { FrontendApplicationContribution, FrontendApplication, TreeNode } from '@devpodio/core/lib/browser';
+import { Range, EditorManager, EditorOpenerOptions } from '@devpodio/editor/lib/browser';
 import DocumentSymbolProviderRegistry = monaco.modes.DocumentSymbolProviderRegistry;
 import CancellationTokenSource = monaco.CancellationTokenSource;
 import CancellationToken = monaco.CancellationToken;
-import { DisposableCollection, Disposable } from '@theia/core';
-import { OutlineViewService } from '@theia/outline-view/lib/browser/outline-view-service';
-import { OutlineSymbolInformationNode } from '@theia/outline-view/lib/browser/outline-view-widget';
-import URI from '@theia/core/lib/common/uri';
+import { DisposableCollection, Disposable } from '@devpodio/core';
+import { OutlineViewService } from '@devpodio/outline-view/lib/browser/outline-view-service';
+import { OutlineSymbolInformationNode } from '@devpodio/outline-view/lib/browser/outline-view-widget';
+import URI from '@devpodio/core/lib/common/uri';
 import { MonacoEditor } from './monaco-editor';
 
 import debounce = require('lodash.debounce');

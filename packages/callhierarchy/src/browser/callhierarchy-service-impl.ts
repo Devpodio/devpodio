@@ -15,15 +15,15 @@
  ********************************************************************************/
 
 import { injectable, inject } from 'inversify';
-import { LanguageClientProvider } from '@theia/languages/lib/browser/language-client-provider';
+import { LanguageClientProvider } from '@devpodio/languages/lib/browser/language-client-provider';
 import {
     SymbolInformation, Location, Position, Range, SymbolKind, DocumentSymbol
 } from 'monaco-languageclient/lib/services';
 import * as utils from './utils';
 import { Definition, Caller } from './callhierarchy';
 import { CallHierarchyService } from './callhierarchy-service';
-import { ILogger } from '@theia/core';
-import { MonacoTextModelService } from '@theia/monaco/lib/browser/monaco-text-model-service';
+import { ILogger } from '@devpodio/core';
+import { MonacoTextModelService } from '@devpodio/monaco/lib/browser/monaco-text-model-service';
 import { CallHierarchyContext } from './callhierarchy-context';
 
 export type ExtendedDocumentSymbol = DocumentSymbol & Location & { containerName: string };

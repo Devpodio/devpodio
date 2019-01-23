@@ -18,7 +18,7 @@
  *  Licensed under the MIT License. See https://github.com/Microsoft/vscode/blob/master/LICENSE.txt for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { Disposable, DisposableCollection, Event, Emitter } from '@theia/core';
+import { Disposable, DisposableCollection, Event, Emitter } from '@devpodio/core';
 
 export interface MonacoEditorViewZone extends monaco.editor.IViewZone {
     id: number

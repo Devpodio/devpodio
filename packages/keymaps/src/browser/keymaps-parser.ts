@@ -17,7 +17,7 @@
 import * as Ajv from 'ajv';
 import * as parser from 'jsonc-parser';
 import { injectable } from 'inversify';
-import { Keybinding } from '@theia/core/lib/browser';
+import { Keybinding } from '@devpodio/core/lib/browser';
 
 export const keymapsSchema = {
     type: 'array',

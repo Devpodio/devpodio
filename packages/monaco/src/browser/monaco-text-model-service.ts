@@ -16,9 +16,9 @@
 
 import { inject, injectable } from 'inversify';
 import { MonacoToProtocolConverter, ProtocolToMonacoConverter } from 'monaco-languageclient';
-import URI from '@theia/core/lib/common/uri';
-import { ResourceProvider, ReferenceCollection, Event } from '@theia/core';
-import { EditorPreferences, EditorPreferenceChange } from '@theia/editor/lib/browser';
+import URI from '@devpodio/core/lib/common/uri';
+import { ResourceProvider, ReferenceCollection, Event } from '@devpodio/core';
+import { EditorPreferences, EditorPreferenceChange } from '@devpodio/editor/lib/browser';
 import { MonacoEditorModel } from './monaco-editor-model';
 
 @injectable()

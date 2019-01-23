@@ -15,8 +15,8 @@
  ********************************************************************************/
 
 import { inject, injectable } from 'inversify';
-import { ILogger } from '@theia/core/lib/common/logger';
-import { OpenerService, OpenerOptions, open } from '@theia/core/lib/browser/opener-service';
+import { ILogger } from '@devpodio/core/lib/common/logger';
+import { OpenerService, OpenerOptions, open } from '@devpodio/core/lib/browser/opener-service';
 import { EditorOpenerOptions } from '../editor-manager';
 import { NavigationLocationUpdater } from './navigation-location-updater';
 import { NavigationLocationSimilarity } from './navigation-location-similarity';

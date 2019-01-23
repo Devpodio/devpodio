@@ -17,7 +17,7 @@
 import { EditorsAndDocumentsExt, EditorsAndDocumentsDelta, PLUGIN_RPC_CONTEXT } from '../api/plugin-api';
 import { TextEditorExt } from './text-editor';
 import { RPCProtocol } from '../api/rpc-protocol';
-import { Emitter, Event } from '@theia/core/lib/common/event';
+import { Emitter, Event } from '@devpodio/core/lib/common/event';
 import { DocumentDataExt } from './document-data';
 import { ok } from '../common/assert';
 import * as Converter from './type-converters';

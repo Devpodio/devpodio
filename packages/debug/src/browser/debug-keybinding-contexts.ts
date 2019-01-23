@@ -15,7 +15,7 @@
  ********************************************************************************/
 
 import { injectable, inject } from 'inversify';
-import { KeybindingContext } from '@theia/core/lib/browser';
+import { KeybindingContext } from '@devpodio/core/lib/browser';
 import { DebugSessionManager } from './debug-session-manager';
 import { DebugState } from './debug-session';
 import { DebugEditorService } from './editor/debug-editor-service';

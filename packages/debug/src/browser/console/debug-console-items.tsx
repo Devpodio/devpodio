@@ -16,9 +16,9 @@
 
 import * as React from 'react';
 import { DebugProtocol } from 'vscode-debugprotocol/lib/debugProtocol';
-import { MessageType } from '@theia/core/lib/common';
-import { SingleTextInputDialog } from '@theia/core/lib/browser';
-import { ConsoleItem, CompositeConsoleItem } from '@theia/console/lib/browser/console-session';
+import { MessageType } from '@devpodio/core/lib/common';
+import { SingleTextInputDialog } from '@devpodio/core/lib/browser';
+import { ConsoleItem, CompositeConsoleItem } from '@devpodio/console/lib/browser/console-session';
 import { DebugSession } from '../debug-session';
 
 export class ExpressionContainer implements CompositeConsoleItem {

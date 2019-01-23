@@ -15,9 +15,9 @@
  ********************************************************************************/
 
 import { interfaces, Container, injectable } from 'inversify';
-import { MenuPath, MessageType } from '@theia/core';
-import { TreeProps } from '@theia/core/lib/browser/tree';
-import { SourceTreeWidget, TreeElementNode } from '@theia/core/lib/browser/source-tree';
+import { MenuPath, MessageType } from '@devpodio/core';
+import { TreeProps } from '@devpodio/core/lib/browser/tree';
+import { SourceTreeWidget, TreeElementNode } from '@devpodio/core/lib/browser/source-tree';
 import { ConsoleItem } from './console-session';
 
 @injectable()

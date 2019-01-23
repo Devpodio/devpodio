@@ -15,7 +15,7 @@
  ********************************************************************************/
 
 import { inject, injectable } from 'inversify';
-import { Event, Emitter, Disposable, DisposableCollection } from '@theia/core';
+import { Event, Emitter, Disposable, DisposableCollection } from '@devpodio/core';
 import * as protocol from './extension-protocol';
 import { ExtensionChange } from './extension-protocol';
 

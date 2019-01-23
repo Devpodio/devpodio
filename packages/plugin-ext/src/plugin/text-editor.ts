@@ -16,7 +16,7 @@
 import { TextEditorConfiguration, TextEditorsMain, TextEditorConfigurationUpdate, SingleEditOperation } from '../api/plugin-api';
 import { Range as ApiRange } from '../api/model';
 import { Selection, Range, TextEditorLineNumbersStyle, SnippetString, Position, TextEditorRevealType, EndOfLine } from './types-impl';
-import * as theia from '@theia/plugin';
+import * as theia from '@devpodio/plugin';
 import { DocumentDataExt } from './document-data';
 import { readonly, illegalArgument } from '../common/errors';
 import { TextEditorCursorStyle } from '../common/editor-options';

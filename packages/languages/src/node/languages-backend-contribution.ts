@@ -17,10 +17,10 @@
 // tslint:disable:no-any
 
 import { injectable, inject, named } from 'inversify';
-import { ContributionProvider } from '@theia/core/lib/common';
+import { ContributionProvider } from '@devpodio/core/lib/common';
 import { LanguageServerContribution } from './language-server-contribution';
-import { ILogger } from '@theia/core/lib/common/logger';
-import { MessagingService } from '@theia/core/lib/node/messaging/messaging-service';
+import { ILogger } from '@devpodio/core/lib/common/logger';
+import { MessagingService } from '@devpodio/core/lib/node/messaging/messaging-service';
 import { LanguageContribution } from '../common';
 
 @injectable()

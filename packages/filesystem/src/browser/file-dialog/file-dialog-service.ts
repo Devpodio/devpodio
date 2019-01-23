@@ -15,9 +15,9 @@
  ********************************************************************************/
 
 import { injectable, inject } from 'inversify';
-import URI from '@theia/core/lib/common/uri';
-import { MaybeArray } from '@theia/core/lib/common';
-import { LabelProvider } from '@theia/core/lib/browser';
+import URI from '@devpodio/core/lib/common/uri';
+import { MaybeArray } from '@devpodio/core/lib/common';
+import { LabelProvider } from '@devpodio/core/lib/browser';
 import { FileSystem, FileStat } from '../../common';
 import { DirNode } from '../file-tree';
 import { OpenFileDialogFactory, OpenFileDialogProps, SaveFileDialogFactory, SaveFileDialogProps } from './file-dialog';

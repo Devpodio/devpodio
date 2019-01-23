@@ -15,14 +15,14 @@
  ********************************************************************************/
 
 import { injectable, inject } from 'inversify';
-import { MenuPath, ILogger, CommandRegistry } from '@theia/core';
-import { EDITOR_CONTEXT_MENU } from '@theia/editor/lib/browser';
-import { MenuModelRegistry } from '@theia/core/lib/common';
-import { NAVIGATOR_CONTEXT_MENU } from '@theia/navigator/lib/browser/navigator-contribution';
+import { MenuPath, ILogger, CommandRegistry } from '@devpodio/core';
+import { EDITOR_CONTEXT_MENU } from '@devpodio/editor/lib/browser';
+import { MenuModelRegistry } from '@devpodio/core/lib/common';
+import { NAVIGATOR_CONTEXT_MENU } from '@devpodio/navigator/lib/browser/navigator-contribution';
 import { VIEW_ITEM_CONTEXT_MENU } from '../view/tree-views-main';
 import { PluginContribution, Menu } from '../../../common';
 import { ContextKeyService, ContextKeyExpr } from '../context-key/context-key';
-import { CommandHandler } from '@theia/core';
+import { CommandHandler } from '@devpodio/core';
 
 @injectable()
 export class MenusContributionPointHandler {

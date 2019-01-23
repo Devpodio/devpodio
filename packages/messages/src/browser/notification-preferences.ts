@@ -21,7 +21,7 @@ import {
     PreferenceService,
     PreferenceContribution,
     PreferenceSchema
-} from '@theia/core/lib/browser/preferences';
+} from '@devpodio/core/lib/browser/preferences';
 
 export const NotificationConfigSchema: PreferenceSchema = {
     'type': 'object',

@@ -15,7 +15,7 @@
  ********************************************************************************/
 
 import { injectable } from 'inversify';
-import { DiffNavigator } from '@theia/editor/lib/browser';
+import { DiffNavigator } from '@devpodio/editor/lib/browser';
 
 import IStandaloneDiffEditor = monaco.editor.IStandaloneDiffEditor;
 import IDiffNavigatorOptions = monaco.editor.IDiffNavigatorOptions;

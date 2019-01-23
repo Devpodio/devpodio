@@ -30,7 +30,7 @@ import {
     PreferenceSchema,
     PreferenceChangeEvent
     // tslint:disable-next-line:no-implicit-dependencies
-} from '@theia/core/lib/browser/preferences';
+} from '@devpodio/core/lib/browser/preferences';
 
 export const javaDebugPreferenceSchema: PreferenceSchema = {
     'type': 'object',

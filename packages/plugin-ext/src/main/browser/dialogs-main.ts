@@ -17,12 +17,12 @@
 import { interfaces } from 'inversify';
 import { RPCProtocol } from '../../api/rpc-protocol';
 import { OpenDialogOptionsMain, SaveDialogOptionsMain, DialogsMain } from '../../api/plugin-api';
-import URI from '@theia/core/lib/common/uri';
-import { DirNode, OpenFileDialogProps, SaveFileDialogProps, OpenFileDialogFactory, SaveFileDialogFactory } from '@theia/filesystem/lib/browser';
-import { WorkspaceService } from '@theia/workspace/lib/browser';
-import { FileSystem, FileStat } from '@theia/filesystem/lib/common';
-import { LabelProvider } from '@theia/core/lib/browser';
-import { UriSelection } from '@theia/core/lib/common/selection';
+import URI from '@devpodio/core/lib/common/uri';
+import { DirNode, OpenFileDialogProps, SaveFileDialogProps, OpenFileDialogFactory, SaveFileDialogFactory } from '@devpodio/filesystem/lib/browser';
+import { WorkspaceService } from '@devpodio/workspace/lib/browser';
+import { FileSystem, FileStat } from '@devpodio/filesystem/lib/common';
+import { LabelProvider } from '@devpodio/core/lib/browser';
+import { UriSelection } from '@devpodio/core/lib/common/selection';
 
 export class DialogsMainImpl implements DialogsMain {
 

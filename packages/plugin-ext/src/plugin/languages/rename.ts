@@ -15,11 +15,11 @@
  ********************************************************************************/
 
 import URI from 'vscode-uri/lib/umd';
-import * as theia from '@theia/plugin';
+import * as theia from '@devpodio/plugin';
 import * as Converter from '../type-converters';
 import * as model from '../../api/model';
-import { DocumentsExtImpl } from '@theia/plugin-ext/src/plugin/documents';
-import { WorkspaceEditDto } from '@theia/plugin-ext/src/common';
+import { DocumentsExtImpl } from '@devpodio/plugin-ext/src/plugin/documents';
+import { WorkspaceEditDto } from '@devpodio/plugin-ext/src/common';
 import { Position } from '../../api/plugin-api';
 import { createToken } from '../token-provider';
 import { Range } from '../types-impl';

@@ -15,10 +15,10 @@
  ********************************************************************************/
 
 import { ContainerModule } from 'inversify';
-import { LanguageClientContribution } from '@theia/languages/lib/browser';
+import { LanguageClientContribution } from '@devpodio/languages/lib/browser';
 import { PythonClientContribution } from './python-client-contribution';
 import { PythonGrammarContribution } from './python-grammar-contribution';
-import { LanguageGrammarDefinitionContribution } from '@theia/monaco/lib/browser/textmate';
+import { LanguageGrammarDefinitionContribution } from '@devpodio/monaco/lib/browser/textmate';
 
 export default new ContainerModule(bind => {
     bind(PythonClientContribution).toSelf().inSingletonScope();

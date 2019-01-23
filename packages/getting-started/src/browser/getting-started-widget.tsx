@@ -15,17 +15,17 @@
  ********************************************************************************/
 
 import * as React from 'react';
-import URI from '@theia/core/lib/common/uri';
+import URI from '@devpodio/core/lib/common/uri';
 import { injectable, inject, postConstruct } from 'inversify';
-import { ReactWidget } from '@theia/core/lib/browser/widgets/react-widget';
-import { CommandRegistry, isOSX, environment } from '@theia/core/lib/common';
-import { WorkspaceCommands, WorkspaceService } from '@theia/workspace/lib/browser';
-import { FileStat, FileSystem } from '@theia/filesystem/lib/common/filesystem';
-import { FileSystemUtils } from '@theia/filesystem/lib/common/filesystem-utils';
-import { KeymapsCommands } from '@theia/keymaps/lib/browser';
-import { CommonCommands } from '@theia/core/lib/browser';
-import { ApplicationInfo, ApplicationServer } from '@theia/core/lib/common/application-protocol';
-import { FrontendApplicationConfigProvider } from '@theia/core/lib/browser/frontend-application-config-provider';
+import { ReactWidget } from '@devpodio/core/lib/browser/widgets/react-widget';
+import { CommandRegistry, isOSX, environment } from '@devpodio/core/lib/common';
+import { WorkspaceCommands, WorkspaceService } from '@devpodio/workspace/lib/browser';
+import { FileStat, FileSystem } from '@devpodio/filesystem/lib/common/filesystem';
+import { FileSystemUtils } from '@devpodio/filesystem/lib/common/filesystem-utils';
+import { KeymapsCommands } from '@devpodio/keymaps/lib/browser';
+import { CommonCommands } from '@devpodio/core/lib/browser';
+import { ApplicationInfo, ApplicationServer } from '@devpodio/core/lib/common/application-protocol';
+import { FrontendApplicationConfigProvider } from '@devpodio/core/lib/browser/frontend-application-config-provider';
 
 @injectable()
 export class GettingStartedWidget extends ReactWidget {

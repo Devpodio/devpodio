@@ -15,10 +15,10 @@
  ********************************************************************************/
 
 import { inject, injectable, postConstruct } from 'inversify';
-import { LocalStorageService } from '@theia/core/lib/browser/storage-service';
-import { StorageService } from '@theia/core/lib/browser/storage-service';
+import { LocalStorageService } from '@devpodio/core/lib/browser/storage-service';
+import { StorageService } from '@devpodio/core/lib/browser/storage-service';
 import { WorkspaceService } from './workspace-service';
-import { FileStat } from '@theia/filesystem/lib/common';
+import { FileStat } from '@devpodio/filesystem/lib/common';
 
 /*
  * Prefixes any stored data with the current workspace path.

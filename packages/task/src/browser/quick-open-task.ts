@@ -15,11 +15,11 @@
  ********************************************************************************/
 
 import { inject, injectable } from 'inversify';
-import { QuickOpenService, QuickOpenModel, QuickOpenItem, QuickOpenGroupItem, QuickOpenMode, QuickOpenHandler, QuickOpenOptions } from '@theia/core/lib/browser/quick-open/';
+import { QuickOpenService, QuickOpenModel, QuickOpenItem, QuickOpenGroupItem, QuickOpenMode, QuickOpenHandler, QuickOpenOptions } from '@devpodio/core/lib/browser/quick-open/';
 import { TaskService } from './task-service';
 import { TaskConfigurations } from './task-configurations';
 import { TaskInfo, TaskConfiguration } from '../common/task-protocol';
-import URI from '@theia/core/lib/common/uri';
+import URI from '@devpodio/core/lib/common/uri';
 
 @injectable()
 export class QuickOpenTask implements QuickOpenModel, QuickOpenHandler {

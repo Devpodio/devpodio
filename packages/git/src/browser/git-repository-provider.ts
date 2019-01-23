@@ -16,12 +16,12 @@
 
 import { Git, Repository } from '../common';
 import { injectable, inject } from 'inversify';
-import { WorkspaceService } from '@theia/workspace/lib/browser/workspace-service';
-import { FileSystem, FileStat } from '@theia/filesystem/lib/common';
-import { DisposableCollection, Event, Emitter } from '@theia/core';
-import { LocalStorageService } from '@theia/core/lib/browser';
-import URI from '@theia/core/lib/common/uri';
-import { FileSystemWatcher } from '@theia/filesystem/lib/browser/filesystem-watcher';
+import { WorkspaceService } from '@devpodio/workspace/lib/browser/workspace-service';
+import { FileSystem, FileStat } from '@devpodio/filesystem/lib/common';
+import { DisposableCollection, Event, Emitter } from '@devpodio/core';
+import { LocalStorageService } from '@devpodio/core/lib/browser';
+import URI from '@devpodio/core/lib/common/uri';
+import { FileSystemWatcher } from '@devpodio/filesystem/lib/browser/filesystem-watcher';
 
 import debounce = require('lodash.debounce');
 
@@ -66,9 +66,10 @@ export class GitRepositoryProvider {
         /*
          * Listen for changes within the workspaces.
          */
+        this.toDisposeOnWorkspaceChange.push(
         this.watcher.onFilesChanged(_changedFiles => {
             this.lazyRefresh();
-        });
+        }));
 
         this._selectedRepository = await this.storageService.getData<Repository | undefined>(this.selectedRepoStorageKey);
         this._allRepositories = await this.storageService.getData<Repository[]>(this.allRepoStorageKey);

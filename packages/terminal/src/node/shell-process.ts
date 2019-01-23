@@ -16,12 +16,12 @@
 
 import { injectable, inject, named } from 'inversify';
 import * as os from 'os';
-import { ILogger } from '@theia/core/lib/common/logger';
-import { TerminalProcess, TerminalProcessOptions, ProcessManager, MultiRingBuffer } from '@theia/process/lib/node';
-import { isWindows, isOSX } from '@theia/core/lib/common';
-import URI from '@theia/core/lib/common/uri';
-import { FileUri } from '@theia/core/lib/node/file-uri';
-import { parseArgs } from '@theia/process/lib/node/utils';
+import { ILogger } from '@devpodio/core/lib/common/logger';
+import { TerminalProcess, TerminalProcessOptions, ProcessManager, MultiRingBuffer } from '@devpodio/process/lib/node';
+import { isWindows, isOSX } from '@devpodio/core/lib/common';
+import URI from '@devpodio/core/lib/common/uri';
+import { FileUri } from '@devpodio/core/lib/node/file-uri';
+import { parseArgs } from '@devpodio/process/lib/node/utils';
 
 export const ShellProcessFactory = Symbol('ShellProcessFactory');
 export type ShellProcessFactory = (options: ShellProcessOptions) => ShellProcess;

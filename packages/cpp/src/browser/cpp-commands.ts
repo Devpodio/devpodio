@@ -15,14 +15,14 @@
  ********************************************************************************/
 
 import { inject, injectable } from 'inversify';
-import { SelectionService, UriSelection } from '@theia/core/lib/common';
-import { CommandContribution, CommandRegistry, Command } from '@theia/core/lib/common';
-import URI from '@theia/core/lib/common/uri';
-import { open, OpenerService } from '@theia/core/lib/browser';
+import { SelectionService, UriSelection } from '@devpodio/core/lib/common';
+import { CommandContribution, CommandRegistry, Command } from '@devpodio/core/lib/common';
+import URI from '@devpodio/core/lib/common/uri';
+import { open, OpenerService } from '@devpodio/core/lib/browser';
 import { CppLanguageClientContribution } from './cpp-language-client-contribution';
 import { SwitchSourceHeaderRequest } from './cpp-protocol';
-import { TextDocumentIdentifier } from '@theia/languages/lib/browser';
-import { EditorCommands, EditorManager } from '@theia/editor/lib/browser';
+import { TextDocumentIdentifier } from '@devpodio/languages/lib/browser';
+import { EditorCommands, EditorManager } from '@devpodio/editor/lib/browser';
 import { HEADER_AND_SOURCE_FILE_EXTENSIONS } from '../common';
 import { ExecuteCommandRequest, ExecuteCommandParams } from 'vscode-languageserver-protocol';
 import { CppPreferences } from './cpp-preferences';

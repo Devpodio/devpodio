@@ -18,19 +18,19 @@
 
 import { injectable, inject, postConstruct } from 'inversify';
 import { ProtocolToMonacoConverter, MonacoToProtocolConverter, testGlob } from 'monaco-languageclient';
-import URI from '@theia/core/lib/common/uri';
-import { DisposableCollection } from '@theia/core/lib/common';
-import { FileSystem, } from '@theia/filesystem/lib/common';
-import { FileChangeType, FileSystemWatcher } from '@theia/filesystem/lib/browser';
-import { WorkspaceService } from '@theia/workspace/lib/browser';
-import { EditorManager, EditorOpenerOptions } from '@theia/editor/lib/browser';
-import * as lang from '@theia/languages/lib/browser';
-import { Emitter, TextDocumentWillSaveEvent, TextEdit } from '@theia/languages/lib/browser';
+import URI from '@devpodio/core/lib/common/uri';
+import { DisposableCollection } from '@devpodio/core/lib/common';
+import { FileSystem, } from '@devpodio/filesystem/lib/common';
+import { FileChangeType, FileSystemWatcher } from '@devpodio/filesystem/lib/browser';
+import { WorkspaceService } from '@devpodio/workspace/lib/browser';
+import { EditorManager, EditorOpenerOptions } from '@devpodio/editor/lib/browser';
+import * as lang from '@devpodio/languages/lib/browser';
+import { Emitter, TextDocumentWillSaveEvent, TextEdit } from '@devpodio/languages/lib/browser';
 import { MonacoTextModelService } from './monaco-text-model-service';
 import { WillSaveMonacoModelEvent, MonacoEditorModel, MonacoModelContentChangedEvent } from './monaco-editor-model';
 import { MonacoEditor } from './monaco-editor';
 import { MonacoConfigurations } from './monaco-configurations';
-import { ProblemManager } from '@theia/markers/lib/browser';
+import { ProblemManager } from '@devpodio/markers/lib/browser';
 
 export interface MonacoDidChangeTextDocumentParams extends lang.DidChangeTextDocumentParams {
     readonly textDocument: MonacoEditorModel;

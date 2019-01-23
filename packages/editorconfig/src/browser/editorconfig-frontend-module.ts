@@ -15,10 +15,10 @@
  ********************************************************************************/
 
 import { ContainerModule } from 'inversify';
-import { FrontendApplicationContribution, FrontendApplication, WebSocketConnectionProvider } from '@theia/core/lib/browser';
+import { FrontendApplicationContribution, FrontendApplication, WebSocketConnectionProvider } from '@devpodio/core/lib/browser';
 import { EditorconfigDocumentManager } from './editorconfig-document-manager';
 import { EditorconfigService, editorconfigServicePath } from '../common/editorconfig-interface';
-import { MaybePromise } from '@theia/core';
+import { MaybePromise } from '@devpodio/core';
 
 export default new ContainerModule((bind, unbind) => {
     bind(EditorconfigService).toDynamicValue(ctx => {

@@ -15,9 +15,9 @@
  ********************************************************************************/
 
 import { inject, injectable, postConstruct } from 'inversify';
-import { Message } from '@theia/core/lib/browser';
+import { Message } from '@devpodio/core/lib/browser';
 import { OutputChannelManager, OutputChannel } from '../common/output-channel';
-import { ReactWidget } from '@theia/core/lib/browser/widgets/react-widget';
+import { ReactWidget } from '@devpodio/core/lib/browser/widgets/react-widget';
 import * as React from 'react';
 
 import '../../src/browser/style/output.css';

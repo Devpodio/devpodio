@@ -15,7 +15,7 @@
  ********************************************************************************/
 
 import { injectable, inject } from 'inversify';
-import { JsonRpcServer, JsonRpcProxy } from '@theia/core';
+import { JsonRpcServer, JsonRpcProxy } from '@devpodio/core';
 
 export const fileSystemWatcherPath = '/services/fs-watcher';
 

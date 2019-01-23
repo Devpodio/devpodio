@@ -15,7 +15,7 @@
  ********************************************************************************/
 
 import { ContainerModule } from 'inversify';
-import { DebugAdapterContribution } from '@theia/debug/lib/common/debug-model';
+import { DebugAdapterContribution } from '@devpodio/debug/lib/common/debug-model';
 import { NodeDebugAdapterContribution, Node2DebugAdapterContribution } from './node-debug-adapter-contribution';
 
 export default new ContainerModule(bind => {

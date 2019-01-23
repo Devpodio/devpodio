@@ -15,8 +15,8 @@
  ********************************************************************************/
 
 import { inject, injectable, named } from 'inversify';
-import URI from '@theia/core/lib/common/uri';
-import { ContributionProvider, MaybePromise, Prioritizeable } from '@theia/core';
+import URI from '@devpodio/core/lib/common/uri';
+import { ContributionProvider, MaybePromise, Prioritizeable } from '@devpodio/core';
 
 export const PreviewHandler = Symbol('PreviewHandler');
 

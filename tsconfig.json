@@ -4,22 +4,22 @@
     "skipLibCheck": false,
     "baseUrl": ".",
     "paths": {
-      "@theia/application-package": [
+      "@devpodio/application-package": [
         "dev-packages/application-package/src"
       ],
-      "@theia/application-package/lib/*": [
+      "@devpodio/application-package/lib/*": [
         "dev-packages/application-package/src/*"
       ],
-      "@theia/core": [
+      "@devpodio/core": [
         "packages/core/src/common"
       ],
-      "@theia/core/lib/*": [
+      "@devpodio/core/lib/*": [
         "packages/core/src/*"
       ],
-      "@theia/extension-manager/lib/*": [
+      "@devpodio/extension-manager/lib/*": [
         "packages/extension-manager/src/*"
       ],
-      "@theia/filesystem/lib/*": [
+      "@devpodio/filesystem/lib/*": [
         "packages/filesystem/src/*"
       ],
       "mv": [
@@ -28,91 +28,94 @@
       "trash": [
         "packages/filesystem/src/typings/trash"
       ],
-      "@theia/navigator/lib/*": [
+      "@devpodio/navigator/lib/*": [
         "packages/navigator/src/*"
       ],
-      "@theia/preferences/lib/*": [
+      "@devpodio/preferences/lib/*": [
         "packages/preferences/src/*"
       ],
-      "@theia/workspace/lib/*": [
+      "@devpodio/workspace/lib/*": [
         "packages/workspace/src/*"
       ],
-      "@theia/terminal/lib/*": [
+      "@devpodio/terminal/lib/*": [
         "packages/terminal/src/*"
       ],
-      "@theia/languages/lib/*": [
+      "@devpodio/languages/lib/*": [
         "packages/languages/src/*"
       ],
-      "@theia/editor/lib/*": [
+      "@devpodio/editor/lib/*": [
         "packages/editor/src/*"
       ],
-      "@theia/mini-browser/lib/*": [
+      "@devpodio/mini-browser/lib/*": [
         "packages/mini-browser/src/*"
       ],
-      "@theia/monaco/lib/*": [
+      "@devpodio/monaco/lib/*": [
         "packages/monaco/src/*"
       ],
-      "@theia/cpp/lib/*": [
+      "@devpodio/cpp/lib/*": [
         "packages/cpp/src/*"
       ],
-      "@theia/java/lib/*": [
+      "@devpodio/java/lib/*": [
         "packages/java/src/*"
       ],
-      "@theia/java-debug/lib/*": [
+      "@devpodio/java-debug/lib/*": [
         "packages/java-debug/src/*"
       ],
-      "@theia/debug/lib/*": [
+      "@devpodio/debug/lib/*": [
         "packages/debug/src/*"
       ],
-      "@theia/debug-nodejs/lib/*": [
+      "@devpodio/debug-nodejs/lib/*": [
         "packages/debug-nodejs/src/*"
       ],
-      "@theia/python/lib/*": [
+      "@devpodio/python/lib/*": [
         "packages/python/src/*"
       ],
-      "@theia/git/lib/*": [
+      "@devpodio/git/lib/*": [
         "packages/git/src/*"
       ],
-      "@theia/process/lib*": [
+      "@devpodio/process/lib*": [
         "packages/process/src/*"
       ],
-      "@theia/markers/lib/*": [
+      "@devpodio/markers/lib/*": [
         "packages/markers/src/*"
       ],
-      "@theia/outline-view/lib/*": [
+      "@devpodio/outline-view/lib/*": [
         "packages/outline-view/src/*"
       ],
-      "@theia/messages/lib/*": [
+      "@devpodio/messages/lib/*": [
         "packages/messages/src/*"
       ],
-      "@theia/merge-conflicts/lib/*": [
+      "@devpodio/merge-conflicts/lib/*": [
         "packages/merge-conflicts/src/*"
       ],
-      "@theia/output/lib/*": [
+      "@devpodio/output/lib/*": [
         "packages/output/src/*"
       ],
-      "@theia/callhierarchy/lib/*": [
+      "@devpodio/callhierarchy/lib/*": [
         "packages/callhierarchy/src/*"
       ],
-      "@theia/variable-resolver/lib/*": [
+      "@devpodio/variable-resolver/lib/*": [
         "packages/variable-resolver/src/*"
       ],
-      "@theia/editorconfig/lib/*": [
+      "@devpodio/editorconfig/lib/*": [
         "packages/editorconfig/src/*"
       ],
-      "@theia/bunyan/lib/*": [
+      "@devpodio/bunyan/lib/*": [
         "packages/bunyan/src/*"
       ],
-      "@theia/console/lib/*": [
+      "@devpodio/console/lib/*": [
         "packages/console/src/*"
       ],
-      "@theia/getting-started/lib/*": [
+      "@devpodio/getting-started/lib/*": [
         "packages/getting-started/src/*"
+      ],
+      "@devpodio/vue/lib/*": [
+        "packages/vue/src/*"
       ]
     },
     "plugins": [
       {
-        "name": "tslint-language-service"
+        "name": "typescript-tslint-plugin"
       }
     ]
   },

@@ -15,16 +15,16 @@
  ********************************************************************************/
 
 import { ContainerModule } from 'inversify';
-import URI from '@theia/core/lib/common/uri';
-import { OpenHandler } from '@theia/core/lib/browser/opener-service';
-import { WidgetFactory } from '@theia/core/lib/browser/widget-manager';
-import { bindContributionProvider } from '@theia/core/lib/common/contribution-provider';
-import { WebSocketConnectionProvider } from '@theia/core/lib/browser/messaging/ws-connection-provider';
-import { FrontendApplicationContribution } from '@theia/core/lib/browser/frontend-application';
-import { TabBarToolbarContribution } from '@theia/core/lib/browser/shell/tab-bar-toolbar';
-import { CommandContribution } from '@theia/core/lib/common/command';
-import { MenuContribution } from '@theia/core/lib/common/menu';
-import { NavigatableWidgetOptions } from '@theia/core/lib/browser/navigatable';
+import URI from '@devpodio/core/lib/common/uri';
+import { OpenHandler } from '@devpodio/core/lib/browser/opener-service';
+import { WidgetFactory } from '@devpodio/core/lib/browser/widget-manager';
+import { bindContributionProvider } from '@devpodio/core/lib/common/contribution-provider';
+import { WebSocketConnectionProvider } from '@devpodio/core/lib/browser/messaging/ws-connection-provider';
+import { FrontendApplicationContribution } from '@devpodio/core/lib/browser/frontend-application';
+import { TabBarToolbarContribution } from '@devpodio/core/lib/browser/shell/tab-bar-toolbar';
+import { CommandContribution } from '@devpodio/core/lib/common/command';
+import { MenuContribution } from '@devpodio/core/lib/common/menu';
+import { NavigatableWidgetOptions } from '@devpodio/core/lib/browser/navigatable';
 import { MiniBrowserOpenHandler } from './mini-browser-open-handler';
 import { MiniBrowserService, MiniBrowserServicePath } from '../common/mini-browser-service';
 import { MiniBrowser, MiniBrowserOptions } from './mini-browser';

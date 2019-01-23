@@ -16,9 +16,9 @@
 
 import { injectable, inject, postConstruct } from 'inversify';
 import { ViewContainer, View } from '../../../common';
-import { ApplicationShell } from '@theia/core/lib/browser';
-import { FrontendApplicationStateService } from '@theia/core/lib/browser/frontend-application-state';
-import { Widget } from '@theia/core/lib/browser/widgets/widget';
+import { ApplicationShell } from '@devpodio/core/lib/browser';
+import { FrontendApplicationStateService } from '@devpodio/core/lib/browser/frontend-application-state';
+import { Widget } from '@devpodio/core/lib/browser/widgets/widget';
 import { ViewsContainerWidget } from './views-container-widget';
 import { TreeViewWidget } from './tree-views-main';
 

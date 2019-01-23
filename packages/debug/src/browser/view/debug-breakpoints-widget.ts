@@ -15,10 +15,10 @@
  ********************************************************************************/
 
 import { injectable, inject, postConstruct, interfaces, Container } from 'inversify';
-import { MenuPath } from '@theia/core/lib/common';
-import { TreeNode, NodeProps } from '@theia/core/lib/browser';
-import { ViewContainerPartWidget, ViewContainerPartToolbarElement } from '@theia/core/lib/browser/view-container';
-import { SourceTreeWidget } from '@theia/core/lib/browser/source-tree';
+import { MenuPath } from '@devpodio/core/lib/common';
+import { TreeNode, NodeProps } from '@devpodio/core/lib/browser';
+import { ViewContainerPartWidget, ViewContainerPartToolbarElement } from '@devpodio/core/lib/browser/view-container';
+import { SourceTreeWidget } from '@devpodio/core/lib/browser/source-tree';
 import { DebugBreakpointsSource } from './debug-breakpoints-source';
 import { BreakpointManager } from '../breakpoint/breakpoint-manager';
 import { DebugViewModel } from './debug-view-model';

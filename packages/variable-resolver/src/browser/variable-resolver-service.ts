@@ -18,7 +18,7 @@
 
 import { injectable, inject } from 'inversify';
 import { VariableRegistry } from './variable';
-import URI from '@theia/core/lib/common/uri';
+import URI from '@devpodio/core/lib/common/uri';
 
 export interface VariableResolveOptions {
     context?: URI;

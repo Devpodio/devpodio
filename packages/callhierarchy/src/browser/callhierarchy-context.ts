@@ -14,15 +14,15 @@
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  ********************************************************************************/
 
-import { ILanguageClient } from '@theia/languages/lib/browser';
+import { ILanguageClient } from '@devpodio/languages/lib/browser';
 import {
     ReferencesRequest, DocumentSymbolRequest, DefinitionRequest, TextDocumentPositionParams,
     TextDocumentIdentifier, SymbolInformation, Location, Position, DocumentSymbol, ReferenceParams
 } from 'monaco-languageclient/lib/services';
 import * as utils from './utils';
-import { ILogger, Disposable } from '@theia/core';
-import { MonacoTextModelService } from '@theia/monaco/lib/browser/monaco-text-model-service';
-import URI from '@theia/core/lib/common/uri';
+import { ILogger, Disposable } from '@devpodio/core';
+import { MonacoTextModelService } from '@devpodio/monaco/lib/browser/monaco-text-model-service';
+import URI from '@devpodio/core/lib/common/uri';
 
 export class CallHierarchyContext implements Disposable {
 

@@ -18,18 +18,18 @@ import { interfaces } from 'inversify';
 import { RPCProtocol } from '../../api/rpc-protocol';
 import { TextEditorService } from './text-editor-service';
 import { MAIN_RPC_CONTEXT, EditorsAndDocumentsExt, EditorsAndDocumentsDelta, ModelAddedData, TextEditorAddData, EditorPosition, PLUGIN_RPC_CONTEXT } from '../../api/plugin-api';
-import { Disposable } from '@theia/core/lib/common/disposable';
+import { Disposable } from '@devpodio/core/lib/common/disposable';
 import { EditorModelService } from './text-editor-model-service';
-import { MonacoEditorModel } from '@theia/monaco/lib/browser/monaco-editor-model';
-import { MonacoEditor } from '@theia/monaco/lib/browser/monaco-editor';
+import { MonacoEditorModel } from '@devpodio/monaco/lib/browser/monaco-editor-model';
+import { MonacoEditor } from '@devpodio/monaco/lib/browser/monaco-editor';
 import { TextEditorMain } from './text-editor-main';
-import { Emitter, Event } from '@theia/core';
-import { DisposableCollection } from '@theia/core';
+import { Emitter, Event } from '@devpodio/core';
+import { DisposableCollection } from '@devpodio/core';
 import { DocumentsMainImpl } from './documents-main';
 import { TextEditorsMainImpl } from './text-editors-main';
-import { EditorManager } from '@theia/editor/lib/browser';
-import { OpenerService } from '@theia/core/lib/browser/opener-service';
-import { MonacoBulkEditService } from '@theia/monaco/lib/browser/monaco-bulk-edit-service';
+import { EditorManager } from '@devpodio/editor/lib/browser';
+import { OpenerService } from '@devpodio/core/lib/browser/opener-service';
+import { MonacoBulkEditService } from '@devpodio/monaco/lib/browser/monaco-bulk-edit-service';
 
 export class EditorsAndDocumentsMain {
     private toDispose = new DisposableCollection();

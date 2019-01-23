@@ -14,7 +14,7 @@
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  ********************************************************************************/
 
-import * as theia from '@theia/plugin';
+import * as theia from '@devpodio/plugin';
 import { BackendInitializationFn } from '../../../common/plugin-protocol';
 import { PluginAPIFactory, Plugin, emptyPlugin } from '../../../api/plugin-api';
 
@@ -47,7 +47,7 @@ function overrideInternalLoad(): void {
     // if we try to resolve theia module, return the filename entry to use cache.
     // tslint:disable-next-line:no-any
     module._load = function (request: string, parent: any, isMain: {}) {
-        if (request !== '@theia/plugin') {
+        if (request !== '@devpodio/plugin') {
             return internalLoad.apply(this, arguments);
         }
 

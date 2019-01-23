@@ -15,10 +15,10 @@
  ********************************************************************************/
 
 import { inject, injectable, named } from 'inversify';
-import URI from '@theia/core/lib/common/uri';
-import { Endpoint } from '@theia/core/lib/browser';
-import { MaybePromise, Prioritizeable } from '@theia/core/lib/common/types';
-import { ContributionProvider } from '@theia/core/lib/common/contribution-provider';
+import URI from '@devpodio/core/lib/common/uri';
+import { Endpoint } from '@devpodio/core/lib/browser';
+import { MaybePromise, Prioritizeable } from '@devpodio/core/lib/common/types';
+import { ContributionProvider } from '@devpodio/core/lib/common/contribution-provider';
 
 /**
  * Contribution for the `LocationMapperService`.

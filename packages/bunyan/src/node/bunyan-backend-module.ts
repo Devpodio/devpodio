@@ -15,7 +15,7 @@
  ********************************************************************************/
 
 import { interfaces, ContainerModule } from 'inversify';
-import { ILoggerServer } from '@theia/core/lib/common/logger-protocol';
+import { ILoggerServer } from '@devpodio/core/lib/common/logger-protocol';
 import { BunyanLoggerServer } from './bunyan-logger-server';
 
 export default new ContainerModule((bind: interfaces.Bind, unbind: interfaces.Unbind, isBound: interfaces.IsBound, rebind: interfaces.Rebind) => {

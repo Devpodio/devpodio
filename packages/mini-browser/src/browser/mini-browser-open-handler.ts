@@ -16,18 +16,18 @@
 
 import { Widget } from '@phosphor/widgets';
 import { injectable, inject } from 'inversify';
-import URI from '@theia/core/lib/common/uri';
-import { MaybePromise } from '@theia/core/lib/common/types';
-import { QuickInputService } from '@theia/core/lib/browser';
-import { ApplicationShell } from '@theia/core/lib/browser/shell';
-import { Command, CommandContribution, CommandRegistry } from '@theia/core/lib/common/command';
-import { MenuContribution, MenuModelRegistry } from '@theia/core/lib/common/menu';
-import { TabBarToolbarContribution, TabBarToolbarRegistry } from '@theia/core/lib/browser/shell/tab-bar-toolbar';
-import { NavigatableWidget, NavigatableWidgetOpenHandler } from '@theia/core/lib/browser/navigatable';
-import { open, OpenerService } from '@theia/core/lib/browser/opener-service';
-import { LabelProvider } from '@theia/core/lib/browser/label-provider';
-import { FrontendApplicationContribution } from '@theia/core/lib/browser/frontend-application';
-import { WidgetOpenerOptions } from '@theia/core/lib/browser/widget-open-handler';
+import URI from '@devpodio/core/lib/common/uri';
+import { MaybePromise } from '@devpodio/core/lib/common/types';
+import { QuickInputService } from '@devpodio/core/lib/browser';
+import { ApplicationShell } from '@devpodio/core/lib/browser/shell';
+import { Command, CommandContribution, CommandRegistry } from '@devpodio/core/lib/common/command';
+import { MenuContribution, MenuModelRegistry } from '@devpodio/core/lib/common/menu';
+import { TabBarToolbarContribution, TabBarToolbarRegistry } from '@devpodio/core/lib/browser/shell/tab-bar-toolbar';
+import { NavigatableWidget, NavigatableWidgetOpenHandler } from '@devpodio/core/lib/browser/navigatable';
+import { open, OpenerService } from '@devpodio/core/lib/browser/opener-service';
+import { LabelProvider } from '@devpodio/core/lib/browser/label-provider';
+import { FrontendApplicationContribution } from '@devpodio/core/lib/browser/frontend-application';
+import { WidgetOpenerOptions } from '@devpodio/core/lib/browser/widget-open-handler';
 import { MiniBrowserService } from '../common/mini-browser-service';
 import { MiniBrowser, MiniBrowserProps } from './mini-browser';
 

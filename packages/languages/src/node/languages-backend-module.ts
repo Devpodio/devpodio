@@ -15,8 +15,8 @@
  ********************************************************************************/
 
 import { ContainerModule } from 'inversify';
-import { bindContributionProvider, ILogger, ConnectionHandler, JsonRpcConnectionHandler } from '@theia/core/lib/common';
-import { MessagingService } from '@theia/core/lib/node/messaging/messaging-service';
+import { bindContributionProvider, ILogger, ConnectionHandler, JsonRpcConnectionHandler } from '@devpodio/core/lib/common';
+import { MessagingService } from '@devpodio/core/lib/node/messaging/messaging-service';
 import { LanguagesBackendContribution } from './languages-backend-contribution';
 import { LanguageServerContribution } from './language-server-contribution';
 import { LanguageContribution } from '../common';

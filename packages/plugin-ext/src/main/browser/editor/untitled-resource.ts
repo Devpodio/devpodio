@@ -14,8 +14,8 @@
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  ********************************************************************************/
 
-import { ResourceResolver, Resource } from '@theia/core';
-import URI from '@theia/core/lib/common/uri';
+import { ResourceResolver, Resource } from '@devpodio/core';
+import URI from '@devpodio/core/lib/common/uri';
 import { injectable } from 'inversify';
 import { Schemes } from '../../../common/uri-components';
 import { UriComponents } from '../../../common/uri-components';

@@ -21,7 +21,7 @@ import {
   PreferenceService,
   PreferenceContribution,
   PreferenceSchema
-} from '@theia/core/lib/browser';
+} from '@devpodio/core/lib/browser';
 
 export const PreviewConfigSchema: PreferenceSchema = {
   type: 'object',

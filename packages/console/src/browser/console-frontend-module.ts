@@ -15,8 +15,8 @@
  ********************************************************************************/
 
 import { ContainerModule } from 'inversify';
-import { CommandContribution, MenuContribution } from '@theia/core';
-import { FrontendApplicationContribution, KeybindingContext, KeybindingContribution } from '@theia/core/lib/browser';
+import { CommandContribution, MenuContribution } from '@devpodio/core';
+import { FrontendApplicationContribution, KeybindingContext, KeybindingContribution } from '@devpodio/core/lib/browser';
 import { ConsoleContribution } from './console-contribution';
 import { ConsoleManager } from './console-manager';
 import { ConsoleInputFocusContext, ConsoleNavigationBackEnabled, ConsoleNavigationForwardEnabled, ConsoleContentFocusContext } from './console-keybinding-contexts';

@@ -18,7 +18,7 @@
 // This could be used to alter hosted instance uri, for example, change port.
 export * from '../hosted/node/hosted-plugin-uri-postprocessor';
 
-// Here we expose types from @theia/plugin, so it becames a direct dependency
+// Here we expose types from @devpodio/plugin, so it becames a direct dependency
 export * from '../common/plugin-protocol';
 export * from '../plugin/plugin-context';
 export * from '../api/plugin-api';

@@ -24,13 +24,13 @@
 import * as path from 'path';
 import * as _ from 'lodash';
 import { injectable, inject } from 'inversify';
-import { DebugConfiguration } from '@theia/debug/lib/common/debug-configuration';
-import { JavaExtensionContribution } from '@theia/java/lib/node';
+import { DebugConfiguration } from '@devpodio/debug/lib/common/debug-configuration';
+import { JavaExtensionContribution } from '@devpodio/java/lib/node';
 // tslint:disable-next-line:no-implicit-dependencies
-import { MessageService, CommandService } from '@theia/core/lib/common';
+import { MessageService, CommandService } from '@devpodio/core/lib/common';
 // tslint:disable-next-line:no-implicit-dependencies
-import { QuickPickService, QuickPickItem } from '@theia/core/lib/common/quick-pick-service';
-import { AbstractVSCodeDebugAdapterContribution } from '@theia/debug/lib/node/vscode/vscode-debug-adapter-contribution';
+import { QuickPickService, QuickPickItem } from '@devpodio/core/lib/common/quick-pick-service';
+import { AbstractVSCodeDebugAdapterContribution } from '@devpodio/debug/lib/node/vscode/vscode-debug-adapter-contribution';
 
 export namespace VSCodeJavaDebugCommands {
     export const COMPILE_WORKSPACE = 'java.workspace.compile';

@@ -18,11 +18,11 @@ import { injectable, inject } from 'inversify';
 import {
     PrefixQuickOpenService, QuickOpenModel, QuickOpenItem, OpenerService,
     QuickOpenMode, KeybindingContribution, KeybindingRegistry, QuickOpenHandler, QuickOpenOptions, QuickOpenContribution, QuickOpenHandlerRegistry
-} from '@theia/core/lib/browser';
+} from '@devpodio/core/lib/browser';
 import { Languages, WorkspaceSymbolParams, SymbolInformation, WorkspaceSymbolProvider, CancellationToken } from './language-client-services';
-import { CancellationTokenSource, CommandRegistry, CommandHandler, Command, SelectionService } from '@theia/core';
-import URI from '@theia/core/lib/common/uri';
-import { CommandContribution } from '@theia/core/lib/common';
+import { CancellationTokenSource, CommandRegistry, CommandHandler, Command, SelectionService } from '@devpodio/core';
+import URI from '@devpodio/core/lib/common/uri';
+import { CommandContribution } from '@devpodio/core/lib/common';
 import { Range, Position } from 'vscode-languageserver-types';
 
 @injectable()

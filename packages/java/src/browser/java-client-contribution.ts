@@ -16,9 +16,9 @@
 
 import { injectable, inject } from 'inversify';
 import { MessageConnection } from 'vscode-jsonrpc';
-import { CommandService } from '@theia/core/lib/common';
-import { StatusBar, StatusBarEntry, StatusBarAlignment } from '@theia/core/lib/browser';
-import { SemanticHighlightingService } from '@theia/editor/lib/browser/semantic-highlight/semantic-highlighting-service';
+import { CommandService } from '@devpodio/core/lib/common';
+import { StatusBar, StatusBarEntry, StatusBarAlignment } from '@devpodio/core/lib/browser';
+import { SemanticHighlightingService } from '@devpodio/editor/lib/browser/semantic-highlight/semantic-highlighting-service';
 import {
     Window,
     ILanguageClient,
@@ -26,7 +26,7 @@ import {
     Workspace, Languages,
     LanguageClientFactory,
     LanguageClientOptions
-} from '@theia/languages/lib/browser';
+} from '@devpodio/languages/lib/browser';
 import { JAVA_LANGUAGE_ID, JAVA_LANGUAGE_NAME, JavaStartParams } from '../common';
 import {
     ActionableNotification,
@@ -35,7 +35,7 @@ import {
     StatusNotification,
     ExecuteClientCommand
 } from './java-protocol';
-import { MaybePromise } from '@theia/core';
+import { MaybePromise } from '@devpodio/core';
 
 @injectable()
 export class JavaClientContribution extends BaseLanguageClientContribution {

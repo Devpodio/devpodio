@@ -16,7 +16,7 @@
 
 import { interfaces } from 'inversify';
 import { PluginApiContribution } from './plugin-service';
-import { BackendApplicationContribution } from '@theia/core/lib/node';
+import { BackendApplicationContribution } from '@devpodio/core/lib/node';
 import { PluginsKeyValueStorage } from './plugins-key-value-storage';
 import { PluginDeployerContribution } from './plugin-deployer-contribution';
 import {
@@ -29,7 +29,7 @@ import { PluginTheiaFileHandler } from './handlers/plugin-theia-file-handler';
 import { PluginTheiaDirectoryHandler } from './handlers/plugin-theia-directory-handler';
 import { GithubPluginDeployerResolver } from './plugin-github-resolver';
 import { HttpPluginDeployerResolver } from './plugin-http-resolver';
-import { ConnectionHandler, JsonRpcConnectionHandler } from '@theia/core';
+import { ConnectionHandler, JsonRpcConnectionHandler } from '@devpodio/core';
 import { PluginPathsService, pluginPathsServicePath } from '../common/plugin-paths-protocol';
 import { PluginPathsServiceImpl } from './paths/plugin-paths-service';
 import { PluginServerHandler } from './plugin-server-handler';

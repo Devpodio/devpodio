@@ -15,8 +15,8 @@
  ********************************************************************************/
 
 import { injectable, inject } from 'inversify';
-import { EDITOR_CONTEXT_MENU } from '@theia/editor/lib/browser';
-import { ContextMenuRenderer, toAnchor } from '@theia/core/lib/browser';
+import { EDITOR_CONTEXT_MENU } from '@devpodio/editor/lib/browser';
+import { ContextMenuRenderer, toAnchor } from '@devpodio/core/lib/browser';
 import IContextMenuService = monaco.editor.IContextMenuService;
 import IContextMenuDelegate = monaco.editor.IContextMenuDelegate;
 import { Menu } from '@phosphor/widgets';
