@@ -526,7 +526,6 @@ export interface EditorConfiguration {
     'editor.formatOnType'?: boolean
     'editor.formatOnSave'?: boolean
     'editor.formatOnPaste'?: boolean
-    'editor.formatOnSave'?: boolean
     'editor.dragAndDrop'?: boolean
     'editor.suggestOnTriggerCharacters'?: boolean
     'editor.acceptSuggestionOnEnter'?: 'on' | 'smart' | 'off'

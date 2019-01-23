@@ -47,6 +47,7 @@ import { TclContribution } from './tcl';
 import { XmlContribution } from './xml';
 import { XslContribution } from './xsl';
 import { JavaContribution } from './java';
+import { PhpContribution } from './php';
 import { LanguageGrammarDefinitionContribution } from '@devpodio/monaco/lib/browser/textmate/textmate-contribution';
 
 export default new ContainerModule(bind => {
@@ -145,4 +146,7 @@ export default new ContainerModule(bind => {
 
     bind(JavaContribution).toSelf().inSingletonScope();
     bind(LanguageGrammarDefinitionContribution).toService(JavaContribution);
+
+    bind(PhpContribution).toSelf().inSingletonScope();
+    bind(LanguageGrammarDefinitionContribution).toService(PhpContribution);
 });

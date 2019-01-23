@@ -82,7 +82,7 @@ function error(issues: DiagnosticMap, extension: string, message: string): void 
 }
 
 function log(issues: DiagnosticMap, extension: string, message: string, type: DiagnosticType): void {
-    const key = `@theia/${extension}`;
+    const key = `@devpodio/${extension}`;
     if (!issues.has(key)) {
         issues.set(key, []);
     }

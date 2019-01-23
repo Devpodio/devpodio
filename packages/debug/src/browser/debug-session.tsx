@@ -35,7 +35,7 @@ import { BreakpointManager } from './breakpoint/breakpoint-manager';
 import { DebugSessionOptions, InternalDebugSessionOptions } from './debug-session-options';
 import { DebugConfiguration } from '../common/debug-common';
 import { SourceBreakpoint } from './breakpoint/breakpoint-marker';
-import { FileSystem } from '@theia/filesystem/lib/common';
+import { FileSystem } from '@devpodio/filesystem/lib/common';
 
 export enum DebugState {
     Inactive,
@@ -367,7 +367,7 @@ export class DebugSession implements CompositeTreeElement {
 
     protected async runInTerminal({ arguments: { title, cwd, args, env } }: DebugProtocol.RunInTerminalRequest): Promise<DebugProtocol.RunInTerminalResponse['body']> {
         const terminal = await this.terminalServer.newTerminal({ title, cwd, shellPath: args[0], shellArgs: args.slice(1), env });
-        this.terminalServer.activateTerminal(terminal);
+        this.terminalServer.open(terminal);
         const processId = await terminal.start();
         return { processId };
     }

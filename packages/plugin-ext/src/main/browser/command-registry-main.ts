@@ -20,7 +20,7 @@ import * as theia from '@devpodio/plugin';
 import { Disposable } from '@devpodio/core/lib/common/disposable';
 import { CommandRegistryMain, CommandRegistryExt, MAIN_RPC_CONTEXT } from '../../api/plugin-api';
 import { RPCProtocol } from '../../api/rpc-protocol';
-import { KeybindingRegistry } from '@theia/core/lib/browser';
+import { KeybindingRegistry } from '@devpodio/core/lib/browser';
 
 export class CommandRegistryMainImpl implements CommandRegistryMain {
     private proxy: CommandRegistryExt;
