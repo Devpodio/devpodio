@@ -3,8 +3,8 @@
   "version": "1.0.17",
   "description": "Theia process support.",
   "dependencies": {
-    "@devpodio/core": "^1.0.17",
-    "node-pty": "0.7.6",
+    "@theia/core": "^0.3.19",
+    "@theia/node-pty": "0.7.8-theia004",
     "string-argv": "^0.1.1"
   },
   "publishConfig": {
