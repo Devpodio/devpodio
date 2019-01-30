@@ -19,12 +19,12 @@ import { enableJSDOM } from '@devpodio/core/lib/browser/test/jsdom';
 const disableJSDOM = enableJSDOM();
 
 import { Container, ContainerModule } from 'inversify';
-import { ILogger, MessageClient, MessageService, MenuPath, MenuAction, CommandRegistry, bindContributionProvider, CommandContribution } from '@devpodio/core';
-import { MenuModelRegistry } from '@devpodio/core/lib/common';
-import { MockLogger } from '@devpodio/core/lib/common/test/mock-logger';
-import { MockMenuModelRegistry } from '@devpodio/core/lib/common/test/mock-menu';
-import { EDITOR_CONTEXT_MENU } from '@devpodio/editor/lib/browser';
-import { NAVIGATOR_CONTEXT_MENU } from '@devpodio/navigator/lib/browser/navigator-contribution';
+import { ILogger, MessageClient, MessageService, MenuPath, MenuAction, CommandRegistry, bindContributionProvider, CommandContribution, SelectionService } from '@theia/core';
+import { MenuModelRegistry } from '@theia/core/lib/common';
+import { MockLogger } from '@theia/core/lib/common/test/mock-logger';
+import { MockMenuModelRegistry } from '@theia/core/lib/common/test/mock-menu';
+import { EDITOR_CONTEXT_MENU } from '@theia/editor/lib/browser';
+import { NAVIGATOR_CONTEXT_MENU } from '@theia/navigator/lib/browser/navigator-contribution';
 import { MenusContributionPointHandler } from './menus-contribution-handler';
 import 'mocha';
 import * as sinon from 'sinon';
@@ -63,6 +63,7 @@ before(() => {
         bind(TabBarToolbarRegistry).toConstantValue({} as any);
         // tslint:disable-next-line:no-any mock PluginSharedStyle
         bind(PluginSharedStyle).toConstantValue({} as any);
+        bind(SelectionService).toSelf().inSingletonScope();
     });
 
     testContainer.load(module);
