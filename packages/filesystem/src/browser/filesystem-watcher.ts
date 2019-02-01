@@ -145,16 +145,31 @@ export class FileSystemWatcher implements Disposable {
      * Resolve when watching is started.
      * Return a disposable to stop file watching under the given uri.
      */
-    async watchFileChanges(uri: URI): Promise<Disposable> {
-        const options = await this.createWatchOptions();
-        const watcher = await this.server.watchFileChanges(uri.toString(), options);
-        const toDispose = new DisposableCollection();
-        const toStop = Disposable.create(() => this.server.unwatchFileChanges(watcher));
-        const toRestart = toDispose.push(toStop);
-        this.toRestartAll.push(Disposable.create(() => {
-            toRestart.dispose();
-            toStop.dispose();
-            this.watchFileChanges(uri).then(disposable => toDispose.push(disposable));
+    watchFileChanges(uri: URI): Promise<Disposable> {
+        return this.createWatchOptions(uri.toString())
+            .then(options =>
+                this.server.watchFileChanges(uri.toString(), options)
+            )
+            .then(watcher => {
+                const toDispose = new DisposableCollection();
+                const toStop = Disposable.create(() =>
+                    this.server.unwatchFileChanges(watcher)
+                );
+                const toRestart = toDispose.push(toStop);
+                this.toRestartAll.push(Disposable.create(() => {
+                    toRestart.dispose();
+                    toStop.dispose();
+                    this.watchFileChanges(uri).then(disposable =>
+                        toDispose.push(disposable)
+                    );
+                }));
+                return toDispose;
+            });
+    }
+
+    protected createWatchOptions(uri: string): Promise<WatchOptions> {
+        return this.getIgnored(uri).then(ignored => ({
+            ignored
         }));
         return toDispose;
     }
@@ -166,10 +181,9 @@ export class FileSystemWatcher implements Disposable {
         });
     }
 
-    protected getIgnored(): Promise<string[]> {
-        const patterns = this.preferences['files.watcherExclude'];
-
-        return Promise.resolve(Object.keys(patterns).filter(pattern => patterns[pattern]));
+    protected async getIgnored(uri: string): Promise<string[]> {
+        const patterns = this.preferences.get('files.watcherExclude', undefined, uri);
+        return Object.keys(patterns).filter(pattern => patterns[pattern]);
     }
 
     protected fireDidMove(sourceUri: string, targetUri: string): void {
