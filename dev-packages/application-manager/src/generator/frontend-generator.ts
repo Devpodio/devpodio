@@ -15,6 +15,7 @@
  ********************************************************************************/
 
 import { AbstractGenerator } from './abstract-generator';
+import { existsSync, readFileSync } from 'fs';
 
 export class FrontendGenerator extends AbstractGenerator {
 
@@ -25,6 +26,20 @@ export class FrontendGenerator extends AbstractGenerator {
         if (this.pck.isElectron()) {
             await this.write(this.pck.frontend('electron-main.js'), this.compileElectronMain());
         }
+    }
+
+    protected compileIndexPreload(frontendModules: Map<string, string>): string {
+        const template = this.pck.props.generator.config.preloadTemplate;
+        if (!template) {
+            return '';
+        }
+
+        // Support path to html file
+        if (existsSync(template)) {
+            return readFileSync(template).toString();
+        }
+
+        return template;
     }
 
     protected compileIndexHtml(frontendModules: Map<string, string>): string {
@@ -41,18 +56,7 @@ export class FrontendGenerator extends AbstractGenerator {
 </head>
 
 <body>
-    <div class="theia-preload"></div>
-    <script type="application/javascript">
-    if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
-            navigator.serviceWorker.register('sw.js').then(registration => {
-                console.log('SW registered: ', registration);
-            }).catch(registrationError => {
-                console.log('SW registration failed: ', registrationError);
-            });
-        });
-    }
-    </script>
+  <div class="theia-preload">${this.compileIndexPreload(frontendModules)}</div>
 </body>
 
 </html>`;
