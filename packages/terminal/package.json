@@ -1,12 +1,12 @@
 {
   "name": "@devpodio/terminal",
-  "version": "1.0.14",
+  "version": "1.0.16",
   "description": "Theia - Terminal Extension",
   "dependencies": {
-    "@devpodio/core": "^1.0.14",
-    "@devpodio/filesystem": "^1.0.14",
-    "@devpodio/process": "^1.0.14",
-    "@devpodio/workspace": "^1.0.14",
+    "@devpodio/core": "^1.0.16",
+    "@devpodio/filesystem": "^1.0.16",
+    "@devpodio/process": "^1.0.16",
+    "@devpodio/workspace": "^1.0.16",
     "vscode-jsonrpc": "^3.6.2",
     "xterm": "3.9.2"
   },
@@ -44,7 +44,7 @@
     "docs": "theiaext docs"
   },
   "devDependencies": {
-    "@devpodio/ext-scripts": "^1.0.14"
+    "@devpodio/ext-scripts": "^1.0.16"
   },
   "nyc": {
     "extends": "../../configs/nyc.json"

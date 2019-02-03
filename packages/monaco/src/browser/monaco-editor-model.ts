@@ -159,8 +159,9 @@ export class MonacoEditorModel implements ITextEditorModel, TextEditorDocument {
         return this.model;
     }
 
-    load(): monaco.Promise<MonacoEditorModel> {
-        return monaco.Promise.wrap(this.resolveModel).then(() => this);
+    async load(): monaco.Promise<MonacoEditorModel> {
+        await monaco.Promise.wrap(this.resolveModel);
+        return this;
     }
 
     save(): Promise<void> {
@@ -341,17 +342,22 @@ export class MonacoEditorModel implements ITextEditorModel, TextEditorDocument {
         const shouldStop: () => boolean = () => token.isCancellationRequested || didTimeout;
 
         // tslint:disable-next-line:no-any
-        const timeoutPromise = new Promise((resolve, reject) => timeoutHandle = <any>setTimeout(() => {
-            didTimeout = true;
-            reject(new Error('onWillSave listener loop timeout'));
-        }, 1000));
+        const timeoutPromise = (p: Promise<any>, time: number) => {
+            const timeout = new Promise((_, reject) => {
+                // tslint:disable-next-line:no-any
+                timeoutHandle = <any>setTimeout(() => {
+                    didTimeout = true;
+                    reject(new Error('onWillSave listener loop timeout'));
+                }, time);
+            });
+            return Promise.race([p, timeout]);
+        };
 
         const firing = this.onWillSaveModelEmitter.sequence(async listener => {
             if (shouldStop()) {
                 return false;
             }
             const waitables: EditContributor[] = [];
-            const { version } = this;
 
             const event = {
                 model: this, reason,
@@ -382,11 +388,6 @@ export class MonacoEditorModel implements ITextEditorModel, TextEditorDocument {
                 return false;
             }
 
-            // In a perfect world, we should only apply edits if document is clean.
-            if (version !== this.version) {
-                console.error('onWillSave listeners should provide edits, not directly alter the document.');
-            }
-
             // Finally apply edits provided by this listener before firing the next.
             if (edits && edits.length > 0) {
                 this.applyEdits(edits, {
@@ -398,7 +399,7 @@ export class MonacoEditorModel implements ITextEditorModel, TextEditorDocument {
         });
 
         try {
-            await Promise.race([timeoutPromise, firing]);
+            await timeoutPromise(firing, 10000);
         } catch (e) {
             console.error(e);
         } finally {

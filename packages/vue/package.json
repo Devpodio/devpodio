@@ -8,16 +8,16 @@
     "theia-extension"
   ],
   "license": "Apache-2.0",
-  "version": "1.0.14",
+  "version": "1.0.16",
   "files": [
     "data",
     "lib",
     "src"
   ],
   "dependencies": {
-    "@devpodio/core": "^1.0.14",
-    "@devpodio/languages": "^1.0.14",
-    "@devpodio/monaco": "^1.0.14",
+    "@devpodio/core": "^1.0.16",
+    "@devpodio/languages": "^1.0.16",
+    "@devpodio/monaco": "^1.0.16",
     "@devpodio/vue-language-server": "^0.1.0"
   },
   "devDependencies": {

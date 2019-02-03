@@ -19,7 +19,7 @@ import { ApplicationPackageManager, rebuild } from '@devpodio/application-manage
 import { ApplicationProps } from '@devpodio/application-package';
 import checkHoisted from './check-hoisting';
 
-process.on('unhandledRejection', (reason, promise) => {
+process.on('unhandledRejection', reason => {
     throw reason;
 });
 process.on('uncaughtException', error => {

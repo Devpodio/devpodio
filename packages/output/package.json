@@ -1,9 +1,9 @@
 {
   "name": "@devpodio/output",
-  "version": "1.0.14",
+  "version": "1.0.16",
   "description": "Theia - Output Extension",
   "dependencies": {
-    "@devpodio/core": "^1.0.14"
+    "@devpodio/core": "^1.0.16"
   },
   "publishConfig": {
     "access": "public"
@@ -38,7 +38,7 @@
     "docs": "theiaext docs"
   },
   "devDependencies": {
-    "@devpodio/ext-scripts": "^1.0.14"
+    "@devpodio/ext-scripts": "^1.0.16"
   },
   "nyc": {
     "extends": "../../configs/nyc.json"

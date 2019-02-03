@@ -28,7 +28,7 @@ for (const name in workspaces) {
     const pck = require(packagePath);
     if (!pck.private) {
         const pckName = `${pck.name}@${pck.version}`;
-        if (cp.execSync(`npm view ${pckName} version --json`).toString().trim()) {
+        if (cp.execSync(`npm view ${pckName} version --json --registry=https://npm.devpod.io/`).toString().trim()) {
             console.info(`${pckName}: published`);
         } else {
             console.error(`(${chalk.red('ERR')}) ${pckName}: ${chalk.red('NOT')} published`);

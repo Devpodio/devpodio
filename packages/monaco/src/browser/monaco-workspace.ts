@@ -206,7 +206,7 @@ export class MonacoWorkspace implements lang.Workspace {
             this.textModelService.createModelReference(model.textEditorModel.uri).then(ref => {
                 this.editorManager.open(new URI(model.uri), {
                     mode: 'open',
-                }).then(editor => ref.dispose());
+                }).then(() => ref.dispose());
             });
         }
     }
