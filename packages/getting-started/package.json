@@ -1,12 +1,12 @@
 {
   "name": "@devpodio/getting-started",
-  "version": "1.0.16",
+  "version": "1.0.17",
   "description": "Theia - GettingStarted Extension",
   "dependencies": {
-    "@devpodio/core": "^1.0.16",
-    "@devpodio/filesystem": "^1.0.16",
-    "@devpodio/keymaps": "^1.0.16",
-    "@devpodio/workspace": "^1.0.16"
+    "@devpodio/core": "^1.0.17",
+    "@devpodio/filesystem": "^1.0.17",
+    "@devpodio/keymaps": "^1.0.17",
+    "@devpodio/workspace": "^1.0.17"
   },
   "publishConfig": {
     "access": "public"
@@ -42,7 +42,7 @@
     "docs": "theiaext docs"
   },
   "devDependencies": {
-    "@devpodio/ext-scripts": "^1.0.16"
+    "@devpodio/ext-scripts": "^1.0.17"
   },
   "nyc": {
     "extends": "../../configs/nyc.json"

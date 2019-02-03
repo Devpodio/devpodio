@@ -1,10 +1,10 @@
 {
   "name": "@devpodio/metrics",
-  "version": "1.0.16",
+  "version": "1.0.17",
   "description": "Theia - Metrics Extension",
   "dependencies": {
-    "@devpodio/application-package": "^1.0.16",
-    "@devpodio/core": "^1.0.16",
+    "@devpodio/application-package": "^1.0.17",
+    "@devpodio/core": "^1.0.17",
     "prom-client": "^10.2.0"
   },
   "publishConfig": {
@@ -40,7 +40,7 @@
     "docs": "theiaext docs"
   },
   "devDependencies": {
-    "@devpodio/ext-scripts": "^1.0.16"
+    "@devpodio/ext-scripts": "^1.0.17"
   },
   "nyc": {
     "extends": "../../configs/nyc.json"
