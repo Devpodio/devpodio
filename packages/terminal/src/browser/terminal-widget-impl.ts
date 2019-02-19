@@ -39,14 +39,14 @@ export interface TerminalWidgetFactoryOptions extends Partial<TerminalWidgetOpti
 }
 
 interface TerminalCSSProperties {
-    /* The font family (e.g. monospace).  */
-    fontFamily: string;
-
-    /* The font size, in number of px.  */
-    fontSize: number;
-
     /* The text color, as a CSS color string.  */
-    termTheme: object;
+    foreground: string;
+
+    /* The background color, as a CSS color string.  */
+    background: string;
+
+    /* The color of selections. */
+    selection: string;
 }
 
 @injectable()
@@ -96,10 +96,28 @@ export class TerminalWidgetImpl extends TerminalWidget implements StatefulWidget
         this.term = new Xterm.Terminal({
             experimentalCharAtlas: 'dynamic',
             cursorBlink: false,
-            fontFamily: cssProps.fontFamily,
-            fontSize: cssProps.fontSize,
-            theme: cssProps.termTheme,
+            fontFamily: this.preferences['terminal.integrated.fontFamily'],
+            fontSize: this.preferences['terminal.integrated.fontSize'],
+            fontWeight: this.preferences['terminal.integrated.fontWeight'],
+            fontWeightBold: this.preferences['terminal.integrated.fontWeightBold'],
+            letterSpacing: this.preferences['terminal.integrated.letterSpacing'],
+            lineHeight: this.preferences['terminal.integrated.lineHeight'],
+            theme: {
+                foreground: cssProps.foreground,
+                background: cssProps.background,
+                cursor: cssProps.foreground,
+                selection: cssProps.selection
+            },
         });
+        this.toDispose.push(this.preferences.onPreferenceChanged(change => {
+            const lastSeparator = change.preferenceName.lastIndexOf('.');
+            if (lastSeparator > 0) {
+                const preferenceName = change.preferenceName.substr(lastSeparator + 1);
+                this.term.setOption(preferenceName, this.preferences[change.preferenceName]);
+                this.needsResize = true;
+                this.update();
+            }
+        }));
 
         this.toDispose.push(this.themeService.onThemeChange(() => {
             const changedProps = this.getCSSPropertiesFromPage();
@@ -185,37 +203,9 @@ export class TerminalWidgetImpl extends TerminalWidget implements StatefulWidget
         /* Get the CSS properties of <html> (aka :root in css).  */
         const htmlElementProps = getComputedStyle(document.documentElement!);
 
-        const fontFamily = lookup(htmlElementProps, '--theia-terminal-font-family');
-        const fontSizeStr = lookup(htmlElementProps, '--theia-code-font-size');
-        const foreground = lookup(htmlElementProps, '--theia-terminal-foreground');
-        const background = lookup(htmlElementProps, '--theia-terminal-background');
-        const cursor = lookup(htmlElementProps, '--theia-terminal-cursor');
-        const cursorAccent = lookup(htmlElementProps, '--theia-terminal-cursorAccent');
-        const selection = lookup(htmlElementProps, '--theia-terminal-selection');
-        const black = lookup(htmlElementProps, '--theia-terminal-black');
-        const red = lookup(htmlElementProps, '--theia-terminal-red');
-        const green = lookup(htmlElementProps, '--theia-terminal-green');
-        const yellow = lookup(htmlElementProps, '--theia-terminal-yellow');
-        const blue = lookup(htmlElementProps, '--theia-terminal-blue');
-        const magenta = lookup(htmlElementProps, '--theia-terminal-magenta');
-        const cyan = lookup(htmlElementProps, '--theia-terminal-cyan');
-        const white = lookup(htmlElementProps, '--theia-terminal-white');
-        const brightBlack = lookup(htmlElementProps, '--theia-terminal-brightBlack');
-        const brightRed = lookup(htmlElementProps, '--theia-terminal-brightRed');
-        const brightGreen = lookup(htmlElementProps, '--theia-terminal-brightGreen');
-        const brightYellow = lookup(htmlElementProps, '--theia-terminal-brightYellow');
-        const brightBlue = lookup(htmlElementProps, '--theia-terminal-brightBlue');
-        const brightMagenta = lookup(htmlElementProps, '--theia-terminal-brightMagenta');
-        const brightCyan = lookup(htmlElementProps, '--theia-terminal-brightCyan');
-        const brightWhite = lookup(htmlElementProps, '--theia-terminal-brightWhite');
-        /* The font size is returned as a string, such as ' 13px').  We want to
-           return just the number of px.  */
-        const fontSizeMatch = fontSizeStr.trim().match(/^(\d+)px$/);
-        if (!fontSizeMatch) {
-            throw new Error(`Unexpected format for --theia-code-font-size (${fontSizeStr})`);
-        }
-
-        const fontSize = Number.parseInt(fontSizeMatch[1]);
+        const foreground = lookup(htmlElementProps, '--theia-ui-font-color1');
+        const background = lookup(htmlElementProps, '--theia-layout-color0');
+        const selection = lookup(htmlElementProps, '--theia-transparent-accent-color2');
 
         /* xterm.js expects #XXX of #XXXXXX for colors.  */
         const colorRe = /^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/;
@@ -229,11 +219,9 @@ export class TerminalWidgetImpl extends TerminalWidget implements StatefulWidget
         }
 
         return {
-            fontSize, fontFamily, termTheme: {
-                foreground, background, cursor, cursorAccent,
-                selection, black, red, green, yellow, blue, magenta, cyan, white, brightBlack,
-                brightRed, brightGreen, brightYellow, brightBlue, brightMagenta, brightCyan, brightWhite
-            }
+            foreground,
+            background,
+            selection
         };
     }
 

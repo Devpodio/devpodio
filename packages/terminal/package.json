@@ -3,11 +3,11 @@
   "version": "1.0.17",
   "description": "Theia - Terminal Extension",
   "dependencies": {
-    "@devpodio/core": "^1.0.17",
-    "@devpodio/filesystem": "^1.0.17",
-    "@devpodio/process": "^1.0.17",
-    "@devpodio/workspace": "^1.0.17",
-    "vscode-jsonrpc": "^3.6.2",
+    "@theia/core": "^0.3.19",
+    "@theia/editor": "^0.3.19",
+    "@theia/filesystem": "^0.3.19",
+    "@theia/process": "^0.3.19",
+    "@theia/workspace": "^0.3.19",
     "xterm": "3.9.2"
   },
   "publishConfig": {
