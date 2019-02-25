@@ -47,8 +47,10 @@ import { TclContribution } from './tcl';
 import { XmlContribution } from './xml';
 import { XslContribution } from './xsl';
 import { JavaContribution } from './java';
-import { PhpContribution } from './php';
-import { LanguageGrammarDefinitionContribution } from '@devpodio/monaco/lib/browser/textmate/textmate-contribution';
+import { LanguageGrammarDefinitionContribution } from '@theia/monaco/lib/browser/textmate/textmate-contribution';
+import { TypescriptContribution } from './ts';
+import { JavascriptContribution } from './js';
+import { JsxTagsContribution } from './jsx-tags';
 
 export default new ContainerModule(bind => {
     bind(BatContribution).toSelf().inSingletonScope();
@@ -147,6 +149,12 @@ export default new ContainerModule(bind => {
     bind(JavaContribution).toSelf().inSingletonScope();
     bind(LanguageGrammarDefinitionContribution).toService(JavaContribution);
 
-    bind(PhpContribution).toSelf().inSingletonScope();
-    bind(LanguageGrammarDefinitionContribution).toService(PhpContribution);
+    bind(TypescriptContribution).toSelf().inSingletonScope();
+    bind(LanguageGrammarDefinitionContribution).toService(TypescriptContribution);
+
+    bind(JavascriptContribution).toSelf().inSingletonScope();
+    bind(LanguageGrammarDefinitionContribution).toService(JavascriptContribution);
+
+    bind(JsxTagsContribution).toSelf().inSingletonScope();
+    bind(LanguageGrammarDefinitionContribution).toService(JsxTagsContribution);
 });
