@@ -12,7 +12,8 @@
     "@types/markdown-it-anchor": "^4.0.1",
     "highlight.js": "^9.12.0",
     "markdown-it": "^8.4.0",
-    "markdown-it-anchor": "^5.0.0"
+    "markdown-it-anchor": "^5.0.0",
+    "snyk": "^1.134.2"
   },
   "publishConfig": {
     "access": "public"
@@ -44,12 +45,15 @@
     "build": "theiaext build",
     "watch": "theiaext watch",
     "test": "theiaext test",
-    "docs": "theiaext docs"
+    "docs": "theiaext docs",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "devDependencies": {
     "@devpodio/ext-scripts": "^1.0.17"
   },
   "nyc": {
     "extends": "../../configs/nyc.json"
-  }
+  },
+  "snyk": true
 }
