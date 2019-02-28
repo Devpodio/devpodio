@@ -1,12 +1,12 @@
 {
-  "name": "@devpodio/extension-manager",
-  "version": "1.0.17",
+  "name": "@theia/extension-manager",
+  "version": "0.4.0",
   "description": "Theia - Extension Manager",
   "dependencies": {
-    "@devpodio/application-manager": "^1.0.17",
-    "@devpodio/application-package": "^1.0.17",
-    "@devpodio/core": "^1.0.17",
-    "@devpodio/filesystem": "^1.0.17",
+    "@theia/application-manager": "^0.4.0",
+    "@theia/application-package": "^0.4.0",
+    "@theia/core": "^0.4.0",
+    "@theia/filesystem": "^0.4.0",
     "@types/fs-extra": "^4.0.2",
     "@types/sanitize-html": "^1.13.31",
     "@types/showdown": "^1.7.1",
@@ -48,7 +48,7 @@
     "docs": "theiaext docs"
   },
   "devDependencies": {
-    "@devpodio/ext-scripts": "^1.0.17"
+    "@theia/ext-scripts": "^0.4.0"
   },
   "nyc": {
     "extends": "../../configs/nyc.json"

@@ -1,12 +1,12 @@
 {
-  "name": "@devpodio/languages",
-  "version": "1.0.17",
+  "name": "@theia/languages",
+  "version": "0.4.0",
   "description": "Theia - Languages Extension",
   "dependencies": {
-    "@devpodio/core": "^1.0.17",
-    "@devpodio/output": "^1.0.17",
-    "@devpodio/process": "^1.0.17",
-    "@devpodio/workspace": "^1.0.17",
+    "@theia/core": "^0.4.0",
+    "@theia/output": "^0.4.0",
+    "@theia/process": "^0.4.0",
+    "@theia/workspace": "^0.4.0",
     "@typefox/monaco-editor-core": "^0.14.6",
     "@types/uuid": "^3.4.3",
     "monaco-languageclient": "^0.9.0",
@@ -46,7 +46,7 @@
     "docs": "theiaext docs"
   },
   "devDependencies": {
-    "@devpodio/ext-scripts": "^1.0.17"
+    "@theia/ext-scripts": "^0.4.0"
   },
   "nyc": {
     "extends": "../../configs/nyc.json"
