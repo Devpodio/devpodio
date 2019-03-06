@@ -17,12 +17,8 @@
 import { ContainerModule } from 'inversify';
 import { LanguageClientContribution } from '@devpodio/languages/lib/browser';
 import { PythonClientContribution } from './python-client-contribution';
-import { PythonGrammarContribution } from './python-grammar-contribution';
-import { LanguageGrammarDefinitionContribution } from '@devpodio/monaco/lib/browser/textmate';
 
 export default new ContainerModule(bind => {
     bind(PythonClientContribution).toSelf().inSingletonScope();
     bind(LanguageClientContribution).toService(PythonClientContribution);
-
-    bind(LanguageGrammarDefinitionContribution).to(PythonGrammarContribution).inSingletonScope();
 });
