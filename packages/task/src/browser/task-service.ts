@@ -15,20 +15,23 @@
  ********************************************************************************/
 
 import { inject, injectable, named, postConstruct } from 'inversify';
-import { ILogger } from '@devpodio/core/lib/common';
-import { FrontendApplication, ApplicationShell } from '@devpodio/core/lib/browser';
+import { EditorManager } from '@theia/editor/lib/browser';
+import { ILogger } from '@theia/core/lib/common';
+import { FrontendApplication, ApplicationShell } from '@theia/core/lib/browser';
 import { TaskResolverRegistry, TaskProviderRegistry } from './task-contribution';
-import { TERMINAL_WIDGET_FACTORY_ID, TerminalWidgetFactoryOptions } from '@devpodio/terminal/lib/browser/terminal-widget-impl';
-import { TerminalWidget } from '@devpodio/terminal/lib/browser/base/terminal-widget';
-import { WidgetManager } from '@devpodio/core/lib/browser/widget-manager';
-import { MessageService } from '@devpodio/core/lib/common/message-service';
+import { TERMINAL_WIDGET_FACTORY_ID, TerminalWidgetFactoryOptions } from '@theia/terminal/lib/browser/terminal-widget-impl';
+import { TerminalService } from '@theia/terminal/lib/browser/base/terminal-service';
+import { TerminalWidget } from '@theia/terminal/lib/browser/base/terminal-widget';
+import { WidgetManager } from '@theia/core/lib/browser/widget-manager';
+import { MessageService } from '@theia/core/lib/common/message-service';
 import { TaskServer, TaskExitedEvent, TaskInfo, TaskConfiguration } from '../common/task-protocol';
 import { WorkspaceService } from '@devpodio/workspace/lib/browser/workspace-service';
 import { VariableResolverService } from '@devpodio/variable-resolver/lib/browser';
 import { TaskWatcher } from '../common/task-watcher';
 import { TaskConfigurationClient, TaskConfigurations } from './task-configurations';
 import { ProvidedTaskConfigurations } from './provided-task-configurations';
-import URI from '@devpodio/core/lib/common/uri';
+import { Range } from 'vscode-languageserver-types';
+import URI from '@theia/core/lib/common/uri';
 
 @injectable()
 export class TaskService implements TaskConfigurationClient {
@@ -78,6 +81,12 @@ export class TaskService implements TaskConfigurationClient {
 
     @inject(TaskResolverRegistry)
     protected readonly taskResolverRegistry: TaskResolverRegistry;
+
+    @inject(TerminalService)
+    protected readonly terminalService: TerminalService;
+
+    @inject(EditorManager)
+    protected readonly editorManager: EditorManager;
 
     /**
      * @deprecated To be removed in 0.5.0
@@ -236,6 +245,20 @@ export class TaskService implements TaskConfigurationClient {
         if (taskInfo.terminalId !== undefined) {
             this.attach(taskInfo.terminalId, taskInfo.taskId);
         }
+    }
+
+    /**
+     * Run the selected text lines in active terminal.
+     */
+    async runSelectedText(): Promise<void> {
+        if (!this.editorManager.currentEditor) { return; }
+        const startLine = this.editorManager.currentEditor.editor.selection.start.line;
+        const endLine = this.editorManager.currentEditor.editor.selection.end.line;
+        const selectedRange: Range = Range.create(startLine, 0, endLine + 1, 0);
+        const selectedText = this.editorManager.currentEditor.editor.document.getText(selectedRange);
+        const terminal = this.terminalService.currentTerminal;
+        if (!terminal) { return; }
+        terminal.sendText(selectedText);
     }
 
     async attach(terminalId: number, taskId: number): Promise<void> {
