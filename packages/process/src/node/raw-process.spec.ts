@@ -21,7 +21,7 @@ import { RawProcessFactory } from './raw-process';
 import * as temp from 'temp';
 import * as fs from 'fs';
 import * as path from 'path';
-import { isWindows } from '@theia/core';
+import { isWindows } from '@devpodio/core';
 import { IProcessStartEvent, ProcessErrorEvent } from './process';
 
 /* Allow to create temporary files, but delete them when we're done.  */

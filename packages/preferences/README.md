@@ -1,6 +1,6 @@
 # Theia - Preferences Extension
 
-This package includes preferences implementation for the preferences api defined in `@theia/core`, which provides four preference providers:
+This package includes preferences implementation for the preferences api defined in `@devpodio/core`, which provides four preference providers:
 - Default Preference, which serves as default values of preferences,
 - User Preference for the user home directory, which has precedence over the default values,
 - Workspace Preference for the workspace, which has precedence over User Preference, and

@@ -50,7 +50,7 @@ import { MonacoBulkEditService } from './monaco-bulk-edit-service';
 import { MonacoOutlineDecorator } from './monaco-outline-decorator';
 import { OutlineTreeDecorator } from '@devpodio/outline-view/lib/browser/outline-decorator-service';
 import { MonacoSnippetSuggestProvider } from './monaco-snippet-suggest-provider';
-import { ContextKeyService } from '@theia/core/lib/browser/context-key-service';
+import { ContextKeyService } from '@devpodio/core/lib/browser/context-key-service';
 import { MonacoContextKeyService } from './monaco-context-key-service';
 
 const deepmerge: (args: object[]) => object = require('deepmerge').default.all;

@@ -15,7 +15,7 @@
  ********************************************************************************/
 
 import * as net from 'net';
-import { CommunicationProvider, DebugAdapterExecutable } from '@theia/debug/lib/common/debug-model';
+import { CommunicationProvider, DebugAdapterExecutable } from '@devpodio/debug/lib/common/debug-model';
 import { ChildProcess, spawn, fork } from 'child_process';
 
 /**

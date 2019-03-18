@@ -16,15 +16,15 @@
 
 import { inject, injectable } from 'inversify';
 import { ExecuteCommandRequest } from 'monaco-languageclient/lib';
-import { CommandContribution, CommandRegistry, Command, MenuContribution, MenuModelRegistry } from '@theia/core/lib/common';
-import { EditorCommands, EDITOR_CONTEXT_MENU, EditorManager, EditorWidget } from '@theia/editor/lib/browser';
-import { KeybindingContribution, KeybindingRegistry, PreferenceService, OpenerService } from '@theia/core/lib/browser';
-import { WorkspaceEdit, Workspace } from '@theia/languages/lib/browser';
+import { CommandContribution, CommandRegistry, Command, MenuContribution, MenuModelRegistry } from '@devpodio/core/lib/common';
+import { EditorCommands, EDITOR_CONTEXT_MENU, EditorManager, EditorWidget } from '@devpodio/editor/lib/browser';
+import { KeybindingContribution, KeybindingRegistry, PreferenceService, OpenerService } from '@devpodio/core/lib/browser';
+import { WorkspaceEdit, Workspace } from '@devpodio/languages/lib/browser';
 import { JAVA_LANGUAGE_ID } from '../common';
 import { JavaClientContribution } from './java-client-contribution';
 import { JavaKeybindingContexts } from './java-keybinding-contexts';
 import { CompileWorkspaceRequest, CompileWorkspaceStatus } from './java-protocol';
-import URI from '@theia/core/lib/common/uri';
+import URI from '@devpodio/core/lib/common/uri';
 
 /**
  * Show Java references

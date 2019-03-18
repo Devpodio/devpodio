@@ -17,16 +17,16 @@
 // tslint:disable:no-any
 
 import { injectable, inject } from 'inversify';
-import { MenuPath, ILogger, CommandRegistry, Command, Mutable, MenuAction, SelectionService, UriSelection } from '@theia/core';
-import { EDITOR_CONTEXT_MENU, EditorWidget } from '@theia/editor/lib/browser';
-import { MenuModelRegistry } from '@theia/core/lib/common';
-import { TabBarToolbarRegistry, TabBarToolbarItem } from '@theia/core/lib/browser/shell/tab-bar-toolbar';
-import { NAVIGATOR_CONTEXT_MENU } from '@theia/navigator/lib/browser/navigator-contribution';
-import { QuickCommandService } from '@theia/core/lib/browser/quick-open/quick-command-service';
+import { MenuPath, ILogger, CommandRegistry, Command, Mutable, MenuAction, SelectionService, UriSelection } from '@devpodio/core';
+import { EDITOR_CONTEXT_MENU, EditorWidget } from '@devpodio/editor/lib/browser';
+import { MenuModelRegistry } from '@devpodio/core/lib/common';
+import { TabBarToolbarRegistry, TabBarToolbarItem } from '@devpodio/core/lib/browser/shell/tab-bar-toolbar';
+import { NAVIGATOR_CONTEXT_MENU } from '@devpodio/navigator/lib/browser/navigator-contribution';
+import { QuickCommandService } from '@devpodio/core/lib/browser/quick-open/quick-command-service';
 import { VIEW_ITEM_CONTEXT_MENU } from '../view/tree-views-main';
 import { PluginContribution, Menu } from '../../../common';
-import { DebugStackFramesWidget } from '@theia/debug/lib/browser/view/debug-stack-frames-widget';
-import { DebugThreadsWidget } from '@theia/debug/lib/browser/view/debug-threads-widget';
+import { DebugStackFramesWidget } from '@devpodio/debug/lib/browser/view/debug-stack-frames-widget';
+import { DebugThreadsWidget } from '@devpodio/debug/lib/browser/view/debug-threads-widget';
 
 @injectable()
 export class MenusContributionPointHandler {

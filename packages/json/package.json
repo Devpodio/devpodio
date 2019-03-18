@@ -1,15 +1,15 @@
 {
-  "name": "@theia/json",
+  "name": "@devpodio/json",
   "version": "0.4.0",
   "description": "Theia - JSON Extension",
   "dependencies": {
-    "@theia/core": "^0.4.0",
-    "@theia/languages": "^0.4.0",
-    "@theia/monaco": "^0.4.0",
+    "@devpodio/core": "^0.4.0",
+    "@devpodio/languages": "^0.4.0",
+    "@devpodio/monaco": "^0.4.0",
     "vscode-json-languageserver": "^1.0.1"
   },
   "devDependencies": {
-    "@theia/ext-scripts": "^0.4.0"
+    "@devpodio/ext-scripts": "^0.4.0"
   },
   "scripts": {
     "prepare": "yarn run clean && yarn run build",

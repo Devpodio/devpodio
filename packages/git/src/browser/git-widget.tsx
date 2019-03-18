@@ -15,12 +15,12 @@
  ********************************************************************************/
 
 import { injectable, inject, postConstruct } from 'inversify';
-import URI from '@theia/core/lib/common/uri';
-import { ResourceProvider, CommandService, MenuPath } from '@theia/core';
-import { DisposableCollection } from '@theia/core/lib/common';
-import { ContextMenuRenderer, LabelProvider, DiffUris, StatefulWidget, Message, SELECTED_CLASS, Key, ConfirmDialog } from '@theia/core/lib/browser';
-import { EditorManager, EditorWidget, EditorOpenerOptions } from '@theia/editor/lib/browser';
-import { WorkspaceCommands } from '@theia/workspace/lib/browser';
+import URI from '@devpodio/core/lib/common/uri';
+import { ResourceProvider, CommandService, MenuPath } from '@devpodio/core';
+import { DisposableCollection } from '@devpodio/core/lib/common';
+import { ContextMenuRenderer, LabelProvider, DiffUris, StatefulWidget, Message, SELECTED_CLASS, Key, ConfirmDialog } from '@devpodio/core/lib/browser';
+import { EditorManager, EditorWidget, EditorOpenerOptions } from '@devpodio/editor/lib/browser';
+import { WorkspaceCommands } from '@devpodio/workspace/lib/browser';
 import { Git, GitFileChange, GitFileStatus, Repository, WorkingDirectoryStatus, CommitWithChanges } from '../common';
 import { GitWatcher, GitStatusChangeEvent } from '../common/git-watcher';
 import { GIT_RESOURCE_SCHEME } from './git-resource';

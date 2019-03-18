@@ -21,10 +21,10 @@ import { MonacoEditorModel } from '@devpodio/monaco/lib/browser/monaco-editor-mo
 import { RPCProtocol } from '../../api/rpc-protocol';
 import { EditorModelService } from './text-editor-model-service';
 import { createUntitledResource } from './editor/untitled-resource';
-import { EditorManager } from '@theia/editor/lib/browser';
-import URI from '@theia/core/lib/common/uri';
+import { EditorManager } from '@devpodio/editor/lib/browser';
+import URI from '@devpodio/core/lib/common/uri';
 import CodeURI from 'vscode-uri';
-import { ApplicationShell, OpenerOptions, Saveable } from '@theia/core/lib/browser';
+import { ApplicationShell, OpenerOptions, Saveable } from '@devpodio/core/lib/browser';
 import { TextDocumentShowOptions } from '../../api/model';
 import { Range } from 'vscode-languageserver-types';
 import { OpenerService } from '@devpodio/core/lib/browser/opener-service';

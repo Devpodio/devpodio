@@ -15,11 +15,11 @@
  ********************************************************************************/
 
 import { inject, injectable, postConstruct } from 'inversify';
-import { PreferenceProvider } from '@theia/core/lib/browser';
-import { WorkspaceService } from '@theia/workspace/lib/browser/workspace-service';
+import { PreferenceProvider } from '@devpodio/core/lib/browser';
+import { WorkspaceService } from '@devpodio/workspace/lib/browser/workspace-service';
 import { FolderPreferenceProvider, FolderPreferenceProviderFactory } from './folder-preference-provider';
-import { FileSystem, FileStat } from '@theia/filesystem/lib/common';
-import URI from '@theia/core/lib/common/uri';
+import { FileSystem, FileStat } from '@devpodio/filesystem/lib/common';
+import URI from '@devpodio/core/lib/common/uri';
 
 @injectable()
 export class FoldersPreferencesProvider extends PreferenceProvider {

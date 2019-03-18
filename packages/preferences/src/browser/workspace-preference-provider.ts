@@ -15,9 +15,9 @@
  ********************************************************************************/
 
 import { inject, injectable, postConstruct } from 'inversify';
-import URI from '@theia/core/lib/common/uri';
-import { PreferenceScope, PreferenceProvider, PreferenceProviderPriority } from '@theia/core/lib/browser';
-import { WorkspaceService, WorkspaceData } from '@theia/workspace/lib/browser/workspace-service';
+import URI from '@devpodio/core/lib/common/uri';
+import { PreferenceScope, PreferenceProvider, PreferenceProviderPriority } from '@devpodio/core/lib/browser';
+import { WorkspaceService, WorkspaceData } from '@devpodio/workspace/lib/browser/workspace-service';
 import { AbstractResourcePreferenceProvider } from './abstract-resource-preference-provider';
 
 @injectable()

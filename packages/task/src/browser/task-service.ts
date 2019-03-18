@@ -28,7 +28,7 @@ import { VariableResolverService } from '@devpodio/variable-resolver/lib/browser
 import { TaskWatcher } from '../common/task-watcher';
 import { TaskConfigurationClient, TaskConfigurations } from './task-configurations';
 import { ProvidedTaskConfigurations } from './provided-task-configurations';
-import URI from '@theia/core/lib/common/uri';
+import URI from '@devpodio/core/lib/common/uri';
 
 @injectable()
 export class TaskService implements TaskConfigurationClient {

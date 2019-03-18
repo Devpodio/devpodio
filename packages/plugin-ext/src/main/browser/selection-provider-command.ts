@@ -14,11 +14,11 @@
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  ********************************************************************************/
 
-import { Command, CommandContribution, CommandRegistry } from '@theia/core/lib/common/command';
+import { Command, CommandContribution, CommandRegistry } from '@devpodio/core/lib/common/command';
 import { inject, injectable } from 'inversify';
-import { UriAwareCommandHandler, UriCommandHandler } from '@theia/core/lib/common/uri-command-handler';
-import URI from '@theia/core/lib/common/uri';
-import { SelectionService } from '@theia/core';
+import { UriAwareCommandHandler, UriCommandHandler } from '@devpodio/core/lib/common/uri-command-handler';
+import URI from '@devpodio/core/lib/common/uri';
+import { SelectionService } from '@devpodio/core';
 import { theiaUritoUriComponents } from '../../common/uri-components';
 
 export namespace SelectionProviderCommands {

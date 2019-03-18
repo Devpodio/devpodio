@@ -19,7 +19,7 @@ import { BaseLanguageServerContribution, IConnection } from '@devpodio/languages
 import { PYTHON_LANGUAGE_ID, PYTHON_LANGUAGE_NAME } from '../common';
 import { parseArgs } from '@devpodio/process/lib/node/utils';
 import { SpawnOptions } from 'child_process';
-import { ProcessErrorEvent } from '@theia/process/lib/node/process';
+import { ProcessErrorEvent } from '@devpodio/process/lib/node/process';
 
 @injectable()
 export class PythonContribution extends BaseLanguageServerContribution {

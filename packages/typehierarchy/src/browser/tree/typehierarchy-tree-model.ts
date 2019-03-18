@@ -15,9 +15,9 @@
  ********************************************************************************/
 
 import { inject, injectable } from 'inversify';
-import { TreeNode } from '@theia/core/lib/browser/tree/tree';
-import { TreeModelImpl } from '@theia/core/lib/browser/tree/tree-model';
-import { TypeHierarchyDirection, TypeHierarchyParams } from '@theia/languages/lib/browser/typehierarchy/typehierarchy-protocol';
+import { TreeNode } from '@devpodio/core/lib/browser/tree/tree';
+import { TreeModelImpl } from '@devpodio/core/lib/browser/tree/tree-model';
+import { TypeHierarchyDirection, TypeHierarchyParams } from '@devpodio/languages/lib/browser/typehierarchy/typehierarchy-protocol';
 import { TypeHierarchyServiceProvider } from '../typehierarchy-service';
 import { TypeHierarchyTree } from './typehierarchy-tree';
 

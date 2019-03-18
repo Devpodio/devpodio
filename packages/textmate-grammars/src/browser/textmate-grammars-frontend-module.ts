@@ -47,7 +47,7 @@ import { TclContribution } from './tcl';
 import { XmlContribution } from './xml';
 import { XslContribution } from './xsl';
 import { JavaContribution } from './java';
-import { LanguageGrammarDefinitionContribution } from '@theia/monaco/lib/browser/textmate/textmate-contribution';
+import { LanguageGrammarDefinitionContribution } from '@devpodio/monaco/lib/browser/textmate/textmate-contribution';
 import { TypescriptContribution } from './ts';
 import { JavascriptContribution } from './js';
 import { JsxTagsContribution } from './jsx-tags';

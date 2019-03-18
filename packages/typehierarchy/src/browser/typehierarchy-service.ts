@@ -15,8 +15,8 @@
  ********************************************************************************/
 
 import { injectable, inject } from 'inversify';
-import { ILanguageClient } from '@theia/languages/lib/browser';
-import { LanguageClientProvider } from '@theia/languages/lib/browser/language-client-provider';
+import { ILanguageClient } from '@devpodio/languages/lib/browser';
+import { LanguageClientProvider } from '@devpodio/languages/lib/browser/language-client-provider';
 import {
     TypeHierarchyItem,
     TypeHierarchyParams,
@@ -24,7 +24,7 @@ import {
     ResolveTypeHierarchyRequest,
     TypeHierarchyServerCapabilities,
     ResolveTypeHierarchyItemParams
-} from '@theia/languages/lib/browser/typehierarchy/typehierarchy-protocol';
+} from '@devpodio/languages/lib/browser/typehierarchy/typehierarchy-protocol';
 
 @injectable()
 export class TypeHierarchyServiceProvider {

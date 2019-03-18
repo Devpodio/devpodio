@@ -15,7 +15,7 @@
  ********************************************************************************/
 
 import { injectable } from 'inversify';
-import { LanguageGrammarDefinitionContribution, TextmateRegistry, getEncodedLanguageId } from '@theia/monaco/lib/browser/textmate';
+import { LanguageGrammarDefinitionContribution, TextmateRegistry, getEncodedLanguageId } from '@devpodio/monaco/lib/browser/textmate';
 import { StandardTokenType } from 'vscode-textmate';
 
 @injectable()

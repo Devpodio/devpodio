@@ -15,10 +15,10 @@
  ********************************************************************************/
 
 import { injectable, inject, postConstruct, interfaces, Container } from 'inversify';
-import { MenuPath } from '@theia/core';
-import { TreeNode, NodeProps, SelectableTreeNode } from '@theia/core/lib/browser';
-import { SelectionService } from '@theia/core/lib/common/selection-service';
-import { SourceTreeWidget, TreeElementNode } from '@theia/core/lib/browser/source-tree';
+import { MenuPath } from '@devpodio/core';
+import { TreeNode, NodeProps, SelectableTreeNode } from '@devpodio/core/lib/browser';
+import { SelectionService } from '@devpodio/core/lib/common/selection-service';
+import { SourceTreeWidget, TreeElementNode } from '@devpodio/core/lib/browser/source-tree';
 import { DebugThreadsSource } from './debug-threads-source';
 import { DebugSession } from '../debug-session';
 import { DebugThread } from '../model/debug-thread';

@@ -22,8 +22,8 @@ import {
     PreferenceContribution,
     PreferenceSchema,
     PreferenceChangeEvent
-} from '@theia/core/lib/browser/preferences';
-import { isWindows, isOSX } from '@theia/core/lib/common/os';
+} from '@devpodio/core/lib/browser/preferences';
+import { isWindows, isOSX } from '@devpodio/core/lib/common/os';
 
 const DEFAULT_WINDOWS_FONT_FAMILY = 'Consolas, \'Courier New\', monospace';
 const DEFAULT_MAC_FONT_FAMILY = 'Menlo, Monaco, \'Courier New\', monospace';

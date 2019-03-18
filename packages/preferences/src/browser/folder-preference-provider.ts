@@ -15,10 +15,10 @@
  ********************************************************************************/
 
 import { inject, injectable } from 'inversify';
-import URI from '@theia/core/lib/common/uri';
-import { PreferenceScope, PreferenceProvider, PreferenceProviderPriority } from '@theia/core/lib/browser';
+import URI from '@devpodio/core/lib/common/uri';
+import { PreferenceScope, PreferenceProvider, PreferenceProviderPriority } from '@devpodio/core/lib/browser';
 import { AbstractResourcePreferenceProvider } from './abstract-resource-preference-provider';
-import { FileSystem, FileStat } from '@theia/filesystem/lib/common';
+import { FileSystem, FileStat } from '@devpodio/filesystem/lib/common';
 
 export const FolderPreferenceProviderFactory = Symbol('FolderPreferenceProviderFactory');
 export interface FolderPreferenceProviderFactory {

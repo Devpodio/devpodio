@@ -15,8 +15,8 @@
  ********************************************************************************/
 
 import { injectable, inject } from 'inversify';
-import URI from '@theia/core/lib/common/uri';
-import { ResourceContextKey } from '@theia/core/lib/browser/resource-context-key';
+import URI from '@devpodio/core/lib/common/uri';
+import { ResourceContextKey } from '@devpodio/core/lib/browser/resource-context-key';
 import { Languages } from './language-client-services';
 
 @injectable()

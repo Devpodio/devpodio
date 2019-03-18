@@ -1,5 +1,5 @@
 {
-  "name": "@theia/application-manager",
+  "name": "@devpodio/application-manager",
   "version": "0.4.0",
   "description": "Theia application manager API.",
   "publishConfig": {
@@ -29,7 +29,7 @@
     "docs": "theiaext docs"
   },
   "dependencies": {
-    "@theia/application-package": "^0.4.0",
+    "@devpodio/application-package": "^0.4.0",
     "@types/fs-extra": "^4.0.2",
     "bunyan": "^1.8.10",
     "circular-dependency-plugin": "^5.0.0",
@@ -56,7 +56,7 @@
     "worker-loader": "^1.1.1"
   },
   "devDependencies": {
-    "@theia/ext-scripts": "^0.4.0"
+    "@devpodio/ext-scripts": "^0.4.0"
   },
   "nyc": {
     "extends": "../../configs/nyc.json"

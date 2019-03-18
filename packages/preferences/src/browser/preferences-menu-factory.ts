@@ -17,8 +17,8 @@
 import { injectable } from 'inversify';
 import { Menu } from '@phosphor/widgets';
 import { CommandRegistry } from '@phosphor/commands';
-import { escapeInvisibleChars, unescapeInvisibleChars } from '@theia/core/lib/common/strings';
-import { PreferenceDataProperty } from '@theia/core/lib/browser';
+import { escapeInvisibleChars, unescapeInvisibleChars } from '@devpodio/core/lib/common/strings';
+import { PreferenceDataProperty } from '@devpodio/core/lib/browser';
 
 @injectable()
 export class PreferencesMenuFactory {

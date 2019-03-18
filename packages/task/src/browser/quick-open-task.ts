@@ -19,7 +19,7 @@ import { QuickOpenService, QuickOpenModel, QuickOpenItem, QuickOpenGroupItem, Qu
 import { TaskService } from './task-service';
 import { TaskInfo, TaskConfiguration } from '../common/task-protocol';
 import { TaskConfigurations } from './task-configurations';
-import URI from '@theia/core/lib/common/uri';
+import URI from '@devpodio/core/lib/common/uri';
 
 @injectable()
 export class QuickOpenTask implements QuickOpenModel, QuickOpenHandler {

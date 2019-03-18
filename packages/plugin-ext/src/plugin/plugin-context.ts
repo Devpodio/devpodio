@@ -16,7 +16,7 @@
 
 // tslint:disable:no-any
 
-import * as theia from '@theia/plugin';
+import * as theia from '@devpodio/plugin';
 import { CommandRegistryImpl } from './command-registry';
 import { Emitter } from '@devpodio/core/lib/common/event';
 import { CancellationTokenSource } from '@devpodio/core/lib/common/cancellation';

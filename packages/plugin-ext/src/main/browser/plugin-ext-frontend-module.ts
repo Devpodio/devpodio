@@ -55,7 +55,7 @@ import { StoragePathService } from './storage-path-service';
 import { DebugSessionContributionRegistry } from '@devpodio/debug/lib/browser/debug-session-contribution';
 import { PluginDebugSessionContributionRegistry } from './debug/plugin-debug-session-contribution-registry';
 import { PluginDebugService } from './debug/plugin-debug-service';
-import { DebugService } from '@theia/debug/lib/common/debug-service';
+import { DebugService } from '@devpodio/debug/lib/common/debug-service';
 import { PluginSharedStyle } from './plugin-shared-style';
 import { FSResourceResolver } from './file-system-main';
 import { SelectionProviderCommandContribution } from './selection-provider-command';

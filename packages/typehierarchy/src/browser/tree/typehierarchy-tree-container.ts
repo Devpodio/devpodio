@@ -15,7 +15,7 @@
  ********************************************************************************/
 
 import { interfaces, Container } from 'inversify';
-import { createTreeContainer, Tree, TreeImpl, TreeModel, TreeModelImpl, TreeWidget } from '@theia/core/lib/browser/tree';
+import { createTreeContainer, Tree, TreeImpl, TreeModel, TreeModelImpl, TreeWidget } from '@devpodio/core/lib/browser/tree';
 import { TypeHierarchyTree } from './typehierarchy-tree';
 import { TypeHierarchyTreeModel } from './typehierarchy-tree-model';
 import { TypeHierarchyTreeWidget } from './typehierarchy-tree-widget';

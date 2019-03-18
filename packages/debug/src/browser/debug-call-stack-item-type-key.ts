@@ -14,7 +14,7 @@
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  ********************************************************************************/
 
-import { ContextKey } from '@theia/core/lib/browser/context-key-service';
+import { ContextKey } from '@devpodio/core/lib/browser/context-key-service';
 
 export const DebugCallStackItemTypeKey = Symbol('DebugCallStackItemTypeKey');
 export type DebugCallStackItemTypeKey = ContextKey<'session' | 'thread' | 'stackFrame'>;

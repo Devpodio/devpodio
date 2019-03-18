@@ -18,9 +18,9 @@ import { WebviewsMain, MAIN_RPC_CONTEXT, WebviewsExt } from '../../api/plugin-ap
 import { interfaces } from 'inversify';
 import { RPCProtocol } from '../../api/rpc-protocol';
 import { UriComponents } from '../../common/uri-components';
-import { WebviewOptions, WebviewPanelOptions, WebviewPanelShowOptions } from '@theia/plugin';
-import { ApplicationShell } from '@theia/core/lib/browser/shell/application-shell';
-import { KeybindingRegistry } from '@theia/core/lib/browser/keybinding';
+import { WebviewOptions, WebviewPanelOptions, WebviewPanelShowOptions } from '@devpodio/plugin';
+import { ApplicationShell } from '@devpodio/core/lib/browser/shell/application-shell';
+import { KeybindingRegistry } from '@devpodio/core/lib/browser/keybinding';
 import { WebviewWidget } from './webview/webview';
 import { ThemeService } from '@devpodio/core/lib/browser/theming';
 import { ThemeRulesService } from './webview/theme-rules-service';

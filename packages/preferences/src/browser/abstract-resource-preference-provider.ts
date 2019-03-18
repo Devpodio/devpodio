@@ -16,9 +16,9 @@
 
 import { inject, injectable, postConstruct } from 'inversify';
 import { JSONExt } from '@phosphor/coreutils';
-import { DisposableCollection, MaybePromise, MessageService, Resource, ResourceProvider } from '@theia/core';
-import { PreferenceProvider, PreferenceSchemaProvider, PreferenceScope, PreferenceProviderDataChange } from '@theia/core/lib/browser';
-import URI from '@theia/core/lib/common/uri';
+import { DisposableCollection, MaybePromise, MessageService, Resource, ResourceProvider } from '@devpodio/core';
+import { PreferenceProvider, PreferenceSchemaProvider, PreferenceScope, PreferenceProviderDataChange } from '@devpodio/core/lib/browser';
+import URI from '@devpodio/core/lib/common/uri';
 import * as jsoncparser from 'jsonc-parser';
 
 @injectable()

@@ -15,11 +15,11 @@
  ********************************************************************************/
 
 import {inject, injectable} from 'inversify';
-import URI from '@theia/core/lib/common/uri';
-import { DiffUris } from '@theia/core/lib/browser/diff-uris';
-import { FileSystem } from '@theia/filesystem/lib/common/filesystem';
-import { OpenerService } from '@theia/core/lib/browser';
-import { MessageService } from '@theia/core/lib/common/message-service';
+import URI from '@devpodio/core/lib/common/uri';
+import { DiffUris } from '@devpodio/core/lib/browser/diff-uris';
+import { FileSystem } from '@devpodio/filesystem/lib/common/filesystem';
+import { OpenerService } from '@devpodio/core/lib/browser';
+import { MessageService } from '@devpodio/core/lib/common/message-service';
 
 @injectable()
 export class DiffService {

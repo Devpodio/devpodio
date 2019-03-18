@@ -15,7 +15,7 @@
  ********************************************************************************/
 
 import URI from 'vscode-uri';
-import * as theia from '@theia/plugin';
+import * as theia from '@devpodio/plugin';
 import { PLUGIN_RPC_CONTEXT, FileSystemExt, FileSystemMain } from '../api/plugin-api';
 import { RPCProtocol } from '../api/rpc-protocol';
 import { UriComponents, Schemes } from '../common/uri-components';

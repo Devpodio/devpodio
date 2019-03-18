@@ -15,7 +15,7 @@
  ********************************************************************************/
 
 import { injectable, inject } from 'inversify';
-import { ContextKeyService, ContextKey } from '@theia/core/lib/browser/context-key-service';
+import { ContextKeyService, ContextKey } from '@devpodio/core/lib/browser/context-key-service';
 
 @injectable()
 export class MonacoContextKeyService extends ContextKeyService {

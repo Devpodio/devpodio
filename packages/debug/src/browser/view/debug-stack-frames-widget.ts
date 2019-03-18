@@ -15,9 +15,9 @@
  ********************************************************************************/
 
 import { injectable, inject, postConstruct, interfaces, Container } from 'inversify';
-import { MenuPath, SelectionService } from '@theia/core';
-import { TreeNode, NodeProps, SelectableTreeNode } from '@theia/core/lib/browser';
-import { SourceTreeWidget, TreeElementNode } from '@theia/core/lib/browser/source-tree';
+import { MenuPath, SelectionService } from '@devpodio/core';
+import { TreeNode, NodeProps, SelectableTreeNode } from '@devpodio/core/lib/browser';
+import { SourceTreeWidget, TreeElementNode } from '@devpodio/core/lib/browser/source-tree';
 import { DebugStackFramesSource, LoadMoreStackFrames } from './debug-stack-frames-source';
 import { DebugStackFrame } from '../model/debug-stack-frame';
 import { DebugViewModel } from './debug-view-model';

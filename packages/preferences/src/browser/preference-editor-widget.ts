@@ -19,11 +19,11 @@ import { AttachedProperty } from '@phosphor/properties';
 import { DockPanel, Menu, TabBar, Widget } from '@phosphor/widgets';
 import { CommandRegistry } from '@phosphor/commands';
 import { VirtualElement, h } from '@phosphor/virtualdom';
-import { PreferenceScope } from '@theia/core/lib/browser';
-import { EditorWidget } from '@theia/editor/lib/browser';
-import { WorkspaceService } from '@theia/workspace/lib/browser/workspace-service';
-import URI from '@theia/core/lib/common/uri';
-import { FileAccess, FileSystem } from '@theia/filesystem/lib/common';
+import { PreferenceScope } from '@devpodio/core/lib/browser';
+import { EditorWidget } from '@devpodio/editor/lib/browser';
+import { WorkspaceService } from '@devpodio/workspace/lib/browser/workspace-service';
+import URI from '@devpodio/core/lib/common/uri';
+import { FileAccess, FileSystem } from '@devpodio/filesystem/lib/common';
 
 export class PreferencesEditorWidgetTitle extends Title<PreferencesEditorWidget> {
     clickableText?: string;

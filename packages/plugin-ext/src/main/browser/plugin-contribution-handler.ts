@@ -20,13 +20,13 @@ import { TextmateRegistry, getEncodedLanguageId, MonacoTextmateService } from '@
 import { MenusContributionPointHandler } from './menus/menus-contribution-handler';
 import { ViewRegistry } from './view/view-registry';
 import { PluginContribution, IndentationRules, FoldingRules, ScopeMap } from '../../common';
-import { PreferenceSchemaProvider } from '@theia/core/lib/browser';
-import { PreferenceSchema, PreferenceSchemaProperties } from '@theia/core/lib/browser/preferences';
+import { PreferenceSchemaProvider } from '@devpodio/core/lib/browser';
+import { PreferenceSchema, PreferenceSchemaProperties } from '@devpodio/core/lib/browser/preferences';
 import { KeybindingsContributionPointHandler } from './keybindings/keybindings-contribution-handler';
-import { MonacoSnippetSuggestProvider } from '@theia/monaco/lib/browser/monaco-snippet-suggest-provider';
+import { MonacoSnippetSuggestProvider } from '@devpodio/monaco/lib/browser/monaco-snippet-suggest-provider';
 import { PluginSharedStyle } from './plugin-shared-style';
-import { CommandRegistry } from '@theia/core';
-import { BuiltinThemeProvider } from '@theia/core/lib/browser/theming';
+import { CommandRegistry } from '@devpodio/core';
+import { BuiltinThemeProvider } from '@devpodio/core/lib/browser/theming';
 
 @injectable()
 export class PluginContributionHandler {

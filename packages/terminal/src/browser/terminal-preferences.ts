@@ -15,8 +15,8 @@
  ********************************************************************************/
 
 import { interfaces } from 'inversify';
-import { createPreferenceProxy, PreferenceProxy, PreferenceService, PreferenceContribution, PreferenceSchema } from '@theia/core/lib/browser';
-import { EDITOR_FONT_DEFAULTS } from '@theia/editor/lib/browser';
+import { createPreferenceProxy, PreferenceProxy, PreferenceService, PreferenceContribution, PreferenceSchema } from '@devpodio/core/lib/browser';
+import { EDITOR_FONT_DEFAULTS } from '@devpodio/editor/lib/browser';
 
 export const TerminalConfigSchema: PreferenceSchema = {
     type: 'object',

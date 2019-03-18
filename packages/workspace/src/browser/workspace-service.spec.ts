@@ -26,10 +26,10 @@ import { FileSystemWatcher, FileChangeEvent, FileChangeType } from '@devpodio/fi
 import { DefaultWindowService, WindowService } from '@devpodio/core/lib/browser/window/window-service';
 import { WorkspaceServer } from '../common';
 import { DefaultWorkspaceServer } from '../node/default-workspace-server';
-import { Emitter, Disposable, DisposableCollection, ILogger, Logger } from '@theia/core';
-import { PreferenceServiceImpl, PreferenceSchemaProvider } from '@theia/core/lib/browser';
+import { Emitter, Disposable, DisposableCollection, ILogger, Logger } from '@devpodio/core';
+import { PreferenceServiceImpl, PreferenceSchemaProvider } from '@devpodio/core/lib/browser';
 import { WorkspacePreferences } from './workspace-preferences';
-import { createMockPreferenceProxy } from '@theia/core/lib/browser/preferences/test';
+import { createMockPreferenceProxy } from '@devpodio/core/lib/browser/preferences/test';
 import * as jsoncparser from 'jsonc-parser';
 import * as sinon from 'sinon';
 import * as chai from 'chai';

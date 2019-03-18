@@ -17,7 +17,7 @@ import {
     PLUGIN_RPC_CONTEXT as Ext, MessageRegistryMain, MainMessageOptions, MainMessageType
 } from '../api/plugin-api';
 import { RPCProtocol } from '../api/rpc-protocol';
-import { MessageItem, MessageOptions } from '@theia/plugin';
+import { MessageItem, MessageOptions } from '@devpodio/plugin';
 
 export class MessageRegistryExt {
 

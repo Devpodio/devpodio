@@ -15,9 +15,9 @@
  ********************************************************************************/
 
 import { ContainerModule } from 'inversify';
-import { FrontendApplicationContribution, QuickOpenContribution, KeybindingContribution } from '@theia/core/lib/browser';
-import { CommandContribution, MenuContribution, bindContributionProvider } from '@theia/core/lib/common';
-import { WebSocketConnectionProvider } from '@theia/core/lib/browser/messaging';
+import { FrontendApplicationContribution, QuickOpenContribution, KeybindingContribution } from '@devpodio/core/lib/browser';
+import { CommandContribution, MenuContribution, bindContributionProvider } from '@devpodio/core/lib/common';
+import { WebSocketConnectionProvider } from '@devpodio/core/lib/browser/messaging';
 import { QuickOpenTask } from './quick-open-task';
 import { TaskContribution, TaskProviderRegistry, TaskResolverRegistry } from './task-contribution';
 import { TaskService } from './task-service';

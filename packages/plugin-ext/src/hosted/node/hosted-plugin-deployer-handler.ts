@@ -15,7 +15,7 @@
  ********************************************************************************/
 
 import { injectable, inject } from 'inversify';
-import { ILogger } from '@theia/core';
+import { ILogger } from '@devpodio/core';
 import { PluginDeployerHandler, PluginDeployerEntry, PluginMetadata } from '../../common/plugin-protocol';
 import { HostedPluginReader } from './plugin-reader';
 

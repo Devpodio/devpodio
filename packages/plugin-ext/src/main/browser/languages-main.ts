@@ -35,8 +35,8 @@ import { DocumentFilter, MonacoModelIdentifier, testGlob, getLanguages } from 'm
 import { DisposableCollection, Emitter } from '@devpodio/core';
 import { MonacoLanguages } from '@devpodio/monaco/lib/browser/monaco-languages';
 import URI from 'vscode-uri/lib/umd';
-import CoreURI from '@theia/core/lib/common/uri';
-import { ProblemManager } from '@theia/markers/lib/browser';
+import CoreURI from '@devpodio/core/lib/common/uri';
+import { ProblemManager } from '@devpodio/markers/lib/browser';
 import * as vst from 'vscode-languageserver-types';
 
 export class LanguagesMainImpl implements LanguagesMain {

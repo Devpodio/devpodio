@@ -15,9 +15,9 @@
  ********************************************************************************/
 
 import { ContainerModule } from 'inversify';
-import { bindContributionProvider, CommandContribution } from '@theia/core/lib/common';
-import { ResourceContextKey } from '@theia/core/lib/browser/resource-context-key';
-import { FrontendApplicationContribution, KeybindingContribution, QuickOpenContribution, WebSocketConnectionProvider } from '@theia/core/lib/browser';
+import { bindContributionProvider, CommandContribution } from '@devpodio/core/lib/common';
+import { ResourceContextKey } from '@devpodio/core/lib/browser/resource-context-key';
+import { FrontendApplicationContribution, KeybindingContribution, QuickOpenContribution, WebSocketConnectionProvider } from '@devpodio/core/lib/browser';
 import { Window } from './language-client-services';
 import { WindowImpl } from './window-impl';
 import { LanguageClientFactory } from './language-client-factory';

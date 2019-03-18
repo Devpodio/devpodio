@@ -17,12 +17,12 @@
 import * as React from 'react';
 import { inject, injectable } from 'inversify';
 import { DockPanel } from '@phosphor/widgets';
-import URI from '@theia/core/lib/common/uri';
-import { SymbolKind, Range } from '@theia/languages/lib/browser';
-import { TreeNode } from '@theia/core/lib/browser/tree/tree';
-import { EditorManager } from '@theia/editor/lib/browser/editor-manager';
-import { ContextMenuRenderer } from '@theia/core/lib/browser/context-menu-renderer';
-import { TreeWidget, TreeProps } from '@theia/core/lib/browser/tree/tree-widget';
+import URI from '@devpodio/core/lib/common/uri';
+import { SymbolKind, Range } from '@devpodio/languages/lib/browser';
+import { TreeNode } from '@devpodio/core/lib/browser/tree/tree';
+import { EditorManager } from '@devpodio/editor/lib/browser/editor-manager';
+import { ContextMenuRenderer } from '@devpodio/core/lib/browser/context-menu-renderer';
+import { TreeWidget, TreeProps } from '@devpodio/core/lib/browser/tree/tree-widget';
 import { TypeHierarchyTreeModel } from './typehierarchy-tree-model';
 import { TypeHierarchyTree } from './typehierarchy-tree';
 

@@ -15,9 +15,9 @@
  ********************************************************************************/
 
 import { inject, injectable } from 'inversify';
-import { Tree, TreeDecorator, TreeDecoration, PreferenceDataProperty, PreferenceService } from '@theia/core/lib/browser';
-import { Emitter, Event, MaybePromise } from '@theia/core';
-import { escapeInvisibleChars } from '@theia/core/lib/common/strings';
+import { Tree, TreeDecorator, TreeDecoration, PreferenceDataProperty, PreferenceService } from '@devpodio/core/lib/browser';
+import { Emitter, Event, MaybePromise } from '@devpodio/core';
+import { escapeInvisibleChars } from '@devpodio/core/lib/common/strings';
 
 @injectable()
 export class PreferencesDecorator implements TreeDecorator {

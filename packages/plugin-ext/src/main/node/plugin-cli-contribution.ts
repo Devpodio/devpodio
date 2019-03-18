@@ -16,7 +16,7 @@
 
 import { injectable } from 'inversify';
 import { Argv, Arguments } from 'yargs';
-import { CliContribution } from '@theia/core/lib/node/cli';
+import { CliContribution } from '@devpodio/core/lib/node/cli';
 import { LocalDirectoryPluginDeployerResolver } from './resolvers/plugin-local-dir-resolver';
 
 @injectable()

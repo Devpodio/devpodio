@@ -40,14 +40,14 @@ import {
 import { UserPreferenceProvider } from './user-preference-provider';
 import { WorkspacePreferenceProvider } from './workspace-preference-provider';
 import { PreferencesEditorWidget, PreferenceEditorContainerTabBarRenderer } from './preference-editor-widget';
-import { EditorWidget, EditorManager } from '@theia/editor/lib/browser';
-import { JSONC_LANGUAGE_ID } from '@theia/json/lib/common';
-import { DisposableCollection, Emitter, Event, MessageService } from '@theia/core';
-import { Deferred } from '@theia/core/lib/common/promise-util';
-import { FileSystem, FileSystemUtils } from '@theia/filesystem/lib/common';
-import { UserStorageUri, THEIA_USER_STORAGE_FOLDER } from '@theia/userstorage/lib/browser';
-import { WorkspaceService } from '@theia/workspace/lib/browser/workspace-service';
-import URI from '@theia/core/lib/common/uri';
+import { EditorWidget, EditorManager } from '@devpodio/editor/lib/browser';
+import { JSONC_LANGUAGE_ID } from '@devpodio/json/lib/common';
+import { DisposableCollection, Emitter, Event, MessageService } from '@devpodio/core';
+import { Deferred } from '@devpodio/core/lib/common/promise-util';
+import { FileSystem, FileSystemUtils } from '@devpodio/filesystem/lib/common';
+import { UserStorageUri, THEIA_USER_STORAGE_FOLDER } from '@devpodio/userstorage/lib/browser';
+import { WorkspaceService } from '@devpodio/workspace/lib/browser/workspace-service';
+import URI from '@devpodio/core/lib/common/uri';
 
 @injectable()
 export class PreferencesContainer extends SplitPanel implements ApplicationShell.TrackableWidgetProvider, Saveable {

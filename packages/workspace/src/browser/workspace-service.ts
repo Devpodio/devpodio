@@ -19,12 +19,12 @@ import URI from '@devpodio/core/lib/common/uri';
 import { FileSystem, FileStat } from '@devpodio/filesystem/lib/common';
 import { FileSystemWatcher, FileChangeEvent } from '@devpodio/filesystem/lib/browser/filesystem-watcher';
 import { WorkspaceServer, THEIA_EXT, VSCODE_EXT, getTemporaryWorkspaceFileUri } from '../common';
-import { WindowService } from '@theia/core/lib/browser/window/window-service';
+import { WindowService } from '@devpodio/core/lib/browser/window/window-service';
 import {
     FrontendApplicationContribution, PreferenceServiceImpl, PreferenceScope, PreferenceSchemaProvider
-} from '@theia/core/lib/browser';
-import { Deferred } from '@theia/core/lib/common/promise-util';
-import { ILogger, Disposable, DisposableCollection, Emitter, Event, MaybePromise } from '@theia/core';
+} from '@devpodio/core/lib/browser';
+import { Deferred } from '@devpodio/core/lib/common/promise-util';
+import { ILogger, Disposable, DisposableCollection, Emitter, Event, MaybePromise } from '@devpodio/core';
 import { WorkspacePreferences } from './workspace-preferences';
 import * as jsoncparser from 'jsonc-parser';
 import * as Ajv from 'ajv';

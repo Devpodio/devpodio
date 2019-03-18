@@ -18,9 +18,9 @@ import { injectable, inject } from 'inversify';
 import findGit from 'find-git-exec';
 import { dirname } from 'path';
 import { pathExists } from 'fs-extra';
-import { ILogger } from '@theia/core/lib/common/logger';
-import { Disposable, DisposableCollection } from '@theia/core/lib/common/disposable';
-import { MessageService } from '@theia/core';
+import { ILogger } from '@devpodio/core/lib/common/logger';
+import { Disposable, DisposableCollection } from '@devpodio/core/lib/common/disposable';
+import { MessageService } from '@devpodio/core';
 
 /**
  * Initializer hook for Git.

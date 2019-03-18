@@ -14,10 +14,10 @@
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  ********************************************************************************/
 import { injectable, inject } from 'inversify';
-import { JsonSchemaStore } from '@theia/core/lib/browser/json-schema-store';
-import { InMemoryResources, deepClone } from '@theia/core/lib/common';
-import { IJSONSchema } from '@theia/core/lib/common/json-schema';
-import URI from '@theia/core/lib/common/uri';
+import { JsonSchemaStore } from '@devpodio/core/lib/browser/json-schema-store';
+import { InMemoryResources, deepClone } from '@devpodio/core/lib/common';
+import { IJSONSchema } from '@devpodio/core/lib/common/json-schema';
+import URI from '@devpodio/core/lib/common/uri';
 import { TaskService } from './task-service';
 
 @injectable()

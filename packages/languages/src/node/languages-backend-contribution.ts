@@ -17,12 +17,12 @@
 // tslint:disable:no-any
 
 import { injectable, inject, named } from 'inversify';
-import { ContributionProvider, ILogger } from '@theia/core/lib/common';
+import { ContributionProvider, ILogger } from '@devpodio/core/lib/common';
 import { IConnection } from 'vscode-ws-jsonrpc/lib/server';
 // tslint:disable-next-line:no-implicit-dependencies
 import { ResponseError, ErrorCodes, ResponseMessage, Message, isRequestMessage } from 'vscode-jsonrpc/lib/messages';
 import { InitializeRequest, ShutdownRequest } from 'vscode-languageserver-protocol';
-import { MessagingService } from '@theia/core/lib/node/messaging/messaging-service';
+import { MessagingService } from '@devpodio/core/lib/node/messaging/messaging-service';
 import { LanguageContribution } from '../common';
 import { LanguageServerContribution } from './language-server-contribution';
 

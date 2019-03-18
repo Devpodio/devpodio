@@ -29,7 +29,7 @@ import { GitLocatorImpl } from './git-locator/git-locator-impl';
 import { GitExecProvider } from './git-exec-provider';
 import { GitPromptServer, GitPromptClient, GitPrompt } from '../common/git-prompt';
 import { DugiteGitPromptServer } from './dugite-git-prompt';
-import { ConnectionContainerModule } from '@theia/core/lib/node/messaging/connection-container-module';
+import { ConnectionContainerModule } from '@devpodio/core/lib/node/messaging/connection-container-module';
 import { DefaultGitInit, GitInit } from './init/git-init';
 
 export interface GitBindingOptions {

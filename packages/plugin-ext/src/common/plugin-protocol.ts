@@ -19,7 +19,7 @@ import { Disposable } from '@devpodio/core/lib/common/disposable';
 import { LogPart, KeysToAnyValues, KeysToKeysToAnyValue } from './types';
 import { CharacterPair, CommentRule, PluginAPIFactory, Plugin } from '../api/plugin-api';
 // FIXME get rid of browser code in backend
-import { PreferenceSchema, PreferenceSchemaProperties } from '@theia/core/lib/browser/preferences';
+import { PreferenceSchema, PreferenceSchemaProperties } from '@devpodio/core/lib/browser/preferences';
 import { ExtPluginApi } from './plugin-ext-api-contribution';
 import { IJSONSchema, IJSONSchemaSnippet } from '@devpodio/core/lib/common/json-schema';
 

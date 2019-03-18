@@ -15,12 +15,12 @@
  ********************************************************************************/
 
 import { interfaces } from 'inversify';
-import { bindContributionProvider } from '@theia/core/lib/common/contribution-provider';
-import { CliContribution } from '@theia/core/lib/node/cli';
-import { ConnectionContainerModule } from '@theia/core/lib/node/messaging/connection-container-module';
+import { bindContributionProvider } from '@devpodio/core/lib/common/contribution-provider';
+import { CliContribution } from '@devpodio/core/lib/node/cli';
+import { ConnectionContainerModule } from '@devpodio/core/lib/node/messaging/connection-container-module';
 import { HostedInstanceManager, NodeHostedPluginRunner } from './hosted-instance-manager';
 import { HostedPluginUriPostProcessorSymbolName } from './hosted-plugin-uri-postprocessor';
-import { BackendApplicationContribution } from '@theia/core/lib/node/backend-application';
+import { BackendApplicationContribution } from '@devpodio/core/lib/node/backend-application';
 import { MetadataScanner } from './metadata-scanner';
 import { HostedPluginServerImpl } from './plugin-service';
 import { HostedPluginReader } from './plugin-reader';

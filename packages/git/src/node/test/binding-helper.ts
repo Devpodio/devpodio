@@ -22,9 +22,9 @@ import { bindLogger } from '@devpodio/core/lib/node/logger-backend-module';
 import { NoSyncRepositoryManager } from '.././test/no-sync-repository-manager';
 import { GitEnvProvider, DefaultGitEnvProvider } from '../env/git-env-provider';
 import { GitInit, DefaultGitInit } from '../init/git-init';
-import { MessageService, LogLevel } from '@theia/core/lib/common';
-import { MessageClient } from '@theia/core';
-import { ILogger } from '@theia/core/lib/common/logger';
+import { MessageService, LogLevel } from '@devpodio/core/lib/common';
+import { MessageClient } from '@devpodio/core';
+import { ILogger } from '@devpodio/core/lib/common/logger';
 
 // tslint:disable-next-line:no-any
 export function initializeBindings(): { container: Container, bind: interfaces.Bind } {

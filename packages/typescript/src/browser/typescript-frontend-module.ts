@@ -15,10 +15,10 @@
  ********************************************************************************/
 
 import { ContainerModule } from 'inversify';
-import { CommandContribution, MenuContribution } from '@theia/core/lib/common';
-import { KeybindingContext, KeybindingContribution, WebSocketConnectionProvider, FrontendApplicationContribution } from '@theia/core/lib/browser';
-import { LanguageClientContribution } from '@theia/languages/lib/browser';
-import { CallHierarchyService } from '@theia/callhierarchy/lib/browser';
+import { CommandContribution, MenuContribution } from '@devpodio/core/lib/common';
+import { KeybindingContext, KeybindingContribution, WebSocketConnectionProvider, FrontendApplicationContribution } from '@devpodio/core/lib/browser';
+import { LanguageClientContribution } from '@devpodio/languages/lib/browser';
+import { CallHierarchyService } from '@devpodio/callhierarchy/lib/browser';
 import { TypeScriptClientContribution } from './typescript-client-contribution';
 import { TypeScriptCallHierarchyService } from './typescript-callhierarchy-service';
 import { TypeScriptFrontendContribution } from './typescript-frontend-contribution';

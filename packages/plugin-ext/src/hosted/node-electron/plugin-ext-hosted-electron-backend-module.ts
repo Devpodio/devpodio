@@ -16,7 +16,7 @@
 
 import { HostedInstanceManager, ElectronNodeHostedPluginRunner } from '../node/hosted-instance-manager';
 import { interfaces } from 'inversify';
-import { ConnectionContainerModule } from '@theia/core/lib/node/messaging/connection-container-module';
+import { ConnectionContainerModule } from '@devpodio/core/lib/node/messaging/connection-container-module';
 import { bindCommonHostedBackend } from '../node/plugin-ext-hosted-backend-module';
 import { PluginScanner } from '../../common/plugin-protocol';
 import { TheiaPluginScannerElectron } from './scanner-theia-electron';

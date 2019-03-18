@@ -16,11 +16,11 @@
 
 import { injectable, inject, postConstruct } from 'inversify';
 import { ViewContainer, View } from '../../../common';
-import { ApplicationShell } from '@theia/core/lib/browser';
+import { ApplicationShell } from '@devpodio/core/lib/browser';
 import {
     FrontendApplicationState,
     FrontendApplicationStateService
-} from '@theia/core/lib/browser/frontend-application-state';
+} from '@devpodio/core/lib/browser/frontend-application-state';
 import { ViewsContainerWidget } from './views-container-widget';
 import { TreeViewWidget } from './tree-views-main';
 

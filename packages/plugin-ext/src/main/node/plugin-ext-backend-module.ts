@@ -16,7 +16,7 @@
 
 import { interfaces } from 'inversify';
 import { PluginApiContribution } from './plugin-service';
-import { BackendApplicationContribution, CliContribution } from '@theia/core/lib/node';
+import { BackendApplicationContribution, CliContribution } from '@devpodio/core/lib/node';
 import { PluginsKeyValueStorage } from './plugins-key-value-storage';
 import { PluginDeployerContribution } from './plugin-deployer-contribution';
 import {

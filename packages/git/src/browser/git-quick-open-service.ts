@@ -15,14 +15,14 @@
  ********************************************************************************/
 
 import { injectable, inject } from 'inversify';
-import { QuickOpenItem, QuickOpenMode, QuickOpenModel } from '@theia/core/lib/browser/quick-open/quick-open-model';
-import { QuickOpenService, QuickOpenOptions } from '@theia/core/lib/browser/quick-open/quick-open-service';
+import { QuickOpenItem, QuickOpenMode, QuickOpenModel } from '@devpodio/core/lib/browser/quick-open/quick-open-model';
+import { QuickOpenService, QuickOpenOptions } from '@devpodio/core/lib/browser/quick-open/quick-open-service';
 import { Git, Repository, Branch, BranchType, Tag, Remote, StashEntry } from '../common';
 import { GitRepositoryProvider } from './git-repository-provider';
-import { MessageService } from '@theia/core/lib/common/message-service';
-import URI from '@theia/core/lib/common/uri';
-import { WorkspaceService } from '@theia/workspace/lib/browser/workspace-service';
-import { FileSystem } from '@theia/filesystem/lib/common';
+import { MessageService } from '@devpodio/core/lib/common/message-service';
+import URI from '@devpodio/core/lib/common/uri';
+import { WorkspaceService } from '@devpodio/workspace/lib/browser/workspace-service';
+import { FileSystem } from '@devpodio/filesystem/lib/common';
 import { GitErrorHandler } from './git-error-handler';
 
 export enum GitAction {

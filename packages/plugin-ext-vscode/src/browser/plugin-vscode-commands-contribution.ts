@@ -19,12 +19,12 @@ import { CommandContribution, CommandRegistry, Command } from '@devpodio/core';
 import { CommandService } from '@devpodio/core/lib/common/command';
 import TheiaURI from '@devpodio/core/lib/common/uri';
 import URI from 'vscode-uri';
-import { ContextKeyService } from '@theia/core/lib/browser/context-key-service';
-import { DiffService } from '@theia/workspace/lib/browser/diff-service';
-import { EditorManager } from '@theia/editor/lib/browser';
-import { WebviewWidget } from '@theia/plugin-ext/lib/main/browser/webview/webview';
-import { ApplicationShell } from '@theia/core/lib/browser';
-import { ResourceProvider } from '@theia/core';
+import { ContextKeyService } from '@devpodio/core/lib/browser/context-key-service';
+import { DiffService } from '@devpodio/workspace/lib/browser/diff-service';
+import { EditorManager } from '@devpodio/editor/lib/browser';
+import { WebviewWidget } from '@devpodio/plugin-ext/lib/main/browser/webview/webview';
+import { ApplicationShell } from '@devpodio/core/lib/browser';
+import { ResourceProvider } from '@devpodio/core';
 
 export namespace VscodeCommands {
     export const OPEN: Command = {

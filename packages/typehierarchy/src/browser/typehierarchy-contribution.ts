@@ -15,16 +15,16 @@
  ********************************************************************************/
 
 import { injectable, inject, named } from 'inversify';
-import { MenuModelRegistry } from '@theia/core/lib/common/menu';
-import { ApplicationShell } from '@theia/core/lib/browser/shell';
-import { KeybindingRegistry } from '@theia/core/lib/browser/keybinding';
-import { Command, CommandRegistry } from '@theia/core/lib/common/command';
-import { EDITOR_CONTEXT_MENU } from '@theia/editor/lib/browser/editor-menu';
-import { EditorAccess } from '@theia/editor/lib/browser/editor-manager';
-import { AbstractViewContribution, OpenViewArguments } from '@theia/core/lib/browser/shell/view-contribution';
+import { MenuModelRegistry } from '@devpodio/core/lib/common/menu';
+import { ApplicationShell } from '@devpodio/core/lib/browser/shell';
+import { KeybindingRegistry } from '@devpodio/core/lib/browser/keybinding';
+import { Command, CommandRegistry } from '@devpodio/core/lib/common/command';
+import { EDITOR_CONTEXT_MENU } from '@devpodio/editor/lib/browser/editor-menu';
+import { EditorAccess } from '@devpodio/editor/lib/browser/editor-manager';
+import { AbstractViewContribution, OpenViewArguments } from '@devpodio/core/lib/browser/shell/view-contribution';
 import { TypeHierarchyTree } from './tree/typehierarchy-tree';
 import { TypeHierarchyTreeWidget } from './tree/typehierarchy-tree-widget';
-import { TypeHierarchyDirection } from '@theia/languages/lib/browser/typehierarchy/typehierarchy-protocol';
+import { TypeHierarchyDirection } from '@devpodio/languages/lib/browser/typehierarchy/typehierarchy-protocol';
 
 @injectable()
 export class TypeHierarchyContribution extends AbstractViewContribution<TypeHierarchyTreeWidget> {

@@ -18,10 +18,10 @@ import * as fuzzy from 'fuzzy';
 import * as readline from 'readline';
 import { rgPath } from 'vscode-ripgrep';
 import { injectable, inject } from 'inversify';
-import URI from '@theia/core/lib/common/uri';
-import { FileUri } from '@theia/core/lib/node/file-uri';
-import { CancellationTokenSource, CancellationToken, ILogger } from '@theia/core';
-import { RawProcessFactory } from '@theia/process/lib/node';
+import URI from '@devpodio/core/lib/common/uri';
+import { FileUri } from '@devpodio/core/lib/node/file-uri';
+import { CancellationTokenSource, CancellationToken, ILogger } from '@devpodio/core';
+import { RawProcessFactory } from '@devpodio/process/lib/node';
 import { FileSearchService } from '../common/file-search-service';
 
 @injectable()

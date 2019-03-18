@@ -16,9 +16,9 @@
 
 import { interfaces, injectable } from 'inversify';
 import Uri from 'vscode-uri';
-import { Disposable, ResourceResolver, DisposableCollection } from '@theia/core';
-import { Resource } from '@theia/core/lib/common/resource';
-import URI from '@theia/core/lib/common/uri';
+import { Disposable, ResourceResolver, DisposableCollection } from '@devpodio/core';
+import { Resource } from '@devpodio/core/lib/common/resource';
+import URI from '@devpodio/core/lib/common/uri';
 import { MAIN_RPC_CONTEXT, FileSystemMain, FileSystemExt } from '../../api/plugin-api';
 import { RPCProtocol } from '../../api/rpc-protocol';
 

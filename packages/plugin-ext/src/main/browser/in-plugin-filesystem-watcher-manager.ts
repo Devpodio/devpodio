@@ -15,7 +15,7 @@
  ********************************************************************************/
 
 import { interfaces } from 'inversify';
-import { FileSystemWatcher, FileChangeEvent, FileChangeType, FileChange, FileMoveEvent, FileWillMoveEvent } from '@theia/filesystem/lib/browser/filesystem-watcher';
+import { FileSystemWatcher, FileChangeEvent, FileChangeType, FileChange, FileMoveEvent, FileWillMoveEvent } from '@devpodio/filesystem/lib/browser/filesystem-watcher';
 import { WorkspaceExt } from '../../api/plugin-api';
 import { FileWatcherSubscriberOptions } from '../../api/model';
 import { parse, ParsedPattern, IRelativePattern } from '../../common/glob';

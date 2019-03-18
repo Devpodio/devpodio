@@ -16,7 +16,7 @@
 
 import { injectable } from 'inversify';
 import { Argv, Arguments } from 'yargs';
-import { CliContribution } from '@theia/core/lib/node';
+import { CliContribution } from '@devpodio/core/lib/node';
 
 @injectable()
 export class HostedPluginCliContribution implements CliContribution {

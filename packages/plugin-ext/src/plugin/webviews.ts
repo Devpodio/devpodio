@@ -18,7 +18,7 @@ import { WebviewsExt, WebviewPanelViewState, WebviewsMain, PLUGIN_RPC_CONTEXT, /
 import * as theia from '@devpodio/plugin';
 import { RPCProtocol } from '../api/rpc-protocol';
 import URI from 'vscode-uri/lib/umd';
-import { Emitter, Event } from '@theia/core/lib/common/event';
+import { Emitter, Event } from '@devpodio/core/lib/common/event';
 import { fromViewColumn, toViewColumn, toWebviewPanelShowOptions } from './type-converters';
 import { IdGenerator } from '../common/id-generator';
 import { Disposable, WebviewPanelTargetArea } from './types-impl';

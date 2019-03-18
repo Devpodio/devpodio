@@ -15,7 +15,7 @@
  ********************************************************************************/
 
 import { TaskConfiguration, TaskInfo } from '../task-protocol';
-import { ApplicationError } from '@theia/core/lib/common/application-error';
+import { ApplicationError } from '@devpodio/core/lib/common/application-error';
 
 export type ProcessType = 'shell' | 'process';
 

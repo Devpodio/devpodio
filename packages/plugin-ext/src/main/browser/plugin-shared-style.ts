@@ -15,8 +15,8 @@
  ********************************************************************************/
 
 import { injectable } from 'inversify';
-import { Disposable, DisposableCollection } from '@theia/core/lib/common/disposable';
-import { ThemeService, Theme } from '@theia/core/lib/browser/theming';
+import { Disposable, DisposableCollection } from '@devpodio/core/lib/common/disposable';
+import { ThemeService, Theme } from '@devpodio/core/lib/browser/theming';
 
 @injectable()
 export class PluginSharedStyle {

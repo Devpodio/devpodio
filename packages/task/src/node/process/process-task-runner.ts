@@ -25,7 +25,7 @@ import {
     RawProcessFactory,
     TerminalProcessFactory,
     ProcessErrorEvent,
-} from '@theia/process/lib/node';
+} from '@devpodio/process/lib/node';
 import { TaskFactory } from './process-task';
 import { TaskRunner } from '../task-runner';
 import { Task } from '../task';

@@ -30,28 +30,28 @@ import { Emitter } from '@devpodio/core/lib/common';
 import {
     PreferenceService, PreferenceScope, PreferenceProviderDataChanges,
     PreferenceSchemaProvider, PreferenceProviderProvider, PreferenceServiceImpl, bindPreferenceSchemaProvider, PreferenceChange
-} from '@theia/core/lib/browser/preferences';
-import { FileSystem, FileShouldOverwrite, FileStat } from '@theia/filesystem/lib/common/';
-import { FileSystemWatcher } from '@theia/filesystem/lib/browser/filesystem-watcher';
-import { FileSystemWatcherServer } from '@theia/filesystem/lib/common/filesystem-watcher-protocol';
-import { FileSystemPreferences, createFileSystemPreferences } from '@theia/filesystem/lib/browser/filesystem-preferences';
-import { ILogger, MessageService, MessageClient } from '@theia/core';
+} from '@devpodio/core/lib/browser/preferences';
+import { FileSystem, FileShouldOverwrite, FileStat } from '@devpodio/filesystem/lib/common/';
+import { FileSystemWatcher } from '@devpodio/filesystem/lib/browser/filesystem-watcher';
+import { FileSystemWatcherServer } from '@devpodio/filesystem/lib/common/filesystem-watcher-protocol';
+import { FileSystemPreferences, createFileSystemPreferences } from '@devpodio/filesystem/lib/browser/filesystem-preferences';
+import { ILogger, MessageService, MessageClient } from '@devpodio/core';
 import { UserPreferenceProvider } from './user-preference-provider';
 import { WorkspacePreferenceProvider } from './workspace-preference-provider';
 import { FoldersPreferencesProvider, } from './folders-preferences-provider';
 import { FolderPreferenceProvider, FolderPreferenceProviderFactory, FolderPreferenceProviderOptions } from './folder-preference-provider';
-import { ResourceProvider } from '@theia/core/lib/common/resource';
-import { WorkspaceServer } from '@theia/workspace/lib/common/';
-import { WindowService } from '@theia/core/lib/browser/window/window-service';
-import { MockPreferenceProvider } from '@theia/core/lib/browser/preferences/test';
-import { MockFilesystem, MockFilesystemWatcherServer } from '@theia/filesystem/lib/common/test';
-import { MockLogger } from '@theia/core/lib/common/test/mock-logger';
-import { MockResourceProvider } from '@theia/core/lib/common/test/mock-resource-provider';
-import { MockWorkspaceServer } from '@theia/workspace/lib/common/test/mock-workspace-server';
-import { MockWindowService } from '@theia/core/lib/browser/window/test/mock-window-service';
-import { WorkspaceService } from '@theia/workspace/lib/browser/workspace-service';
-import { WorkspacePreferences, createWorkspacePreferences } from '@theia/workspace/lib/browser/workspace-preferences';
-import { FrontendApplicationConfigProvider } from '@theia/core/lib/browser/frontend-application-config-provider';
+import { ResourceProvider } from '@devpodio/core/lib/common/resource';
+import { WorkspaceServer } from '@devpodio/workspace/lib/common/';
+import { WindowService } from '@devpodio/core/lib/browser/window/window-service';
+import { MockPreferenceProvider } from '@devpodio/core/lib/browser/preferences/test';
+import { MockFilesystem, MockFilesystemWatcherServer } from '@devpodio/filesystem/lib/common/test';
+import { MockLogger } from '@devpodio/core/lib/common/test/mock-logger';
+import { MockResourceProvider } from '@devpodio/core/lib/common/test/mock-resource-provider';
+import { MockWorkspaceServer } from '@devpodio/workspace/lib/common/test/mock-workspace-server';
+import { MockWindowService } from '@devpodio/core/lib/browser/window/test/mock-window-service';
+import { WorkspaceService } from '@devpodio/workspace/lib/browser/workspace-service';
+import { WorkspacePreferences, createWorkspacePreferences } from '@devpodio/workspace/lib/browser/workspace-preferences';
+import { FrontendApplicationConfigProvider } from '@devpodio/core/lib/browser/frontend-application-config-provider';
 import * as sinon from 'sinon';
 import URI from '@devpodio/core/lib/common/uri';
 

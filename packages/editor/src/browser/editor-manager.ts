@@ -15,9 +15,9 @@
  ********************************************************************************/
 
 import { injectable, postConstruct, inject } from 'inversify';
-import URI from '@theia/core/lib/common/uri';
-import { RecursivePartial, Emitter, Event } from '@theia/core/lib/common';
-import { WidgetOpenerOptions, NavigatableWidgetOpenHandler } from '@theia/core/lib/browser';
+import URI from '@devpodio/core/lib/common/uri';
+import { RecursivePartial, Emitter, Event } from '@devpodio/core/lib/common';
+import { WidgetOpenerOptions, NavigatableWidgetOpenHandler } from '@devpodio/core/lib/browser';
 import { EditorWidget } from './editor-widget';
 import { Range, Position, Location } from './editor';
 import { EditorWidgetFactory } from './editor-widget-factory';
