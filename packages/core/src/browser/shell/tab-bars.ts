@@ -309,6 +309,7 @@ export class ToolbarAwareTabBar extends ScrollableTabBar {
 
         super(options);
         this.rewireDOM();
+        this.tabBarToolbarRegistry.onDidChange(() => this.update());
     }
 
     /**
