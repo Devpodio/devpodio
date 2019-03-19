@@ -10,18 +10,20 @@ To install Clangd on Ubuntu 18.04:
     $ sudo apt-get update && sudo apt-get install -y clang-tools-8
     $ sudo ln -s /usr/bin/clangd-8 /usr/bin/clangd
 
-See [here](https://clang.llvm.org/extra/clangd.html#id4) for detailed installation instructions.
+See [here](https://clang.llvm.org/extra/clangd.html#id4) for detailed
+installation instructions.
 
-To get accurate diagnostics, it helps to...
+## Getting accurate diagnostics
 
-1. ... have the build system of the C/C++ project generate a
+To get accurate diagnostics, it helps to:
+
+1. Have the build system of the C/C++ project generate a
    [`compile_commands.json`](https://clang.llvm.org/docs/JSONCompilationDatabase.html)
-   file and...
-2. ... point Clangd to the build directory containing said
-   `compile_commands.json`.
+   file.
+2. Point Clangd to the build directory containing said `compile_commands.json`.
 
-\#2 can be done using the `cpp.buildConfigurations` preference.  In your home
-or your project `.theia/settings.json`, define one or more build
+Step \#2 can be done using the `cpp.buildConfigurations` preference. In your
+home or your project `.theia/settings.json`, define one or more build
 configurations:
 
     {
@@ -34,8 +36,48 @@ configurations:
         }]
     }
 
-You can then select an active configuration using the
-`C/C++: Change Build Configuration` command from the command palette.
+You can then select an active configuration using the `C/C++: Change Build
+Configuration` command from the command palette.
+
+## Setting clangd executable path and arguments
+
+The path of the clangd executable to use can be specified by either:
+
+- Setting the `CPP_CLANGD_COMMAND` environment variable
+- Setting the `cpp.clangdExecutable` preference in your home or your project
+  `.theia/settings.json`:
+
+        {
+            "cpp.clangdExecutable": "/path/to/my/clangd/executable"
+        }
+
+- Adding clangd to system path. Default value of executable path is set to
+  `clangd`
+
+Similarly, the command-line arguments passed to clangd can be specified by
+either:
+
+- Setting the `CPP_CLANGD_ARGS` environment variable
+- Setting the `cpp.clangdArgs` preference in your home or your project
+  `.theia/settings.json`:
+
+        {
+            "cpp.clangdArgs": "list of clangd arguments"
+        }
+
+## Getting cross-file references to work
+
+You may notice that by default, cross-references across source file boundaries
+don't work.  For example, doing a "Go To Definition" on a function defined in a
+different source file (different `.c` or `.cpp`) doesn't work, instead it sends
+you to the declaration of the function, typically in a header file.
+
+To get this working, you need to enable clangd's global index using the
+`--background-index` command-line argument.
+
+        {
+            "cpp.clangdArgs": "--background-index"
+        }
 
 ## License
 - [Eclipse Public License 2.0](http://www.eclipse.org/legal/epl-2.0/)

@@ -25,8 +25,14 @@ export interface TaskConfiguration {
     /**
      * Source of the task configuration.
      * For a configured task, it is the name of the root folder, while for a provided task, it is the name of the provider.
+     * This field is not supposed to be used in `tasks.json`
      */
-    readonly source: string;
+    readonly _source: string;
+    /**
+     * For a provided task, it is the string representation of the URI where the task is supposed to run from. It is `undefined` for global tasks.
+     * This field is not supposed to be used in `tasks.json`
+     */
+    readonly _scope: string | undefined;
     /** A label that uniquely identifies a task configuration per source */
     readonly label: string;
     readonly type: string;
@@ -64,6 +70,10 @@ export interface TaskServer extends JsonRpcServer<TaskClient> {
 
     /** removes the client that has disconnected */
     disconnectClient(client: TaskClient): void;
+
+    /** Returns the list of default and registered task runners */
+    getRegisteredTaskTypes(): Promise<string[]>
+
 }
 
 /** Event sent when a task has concluded its execution */

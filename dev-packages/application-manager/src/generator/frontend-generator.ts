@@ -14,7 +14,9 @@
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  ********************************************************************************/
 
+import * as paths from 'path';
 import { AbstractGenerator } from './abstract-generator';
+import { existsSync, readFileSync } from 'fs';
 
 export class FrontendGenerator extends AbstractGenerator {
 
@@ -22,9 +24,26 @@ export class FrontendGenerator extends AbstractGenerator {
         const frontendModules = this.pck.targetFrontendModules;
         await this.write(this.pck.frontend('index.html'), this.compileIndexHtml(frontendModules));
         await this.write(this.pck.frontend('index.js'), this.compileIndexJs(frontendModules));
+        await this.write(this.pck.frontend('passive-events.js'), this.compilePassiveJs(frontendModules));
         if (this.pck.isElectron()) {
             await this.write(this.pck.frontend('electron-main.js'), this.compileElectronMain());
         }
+    }
+    protected getTemplate(templateName: string): string {
+        return paths.resolve(__dirname, '../../src/generator/templates', templateName + '.template');
+    }
+    protected compileIndexPreload(frontendModules: Map<string, string>): string {
+        const template = this.pck.props.generator.config.preloadTemplate;
+        if (!template) {
+            return '';
+        }
+
+        // Support path to html file
+        if (existsSync(template)) {
+            return readFileSync(template).toString();
+        }
+
+        return template;
     }
 
     protected compileIndexHtml(frontendModules: Map<string, string>): string {
@@ -41,18 +60,11 @@ export class FrontendGenerator extends AbstractGenerator {
 </head>
 
 <body>
-    <div class="theia-preload"></div>
-    <script type="application/javascript">
-    if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
-            navigator.serviceWorker.register('sw.js').then(registration => {
-                console.log('SW registered: ', registration);
-            }).catch(registrationError => {
-                console.log('SW registration failed: ', registrationError);
-            });
-        });
-    }
-    </script>
+  <div class="theia-preload">${this.compileIndexPreload(frontendModules)}</div>
+  <script type="application/javascript">
+    "serviceWorker"in navigator&&window.addEventListener("load",()=>{navigator.serviceWorker.register("/sw.js")
+    .then(e=>{console.log("SW registered: ",e)}).catch(e=>{console.log("SW registration failed: ",e)})});
+ </script>
 </body>
 
 </html>`;
@@ -62,10 +74,13 @@ export class FrontendGenerator extends AbstractGenerator {
         return `
   <meta charset="UTF-8">`;
     }
-
+    protected compilePassiveJs(frontendModules: Map<string, string>): string {
+        return readFileSync(this.getTemplate('passive')).toString();
+    }
     protected compileIndexJs(frontendModules: Map<string, string>): string {
         return `// @ts-check
 ${this.ifBrowser("require('es6-promise/auto');")}
+require('./passive-events');
 require('reflect-metadata');
 const { Container } = require('inversify');
 const { FrontendApplication } = require('@devpodio/core/lib/browser');
@@ -127,11 +142,15 @@ const electron = require('electron');
 const { join, resolve } = require('path');
 const { isMaster } = require('cluster');
 const { fork } = require('child_process');
-const { app, BrowserWindow, ipcMain, Menu } = electron;
+const { app, shell, BrowserWindow, ipcMain, Menu } = electron;
 
 const applicationName = \`${this.pck.props.frontend.config.applicationName}\`;
 
 if (isMaster) {
+
+    const Storage = require('electron-store');
+    const electronStore = new Storage();
+
     app.on('ready', () => {
         const { screen } = electron;
 
@@ -139,9 +158,6 @@ if (isMaster) {
         Menu.setApplicationMenu(Menu.buildFromTemplate([{
             role: 'help', submenu: [{ role: 'toggledevtools'}]
         }]));
-
-        // Window list tracker.
-        const windows = [];
 
         function createNewWindow(theUrl) {
 
@@ -154,43 +170,80 @@ if (isMaster) {
             const y = Math.floor(bounds.y + (bounds.height - height) / 2);
             const x = Math.floor(bounds.x + (bounds.width - width) / 2);
 
-            const newWindow = new BrowserWindow({ width, height, x, y, show: !!theUrl, title: applicationName });
+            const WINDOW_STATE = 'windowstate';
+            const windowState = electronStore.get(WINDOW_STATE, {
+                width, height, x, y
+            });
 
-            if (windows.length === 0) {
-                newWindow.webContents.on('new-window', (event, url, frameName, disposition, options) => {
-                    // If the first electron window isn't visible, then all other new windows will remain invisible.
-                    // https://github.com/electron/electron/issues/3751
-                    options.show = true;
-                    options.width = width;
-                    options.height = height;
-                    options.title = applicationName;
-                });
+            let windowOptions = {
+                show: false,
+                title: applicationName,
+                width: windowState.width,
+                height: windowState.height,
+                x: windowState.x,
+                y: windowState.y,
+                isMaximized: windowState.isMaximized
+            };
+
+            // Always hide the window, we will show the window when it is ready to be shown in any case.
+            const newWindow = new BrowserWindow(windowOptions);
+            if (windowOptions.isMaximized) {
+                newWindow.maximize();
             }
-            windows.push(newWindow);
+            newWindow.on('ready-to-show', () => newWindow.show());
+
+            // Prevent calls to "window.open" from opening an ElectronBrowser window,
+            // and rather open in the OS default web browser.
+            newWindow.webContents.on('new-window', (event, url) => {
+                event.preventDefault();
+                shell.openExternal(url);
+            });
+
+            // Save the window geometry state on every change
+            const saveWindowState = () => {
+                try {
+                    let bounds;
+                    if (newWindow.isMaximized()) {
+                        bounds = electronStore.get(WINDOW_STATE, {});
+                    } else {
+                        bounds = newWindow.getBounds();
+                    }
+                    electronStore.set(WINDOW_STATE, {
+                        isMaximized: newWindow.isMaximized(),
+                        width: bounds.width,
+                        height: bounds.height,
+                        x: bounds.x,
+                        y: bounds.y
+                    });
+                } catch (e) {
+                    console.error("Error while saving window state.", e);
+                }
+            };
+            let delayedSaveTimeout;
+            const saveWindowStateDelayed = () => {
+                if (delayedSaveTimeout) {
+                    clearTimeout(delayedSaveTimeout);
+                }
+                delayedSaveTimeout = setTimeout(saveWindowState, 1000);
+            };
+            newWindow.on('close', saveWindowState);
+            newWindow.on('resize', saveWindowStateDelayed);
+            newWindow.on('move', saveWindowStateDelayed);
+
             if (!!theUrl) {
                 newWindow.loadURL(theUrl);
-            } else {
-                newWindow.on('ready-to-show', () => newWindow.show());
             }
-            newWindow.on('closed', () => {
-                const index = windows.indexOf(newWindow);
-                if (index !== -1) {
-                    windows.splice(index, 1);
-                }
-                if (windows.length === 0) {
-                    app.exit(0);
-                }
-            });
             return newWindow;
         }
 
         app.on('window-all-closed', () => {
-            if (process.platform !== 'darwin') {
-                app.quit();
-            }
+            app.quit();
         });
         ipcMain.on('create-new-window', (event, url) => {
             createNewWindow(url);
+        });
+        ipcMain.on('open-external', (event, url) => {
+            shell.openExternal(url);
         });
 
         // Check whether we are in bundled application or development mode.
@@ -198,7 +251,9 @@ if (isMaster) {
         const devMode = process.defaultApp || /node_modules[\/]electron[\/]/.test(process.execPath);
         const mainWindow = createNewWindow();
         const loadMainWindow = (port) => {
-            mainWindow.loadURL('file://' + join(__dirname, '../../lib/index.html') + '?port=' + port);
+            if (!mainWindow.isDestroyed()) {
+                mainWindow.loadURL('file://' + join(__dirname, '../../lib/index.html') + '?port=' + port);
+            }
         };
 
         // We cannot use the \`process.cwd()\` as the application project path (the location of the \`package.json\` in other words)

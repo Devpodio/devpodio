@@ -1,12 +1,12 @@
 {
   "name": "@devpodio/preview",
-  "version": "1.0.17",
+  "version": "0.4.0-latest.1",
   "description": "Theia - Preview Extension",
   "dependencies": {
-    "@devpodio/core": "^1.0.17",
-    "@devpodio/editor": "^1.0.17",
-    "@devpodio/languages": "^1.0.17",
-    "@devpodio/mini-browser": "^1.0.17",
+    "@devpodio/core": "^0.4.0-latest.1",
+    "@devpodio/editor": "^0.4.0-latest.1",
+    "@devpodio/languages": "^0.4.0-latest.1",
+    "@devpodio/mini-browser": "^0.4.0-latest.1",
     "@types/highlight.js": "^9.12.2",
     "@types/markdown-it": "^0.0.4",
     "@types/markdown-it-anchor": "^4.0.1",
@@ -47,7 +47,7 @@
     "docs": "theiaext docs"
   },
   "devDependencies": {
-    "@devpodio/ext-scripts": "^1.0.17"
+    "@devpodio/ext-scripts": "^0.4.0-latest.1"
   },
   "nyc": {
     "extends": "../../configs/nyc.json"

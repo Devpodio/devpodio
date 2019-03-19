@@ -24,13 +24,14 @@ import { MAIN_RPC_CONTEXT, ConfigStorage, PluginManagerExt } from '../../api/plu
 import { setUpPluginApi } from '../../main/browser/main-context';
 import { RPCProtocol, RPCProtocolImpl } from '../../api/rpc-protocol';
 import { ILogger, ContributionProvider } from '@devpodio/core';
-import { PreferenceServiceImpl } from '@devpodio/core/lib/browser';
+import { PreferenceServiceImpl, PreferenceProviderProvider } from '@devpodio/core/lib/browser';
 import { WorkspaceService } from '@devpodio/workspace/lib/browser';
 import { PluginContributionHandler } from '../../main/browser/plugin-contribution-handler';
 import { getQueryParameters } from '../../main/browser/env-main';
 import { ExtPluginApi, MainPluginApiProvider } from '../../common/plugin-ext-api-contribution';
 import { PluginPathsService } from '../../main/common/plugin-paths-protocol';
 import { StoragePathService } from '../../main/browser/storage-path-service';
+import { getPreferences } from '../../main/browser/preference-registry-main';
 import { PluginServer } from '../../common/plugin-protocol';
 import { KeysToKeysToAnyValue } from '../../common/types';
 
@@ -57,8 +58,8 @@ export class HostedPluginSupport {
     @inject(PluginServer)
     protected readonly pluginServer: PluginServer;
 
-    @inject(WorkspaceService)
-    protected readonly workspaceService: WorkspaceService;
+    @inject(PreferenceProviderProvider)
+    protected readonly preferenceProviderProvider: PreferenceProviderProvider;
 
     private theiaReadyPromise: Promise<any>;
     private frontendExtManagerProxy: PluginManagerExt;
@@ -68,8 +69,9 @@ export class HostedPluginSupport {
         @inject(PreferenceServiceImpl) private readonly preferenceServiceImpl: PreferenceServiceImpl,
         @inject(PluginPathsService) private readonly pluginPathsService: PluginPathsService,
         @inject(StoragePathService) private readonly storagePathService: StoragePathService,
+        @inject(WorkspaceService) protected readonly workspaceService: WorkspaceService,
     ) {
-        this.theiaReadyPromise = Promise.all([this.preferenceServiceImpl.ready]);
+        this.theiaReadyPromise = Promise.all([this.preferenceServiceImpl.ready, this.workspaceService.roots]);
 
         this.storagePathService.onStoragePathChanged(path => {
             this.updateStoragePath(path);
@@ -119,7 +121,7 @@ export class HostedPluginSupport {
                 const hostedExtManager = worker.rpc.getProxy(MAIN_RPC_CONTEXT.HOSTED_PLUGIN_MANAGER_EXT);
                 hostedExtManager.$init({
                     plugins: initData.plugins,
-                    preferences: this.preferenceServiceImpl.getPreferences(),
+                    preferences: getPreferences(this.preferenceProviderProvider),
                     globalState: initData.globalStates,
                     workspaceState: initData.workspaceStates,
                     env: { queryParams: getQueryParameters() },
@@ -146,20 +148,20 @@ export class HostedPluginSupport {
                 Object.keys(pluginsPerHost).forEach(hostKey => {
                     const plugins: PluginMetadata[] = pluginsPerHost[hostKey];
                     let pluginID = hostKey;
-                    if (plugins.length === 1) {
+                    if (plugins.length >= 1) {
                         pluginID = getPluginId(plugins[0].model);
                     }
                     const rpc = this.createServerRpc(pluginID, hostKey);
+                    setUpPluginApi(rpc, container);
                     const hostedExtManager = rpc.getProxy(MAIN_RPC_CONTEXT.HOSTED_PLUGIN_MANAGER_EXT);
                     hostedExtManager.$init({
                         plugins: plugins,
-                        preferences: this.preferenceServiceImpl.getPreferences(),
+                        preferences: getPreferences(this.preferenceProviderProvider),
                         globalState: initData.globalStates,
                         workspaceState: initData.workspaceStates,
                         env: { queryParams: getQueryParameters() },
                         extApi: initData.pluginAPIs
                     }, confStorage);
-                    setUpPluginApi(rpc, container);
                     this.mainPluginApiProviders.getContributions().forEach(p => p.initialize(rpc, container));
                     this.backendExtManagerProxy = hostedExtManager;
                 });

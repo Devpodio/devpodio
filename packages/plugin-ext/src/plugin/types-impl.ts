@@ -578,8 +578,11 @@ export enum OverviewRulerLane {
 }
 
 export enum ConfigurationTarget {
-    User = 0,
-    Workspace = 1
+    Global = 1,
+    Workspace,
+    WorkspaceFolder,
+    Default,
+    Memory
 }
 
 export class RelativePattern {
@@ -663,7 +666,7 @@ export class TextEdit {
         if (!thing) {
             return false;
         }
-        return Range.isRange((<TextEdit>thing))
+        return Range.isRange((<TextEdit>thing).range)
             && typeof (<TextEdit>thing).newText === 'string';
     }
 
@@ -1218,6 +1221,41 @@ export enum FileChangeType {
     Deleted = 3,
 }
 
+export class FileSystemError extends Error {
+
+    static FileExists(messageOrUri?: string | URI): FileSystemError {
+        return new FileSystemError(messageOrUri, 'EntryExists', FileSystemError.FileExists);
+    }
+    static FileNotFound(messageOrUri?: string | URI): FileSystemError {
+        return new FileSystemError(messageOrUri, 'EntryNotFound', FileSystemError.FileNotFound);
+    }
+    static FileNotADirectory(messageOrUri?: string | URI): FileSystemError {
+        return new FileSystemError(messageOrUri, 'EntryNotADirectory', FileSystemError.FileNotADirectory);
+    }
+    static FileIsADirectory(messageOrUri?: string | URI): FileSystemError {
+        return new FileSystemError(messageOrUri, 'EntryIsADirectory', FileSystemError.FileIsADirectory);
+    }
+    static NoPermissions(messageOrUri?: string | URI): FileSystemError {
+        return new FileSystemError(messageOrUri, 'NoPermissions', FileSystemError.NoPermissions);
+    }
+    static Unavailable(messageOrUri?: string | URI): FileSystemError {
+        return new FileSystemError(messageOrUri, 'Unavailable', FileSystemError.Unavailable);
+    }
+
+    constructor(uriOrMessage?: string | URI, code?: string, terminator?: Function) {
+        super(URI.isUri(uriOrMessage) ? uriOrMessage.toString(true) : uriOrMessage);
+        this.name = code ? `${code} (FileSystemError)` : 'FileSystemError';
+
+        if (typeof Object.setPrototypeOf === 'function') {
+            Object.setPrototypeOf(this, FileSystemError.prototype);
+        }
+
+        if (typeof Error.captureStackTrace === 'function' && typeof terminator === 'function') {
+            Error.captureStackTrace(this, terminator);
+        }
+    }
+}
+
 export enum FileType {
     Unknown = 0,
     File = 1,
@@ -1339,6 +1377,11 @@ export class ProcessExecution {
         }
         return hash.digest('hex');
     }
+
+    public static is(value: theia.ShellExecution | theia.ProcessExecution): boolean {
+        const candidate = value as ProcessExecution;
+        return candidate && !!candidate.process;
+    }
 }
 
 export enum ShellQuoting {
@@ -1442,6 +1485,11 @@ export class ShellExecution {
         }
         return hash.digest('hex');
     }
+
+    public static is(value: theia.ShellExecution | theia.ProcessExecution): boolean {
+        const candidate = value as ShellExecution;
+        return candidate && (!!candidate.commandLine || !!candidate.command);
+    }
 }
 
 export class TaskGroup {
@@ -1533,7 +1581,6 @@ export class Task {
         if (value === undefined || value === null) {
             throw illegalArgument('Kind can\'t be undefined or null');
         }
-        this.clear();
         this.taskDefinition = value;
     }
 
@@ -1542,7 +1589,6 @@ export class Task {
     }
 
     set scope(value: theia.TaskScope.Global | theia.TaskScope.Workspace | theia.WorkspaceFolder | undefined) {
-        this.clear();
         this.taskScope = value;
     }
 
@@ -1554,7 +1600,6 @@ export class Task {
         if (typeof value !== 'string') {
             throw illegalArgument('name');
         }
-        this.clear();
         this.taskName = value;
     }
 
@@ -1566,8 +1611,8 @@ export class Task {
         if (value === null) {
             value = undefined;
         }
-        this.clear();
         this.taskExecution = value;
+        this.updateDefinitionBasedOnExecution();
     }
 
     get problemMatchers(): string[] {
@@ -1580,7 +1625,6 @@ export class Task {
             this.hasTaskProblemMatchers = false;
             return;
         }
-        this.clear();
         this.taskProblemMatchers = value;
         this.hasTaskProblemMatchers = true;
     }
@@ -1597,7 +1641,6 @@ export class Task {
         if (value !== true && value !== false) {
             value = false;
         }
-        this.clear();
         this.isTaskBackground = value;
     }
 
@@ -1609,7 +1652,6 @@ export class Task {
         if (typeof value !== 'string' || value.length === 0) {
             throw illegalArgument('source must be a string of length > 0');
         }
-        this.clear();
         this.taskSource = value;
     }
 
@@ -1622,7 +1664,6 @@ export class Task {
             this.taskGroup = undefined;
             return;
         }
-        this.clear();
         this.taskGroup = value;
     }
 
@@ -1634,12 +1675,10 @@ export class Task {
         if (value === null) {
             value = undefined;
         }
-        this.clear();
         this.taskPresentationOptions = value;
     }
 
-    private clear(): void {
-        this.taskScope = undefined;
+    private updateDefinitionBasedOnExecution(): void {
         this.taskDefinition = undefined;
         if (this.taskExecution instanceof ProcessExecution) {
             this.taskDefinition = {
@@ -1806,4 +1845,12 @@ export enum OperatingSystem {
     Windows = 'Windows',
     Linux = 'Linux',
     OSX = 'OSX'
+}
+
+/** The areas of the application shell where webview panel can reside. */
+export enum WebviewPanelTargetArea {
+    Main = 'main',
+    Left = 'left',
+    Right = 'right',
+    Bottom = 'bottom'
 }

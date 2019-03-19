@@ -30,6 +30,7 @@ import { FrontendApplicationContribution } from '@devpodio/core/lib/browser/fron
 import { WidgetOpenerOptions } from '@devpodio/core/lib/browser/widget-open-handler';
 import { MiniBrowserService } from '../common/mini-browser-service';
 import { MiniBrowser, MiniBrowserProps } from './mini-browser';
+import { LocationMapperService } from './location-mapper-service';
 
 export namespace MiniBrowserCommands {
     export const PREVIEW: Command = {
@@ -57,6 +58,8 @@ export interface MiniBrowserOpenerOptions extends WidgetOpenerOptions, MiniBrows
 export class MiniBrowserOpenHandler extends NavigatableWidgetOpenHandler<MiniBrowser>
     implements FrontendApplicationContribution, CommandContribution, MenuContribution, TabBarToolbarContribution {
 
+    static PREVIEW_URI = new URI().withScheme('__minibrowser__preview__');
+
     /**
      * Instead of going to the backend with each file URI to ask whether it can handle the current file or not,
      * we have this map of extension and priority pairs that we populate at application startup.
@@ -81,6 +84,9 @@ export class MiniBrowserOpenHandler extends NavigatableWidgetOpenHandler<MiniBro
 
     @inject(MiniBrowserService)
     protected readonly miniBrowserService: MiniBrowserService;
+
+    @inject(LocationMapperService)
+    protected readonly locationMapperService: LocationMapperService;
 
     onStart(): void {
         (async () => (await this.miniBrowserService.supportedFileExtensions()).forEach(entry => {
@@ -114,6 +120,7 @@ export class MiniBrowserOpenHandler extends NavigatableWidgetOpenHandler<MiniBro
         widget.setProps(props);
         return widget;
     }
+
     protected async options(uri?: URI, options?: MiniBrowserOpenerOptions): Promise<MiniBrowserOpenerOptions & { widgetOptions: ApplicationShell.WidgetOptions }> {
         // Get the default options.
         let result = await this.defaultOptions();
@@ -170,7 +177,7 @@ export class MiniBrowserOpenHandler extends NavigatableWidgetOpenHandler<MiniBro
             isVisible: widget => !!this.getSourceUri(widget)
         });
         commands.registerCommand(MiniBrowserCommands.OPEN_URL, {
-            execute: () => this.openUrl()
+            execute: (arg?: string) => this.openUrl(arg)
         });
     }
 
@@ -243,8 +250,8 @@ export class MiniBrowserOpenHandler extends NavigatableWidgetOpenHandler<MiniBro
         return uri;
     }
 
-    protected async openUrl(): Promise<void> {
-        const url = await this.quickInputService.open({
+    protected async openUrl(arg?: string): Promise<void> {
+        const url = arg ? arg : await this.quickInputService.open({
             prompt: 'URL to open',
             placeHolder: 'Type a URL'
         });
@@ -253,18 +260,21 @@ export class MiniBrowserOpenHandler extends NavigatableWidgetOpenHandler<MiniBro
         }
     }
 
-    static PREVIEW_URI = new URI().withScheme('__minibrowser__preview__');
     async openPreview(startPage: string): Promise<MiniBrowser> {
-        return this.open(MiniBrowserOpenHandler.PREVIEW_URI, this.getOpenPreviewProps(startPage));
+        const props = await this.getOpenPreviewProps(await this.locationMapperService.map(startPage));
+        return this.open(MiniBrowserOpenHandler.PREVIEW_URI, props);
     }
-    protected getOpenPreviewProps(startPage: string): MiniBrowserOpenerOptions {
+
+    protected async getOpenPreviewProps(startPage: string): Promise<MiniBrowserOpenerOptions> {
+        const resetBackground = await this.resetBackground(new URI(startPage));
         return {
             name: 'Preview',
             startPage,
             toolbar: 'read-only',
             widgetOptions: {
                 area: 'right'
-            }
+            },
+            resetBackground
         };
     }
 

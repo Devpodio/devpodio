@@ -93,6 +93,18 @@ export interface FileChangeEvent {
     type: FileChangeEventType
 }
 
+export interface FileMoveEvent {
+    subscriberId: string,
+    oldUri: UriComponents,
+    newUri: UriComponents
+}
+
+export interface FileWillMoveEvent {
+    subscriberId: string,
+    oldUri: UriComponents,
+    newUri: UriComponents
+}
+
 export type FileChangeEventType = 'created' | 'updated' | 'deleted';
 
 export enum CompletionTriggerKind {
@@ -197,7 +209,7 @@ export interface MarkerData {
 }
 
 export interface RelatedInformation {
-    resource: UriComponents;
+    resource: string;
     message: string;
     startLineNumber: number;
     startColumn: number;

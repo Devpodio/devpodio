@@ -13,7 +13,14 @@
  *
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  ********************************************************************************/
-import { DocumentsExt, ModelChangedEvent, PLUGIN_RPC_CONTEXT, DocumentsMain } from '../api/plugin-api';
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+/**
+ * based on https://github.com/Microsoft/vscode/blob/bf9a27ec01f2ef82fc45f69e0c946c7d74a57d3e/src/vs/workbench/api/node/extHostDocumentSaveParticipant.ts
+ */
+import { DocumentsExt, ModelChangedEvent, PLUGIN_RPC_CONTEXT, DocumentsMain, SingleEditOperation } from '../api/plugin-api';
 import URI from 'vscode-uri';
 import { UriComponents } from '../common/uri-components';
 import { RPCProtocol } from '../api/rpc-protocol';
@@ -24,6 +31,7 @@ import { EditorsAndDocumentsExtImpl } from './editors-and-documents';
 import * as Converter from './type-converters';
 import { DisposableCollection } from '@devpodio/core/lib/common/disposable';
 import { Range, TextDocumentShowOptions } from '../api/model';
+import { TextEdit } from './types-impl';
 
 export class DocumentsExtImpl implements DocumentsExt {
     private toDispose = new DisposableCollection();
@@ -31,11 +39,13 @@ export class DocumentsExtImpl implements DocumentsExt {
     private _onDidRemoveDocument = new Emitter<theia.TextDocument>();
     private _onDidChangeDocument = new Emitter<theia.TextDocumentChangeEvent>();
     private _onDidSaveTextDocument = new Emitter<theia.TextDocument>();
+    private _onWillSaveTextDocument = new Emitter<theia.TextDocumentWillSaveEvent>();
 
     readonly onDidAddDocument: Event<theia.TextDocument> = this._onDidAddDocument.event;
     readonly onDidRemoveDocument: Event<theia.TextDocument> = this._onDidRemoveDocument.event;
     readonly onDidChangeDocument: Event<theia.TextDocumentChangeEvent> = this._onDidChangeDocument.event;
     readonly onDidSaveTextDocument: Event<theia.TextDocument> = this._onDidSaveTextDocument.event;
+    readonly onWillSaveTextDocument: Event<theia.TextDocumentWillSaveEvent> = this._onWillSaveTextDocument.event;
 
     private proxy: DocumentsMain;
     private loadingDocuments = new Map<string, Promise<DocumentDataExt | undefined>>();
@@ -78,6 +88,72 @@ export class DocumentsExtImpl implements DocumentsExt {
             this._onDidSaveTextDocument.fire(data.document);
         }
     }
+
+    async $acceptModelWillSave(strUrl: UriComponents, reason: theia.TextDocumentSaveReason, saveTimeout: number): Promise<SingleEditOperation[]> {
+        const uri = URI.revive(strUrl).toString();
+        const operations: SingleEditOperation[] = [];
+        let didTimeout = false;
+        // try to timeout early to squeeze edits at least from some save participants
+        const didTimeoutHandle = setTimeout(() => didTimeout = true, saveTimeout - 250);
+        try {
+            await this._onWillSaveTextDocument.sequence(async fireEvent => {
+                if (didTimeout) {
+                    return false;
+                }
+                try {
+                    const documentData = this.editorsAndDocuments.getDocument(uri);
+                    if (documentData) {
+                        const { document } = documentData;
+                        await this.fireTextDocumentWillSaveEvent({
+                            document, reason, fireEvent,
+                            accept: operation => operations.push(operation)
+                        });
+                    }
+                } catch (e) {
+                    console.error(e);
+                }
+                return !didTimeout;
+            });
+        } finally {
+            clearTimeout(didTimeoutHandle);
+        }
+        return operations;
+    }
+
+    // tslint:disable:no-any
+    protected async fireTextDocumentWillSaveEvent({
+        document, reason, fireEvent, accept
+    }: {
+            document: theia.TextDocument,
+            reason: theia.TextDocumentSaveReason,
+            fireEvent: (e: theia.TextDocumentWillSaveEvent) => any,
+            accept: (operation: SingleEditOperation) => void
+        }): Promise<void> {
+
+        const promises: PromiseLike<TextEdit[] | any>[] = [];
+        fireEvent(Object.freeze({
+            document, reason,
+            waitUntil(p: PromiseLike<TextEdit[] | any>) {
+                if (Object.isFrozen(promises)) {
+                    throw new Error('waitUntil can not be called async');
+                }
+                promises.push(p);
+            }
+        }));
+        Object.freeze(promises);
+
+        await Promise.all(promises).then(allEdits => allEdits.forEach(edits => {
+            if (Array.isArray(edits)) {
+                edits.forEach(edit => {
+                    if (TextEdit.isTextEdit(edit)) {
+                        accept(Converter.fromTextEdit(edit));
+                    }
+                });
+            }
+        }));
+    }
+    // tslint:enable:no-any
+
     $acceptDirtyStateChanged(strUrl: UriComponents, isDirty: boolean): void {
         const uri = URI.revive(strUrl);
         const uriString = uri.toString();

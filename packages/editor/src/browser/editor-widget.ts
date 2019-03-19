@@ -14,7 +14,7 @@
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  ********************************************************************************/
 
-import { SelectionService } from '@devpodio/core/lib/common';
+import { Disposable, SelectionService } from '@devpodio/core/lib/common';
 import { Widget, BaseWidget, Message, Saveable, SaveableSource, Navigatable, StatefulWidget, DiffUris } from '@devpodio/core/lib/browser';
 import URI from '@devpodio/core/lib/common/uri';
 import { TextEditor } from './editor';
@@ -30,6 +30,11 @@ export class EditorWidget extends BaseWidget implements SaveableSource, Navigata
         this.toDispose.push(this.editor.onSelectionChanged(() => {
             if (this.editor.isFocused()) {
                 this.selectionService.selection = this.editor;
+            }
+        }));
+        this.toDispose.push(Disposable.create(() => {
+            if (this.selectionService.selection === this.editor) {
+                this.selectionService.selection = undefined;
             }
         }));
     }

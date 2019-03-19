@@ -14,4 +14,4 @@
  * limitations under the License.
 ********************************************************************************/
 
-/// <reference types="@devpodio/monaco/src/typings/monaco/index"/>
+/// <reference types='@devpodio/monaco/src/typings/monaco/index'/>

@@ -1,6 +1,6 @@
 sudo: required
 language: node_js
-node_js: '8'
+node_js: '10'
 git:
   depth: 1
 cache:
@@ -55,6 +55,7 @@ cache:
   - packages/terminal/node_modules
   - packages/textmate-grammars/node_modules
   - packages/tslint/node_modules
+  - packages/typehierarchy/node_modules
   - packages/typescript/node_modules
   - packages/userstorage/node_modules
   - packages/variable-resolver/node_modules
@@ -90,13 +91,6 @@ script:
   - travis_retry yarn test:theia ;
   - travis_retry yarn test:electron ;
   - travis_retry yarn test:browser ;
-notifications:
-  webhooks:
-    urls:
-    - https://webhooks.gitter.im/e/c42ddc125fe6bbfccb48
-    on_success: change
-    on_failure: always
-    on_start: never
 jobs:
   fast_finish: true
   allow_failures:
@@ -107,7 +101,8 @@ jobs:
   - os: osx
     env: CXX=c++
     before_script: skip
-    script: travis_retry yarn test:theia ;
+    script:
+      - travis_retry yarn test:theia ;
   - stage: deploy
     if: NOT type IN (cron, pull_request)
     os: linux

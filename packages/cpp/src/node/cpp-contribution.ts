@@ -29,20 +29,20 @@ export class CppContribution extends BaseLanguageServerContribution {
     readonly id = CPP_LANGUAGE_ID;
     readonly name = CPP_LANGUAGE_NAME;
 
-    public start(clientConnection: IConnection, { parameters }: CppStartOptions): void {
+    async start(clientConnection: IConnection, { parameters }: CppStartOptions): Promise<void> {
 
         const command =
-            (parameters && parameters.clangdExecutable)
-            || process.env.CPP_CLANGD_COMMAND
+            process.env.CPP_CLANGD_COMMAND
+            || (parameters && parameters.clangdExecutable)
             || CLANGD_EXECUTABLE_DEFAULT;
 
         const args = parseArgs(
-            (parameters && parameters.clangdArgs)
-            || process.env.CPP_CLANGD_ARGS
+            process.env.CPP_CLANGD_ARGS
+            || (parameters && parameters.clangdArgs)
             || undefined
         );
 
-        const serverConnection = this.createProcessStreamConnection(command, args);
+        const serverConnection = await this.createProcessStreamConnectionAsync(command, args);
         this.forward(clientConnection, serverConnection);
     }
 }

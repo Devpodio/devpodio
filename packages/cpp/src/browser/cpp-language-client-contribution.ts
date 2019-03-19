@@ -22,6 +22,7 @@ import {
 } from '@devpodio/languages/lib/browser';
 import { Languages, Workspace } from '@devpodio/languages/lib/browser';
 import { ILogger } from '@devpodio/core/lib/common/logger';
+import { WindowService } from '@devpodio/core/lib/browser/window/window-service';
 import { CPP_LANGUAGE_ID, CPP_LANGUAGE_NAME, HEADER_AND_SOURCE_FILE_EXTENSIONS, CppStartParameters } from '../common';
 import { CppBuildConfigurationManager, CppBuildConfiguration } from './cpp-build-configurations';
 import { CppBuildConfigurationsStatusBarElement } from './cpp-build-configurations-statusbar-element';
@@ -50,6 +51,9 @@ export class CppLanguageClientContribution extends BaseLanguageClientContributio
 
     @inject(CppBuildConfigurationsStatusBarElement)
     protected readonly cppBuildConfigurationsStatusBarElement: CppBuildConfigurationsStatusBarElement;
+
+    @inject(WindowService)
+    protected readonly windowService: WindowService;
 
     @inject(ILogger)
     protected readonly logger: ILogger;
@@ -85,10 +89,11 @@ export class CppLanguageClientContribution extends BaseLanguageClientContributio
     }
 
     async onActiveBuildConfigChanged(config: CppBuildConfiguration | undefined) {
-        // Restart clangd.  The new config will be picked up when
-        // createOptions will be called to send the initialize request
-        // to the new instance of clangd.
+        // Override the initializationOptions to put the new path to the build,
+        // then restart clangd.
         if (this.running) {
+            const lc = await this.languageClient;
+            lc.clientOptions.initializationOptions = this.createClangdConfigurationParams(config);
             this.restart();
         }
     }
@@ -123,7 +128,7 @@ export class CppLanguageClientContribution extends BaseLanguageClientContributio
                 'You can refer to the clangd page for instructions.';
             this.messageService.error(ERROR_MESSAGE, READ_INSTRUCTIONS_ACTION).then(selected => {
                 if (READ_INSTRUCTIONS_ACTION === selected) {
-                    window.open('https://clang.llvm.org/extra/clangd.html');
+                    this.windowService.openNewWindow('https://clang.llvm.org/extra/clangd.html', { external: true });
                 }
             });
             this.logger.error(ERROR_MESSAGE);

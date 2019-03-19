@@ -14,11 +14,11 @@
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  ********************************************************************************/
 
-import { WebviewsMain, WebviewPanelShowOptions, MAIN_RPC_CONTEXT, WebviewsExt } from '../../api/plugin-api';
+import { WebviewsMain, MAIN_RPC_CONTEXT, WebviewsExt } from '../../api/plugin-api';
 import { interfaces } from 'inversify';
 import { RPCProtocol } from '../../api/rpc-protocol';
 import { UriComponents } from '../../common/uri-components';
-import { WebviewOptions, WebviewPanelOptions } from '@devpodio/plugin';
+import { WebviewOptions, WebviewPanelOptions, WebviewPanelShowOptions } from '@devpodio/plugin';
 import { ApplicationShell } from '@devpodio/core/lib/browser/shell/application-shell';
 import { KeybindingRegistry } from '@devpodio/core/lib/browser/keybinding';
 import { WebviewWidget } from './webview/webview';
@@ -85,8 +85,11 @@ export class WebviewsMainImpl implements WebviewsMain {
             this.onCloseView(viewId);
         });
         this.views.set(viewId, view);
-        this.shell.addWidget(view, { area: 'main' });
+        this.shell.addWidget(view, { area: showOptions.area ? showOptions.area : 'main' });
         this.shell.activateWidget(view.id);
+        if (showOptions.preserveFocus) {
+            view.focus();
+        }
     }
     $disposeWebview(handle: string): void {
         const view = this.views.get(handle);

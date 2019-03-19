@@ -14,21 +14,25 @@
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  ********************************************************************************/
 
-import { injectable } from 'inversify';
+import { injectable, inject } from 'inversify';
 import URI from '../common/uri';
 import { OpenHandler } from './opener-service';
+import { WindowService } from './window/window-service';
 
 @injectable()
 export class HttpOpenHandler implements OpenHandler {
 
     readonly id = 'http';
 
+    @inject(WindowService)
+    protected readonly windowService: WindowService;
+
     canHandle(uri: URI): number {
         return uri.scheme.startsWith('http') ? 500 : 0;
     }
 
     open(uri: URI): Window | undefined {
-        return window.open(uri.toString(true)) || undefined;
+        return this.windowService.openNewWindow(uri.toString(true), { external: true });
     }
 
 }

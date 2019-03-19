@@ -17,34 +17,34 @@
 import { injectable } from 'inversify';
 import { Menu } from '@phosphor/widgets';
 import { CommandRegistry } from '@phosphor/commands';
-import { PreferenceProperty } from '@devpodio/core/lib/browser';
+import { escapeInvisibleChars, unescapeInvisibleChars } from '@devpodio/core/lib/common/strings';
+import { PreferenceDataProperty } from '@devpodio/core/lib/browser';
 
 @injectable()
 export class PreferencesMenuFactory {
 
     // tslint:disable-next-line:no-any
-    createPreferenceContextMenu(id: string, savedPreference: any, property: PreferenceProperty, execute: (property: string, value: any) => void): Menu {
+    createPreferenceContextMenu(id: string, savedPreference: any, property: PreferenceDataProperty, execute: (property: string, value: any) => void): Menu {
         const commands = new CommandRegistry();
         const menu = new Menu({ commands });
         if (property) {
             const enumConst = property.enum;
             if (enumConst) {
-                enumConst
-                .map(this.escapeInvisibleChars)
-                .forEach(enumValue => {
-                    const commandId = id + '-' + enumValue;
-                    if (!commands.hasCommand(commandId)) {
-                        commands.addCommand(commandId, {
-                            label: enumValue,
-                            iconClass: this.escapeInvisibleChars(savedPreference) === enumValue || !savedPreference && property.default === enumValue ? 'fa fa-check' : '',
-                            execute: () => execute(id, this.unescapeInvisibleChars(enumValue))
-                        });
-                        menu.addItem({
-                            type: 'command',
-                            command: commandId
-                        });
-                    }
-                });
+                enumConst.map(escapeInvisibleChars)
+                    .forEach(enumValue => {
+                        const commandId = id + '-' + enumValue;
+                        if (!commands.hasCommand(commandId)) {
+                            commands.addCommand(commandId, {
+                                label: enumValue,
+                                iconClass: escapeInvisibleChars(savedPreference) === enumValue || !savedPreference && property.default === enumValue ? 'fa fa-check' : '',
+                                execute: () => execute(id, unescapeInvisibleChars(enumValue))
+                            });
+                            menu.addItem({
+                                type: 'command',
+                                command: commandId
+                            });
+                        }
+                    });
             } else if (property.type && property.type === 'boolean') {
                 const commandTrue = id + '-true';
                 commands.addCommand(commandTrue, {

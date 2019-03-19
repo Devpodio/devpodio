@@ -94,6 +94,9 @@
       "@devpodio/callhierarchy/lib/*": [
         "packages/callhierarchy/src/*"
       ],
+      "@devpodio/typehierarchy/lib/*": [
+        "packages/typehierarchy/src/*"
+      ],
       "@devpodio/variable-resolver/lib/*": [
         "packages/variable-resolver/src/*"
       ],

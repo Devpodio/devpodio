@@ -35,13 +35,21 @@ export const filesystemPreferenceSchema: PreferenceSchema = {
                 '**/.git/objects/**': true,
                 '**/.git/subtree-cache/**': true,
                 '**/node_modules/**': true
-            }
+            },
+            'scope': 'resource'
+        },
+        'files.exclude': {
+            'type': 'object',
+            'default': { '**/.git': true, '**/.svn': true, '**/.hg': true, '**/CVS': true, '**/.DS_Store': true },
+            'description': 'Configure glob patterns for excluding files and folders.',
+            'scope': 'resource'
         }
     }
 };
 
 export interface FileSystemConfiguration {
-    'files.watcherExclude': { [globPattern: string]: boolean }
+    'files.watcherExclude': { [globPattern: string]: boolean };
+    'files.exclude': { [key: string]: boolean };
 }
 
 export const FileSystemPreferences = Symbol('FileSystemPreferences');

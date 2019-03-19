@@ -19,6 +19,7 @@ import { BaseLanguageServerContribution, IConnection } from '@devpodio/languages
 import { PYTHON_LANGUAGE_ID, PYTHON_LANGUAGE_NAME } from '../common';
 import { parseArgs } from '@devpodio/process/lib/node/utils';
 import { SpawnOptions } from 'child_process';
+import { ProcessErrorEvent } from '@devpodio/process/lib/node/process';
 
 @injectable()
 export class PythonContribution extends BaseLanguageServerContribution {
@@ -26,7 +27,7 @@ export class PythonContribution extends BaseLanguageServerContribution {
     readonly id = PYTHON_LANGUAGE_ID;
     readonly name = PYTHON_LANGUAGE_NAME;
 
-    start(clientConnection: IConnection): void {
+    async start(clientConnection: IConnection): Promise<void> {
         let command = 'python';
         let args = ['-m', 'pyls'];
         const pythonLsCommand = process.env.PYTHON_LS_COMMAND;
@@ -34,7 +35,7 @@ export class PythonContribution extends BaseLanguageServerContribution {
             command = pythonLsCommand;
             args = parseArgs(process.env.PYTHON_LS_ARGS || '');
         }
-        const serverConnection = this.createProcessStreamConnection(command, args, this.getSpawnOptions());
+        const serverConnection = await this.createProcessStreamConnectionAsync(command, args, this.getSpawnOptions());
         this.forward(clientConnection, serverConnection);
     }
 
@@ -42,7 +43,7 @@ export class PythonContribution extends BaseLanguageServerContribution {
         return undefined;
     }
 
-    protected onDidFailSpawnProcess(error: Error): void {
+    protected onDidFailSpawnProcess(error: ProcessErrorEvent): void {
         super.onDidFailSpawnProcess(error);
         console.error('Python language server cannot be started.');
         console.error("Make sure `pyls` is installed: e.g. `pip install 'python-language-server[all]'`");

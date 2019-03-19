@@ -14,10 +14,11 @@
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  ********************************************************************************/
 import { Event, Emitter } from '@devpodio/core';
-import { MonacoEditorModel } from '@devpodio/monaco/lib/browser/monaco-editor-model';
+import { MonacoEditorModel, WillSaveMonacoModelEvent } from '@devpodio/monaco/lib/browser/monaco-editor-model';
 import { injectable, inject } from 'inversify';
 import { MonacoTextModelService } from '@devpodio/monaco/lib/browser/monaco-text-model-service';
 import { MonacoWorkspace } from '@devpodio/monaco/lib/browser/monaco-workspace';
+import { Schemes } from '../../common/uri-components';
 
 export const EditorModelService = Symbol('EditorModelService');
 export interface EditorModelService {
@@ -25,10 +26,12 @@ export interface EditorModelService {
     onModelRemoved: Event<MonacoEditorModel>;
     onModelModeChanged: Event<{ model: MonacoEditorModel, oldModeId: string }>;
 
+    onModelWillSave: Event<WillSaveMonacoModelEvent>;
     onModelDirtyChanged: Event<MonacoEditorModel>;
     onModelSaved: Event<MonacoEditorModel>;
 
     getModels(): MonacoEditorModel[];
+    saveAll(includeUntitled?: boolean): Promise<boolean>;
 }
 
 @injectable()
@@ -39,11 +42,13 @@ export class EditorModelServiceImpl implements EditorModelService {
     private onModelRemovedEmitter = new Emitter<MonacoEditorModel>();
     private modelDirtyEmitter = new Emitter<MonacoEditorModel>();
     private modelSavedEmitter = new Emitter<MonacoEditorModel>();
+    private onModelWillSavedEmitter = new Emitter<WillSaveMonacoModelEvent>();
 
     onModelDirtyChanged: Event<MonacoEditorModel> = this.modelDirtyEmitter.event;
     onModelSaved: Event<MonacoEditorModel> = this.modelSavedEmitter.event;
     onModelModeChanged = this.modelModeChangedEmitter.event;
     onModelRemoved = this.onModelRemovedEmitter.event;
+    onModelWillSave = this.onModelWillSavedEmitter.event;
 
     constructor(@inject(MonacoTextModelService) monacoModelService: MonacoTextModelService,
         @inject(MonacoWorkspace) monacoWorkspace: MonacoWorkspace) {
@@ -70,6 +75,9 @@ export class EditorModelServiceImpl implements EditorModelService {
         model.onDirtyChanged(_ => {
             this.modelDirtyEmitter.fire(model);
         });
+        model.onWillSaveModel(willSaveModelEvent => {
+            this.onModelWillSavedEmitter.fire(willSaveModelEvent);
+        });
     }
 
     get onModelAdded(): Event<MonacoEditorModel> {
@@ -78,6 +86,26 @@ export class EditorModelServiceImpl implements EditorModelService {
 
     getModels(): MonacoEditorModel[] {
         return this.monacoModelService.models;
+    }
+
+    async saveAll(includeUntitled?: boolean): Promise<boolean> {
+        const saves = [];
+        for (const model of this.monacoModelService.models) {
+            const { uri } = model.textEditorModel;
+            if (model.dirty && (includeUntitled || uri.scheme !== Schemes.UNTITLED)) {
+                saves.push((async () => {
+                    try {
+                        await model.save();
+                        return true;
+                    } catch (e) {
+                        console.error('Failed to save ', uri.toString(), e);
+                        return false;
+                    }
+                })());
+            }
+        }
+        const results = await Promise.all(saves);
+        return results.reduce((a, b) => a && b, true);
     }
 
 }

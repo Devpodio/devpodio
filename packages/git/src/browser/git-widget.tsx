@@ -17,6 +17,7 @@
 import { injectable, inject, postConstruct } from 'inversify';
 import URI from '@devpodio/core/lib/common/uri';
 import { ResourceProvider, CommandService, MenuPath } from '@devpodio/core';
+import { DisposableCollection } from '@devpodio/core/lib/common';
 import { ContextMenuRenderer, LabelProvider, DiffUris, StatefulWidget, Message, SELECTED_CLASS, Key, ConfirmDialog } from '@devpodio/core/lib/browser';
 import { EditorManager, EditorWidget, EditorOpenerOptions } from '@devpodio/editor/lib/browser';
 import { WorkspaceCommands } from '@devpodio/workspace/lib/browser';
@@ -52,6 +53,8 @@ export class GitWidget extends GitDiffWidget implements StatefulWidget {
     protected lastSelectedNode?: { id: number, node: GitFileChangeNode };
     protected listContainer: GitChangesListContainer | undefined;
     protected readonly selectChange = (change: GitFileChangeNode) => this.selectNode(change);
+
+    protected readonly toDisposeOnInitialize = new DisposableCollection();
 
     @inject(EditorManager)
     protected readonly editorManager: EditorManager;
@@ -94,10 +97,11 @@ export class GitWidget extends GitDiffWidget implements StatefulWidget {
     }
 
     async initialize(repository: Repository | undefined): Promise<void> {
+        this.toDisposeOnInitialize.dispose();
         if (repository) {
-            this.toDispose.dispose();
-            this.toDispose.push(await this.gitWatcher.watchGitChanges(repository));
-            this.toDispose.push(this.gitWatcher.onGitEvent(async gitEvent => {
+            this.toDispose.push(this.toDisposeOnInitialize);
+            this.toDisposeOnInitialize.push(await this.gitWatcher.watchGitChanges(repository));
+            this.toDisposeOnInitialize.push(this.gitWatcher.onGitEvent(async gitEvent => {
                 if (GitStatusChangeEvent.is(gitEvent)) {
                     if (gitEvent.status.currentHead !== this.lastHead) {
                         this.lastHead = gitEvent.status.currentHead;
@@ -107,6 +111,8 @@ export class GitWidget extends GitDiffWidget implements StatefulWidget {
                     this.updateView(gitEvent.status);
                 }
             }));
+        } else {
+            this.updateView(undefined);
         }
     }
 
@@ -714,6 +720,7 @@ export namespace GitWidget {
         export const OTHER_GROUP: MenuPath = [...PATH, '1_other'];
         export const COMMIT_GROUP: MenuPath = [...PATH, '2_commit'];
         export const BATCH: MenuPath = [...PATH, '3_batch'];
+        export const STASH: MenuPath = [...PATH, '4_stash'];
     }
 
     export namespace Styles {

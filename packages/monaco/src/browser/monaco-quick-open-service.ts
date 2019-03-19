@@ -14,13 +14,15 @@
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  ********************************************************************************/
 
-import { injectable } from 'inversify';
+import { injectable, inject, postConstruct } from 'inversify';
 import { MessageType } from '@devpodio/core/lib/common/message-service-protocol';
 import {
     QuickOpenService, QuickOpenModel, QuickOpenOptions,
     QuickOpenItem, QuickOpenGroupItem, QuickOpenMode, KeySequence
 } from '@devpodio/core/lib/browser';
 import { KEY_CODE_MAP } from './monaco-keycode-map';
+import { ContextKey } from '@devpodio/core/lib/browser/context-key-service';
+import { MonacoContextKeyService } from './monaco-context-key-service';
 
 export interface MonacoQuickOpenControllerOpts extends monaco.quickOpen.IQuickOpenControllerOpts {
     readonly prefix?: string;
@@ -38,6 +40,11 @@ export class MonacoQuickOpenService extends QuickOpenService {
     protected opts: MonacoQuickOpenControllerOpts | undefined;
     protected previousActiveElement: Element | undefined;
 
+    @inject(MonacoContextKeyService)
+    protected readonly contextKeyService: MonacoContextKeyService;
+
+    protected inQuickOpenKey: ContextKey<boolean>;
+
     constructor() {
         super();
         const overlayWidgets = document.createElement('div');
@@ -49,6 +56,11 @@ export class MonacoQuickOpenService extends QuickOpenService {
         container.style.top = '0px';
         container.style.right = '50%';
         overlayWidgets.appendChild(container);
+    }
+
+    @postConstruct()
+    protected init(): void {
+        this.inQuickOpenKey = this.contextKeyService.createKey<boolean>('inQuickOpen', false);
     }
 
     open(model: QuickOpenModel, options?: QuickOpenOptions): void {
@@ -70,11 +82,16 @@ export class MonacoQuickOpenService extends QuickOpenService {
 
     internalOpen(opts: MonacoQuickOpenControllerOpts): void {
         this.opts = opts;
-        this.previousActiveElement = window.document.activeElement || undefined;
+        const activeContext = window.document.activeElement || undefined;
+        if (!activeContext || !this.container.contains(activeContext)) {
+            this.previousActiveElement = activeContext;
+            this.contextKeyService.activeContext = activeContext instanceof HTMLElement ? activeContext : undefined;
+        }
         this.hideDecoration();
         this.widget.show(this.opts.prefix || '');
         this.setPlaceHolder(opts.inputAriaLabel);
         this.setPassword(opts.password ? true : false);
+        this.inQuickOpenKey.set(true);
     }
 
     setPlaceHolder(placeHolder: string): void {
@@ -114,6 +131,7 @@ export class MonacoQuickOpenService extends QuickOpenService {
         this._widget = new monaco.quickOpen.QuickOpenWidget(this.container, {
             onOk: () => {
                 this.previousActiveElement = undefined;
+                this.contextKeyService.activeContext = undefined;
                 this.onClose(false);
             },
             onCancel: () => {
@@ -121,6 +139,7 @@ export class MonacoQuickOpenService extends QuickOpenService {
                     this.previousActiveElement.focus();
                 }
                 this.previousActiveElement = undefined;
+                this.contextKeyService.activeContext = undefined;
                 this.onClose(true);
             },
             onType: lookFor => this.onType(lookFor || ''),
@@ -148,6 +167,7 @@ export class MonacoQuickOpenService extends QuickOpenService {
         if (this.opts && this.opts.onClose) {
             this.opts.onClose(cancelled);
         }
+        this.inQuickOpenKey.set(false);
     }
 
     protected async onType(lookFor: string): Promise<void> {
@@ -224,9 +244,10 @@ export class MonacoQuickOpenControllerOptsImpl implements MonacoQuickOpenControl
         if (this.options.skipPrefix) {
             lookFor = lookFor.substr(this.options.skipPrefix);
         }
-        const labelHighlights = this.options.fuzzyMatchLabel ? this.matchesFuzzy(lookFor, item.getLabel()) : item.getLabelHighlights();
-        const descriptionHighlights = this.options.fuzzyMatchDescription ? this.matchesFuzzy(lookFor, item.getDescription()) : item.getDescriptionHighlights();
-        const detailHighlights = this.options.fuzzyMatchDetail ? this.matchesFuzzy(lookFor, item.getDetail()) : item.getDetailHighlights();
+        const { fuzzyMatchLabel, fuzzyMatchDescription, fuzzyMatchDetail } = this.options;
+        const labelHighlights = fuzzyMatchLabel ? this.matchesFuzzy(lookFor, item.getLabel(), fuzzyMatchLabel) : item.getLabelHighlights();
+        const descriptionHighlights = fuzzyMatchDescription ? this.matchesFuzzy(lookFor, item.getDescription(), fuzzyMatchDescription) : item.getDescriptionHighlights();
+        const detailHighlights = fuzzyMatchDetail ? this.matchesFuzzy(lookFor, item.getDetail(), fuzzyMatchDetail) : item.getDetailHighlights();
         if ((lookFor && !labelHighlights && !descriptionHighlights && !detailHighlights)
             && !this.options.showItemsWithoutHighlight) {
             return undefined;
@@ -236,11 +257,12 @@ export class MonacoQuickOpenControllerOptsImpl implements MonacoQuickOpenControl
         return entry;
     }
 
-    protected matchesFuzzy(lookFor: string, value: string | undefined): monaco.quickOpen.IHighlight[] | undefined {
+    protected matchesFuzzy(lookFor: string, value: string | undefined, options?: QuickOpenOptions.FuzzyMatchOptions | boolean): monaco.quickOpen.IHighlight[] | undefined {
         if (!lookFor || !value) {
             return undefined;
         }
-        return monaco.filters.matchesFuzzy(lookFor, value, true);
+        const enableSeparateSubstringMatching = typeof options === 'object' && options.enableSeparateSubstringMatching;
+        return monaco.filters.matchesFuzzy(lookFor, value, enableSeparateSubstringMatching);
     }
 
     getAutoFocus(lookFor: string): monaco.quickOpen.IAutoFocus {

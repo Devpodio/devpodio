@@ -19,17 +19,19 @@ import { enableJSDOM } from '@devpodio/core/lib/browser/test/jsdom';
 const disableJSDOM = enableJSDOM();
 
 import { Container, ContainerModule } from 'inversify';
-import { ILogger, MessageClient, MessageService, MenuPath, MenuAction, CommandRegistry, bindContributionProvider, CommandContribution } from '@devpodio/core';
+import { ILogger, MessageClient, MessageService, MenuPath, MenuAction, CommandRegistry, bindContributionProvider, CommandContribution, SelectionService } from '@devpodio/core';
 import { MenuModelRegistry } from '@devpodio/core/lib/common';
 import { MockLogger } from '@devpodio/core/lib/common/test/mock-logger';
 import { MockMenuModelRegistry } from '@devpodio/core/lib/common/test/mock-menu';
 import { EDITOR_CONTEXT_MENU } from '@devpodio/editor/lib/browser';
 import { NAVIGATOR_CONTEXT_MENU } from '@devpodio/navigator/lib/browser/navigator-contribution';
 import { MenusContributionPointHandler } from './menus-contribution-handler';
-import { ContextKeyService } from '../context-key/context-key';
-import { MockContextKeyService } from '../context-key/mock-context-key-service';
 import 'mocha';
 import * as sinon from 'sinon';
+import { ContextKeyService } from '@devpodio/core/lib/browser/context-key-service';
+import { QuickCommandService } from '@devpodio/core/lib/browser';
+import { PluginSharedStyle } from '../plugin-shared-style';
+import { TabBarToolbarRegistry } from '@devpodio/core/lib/browser/shell/tab-bar-toolbar';
 
 disableJSDOM();
 
@@ -53,8 +55,15 @@ before(() => {
         bind(MenuModelRegistry).toConstantValue(new MockMenuModelRegistry());
         bindContributionProvider(bind, CommandContribution);
         bind(CommandRegistry).toSelf().inSingletonScope();
-        bind(ContextKeyService).toConstantValue(new MockContextKeyService());
+        bind(ContextKeyService).toSelf().inSingletonScope();
         bind(MenusContributionPointHandler).toSelf();
+        // tslint:disable-next-line:no-any mock QuickCommandService
+        bind(QuickCommandService).toConstantValue({} as any);
+        // tslint:disable-next-line:no-any mock TabBarToolbarRegistry
+        bind(TabBarToolbarRegistry).toConstantValue({} as any);
+        // tslint:disable-next-line:no-any mock PluginSharedStyle
+        bind(PluginSharedStyle).toConstantValue({} as any);
+        bind(SelectionService).toSelf().inSingletonScope();
     });
 
     testContainer.load(module);

@@ -14,15 +14,19 @@
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  ********************************************************************************/
 
+// tslint:disable:no-any
+
 import { injectable, inject } from 'inversify';
-import { MenuPath, ILogger, CommandRegistry } from '@devpodio/core';
-import { EDITOR_CONTEXT_MENU } from '@devpodio/editor/lib/browser';
+import { MenuPath, ILogger, CommandRegistry, Command, Mutable, MenuAction, SelectionService, UriSelection } from '@devpodio/core';
+import { EDITOR_CONTEXT_MENU, EditorWidget } from '@devpodio/editor/lib/browser';
 import { MenuModelRegistry } from '@devpodio/core/lib/common';
+import { TabBarToolbarRegistry, TabBarToolbarItem } from '@devpodio/core/lib/browser/shell/tab-bar-toolbar';
 import { NAVIGATOR_CONTEXT_MENU } from '@devpodio/navigator/lib/browser/navigator-contribution';
+import { QuickCommandService } from '@devpodio/core/lib/browser/quick-open/quick-command-service';
 import { VIEW_ITEM_CONTEXT_MENU } from '../view/tree-views-main';
 import { PluginContribution, Menu } from '../../../common';
-import { ContextKeyService, ContextKeyExpr } from '../context-key/context-key';
-import { CommandHandler } from '@devpodio/core';
+import { DebugStackFramesWidget } from '@devpodio/debug/lib/browser/view/debug-stack-frames-widget';
+import { DebugThreadsWidget } from '@devpodio/debug/lib/browser/view/debug-threads-widget';
 
 @injectable()
 export class MenusContributionPointHandler {
@@ -36,89 +40,124 @@ export class MenusContributionPointHandler {
     @inject(ILogger)
     protected readonly logger: ILogger;
 
-    @inject(ContextKeyService)
-    protected readonly contextKeyService: ContextKeyService;
+    @inject(QuickCommandService)
+    protected readonly quickCommandService: QuickCommandService;
 
-    // menu location to command IDs
-    protected readonly registeredMenus: Map<string, Set<string>> = new Map();
+    @inject(TabBarToolbarRegistry)
+    protected readonly tabBarToolbar: TabBarToolbarRegistry;
 
-    /**
-     * Handles the `menus` contribution point.
-     * In VSCode, a menu can have more than one item for the same command. Each item may have it's own visibility rules.
-     * In Theia, a menu can't have more than one item for the same command.
-     * So, several handlers for the same command are registered to support different visibility rules for a menu item in different contexts.
-     */
+    @inject(SelectionService)
+    protected readonly selectionService: SelectionService;
+
     handle(contributions: PluginContribution): void {
         const allMenus = contributions.menus;
         if (!allMenus) {
             return;
         }
         for (const location in allMenus) {
-            if (allMenus.hasOwnProperty(location)) {
-                const menuPath = MenusContributionPointHandler.parseMenuPath(location);
-                if (!menuPath) {
+            if (location === 'commandPalette') {
+                for (const menu of allMenus[location]) {
+                    if (menu.when) {
+                        this.quickCommandService.pushCommandContext(menu.command, menu.when);
+                    }
+                }
+            } else if (location === 'editor/title') {
+                for (const action of allMenus[location]) {
+                    this.registerEditorTitleAction(action);
+                }
+            } else if (allMenus.hasOwnProperty(location)) {
+                const menuPaths = MenusContributionPointHandler.parseMenuPaths(location);
+                if (!menuPaths.length) {
                     this.logger.warn(`Plugin contributes items to a menu with invalid identifier: ${location}`);
                     continue;
                 }
                 const menus = allMenus[location];
                 menus.forEach(menu => {
-                    if (!this.isMenuItemRegistered(location, menu.command)) {
-                        this.registerMenuAction(menuPath, location, menu);
+                    for (const menuPath of menuPaths) {
+                        this.registerMenuAction(menuPath, menu);
                     }
                 });
-                menus.filter(menu => menu.when).forEach(menu => this.registerCommandHandler(menu));
             }
         }
     }
 
-    protected static parseMenuPath(value: string): MenuPath | undefined {
+    protected registerEditorTitleAction(action: Menu): void {
+        const id = this.createSyntheticCommandId(action, { prefix: '__plugin.editor.title.action.' });
+        const command: Command = { id };
+        this.commands.registerCommand(command, {
+            execute: widget => widget instanceof EditorWidget && this.commands.executeCommand(action.command, widget.editor.uri['codeUri']),
+            isEnabled: widget => widget instanceof EditorWidget && this.commands.isEnabled(action.command, widget.editor.uri['codeUri']),
+            isVisible: widget => widget instanceof EditorWidget && this.commands.isVisible(action.command, widget.editor.uri['codeUri'])
+        });
+
+        const { group, when } = action;
+        const item: Mutable<TabBarToolbarItem> = { id, command: id, group, when };
+        this.tabBarToolbar.registerItem(item);
+
+        this.onDidRegisterCommand(action.command, pluginCommand => {
+            command.iconClass = pluginCommand.iconClass;
+            item.tooltip = pluginCommand.label;
+        });
+    }
+
+    protected static parseMenuPaths(value: string): MenuPath[] {
         switch (value) {
-            case 'editor/context': return EDITOR_CONTEXT_MENU;
-            case 'explorer/context': return NAVIGATOR_CONTEXT_MENU;
-            case 'view/item/context': return VIEW_ITEM_CONTEXT_MENU;
+            case 'editor/context': return [EDITOR_CONTEXT_MENU];
+            case 'explorer/context': return [NAVIGATOR_CONTEXT_MENU];
+            case 'view/item/context': return [VIEW_ITEM_CONTEXT_MENU];
+            case 'debug/callstack/context': return [DebugStackFramesWidget.CONTEXT_MENU, DebugThreadsWidget.CONTEXT_MENU];
         }
+        return [];
     }
 
-    protected isMenuItemRegistered(location: string, commandId: string): boolean {
-        const commands = this.registeredMenus.get(location);
-        return commands !== undefined && commands.has(commandId);
-    }
-
-    protected registerMenuAction(menuPath: MenuPath, location: string, menu: Menu): void {
-        const [group = '', order = undefined] = (menu.group || '').split('@');
-        // Registering a menu action requires the related command to be already registered.
-        // But Theia plugin registers the commands dynamically via the Commands API.
-        // Let's wait for ~2 sec. It should be enough to finish registering all the contributed commands.
-        // FIXME: remove this workaround (timer) once the https://github.com/theia-ide/theia/issues/3344 is fixed
-        setTimeout(() => {
-            this.menuRegistry.registerMenuAction([...menuPath, group], {
-                commandId: menu.command,
-                order
-            });
-        }, 2000);
-
-        let commands = this.registeredMenus.get(location);
-        if (!commands) {
-            commands = new Set();
-        }
-        commands.add(menu.command);
-        this.registeredMenus.set(location, commands);
-    }
-
-    /** Register a handler for the command that should be called by the specified menu item. */
-    protected registerCommandHandler(menu: Menu): void {
-        this.commands.registerHandler(menu.command, this.newHandler(menu));
-    }
-
-    /**
-     * Creates a command handler that executes nothing but allows
-     * a related menu item be visible depending on the provided rules.
-     */
-    protected newHandler(menu: Menu): CommandHandler {
-        return {
-            execute: () => undefined,
-            isEnabled: () => false,
-            isVisible: () => this.contextKeyService.contextMatchesRules(ContextKeyExpr.deserialize(menu.when))
+    protected registerMenuAction(menuPath: MenuPath, menu: Menu): void {
+        const commandId = this.createSyntheticCommandId(menu, { prefix: '__plugin.menu.action.' });
+        const command: Command = { id: commandId };
+        const selectedResource = () => {
+            const selection = this.selectionService.selection;
+            const uri = UriSelection.getUri(selection);
+            return uri ? uri['codeUri'] : (typeof selection !== 'object' && typeof selection !== 'function') ? selection : undefined;
         };
+        this.commands.registerCommand(command, {
+            execute: () => this.commands.executeCommand(menu.command, selectedResource()),
+            isEnabled: () => this.commands.isEnabled(menu.command, selectedResource()),
+            isVisible: () => this.commands.isVisible(menu.command, selectedResource())
+        });
+
+        const { when } = menu;
+        const [group = '', order = undefined] = (menu.group || '').split('@');
+        const action: MenuAction = { commandId, order, when };
+        this.menuRegistry.registerMenuAction([...menuPath, group], action);
+
+        this.onDidRegisterCommand(menu.command, pluginCommand => {
+            command.category = pluginCommand.category;
+            action.label = pluginCommand.label;
+            action.icon = pluginCommand.iconClass;
+        });
     }
+
+    protected createSyntheticCommandId(menu: Menu, { prefix }: { prefix: string }): string {
+        const command = menu.command;
+        let id = prefix + command;
+        let index = 0;
+        while (this.commands.getCommand(id)) {
+            id = prefix + command + ':' + index;
+            index++;
+        }
+        return id;
+    }
+
+    protected onDidRegisterCommand(id: string, cb: (command: Command) => void): void {
+        const command = this.commands.getCommand(id);
+        if (command) {
+            cb(command);
+        } else {
+            // Registering a menu action requires the related command to be already registered.
+            // But Theia plugin registers the commands dynamically via the Commands API.
+            // Let's wait for ~2 sec. It should be enough to finish registering all the contributed commands.
+            // FIXME: remove this workaround (timer) once the https://github.com/theia-ide/theia/issues/3344 is fixed
+            setTimeout(() => this.onDidRegisterCommand(id, cb), 2000);
+        }
+    }
+
 }

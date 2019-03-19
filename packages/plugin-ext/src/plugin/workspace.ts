@@ -26,13 +26,15 @@ import {
 } from '../api/plugin-api';
 import { Path } from '@devpodio/core/lib/common/path';
 import { RPCProtocol } from '../api/rpc-protocol';
-import { WorkspaceRootsChangeEvent, FileChangeEvent } from '../api/model';
+import { WorkspaceRootsChangeEvent, FileChangeEvent, FileMoveEvent, FileWillMoveEvent } from '../api/model';
 import { EditorsAndDocumentsExtImpl } from './editors-and-documents';
 import { InPluginFileSystemWatcherProxy } from './in-plugin-filesystem-watcher-proxy';
 import URI from 'vscode-uri';
 import { FileStat } from '@devpodio/filesystem/lib/common';
 import { normalize } from '../common/paths';
 import { relative } from '../common/paths-util';
+import { Schemes } from '../common/uri-components';
+import { toWorkspaceFolder } from './type-converters';
 
 export class WorkspaceExtImpl implements WorkspaceExt {
 
@@ -48,6 +50,11 @@ export class WorkspaceExtImpl implements WorkspaceExt {
     constructor(rpc: RPCProtocol, private editorsAndDocuments: EditorsAndDocumentsExtImpl) {
         this.proxy = rpc.getProxy(Ext.WORKSPACE_MAIN);
         this.fileSystemWatcherManager = new InPluginFileSystemWatcherProxy(this.proxy);
+    }
+
+    get rootPath(): string | undefined {
+        const folder = this.folders && this.folders[0];
+        return folder && folder.uri.fsPath;
     }
 
     get workspaceFolders(): theia.WorkspaceFolder[] | undefined {
@@ -107,14 +114,16 @@ export class WorkspaceExtImpl implements WorkspaceExt {
         });
     }
 
-    findFiles(include: theia.GlobPattern, exclude?: theia.GlobPattern | undefined, maxResults?: number,
+    findFiles(include: theia.GlobPattern, exclude?: theia.GlobPattern | null, maxResults?: number,
         token: CancellationToken = CancellationToken.None): PromiseLike<URI[]> {
         let includePattern: string;
+        let includeFolderUri: string | undefined;
         if (include) {
             if (typeof include === 'string') {
                 includePattern = include;
             } else {
                 includePattern = include.pattern;
+                includeFolderUri = URI.file(include.base).toString();
             }
         } else {
             includePattern = '';
@@ -122,7 +131,7 @@ export class WorkspaceExtImpl implements WorkspaceExt {
 
         let excludePatternOrDisregardExcludes: string | false;
         if (exclude === undefined) {
-            excludePatternOrDisregardExcludes = false;
+            excludePatternOrDisregardExcludes = ''; // default excludes
         } else if (exclude) {
             if (typeof exclude === 'string') {
                 excludePatternOrDisregardExcludes = exclude;
@@ -130,14 +139,14 @@ export class WorkspaceExtImpl implements WorkspaceExt {
                 excludePatternOrDisregardExcludes = exclude.pattern;
             }
         } else {
-            excludePatternOrDisregardExcludes = false;
+            excludePatternOrDisregardExcludes = false; // no excludes
         }
 
         if (token && token.isCancellationRequested) {
             return Promise.resolve([]);
         }
 
-        return this.proxy.$startFileSearch(includePattern, excludePatternOrDisregardExcludes, maxResults, token)
+        return this.proxy.$startFileSearch(includePattern, includeFolderUri, excludePatternOrDisregardExcludes, maxResults, token)
             .then(data => Array.isArray(data) ? data.map(URI.revive) : []);
     }
 
@@ -150,7 +159,10 @@ export class WorkspaceExtImpl implements WorkspaceExt {
     }
 
     registerTextDocumentContentProvider(scheme: string, provider: theia.TextDocumentContentProvider): theia.Disposable {
-        if (scheme === 'file' || scheme === 'untitled' || this.documentContentProviders.has(scheme)) {
+        // `file` and `untitled` schemas are reserved by `workspace.openTextDocument` API:
+        // `file`-scheme for opening a file
+        // `untitled`-scheme for opening a new file that should be saved
+        if (scheme === Schemes.FILE || scheme === Schemes.UNTITLED || this.documentContentProviders.has(scheme)) {
             throw new Error(`Text Content Document Provider for scheme '${scheme}' is already registered`);
         }
 
@@ -193,7 +205,7 @@ export class WorkspaceExtImpl implements WorkspaceExt {
         return undefined;
     }
 
-    getWorkspaceFolder(uri: theia.Uri, resolveParent?: boolean): theia.WorkspaceFolder | URI | undefined {
+    getWorkspaceFolder(uri: theia.Uri, resolveParent?: boolean): theia.WorkspaceFolder | undefined {
         if (!this.folders || !this.folders.length) {
             return undefined;
         }
@@ -219,8 +231,7 @@ export class WorkspaceExtImpl implements WorkspaceExt {
             const folderPath = folder.uri.toString();
 
             if (resourcePath === folderPath) {
-                // return the input when the given uri is a workspace folder itself
-                return uri;
+                return toWorkspaceFolder(folder);
             }
 
             if (resourcePath.startsWith(folderPath)
@@ -271,4 +282,30 @@ export class WorkspaceExtImpl implements WorkspaceExt {
         return normalize(result, true);
     }
 
+    // Experimental API https://github.com/theia-ide/theia/issues/4167
+    private workspaceWillRenameFileEmitter = new Emitter<theia.FileWillRenameEvent>();
+    private workspaceDidRenameFileEmitter = new Emitter<theia.FileRenameEvent>();
+
+    /**
+     * Adds a listener for an event that is emitted when a workspace file is going to be renamed.
+     */
+    public readonly onWillRenameFile: Event<theia.FileWillRenameEvent> = this.workspaceWillRenameFileEmitter.event;
+
+    /**
+     * Adds a listener for an event that is emitted when a workspace file is renamed.
+     */
+    public readonly onDidRenameFile: Event<theia.FileRenameEvent> = this.workspaceDidRenameFileEmitter.event;
+
+    $onFileRename(event: FileMoveEvent) {
+        this.workspaceDidRenameFileEmitter.fire(Object.freeze({ oldUri: URI.revive(event.oldUri), newUri: URI.revive(event.newUri) }));
+    }
+
+    /* tslint:disable-next-line:no-any */
+    $onWillRename(event: FileWillMoveEvent): Promise<any> {
+        return this.workspaceWillRenameFileEmitter.fire({
+            oldUri: URI.revive(event.oldUri),
+            newUri: URI.revive(event.newUri),
+            waitUntil: (thenable: Promise<theia.WorkspaceEdit>): void => { }
+        });
+    }
 }

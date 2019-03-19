@@ -68,17 +68,23 @@ export function loadMonaco(vsRequire: any): Promise<void> {
                 'vs/editor/contrib/rename/rename',
                 'vs/editor/contrib/snippet/snippetParser',
                 'vs/platform/configuration/common/configuration',
+                'vs/platform/configuration/common/configurationModels',
                 'vs/editor/browser/services/codeEditorService',
-                'vs/editor/browser/services/codeEditorServiceImpl'
-            ], (css: any, html: any, commands: any, actions: any, registry: any, resolver: any, resolvedKeybinding: any,
+                'vs/editor/browser/services/codeEditorServiceImpl',
+                'vs/platform/contextkey/common/contextkey',
+                'vs/platform/contextkey/browser/contextKeyService'
+            ], (css: any, html: any, commands: any, actions: any,
+                keybindingsRegistry: any, keybindingResolver: any, resolvedKeybinding: any,
                 keyCodes: any, editorExtensions: any, simpleServices: any, standaloneServices: any, quickOpen: any, quickOpenWidget: any, quickOpenModel: any,
                 filters: any, styler: any, platform: any, modes: any, suggest: any, suggestController: any, findController: any, rename: any, snippetParser: any,
-                configuration: any, codeEditorService: any, codeEditorServiceImpl: any) => {
+                configuration: any, configurationModels: any,
+                codeEditorService: any, codeEditorServiceImpl: any,
+                contextKey: any, contextKeyService: any) => {
                     const global: any = self;
                     global.monaco.commands = commands;
                     global.monaco.actions = actions;
-                    global.monaco.keybindings = Object.assign({}, registry, resolver, resolvedKeybinding, keyCodes);
-                    global.monaco.services = Object.assign({}, simpleServices, standaloneServices, configuration, codeEditorService, codeEditorServiceImpl);
+                    global.monaco.keybindings = Object.assign({}, keybindingsRegistry, keybindingResolver, resolvedKeybinding, keyCodes);
+                    global.monaco.services = Object.assign({}, simpleServices, standaloneServices, configuration, configurationModels, codeEditorService, codeEditorServiceImpl);
                     global.monaco.quickOpen = Object.assign({}, quickOpen, quickOpenWidget, quickOpenModel);
                     global.monaco.filters = filters;
                     global.monaco.theme = styler;
@@ -90,6 +96,8 @@ export function loadMonaco(vsRequire: any): Promise<void> {
                     global.monaco.findController = findController;
                     global.monaco.rename = rename;
                     global.monaco.snippetParser = snippetParser;
+                    global.monaco.contextkey = contextKey;
+                    global.monaco.contextKeyService = contextKeyService;
                     resolve();
                 });
         });

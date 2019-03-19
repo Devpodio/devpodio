@@ -35,10 +35,10 @@ export interface RawProcessOptions extends ProcessOptions {
 }
 
 /**
- * Options to fork a new process using the current Node interpeter (`fork`).
+ * Options to fork a new process using the current Node interpreter (`fork`).
  *
  * For more information please refer to the fork function of Node's
- * child_process module:
+ * `child_process` module:
  *
  *   https://nodejs.org/api/child_process.html#child_process_child_process_fork_modulepath_args_options
  */
@@ -50,9 +50,11 @@ export interface RawProcessFactory {
     (options: RawProcessOptions | RawForkOptions): RawProcess;
 }
 
-/* A Node stream like /dev/null.
-
-   Writing goes to a black hole, reading returns EOF.  */
+/**
+ * A Node stream like `/dev/null`.
+ *
+ * Writing goes to a black hole, reading returns `EOF`.
+ */
 class DevNullStream extends stream.Duplex {
     // tslint:disable-next-line:no-any
     _write(chunk: any, encoding: string, callback: (err?: Error) => void): void {
@@ -85,10 +87,11 @@ export class RawProcess extends Process {
             + ` with args: ${options.args ? options.args.join(' ') : ''}, `
             + ` with options: ${JSON.stringify(options.options)}`);
 
-        /* spawn can throw exceptions, for example if the file is not
-           executable, it throws an error with EACCES.  Here, we try to
-           normalize the error handling by calling the error handler
-           instead.  */
+        // About catching errors: spawn will sometimes throw directly
+        // (EACCES on Linux), sometimes return a Process object with the pid
+        // property undefined (ENOENT on Linux) and then emit an 'error' event.
+        // For now, we try to normalize that into always emitting an 'error'
+        // event.
         try {
             if (this.isForkOptions(options)) {
                 this.process = fork(
@@ -102,7 +105,11 @@ export class RawProcess extends Process {
                     options.options);
             }
 
-            this.process.on('error', this.emitOnError.bind(this));
+            this.process.on('error', (error: NodeJS.ErrnoException) => {
+                this.emitOnError({
+                    code: error.code || 'Unknown error',
+                });
+            });
             this.process.on('exit', (exitCode: number, signal: string) => {
                 // node's child_process exit sets the unused parameter to null,
                 // but we want it to be undefined instead.
@@ -115,6 +122,12 @@ export class RawProcess extends Process {
             this.output = this.process.stdout;
             this.input = this.process.stdin;
             this.errorOutput = this.process.stderr;
+
+            if (this.process.pid !== undefined) {
+                process.nextTick(() => {
+                    this.emitOnStarted();
+                });
+            }
         } catch (error) {
             /* When an error is thrown, set up some fake streams, so the client
                code doesn't break because these field are undefined.  */

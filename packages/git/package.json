@@ -1,19 +1,19 @@
 {
   "name": "@devpodio/git",
-  "version": "1.0.17",
+  "version": "0.4.0-latest.1",
   "description": "Theia - Git Integration",
   "dependencies": {
-    "@devpodio/core": "^1.0.17",
-    "@devpodio/editor": "^1.0.17",
-    "@devpodio/filesystem": "^1.0.17",
-    "@devpodio/languages": "^1.0.17",
-    "@devpodio/navigator": "^1.0.17",
-    "@devpodio/workspace": "^1.0.17",
+    "@devpodio/core": "^0.4.0-latest.1",
+    "@devpodio/editor": "^0.4.0-latest.1",
+    "@devpodio/filesystem": "^0.4.0-latest.1",
+    "@devpodio/languages": "^0.4.0-latest.1",
+    "@devpodio/navigator": "^0.4.0-latest.1",
+    "@devpodio/workspace": "^0.4.0-latest.1",
     "@types/diff": "^3.2.2",
     "@types/fs-extra": "^4.0.2",
     "@types/p-queue": "^2.3.1",
     "diff": "^3.4.0",
-    "dugite-extra": "0.1.9",
+    "dugite-extra": "0.1.11",
     "find-git-exec": "^0.0.1-alpha.2",
     "find-git-repositories": "^0.1.0",
     "fs-extra": "^4.0.2",
@@ -34,10 +34,6 @@
     {
       "backend": "lib/node/env/git-env-module",
       "backendElectron": "lib/electron-node/env/electron-git-env-module"
-    },
-    {
-      "backend": "lib/node/init/git-init-module",
-      "backendElectron": "lib/electron-node/init/electron-git-init-module"
     },
     {
       "frontend": "lib/browser/prompt/git-prompt-module",
@@ -70,7 +66,7 @@
     "docs": "theiaext docs"
   },
   "devDependencies": {
-    "@devpodio/ext-scripts": "^1.0.17",
+    "@devpodio/ext-scripts": "^0.4.0-latest.1",
     "upath": "^1.0.2"
   },
   "nyc": {

@@ -1,9 +1,8 @@
 {
   "compilerOptions": {
     "skipLibCheck": true,
-    "declaration": true,
-    "declarationMap": true,
     "noImplicitAny": true,
+    "declaration": true,
     "noEmitOnError": false,
     "noImplicitThis": true,
     "noUnusedLocals": true,
@@ -19,6 +18,6 @@
       "es6",
       "dom"
     ],
-    "sourceMap": true
+    "removeComments": true
   }
 }

@@ -108,33 +108,38 @@ export class EditorsAndDocumentsExtImpl implements EditorsAndDocumentsExt {
             }
         }
 
-        if (delta.newActiveEditor !== undefined) {
-            ok(delta.newActiveEditor === null || this.editors.has(delta.newActiveEditor), `active editor '${delta.newActiveEditor}' doesn't exist`);
-            this.activeEditorId = delta.newActiveEditor;
+        if (this.activeEditorId && delta.removedEditors && delta.removedEditors.indexOf(this.activeEditorId) !== -1 && this.editors.size !== 0) {
+            // to be compatible with VSCode, when active editor is closed onDidChangeActiveTextEditor
+            // should be trigerred with undefined before next editor, if any, become active.
+            this._onDidChangeActiveTextEditors.fire(undefined);
         }
-
-        dispose(removedDocuments);
-        dispose(removedEditors);
 
         if (delta.removedDocuments) {
             this._onDidRemoveDocuments.fire(removedDocuments);
         }
 
+        dispose(removedDocuments);
+        dispose(removedEditors);
+
         if (delta.addedDocuments) {
             this._onDidAddDocuments.fire(addedDocuments);
         }
 
-        if (delta.removedDocuments || delta.addedDocuments) {
+        if ((delta.removedEditors && delta.removedEditors.length > 0) || (delta.addedEditors && delta.addedEditors.length > 0)) {
             this._onDidChangeVisibleTextEditors.fire(this.allEditors());
         }
 
         if (delta.newActiveEditor !== undefined) {
-            this._onDidChangeActiveTextEditors.fire(this.activeEditor());
+            ok(delta.newActiveEditor === null || this.editors.has(delta.newActiveEditor), `active editor '${delta.newActiveEditor}' doesn't exist`);
+            // do not fire event if focus returns to the same editor
+            if (delta.newActiveEditor !== this.activeEditorId) {
+                this.activeEditorId = delta.newActiveEditor;
+                this._onDidChangeActiveTextEditors.fire(this.activeEditor());
+            }
         } else if (this.editors.size === 0 && delta.removedEditors) {
             this.activeEditorId = undefined;
             this._onDidChangeActiveTextEditors.fire(undefined);
         }
-
     }
 
     allEditors(): TextEditorExt[] {

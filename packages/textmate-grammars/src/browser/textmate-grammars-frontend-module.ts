@@ -47,8 +47,12 @@ import { TclContribution } from './tcl';
 import { XmlContribution } from './xml';
 import { XslContribution } from './xsl';
 import { JavaContribution } from './java';
-import { PhpContribution } from './php';
 import { LanguageGrammarDefinitionContribution } from '@devpodio/monaco/lib/browser/textmate/textmate-contribution';
+import { TypescriptContribution } from './ts';
+import { JavascriptContribution } from './js';
+import { JsxTagsContribution } from './jsx-tags';
+import { PythonContribution } from './python';
+import { GoContribution } from './go';
 
 export default new ContainerModule(bind => {
     bind(BatContribution).toSelf().inSingletonScope();
@@ -147,6 +151,18 @@ export default new ContainerModule(bind => {
     bind(JavaContribution).toSelf().inSingletonScope();
     bind(LanguageGrammarDefinitionContribution).toService(JavaContribution);
 
-    bind(PhpContribution).toSelf().inSingletonScope();
-    bind(LanguageGrammarDefinitionContribution).toService(PhpContribution);
+    bind(TypescriptContribution).toSelf().inSingletonScope();
+    bind(LanguageGrammarDefinitionContribution).toService(TypescriptContribution);
+
+    bind(JavascriptContribution).toSelf().inSingletonScope();
+    bind(LanguageGrammarDefinitionContribution).toService(JavascriptContribution);
+
+    bind(JsxTagsContribution).toSelf().inSingletonScope();
+    bind(LanguageGrammarDefinitionContribution).toService(JsxTagsContribution);
+
+    bind(PythonContribution).toSelf().inSingletonScope();
+    bind(LanguageGrammarDefinitionContribution).toService(PythonContribution);
+
+    bind(GoContribution).toSelf().inSingletonScope();
+    bind(LanguageGrammarDefinitionContribution).toService(GoContribution);
 });

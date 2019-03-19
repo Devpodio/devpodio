@@ -157,12 +157,13 @@ declare module '@devpodio/plugin' {
         export let all: Plugin<any>[];
     }
 
+
     /**
-     * A command is a unique identifier of a function
-     * which can be executed by a user via a keyboard shortcut,
-     * a menu action or directly.
-     */
-    export interface Command {
+ * A command is a unique identifier of a function
+ * which can be executed by a user via a keyboard shortcut,
+ * a menu action or directly.
+ */
+    export interface CommandDescription {
         /**
          * A unique identifier of this command.
          */
@@ -172,29 +173,44 @@ declare module '@devpodio/plugin' {
          */
         label?: string;
         /**
-         * A tooltip for for command, when represented in the UI.
-         */
+          * A tooltip for for command, when represented in the UI.
+          */
         tooltip?: string;
         /**
          * An icon class of this command.
          */
         iconClass?: string;
+    }
+    /**
+     * Command represents a particular invocation of a registered command.
+     */
+    export interface Command {
+        /**
+         * The identifier of the actual command handler.
+         */
+        command?: string;
+        /**
+        * Title of the command invocation, like "Add local varible 'foo'".
+        */
+        title?: string;
+        /**
+          * A tooltip for for command, when represented in the UI.
+          */
+        tooltip?: string;
         /**
          * Arguments that the command handler should be
          * invoked with.
          */
         arguments?: any[];
 
-        // Title and command fields are needed to make Command object similar to Command from vscode API
-
         /**
-         * Title of the command, like "save".
+         * @deprecated use command instead
          */
-        title?: string;
+        id?: string;
         /**
-         * The identifier of the actual command handler.
+         * @deprecated use title instead
          */
-        command?: string;
+        label?: string;
     }
 
     /**
@@ -308,7 +324,7 @@ declare module '@devpodio/plugin' {
     }
 
     /**
-     * Pair if two positions.
+     * Pair of two positions.
      */
     export class Range {
         /**
@@ -1871,12 +1887,12 @@ declare module '@devpodio/plugin' {
         /**
          * A flag to include the description when filtering
          */
-        machOnDescription?: boolean;
+        matchOnDescription?: boolean;
 
         /**
          *  A flag to include the detail when filtering
          */
-        machOnDetail?: boolean;
+        matchOnDetail?: boolean;
 
         /**
          * The place holder in input box
@@ -1996,23 +2012,33 @@ declare module '@devpodio/plugin' {
          *
          * Throw if a command is already registered for the given command identifier.
          */
-        export function registerCommand(command: Command, handler?: (...args: any[]) => any): Disposable;
+        export function registerCommand(command: CommandDescription, handler?: (...args: any[]) => any, thisArg?: any): Disposable;
 
         /**
          * Register the given handler for the given command identifier.
          *
          * @param commandId a given command id
          * @param handler a command handler
+         *
+         * Throw if a handler for the given command identifier is already registered.
          */
-        export function registerHandler(commandId: string, handler: (...args: any[]) => any): Disposable;
+        export function registerHandler(commandId: string, handler: (...args: any[]) => any, thisArg?: any): Disposable;
 
         /**
-         * Register a text editor command which can execute only if active editor present and command has access to the active editor
+         * Registers a text editor command that can be invoked via a keyboard shortcut,
+         * a menu item, an action, or directly.
          *
-         * @param command a command description
-         * @param handler a command handler with access to text editor
+         * Text editor commands are different from ordinary [commands](#commands.registerCommand) as
+         * they only execute when there is an active editor when the command is called. Also, the
+         * command handler of an editor command has access to the active editor and to an
+         * [edit](#TextEditorEdit)-builder.
+         *
+         * @param command A unique identifier for the command.
+         * @param callback A command handler function with access to an [editor](#TextEditor) and an [edit](#TextEditorEdit).
+         * @param thisArg The `this` context used when invoking the handler function.
+         * @return Disposable which unregisters this command on disposal.
          */
-        export function registerTextEditorCommand(command: Command, handler: (textEditor: TextEditor, edit: TextEditorEdit, ...arg: any[]) => void): Disposable;
+        export function registerTextEditorCommand(command: string, callback: (textEditor: TextEditor, edit: TextEditorEdit, ...args: any[]) => void, thisArg?: any): Disposable;
 
         /**
          * Execute the active handler for the given command and arguments.
@@ -2020,6 +2046,15 @@ declare module '@devpodio/plugin' {
          * Reject if a command cannot be executed.
          */
         export function executeCommand<T>(commandId: string, ...args: any[]): PromiseLike<T | undefined>;
+
+        /**
+         * Retrieve the list of all available commands. Commands starting an underscore are
+         * treated as internal commands.
+         *
+         * @param filterInternal Set `true` to not see internal commands (starting with an underscore)
+         * @return Thenable that resolves to a list of command ids.
+         */
+        export function getCommands(filterInternal?: boolean): PromiseLike<string[]>;
     }
 
     /**
@@ -2535,6 +2570,36 @@ declare module '@devpodio/plugin' {
     }
 
     /**
+     * The areas of the application shell where webview panel can reside.
+     */
+    export enum WebviewPanelTargetArea {
+        Main = 'main',
+        Left = 'left',
+        Right = 'right',
+        Bottom = 'bottom'
+    }
+
+    /**
+     * Settings to determine where webview panel will be reside
+     */
+    export interface WebviewPanelShowOptions {
+        /**
+         * Target area where webview panel will be resided. Shows in the 'WebviewPanelTargetArea.Main' area if undefined.
+         */
+        area?: WebviewPanelTargetArea;
+
+        /**
+         * Editor View column to show the panel in. Shows in the current `viewColumn` if undefined.
+         */
+        viewColumn?: number;
+
+        /**
+         * When `true`, the webview will not take focus.
+         */
+        preserveFocus?: boolean;
+    }
+
+    /**
      * A panel that contains a webview.
      */
     interface WebviewPanel {
@@ -2563,6 +2628,10 @@ declare module '@devpodio/plugin' {
          */
         readonly options: WebviewPanelOptions;
 
+        /**
+         * Settings to determine where webview panel will be reside
+         */
+        readonly showOptions?: WebviewPanelShowOptions;
         /**
          * Editor position of the panel. This property is only set if the webview is in
          * one of the editor view columns.
@@ -2595,15 +2664,16 @@ declare module '@devpodio/plugin' {
         readonly onDidDispose: Event<void>;
 
         /**
-         * Show the webview panel in a given column.
+         * Show the webview panel according to a given options.
          *
          * A webview panel may only show in a single column at a time. If it is already showing, this
          * method moves it to a new column.
          *
+         * @param area target area where webview panel will be resided. Shows in the 'WebviewPanelTargetArea.Main' area if undefined.
          * @param viewColumn View column to show the panel in. Shows in the current `viewColumn` if undefined.
          * @param preserveFocus When `true`, the webview will not take focus.
          */
-        reveal(viewColumn?: ViewColumn, preserveFocus?: boolean): void;
+        reveal(area?: WebviewPanelTargetArea, viewColumn?: ViewColumn, preserveFocus?: boolean): void;
 
         /**
          * Dispose of the webview panel.
@@ -2964,12 +3034,12 @@ declare module '@devpodio/plugin' {
          *
          * @param viewType Identifies the type of the webview panel.
          * @param title Title of the panel.
-         * @param showOptions Where to show the webview in the editor. If preserveFocus is set, the new webview will not take focus.
+         * @param showOptions where webview panel will be reside. If preserveFocus is set, the new webview will not take focus.
          * @param options Settings for the new panel.
          *
          * @return New webview panel.
          */
-        export function createWebviewPanel(viewType: string, title: string, showOptions: ViewColumn | { viewColumn: ViewColumn, preserveFocus?: boolean }, options?: WebviewPanelOptions & WebviewOptions): WebviewPanel;
+        export function createWebviewPanel(viewType: string, title: string, showOptions: ViewColumn | WebviewPanelShowOptions, options?: WebviewPanelOptions & WebviewOptions): WebviewPanel;
 
         /**
          * Registers a webview panel serializer.
@@ -3089,7 +3159,7 @@ declare module '@devpodio/plugin' {
          * @param options Options object to provide [TreeDataProvider](#TreeDataProvider) for the view.
          * @returns a [TreeView](#TreeView).
          */
-        export function createTreeView<T>(viewId: string, options: { treeDataProvider: TreeDataProvider<T> }): TreeView<T>;
+        export function createTreeView<T>(viewId: string, options: TreeViewOptions<T>): TreeView<T>;
 
         /**
          * Show progress in the editor. Progress is shown while running the given callback
@@ -3162,6 +3232,22 @@ declare module '@devpodio/plugin' {
          * report on how much work finished
          */
         report(value: T): void;
+    }
+
+    /**
+     * Options for creating a [TreeView](#TreeView)
+     */
+    export interface TreeViewOptions<T> {
+
+        /**
+         * A data provider that provides tree data.
+         */
+        treeDataProvider: TreeDataProvider<T>;
+
+        /**
+         * Whether to show collapse all action or not.
+         */
+        showCollapseAll?: boolean;
     }
 
     /**
@@ -3462,11 +3548,15 @@ declare module '@devpodio/plugin' {
         /**
          * Global configuration
          */
-        User = 0,
+        Global = 1,
         /**
          * Workspace configuration
          */
-        Workspace = 1
+        Workspace = 2,
+        /**
+         * Workspace folder configuration
+         */
+        WorkspaceFolder = 3
     }
 
     /**
@@ -3569,6 +3659,60 @@ declare module '@devpodio/plugin' {
          * The size in bytes.
          */
         size: number;
+    }
+
+	/**
+	 * A type that filesystem providers should use to signal errors.
+	 *
+	 * This class has factory methods for common error-cases, like `EntryNotFound` when
+	 * a file or folder doesn't exist, use them like so: `throw vscode.FileSystemError.EntryNotFound(someUri);`
+	 */
+    export class FileSystemError extends Error {
+
+		/**
+		 * Create an error to signal that a file or folder wasn't found.
+		 * @param messageOrUri Message or uri.
+		 */
+        static FileNotFound(messageOrUri?: string | Uri): FileSystemError;
+
+		/**
+		 * Create an error to signal that a file or folder already exists, e.g. when
+		 * creating but not overwriting a file.
+		 * @param messageOrUri Message or uri.
+		 */
+        static FileExists(messageOrUri?: string | Uri): FileSystemError;
+
+		/**
+		 * Create an error to signal that a file is not a folder.
+		 * @param messageOrUri Message or uri.
+		 */
+        static FileNotADirectory(messageOrUri?: string | Uri): FileSystemError;
+
+		/**
+		 * Create an error to signal that a file is a folder.
+		 * @param messageOrUri Message or uri.
+		 */
+        static FileIsADirectory(messageOrUri?: string | Uri): FileSystemError;
+
+		/**
+		 * Create an error to signal that an operation lacks required permissions.
+		 * @param messageOrUri Message or uri.
+		 */
+        static NoPermissions(messageOrUri?: string | Uri): FileSystemError;
+
+		/**
+		 * Create an error to signal that the file system is unavailable or too busy to
+		 * complete a request.
+		 * @param messageOrUri Message or uri.
+		 */
+        static Unavailable(messageOrUri?: string | Uri): FileSystemError;
+
+		/**
+		 * Creates a new filesystem error.
+		 *
+		 * @param messageOrUri Message or uri.
+		 */
+        constructor(messageOrUri?: string | Uri);
     }
 
     /**
@@ -3744,6 +3888,17 @@ declare module '@devpodio/plugin' {
      * the editor-process so that they should be always used instead of nodejs-equivalents.
      */
     export namespace workspace {
+
+        /**
+         * ~~The folder that is open in the editor. `undefined` when no folder
+         * has been opened.~~
+         *
+         * @deprecated Use [`workspaceFolders`](#workspace.workspaceFolders) instead.
+         *
+         * @readonly
+         */
+        export let rootPath: string | undefined;
+
         /**
          * List of workspace folders or `undefined` when no folder is open.
          * *Note* that the first entry corresponds to the value of `rootPath`.
@@ -3813,18 +3968,18 @@ declare module '@devpodio/plugin' {
         export const onDidChangeTextDocument: Event<TextDocumentChangeEvent>;
 
         /**
-		 * An event that is emitted when a [text document](#TextDocument) will be saved to disk.
-		 *
-		 * *Note 1:* Subscribers can delay saving by registering asynchronous work. For the sake of data integrity the editor
-		 * might save without firing this event. For instance when shutting down with dirty files.
-		 *
-		 * *Note 2:* Subscribers are called sequentially and they can [delay](#TextDocumentWillSaveEvent.waitUntil) saving
-		 * by registering asynchronous work. Protection against misbehaving listeners is implemented as such:
-		 *  * there is an overall time budget that all listeners share and if that is exhausted no further listener is called
-		 *  * listeners that take a long time or produce errors frequently will not be called anymore
-		 *
-		 * The current thresholds are 1.5 seconds as overall time budget and a listener can misbehave 3 times before being ignored.
-		 */
+         * An event that is emitted when a [text document](#TextDocument) will be saved to disk.
+         *
+         * *Note 1:* Subscribers can delay saving by registering asynchronous work. For the sake of data integrity the editor
+         * might save without firing this event. For instance when shutting down with dirty files.
+         *
+         * *Note 2:* Subscribers are called sequentially and they can [delay](#TextDocumentWillSaveEvent.waitUntil) saving
+         * by registering asynchronous work. Protection against misbehaving listeners is implemented as such:
+         *  * there is an overall time budget that all listeners share and if that is exhausted no further listener is called
+         *  * listeners that take a long time or produce errors frequently will not be called anymore
+         *
+         * The current thresholds are 1.5 seconds as overall time budget and a listener can misbehave 3 times before being ignored.
+         */
         export const onWillSaveTextDocument: Event<TextDocumentWillSaveEvent>;
 
         /**
@@ -3927,24 +4082,32 @@ declare module '@devpodio/plugin' {
          * @return A thenable that resolves to an array of resource identifiers. Will return no results if no
          * [workspace folders](#workspace.workspaceFolders) are opened.
          */
-        export function findFiles(include: GlobPattern, exclude?: GlobPattern | undefined, maxResults?: number, token?: CancellationToken): PromiseLike<Uri[]>;
+        export function findFiles(include: GlobPattern, exclude?: GlobPattern | null, maxResults?: number, token?: CancellationToken): PromiseLike<Uri[]>;
 
         /**
-		 * Make changes to one or many resources or create, delete, and rename resources as defined by the given
-		 * [workspace edit](#WorkspaceEdit).
-		 *
-		 * All changes of a workspace edit are applied in the same order in which they have been added. If
-		 * multiple textual inserts are made at the same position, these strings appear in the resulting text
-		 * in the order the 'inserts' were made. Invalid sequences like 'delete file a' -> 'insert text in file a'
-		 * cause failure of the operation.
-		 *
-		 * When applying a workspace edit that consists only of text edits an 'all-or-nothing'-strategy is used.
-		 * A workspace edit with resource creations or deletions aborts the operation, e.g. consective edits will
-		 * not be attempted, when a single edit fails.
-		 *
-		 * @param edit A workspace edit.
-		 * @return A thenable that resolves when the edit could be applied.
-		 */
+         * Save all dirty files.
+         *
+         * @param includeUntitled Also save files that have been created during this session.
+         * @return A thenable that resolves when the files have been saved.
+         */
+        export function saveAll(includeUntitled?: boolean): PromiseLike<boolean>;
+
+        /**
+         * Make changes to one or many resources or create, delete, and rename resources as defined by the given
+         * [workspace edit](#WorkspaceEdit).
+         *
+         * All changes of a workspace edit are applied in the same order in which they have been added. If
+         * multiple textual inserts are made at the same position, these strings appear in the resulting text
+         * in the order the 'inserts' were made. Invalid sequences like 'delete file a' -> 'insert text in file a'
+         * cause failure of the operation.
+         *
+         * When applying a workspace edit that consists only of text edits an 'all-or-nothing'-strategy is used.
+         * A workspace edit with resource creations or deletions aborts the operation, e.g. consective edits will
+         * not be attempted, when a single edit fails.
+         *
+         * @param edit A workspace edit.
+         * @return A thenable that resolves when the edit could be applied.
+         */
         export function applyEdit(edit: WorkspaceEdit): PromiseLike<boolean>;
 
 
@@ -3964,12 +4127,11 @@ declare module '@devpodio/plugin' {
         /**
          * Returns the [workspace folder](#WorkspaceFolder) that contains a given uri.
          * * returns `undefined` when the given uri doesn't match any workspace folder
-         * * returns the *input* when the given uri is a workspace folder itself
          *
          * @param uri An uri.
          * @return A workspace folder or `undefined`
          */
-        export function getWorkspaceFolder(uri: Uri): WorkspaceFolder | Uri | undefined;
+        export function getWorkspaceFolder(uri: Uri): WorkspaceFolder | undefined;
 
         /**
          * Returns a path that is relative to the workspace folder or folders.
@@ -3984,6 +4146,17 @@ declare module '@devpodio/plugin' {
          * @return A path relative to the root or the input.
          */
         export function asRelativePath(pathOrUri: string | Uri, includeWorkspaceFolder?: boolean): string | undefined;
+
+        /**
+        * ~~Register a task provider.~~
+        *
+        * @deprecated Use the corresponding function on the `tasks` namespace instead
+        *
+        * @param type The task kind type this provider is registered for.
+        * @param provider A task provider.
+        * @return A [disposable](#Disposable) that unregisters this provider when being disposed.
+        */
+        export function registerTaskProvider(type: string, provider: TaskProvider): Disposable;
     }
 
     export namespace env {
@@ -4874,7 +5047,7 @@ declare module '@devpodio/plugin' {
      * the given [edit](#CompletionItem.textEdit) is used.
      *
      * When selecting a completion item in the editor its defined or synthesized text edit will be applied
-     * to *all* cursors/selections whereas [additionalTextEdits](CompletionItem.additionalTextEdits) will be
+     * to *all* cursors/selections whereas [additionalTextEdits](#additionalTextEdits) will be
      * applied as provided.
      *
      * @see [CompletionItemProvider.provideCompletionItems](#CompletionItemProvider.provideCompletionItems)
@@ -4962,7 +5135,7 @@ declare module '@devpodio/plugin' {
         /**
          * An optional [command](#Command) that is executed *after* inserting this completion. *Note* that
          * additional modifications to the current document should be described with the
-         * [additionalTextEdits](#CompletionItem.additionalTextEdits)-property.
+         * [additionalTextEdits](#additionalTextEdits)-property.
          */
         command?: Command;
 
@@ -5291,7 +5464,7 @@ declare module '@devpodio/plugin' {
      * A code action represents a change that can be performed in code, e.g. to fix a problem or
      * to refactor code.
      *
-     * A CodeAction must set either [`edit`](CodeAction#edit) and/or a [`command`](CodeAction#command).
+     * A CodeAction must set either [`edit`](#edit) and/or a [`command`](#command).
      * If both are supplied, the `edit` is applied first, then the command is executed.
      */
     export class CodeAction {
@@ -6057,7 +6230,7 @@ declare module '@devpodio/plugin' {
          * Register a formatting provider for a document range.
          *
          * *Note:* A document range provider is also a [document formatter](#DocumentFormattingEditProvider)
-         * which means there is no need to [register](registerDocumentFormattingEditProvider) a document
+         * which means there is no need to [register](#registerDocumentFormattingEditProvider) a document
          * formatter when also registering a range provider.
          *
          * Multiple providers can be registered for a language. In that case providers are sorted
@@ -7043,6 +7216,11 @@ declare module '@devpodio/plugin' {
          * @return A [disposable](#Disposable) that unregisters this provider when being disposed.
          */
         export function registerTaskProvider(type: string, provider: TaskProvider): Disposable;
+
+        /**
+         * The currently active task executions or an empty array.
+         */
+        export const taskExecutions: ReadonlyArray<TaskExecution>;
 
         /** Fires when a task starts. */
         export const onDidStartTask: Event<TaskStartEvent>;

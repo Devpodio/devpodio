@@ -23,6 +23,7 @@ import { EditorModelService } from './text-editor-model-service';
 import { createUntitledResource } from './editor/untitled-resource';
 import { EditorManager } from '@devpodio/editor/lib/browser';
 import URI from '@devpodio/core/lib/common/uri';
+import CodeURI from 'vscode-uri';
 import { ApplicationShell, OpenerOptions, Saveable } from '@devpodio/core/lib/browser';
 import { TextDocumentShowOptions } from '../../api/model';
 import { Range } from 'vscode-languageserver-types';
@@ -36,12 +37,14 @@ export class DocumentsMainImpl implements DocumentsMain {
     private modelToDispose = new Map<string, Disposable>();
     private modelIsSynced = new Map<string, boolean>();
 
+    protected saveTimeout = 1750;
+
     constructor(
         editorsAndDocuments: EditorsAndDocumentsMain,
         modelService: EditorModelService,
         rpc: RPCProtocol,
         private editorManger: EditorManager,
-        private openerService: OpenerService
+        private openerService: OpenerService,
     ) {
         this.proxy = rpc.getProxy(MAIN_RPC_CONTEXT.DOCUMENTS_EXT);
 
@@ -51,6 +54,19 @@ export class DocumentsMainImpl implements DocumentsMain {
 
         this.toDispose.push(modelService.onModelSaved(m => {
             this.proxy.$acceptModelSaved(m.textEditorModel.uri);
+        }));
+        this.toDispose.push(modelService.onModelWillSave(onWillSaveModelEvent => {
+            onWillSaveModelEvent.waitUntil(new Promise<monaco.editor.IIdentifiedSingleEditOperation[]>(async (resolve, reject) => {
+                setTimeout(() => reject(new Error(`Aborted onWillSaveTextDocument-event after ${this.saveTimeout}ms`)), this.saveTimeout);
+                const edits = await this.proxy.$acceptModelWillSave(onWillSaveModelEvent.model.textEditorModel.uri, onWillSaveModelEvent.reason, this.saveTimeout);
+                const transformedEdits = edits.map((edit): monaco.editor.IIdentifiedSingleEditOperation =>
+                    ({
+                        range: monaco.Range.lift(edit.range),
+                        text: edit.text!,
+                        forceMoveMarkers: edit.forceMoveMarkers
+                    }));
+                resolve(transformedEdits);
+            }));
         }));
         this.toDispose.push(modelService.onModelDirtyChanged(m => {
             this.proxy.$acceptDirtyStateChanged(m.textEditorModel.uri, m.dirty);
@@ -154,16 +170,16 @@ export class DocumentsMainImpl implements DocumentsMain {
                     widgetOptions
                 };
             }
-            const uriArg = new URI(uri.external!);
+            const uriArg = new URI(CodeURI.revive(uri));
             const opener = await this.openerService.getOpener(uriArg, openerOptions);
-            opener.open(uriArg, openerOptions);
+            await opener.open(uriArg, openerOptions);
         } catch (err) {
             throw new Error(err);
         }
     }
 
     async $trySaveDocument(uri: UriComponents): Promise<boolean> {
-        const widget = await this.editorManger.getByUri(new URI(uri.external!));
+        const widget = await this.editorManger.getByUri(new URI(CodeURI.revive(uri)));
         if (widget) {
             await Saveable.save(widget);
             return true;

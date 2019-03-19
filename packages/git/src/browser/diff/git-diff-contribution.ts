@@ -20,7 +20,7 @@ import { WidgetManager } from '@devpodio/core/lib/browser/widget-manager';
 import { injectable, inject } from 'inversify';
 import { GitDiffWidget, GIT_DIFF } from './git-diff-widget';
 import { open, OpenerService } from '@devpodio/core/lib/browser';
-import { NAVIGATOR_CONTEXT_MENU } from '@devpodio/navigator/lib/browser/navigator-contribution';
+import { NavigatorContextMenu } from '@devpodio/navigator/lib/browser/navigator-contribution';
 import { UriCommandHandler, UriAwareCommandHandler } from '@devpodio/core/lib/common/uri-command-handler';
 import { GitQuickOpenService } from '../git-quick-open-service';
 import { FileSystem } from '@devpodio/filesystem/lib/common';
@@ -62,7 +62,7 @@ export class GitDiffContribution extends AbstractViewContribution<GitDiffWidget>
     }
 
     registerMenus(menus: MenuModelRegistry): void {
-        menus.registerMenuAction([...NAVIGATOR_CONTEXT_MENU, '5_diff'], {
+        menus.registerMenuAction(NavigatorContextMenu.COMPARE, {
             commandId: GitDiffCommands.OPEN_FILE_DIFF.id
         });
     }

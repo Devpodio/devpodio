@@ -1,5 +1,5 @@
 /********************************************************************************
- * Copyright (C) 2018 TypeFox and others.
+ * Copyright (C) 2019 TypeFox and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0 which is available at
@@ -13,12 +13,21 @@
  *
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  ********************************************************************************/
-
 import { ContainerModule } from 'inversify';
-import { GitInit } from '../../node/init/git-init';
-import { ElectronGitInit } from './electron-git-init';
+import { WidgetFactory } from '@devpodio/core/lib/browser/widget-manager';
+import { bindViewContribution } from '@devpodio/core/lib/browser/shell/view-contribution';
+import { TypeHierarchyServiceProvider } from './typehierarchy-service';
+import { TypeHierarchyContribution } from './typehierarchy-contribution';
+import { TypeHierarchyTreeWidget } from './tree/typehierarchy-tree-widget';
+import { createHierarchyTreeWidget } from './tree/typehierarchy-tree-container';
+
+import '../../src/browser/style/index.css';
 
 export default new ContainerModule(bind => {
-    bind(ElectronGitInit).toSelf();
-    bind(GitInit).toService(ElectronGitInit);
+    bind(TypeHierarchyServiceProvider).toSelf().inSingletonScope();
+    bindViewContribution(bind, TypeHierarchyContribution);
+    bind(WidgetFactory).toDynamicValue(context => ({
+        id: TypeHierarchyTreeWidget.WIDGET_ID,
+        createWidget: () => createHierarchyTreeWidget(context.container)
+    }));
 });

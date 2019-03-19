@@ -39,6 +39,8 @@ export class MonacoEditorModel implements ITextEditorModel, TextEditorDocument {
 
     autoSave: 'on' | 'off' = 'on';
     autoSaveDelay: number = 500;
+    /* @deprecated there is no general save timeout, each participant should introduce a sensible timeout  */
+    readonly onWillSaveLoopTimeOut = 1500;
 
     protected model: monaco.editor.IModel;
     protected readonly resolveModel: Promise<void>;
@@ -336,25 +338,8 @@ export class MonacoEditorModel implements ITextEditorModel, TextEditorDocument {
     protected async fireWillSaveModel(reason: TextDocumentSaveReason, token: CancellationToken): Promise<void> {
         type EditContributor = Thenable<monaco.editor.IIdentifiedSingleEditOperation[]>;
 
-        let didTimeout = false;
-        let timeoutHandle: number = -1;
-
-        const shouldStop: () => boolean = () => token.isCancellationRequested || didTimeout;
-
-        // tslint:disable-next-line:no-any
-        const timeoutPromise = (p: Promise<any>, time: number) => {
-            const timeout = new Promise((_, reject) => {
-                // tslint:disable-next-line:no-any
-                timeoutHandle = <any>setTimeout(() => {
-                    didTimeout = true;
-                    reject(new Error('onWillSave listener loop timeout'));
-                }, time);
-            });
-            return Promise.race([p, timeout]);
-        };
-
         const firing = this.onWillSaveModelEmitter.sequence(async listener => {
-            if (shouldStop()) {
+            if (token.isCancellationRequested) {
                 return false;
             }
             const waitables: EditContributor[] = [];
@@ -384,7 +369,7 @@ export class MonacoEditorModel implements ITextEditorModel, TextEditorDocument {
             const edits = await Promise.all(waitables).then(allOperations =>
                 ([] as monaco.editor.IIdentifiedSingleEditOperation[]).concat(...allOperations)
             );
-            if (shouldStop()) {
+            if (token.isCancellationRequested) {
                 return false;
             }
 
@@ -399,11 +384,9 @@ export class MonacoEditorModel implements ITextEditorModel, TextEditorDocument {
         });
 
         try {
-            await timeoutPromise(firing, 10000);
+            await firing;
         } catch (e) {
             console.error(e);
-        } finally {
-            clearTimeout(timeoutHandle);
         }
     }
 

@@ -17,14 +17,14 @@
 import { injectable, inject, postConstruct } from 'inversify';
 import { Message } from '@phosphor/messaging';
 import URI from '@devpodio/core/lib/common/uri';
-import { CommandService, SelectionService } from '@devpodio/core/lib/common';
+import { CommandService, SelectionService, Disposable } from '@devpodio/core/lib/common';
 import { CommonCommands, CorePreferences } from '@devpodio/core/lib/browser';
 import {
     ContextMenuRenderer, ExpandableTreeNode,
     TreeProps, TreeModel, TreeNode,
     SelectableTreeNode, CompositeTreeNode
 } from '@devpodio/core/lib/browser';
-import { FileTreeWidget, FileNode } from '@devpodio/filesystem/lib/browser';
+import { FileTreeWidget, FileNode, DirNode } from '@devpodio/filesystem/lib/browser';
 import { WorkspaceService, WorkspaceCommands } from '@devpodio/workspace/lib/browser';
 import { ApplicationShell } from '@devpodio/core/lib/browser/shell/application-shell';
 import { WorkspaceNode } from './navigator-tree';
@@ -32,6 +32,7 @@ import { FileNavigatorModel } from './navigator-model';
 import { FileSystem } from '@devpodio/filesystem/lib/common/filesystem';
 import { isOSX, environment } from '@devpodio/core';
 import * as React from 'react';
+import { NavigatorContextKeyService } from './navigator-context-key-service';
 
 export const FILE_NAVIGATOR_ID = 'files';
 export const LABEL = 'Files';
@@ -41,6 +42,9 @@ export const CLASS = 'theia-Files';
 export class FileNavigatorWidget extends FileTreeWidget {
 
     @inject(CorePreferences) protected readonly corePreferences: CorePreferences;
+
+    @inject(NavigatorContextKeyService)
+    protected readonly contextKeyService: NavigatorContextKeyService;
 
     constructor(
         @inject(TreeProps) readonly props: TreeProps,
@@ -64,11 +68,13 @@ export class FileNavigatorWidget extends FileTreeWidget {
     @postConstruct()
     protected init(): void {
         super.init();
+        this.updateSelectionContextKeys();
         this.toDispose.pushAll([
             this.model.onSelectionChanged(selection => {
                 if (this.shell.activeWidget === this) {
                     this.selectionService.selection = selection;
                 }
+                this.updateSelectionContextKeys();
             }),
             this.model.onExpansionChanged(node => {
                 if (node.expanded && node.children.length === 1) {
@@ -76,6 +82,11 @@ export class FileNavigatorWidget extends FileTreeWidget {
                     if (ExpandableTreeNode.is(child) && !child.expanded) {
                         this.model.expandNode(child);
                     }
+                }
+            }),
+            Disposable.create(() => {
+                if (this.selectionService.selection === this) {
+                    this.selectionService.selection = undefined;
                 }
             })
         ]);
@@ -217,6 +228,20 @@ export class FileNavigatorWidget extends FileTreeWidget {
             this.model.previewNode(node);
         }
         super.handleClickEvent(node, event);
+    }
+
+    protected onAfterShow(msg: Message): void {
+        super.onAfterShow(msg);
+        this.contextKeyService.explorerViewletVisible.set(true);
+    }
+
+    protected onAfterHide(msg: Message): void {
+        super.onAfterHide(msg);
+        this.contextKeyService.explorerViewletVisible.set(false);
+    }
+
+    protected updateSelectionContextKeys(): void {
+        this.contextKeyService.explorerResourceIsFolder.set(DirNode.is(this.model.selectedNodes[0]));
     }
 
 }

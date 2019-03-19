@@ -40,8 +40,6 @@ import { PluginExtDeployCommandService } from './plugin-ext-deploy-command';
 import { TextEditorService, TextEditorServiceImpl } from './text-editor-service';
 import { EditorModelService, EditorModelServiceImpl } from './text-editor-model-service';
 import { UntitledResourceResolver } from './editor/untitled-resource';
-import { ContextKeyService } from './context-key/context-key';
-import { ContextKeyServiceImpl } from './context-key/context-key-service';
 import { MenusContributionPointHandler } from './menus/menus-contribution-handler';
 import { PluginContributionHandler } from './plugin-contribution-handler';
 import { ViewRegistry } from './view/view-registry';
@@ -58,6 +56,9 @@ import { DebugSessionContributionRegistry } from '@devpodio/debug/lib/browser/de
 import { PluginDebugSessionContributionRegistry } from './debug/plugin-debug-session-contribution-registry';
 import { PluginDebugService } from './debug/plugin-debug-service';
 import { DebugService } from '@devpodio/debug/lib/common/debug-service';
+import { PluginSharedStyle } from './plugin-shared-style';
+import { FSResourceResolver } from './file-system-main';
+import { SelectionProviderCommandContribution } from './selection-provider-command';
 
 export default new ContainerModule((bind, unbind, isBound, rebind) => {
     bindHostedPluginPreferences(bind);
@@ -68,6 +69,8 @@ export default new ContainerModule((bind, unbind, isBound, rebind) => {
     bind(HostedPluginWatcher).toSelf().inSingletonScope();
     bind(HostedPluginLogViewer).toSelf().inSingletonScope();
     bind(HostedPluginManagerClient).toSelf().inSingletonScope();
+    bind(SelectionProviderCommandContribution).toSelf().inSingletonScope();
+    bind(CommandContribution).toService(SelectionProviderCommandContribution);
 
     bind(FrontendApplicationContribution).to(HostedPluginInformer).inSingletonScope();
     bind(FrontendApplicationContribution).to(HostedPluginController).inSingletonScope();
@@ -113,6 +116,7 @@ export default new ContainerModule((bind, unbind, isBound, rebind) => {
         return provider.createProxy<PluginServer>(pluginServerJsonRpcPath);
     }).inSingletonScope();
 
+    bind(PluginSharedStyle).toSelf().inSingletonScope();
     bind(ViewRegistry).toSelf().inSingletonScope();
     bind(MenusContributionPointHandler).toSelf().inSingletonScope();
 
@@ -122,13 +126,14 @@ export default new ContainerModule((bind, unbind, isBound, rebind) => {
 
     bind(TextContentResourceResolver).toSelf().inSingletonScope();
     bind(ResourceResolver).toService(TextContentResourceResolver);
+    bind(FSResourceResolver).toSelf().inSingletonScope();
+    bind(ResourceResolver).toService(FSResourceResolver);
     bindContributionProvider(bind, MainPluginApiProvider);
 
     bind(LanguageClientContributionProviderImpl).toSelf().inSingletonScope();
     bind(LanguageClientContributionProvider).toService(LanguageClientContributionProviderImpl);
     bind(LanguageClientProviderImpl).toSelf().inSingletonScope();
     rebind(LanguageClientProvider).toService(LanguageClientProviderImpl);
-    bind(ContextKeyService).to(ContextKeyServiceImpl).inSingletonScope();
 
     bind(PluginDebugService).toSelf().inSingletonScope();
     rebind(DebugService).toService(PluginDebugService);

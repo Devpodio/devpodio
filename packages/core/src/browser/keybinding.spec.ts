@@ -30,6 +30,7 @@ import { FrontendApplicationStateService } from './frontend-application-state';
 import * as os from '../common/os';
 import * as chai from 'chai';
 import * as sinon from 'sinon';
+import { ContextKeyService } from './context-key-service';
 
 disableJSDOM();
 
@@ -72,6 +73,7 @@ before(async () => {
         bind(StatusBar).toService(StatusBarImpl);
         bind(CommandService).toService(CommandRegistry);
         bind(LabelParser).toSelf().inSingletonScope();
+        bind(ContextKeyService).toSelf().inSingletonScope();
         bind(FrontendApplicationStateService).toSelf().inSingletonScope();
     });
 
@@ -155,10 +157,10 @@ describe('keybindings', () => {
 
         const bindings = keybindingRegistry.getKeybindingsForCommand(TEST_COMMAND2.id);
         if (bindings) {
-            expect(bindings.length).to.be.equal(2);
+            expect(bindings.length).to.be.equal(1);
             const keyCode = KeyCode.parse(bindings[0].keybinding);
-            expect(keyCode.key).to.be.equal(Key.F1);
-            expect(keyCode.ctrl).to.be.true;
+            expect(keyCode.key).to.be.equal(Key.F3);
+            expect(keyCode.ctrl).to.be.false;
         }
     });
 
@@ -513,6 +515,14 @@ describe('keys api', () => {
         const keyCode = new KeyCode(KeyCode.parse('ctrlcmd+shift+7').keystroke, '/');
         const normalized = keyCode.normalizeToUsLayout();
         expect(normalized).to.be.deep.equal(KeyCode.parse('ctrlcmd+/'));
+    });
+
+    it('parse bogus keybinding', () => {
+        const [first, second] = KeySequence.parse('  Ctrl+sHiFt+F10     b ');
+        expect(first.ctrl).to.be.true;
+        expect(first.shift).to.be.true;
+        expect(first.key).is.equal(Key.F10);
+        expect(second.key).is.equal(Key.KEY_B);
     });
 });
 

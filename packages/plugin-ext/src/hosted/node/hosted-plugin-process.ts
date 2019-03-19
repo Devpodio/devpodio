@@ -23,6 +23,7 @@ import { createIpcEnv } from '@devpodio/core/lib/node/messaging/ipc-protocol';
 import { HostedPluginClient, ServerPluginRunner, PluginMetadata } from '../../common/plugin-protocol';
 import { RPCProtocolImpl } from '../../api/rpc-protocol';
 import { MAIN_RPC_CONTEXT } from '../../api/plugin-api';
+import { HostedPluginCliContribution } from './hosted-plugin-cli-contribution';
 
 export interface IPCConnectionOptions {
     readonly serverName: string;
@@ -37,6 +38,9 @@ export class HostedPluginProcess implements ServerPluginRunner {
     @inject(ILogger)
     protected readonly logger: ILogger;
 
+    @inject(HostedPluginCliContribution)
+    protected readonly cli: HostedPluginCliContribution;
+
     private childProcess: cp.ChildProcess | undefined;
     private client: HostedPluginClient;
 
@@ -47,6 +51,10 @@ export class HostedPluginProcess implements ServerPluginRunner {
             }
         }
         this.client = client;
+    }
+
+    public clientClosed(): void {
+
     }
 
     public setDefault(defaultRunner: ServerPluginRunner): void {
@@ -110,13 +118,19 @@ export class HostedPluginProcess implements ServerPluginRunner {
 
     }
 
+    readonly HOSTED_PLUGIN_ENV_REGEXP_EXCLUSION = new RegExp('HOSTED_PLUGIN*');
     private fork(options: IPCConnectionOptions): cp.ChildProcess {
 
         // create env and add PATH to it so any executable from root process is available
-        const env = createIpcEnv();
-        env.PATH = process.env.PATH;
-        // add HOME to env since some plug-ins need to read files from user's home dir
-        env.HOME = process.env.HOME;
+        const env = createIpcEnv({ env: process.env });
+        for (const key of Object.keys(env)) {
+            if (this.HOSTED_PLUGIN_ENV_REGEXP_EXCLUSION.test(key)) {
+                delete env[key];
+            }
+        }
+        if (this.cli.extensionTestsPath) {
+            env.extensionTestsPath = this.cli.extensionTestsPath;
+        }
 
         const forkOptions: cp.ForkOptions = {
             silent: true,

@@ -21,9 +21,12 @@ import { MenusContributionPointHandler } from './menus/menus-contribution-handle
 import { ViewRegistry } from './view/view-registry';
 import { PluginContribution, IndentationRules, FoldingRules, ScopeMap } from '../../common';
 import { PreferenceSchemaProvider } from '@devpodio/core/lib/browser';
-import { PreferenceSchema } from '@devpodio/core/lib/browser/preferences';
+import { PreferenceSchema, PreferenceSchemaProperties } from '@devpodio/core/lib/browser/preferences';
 import { KeybindingsContributionPointHandler } from './keybindings/keybindings-contribution-handler';
 import { MonacoSnippetSuggestProvider } from '@devpodio/monaco/lib/browser/monaco-snippet-suggest-provider';
+import { PluginSharedStyle } from './plugin-shared-style';
+import { CommandRegistry } from '@devpodio/core';
+import { BuiltinThemeProvider } from '@devpodio/core/lib/browser/theming';
 
 @injectable()
 export class PluginContributionHandler {
@@ -51,9 +54,18 @@ export class PluginContributionHandler {
     @inject(MonacoSnippetSuggestProvider)
     protected readonly snippetSuggestProvider: MonacoSnippetSuggestProvider;
 
+    @inject(CommandRegistry)
+    protected readonly commands: CommandRegistry;
+
+    @inject(PluginSharedStyle)
+    protected readonly style: PluginSharedStyle;
+
     handleContributions(contributions: PluginContribution): void {
         if (contributions.configuration) {
             this.updateConfigurationSchema(contributions.configuration);
+        }
+        if (contributions.configurationDefaults) {
+            this.updateDefaultOverridesSchema(contributions.configurationDefaults);
         }
 
         if (contributions.languages) {
@@ -119,20 +131,15 @@ export class PluginContributionHandler {
             for (const location in contributions.viewsContainers) {
                 if (contributions.viewsContainers!.hasOwnProperty(location)) {
                     const viewContainers = contributions.viewsContainers[location];
-                    viewContainers.forEach(container => this.viewRegistry.registerViewContainer(location, container));
+                    viewContainers.forEach(container => {
+                        const views = contributions.views && contributions.views[container.id] ? contributions.views[container.id] : [];
+                        this.viewRegistry.registerViewContainer(location, container, views);
+                    });
                 }
             }
         }
 
-        if (contributions.views) {
-            for (const location in contributions.views) {
-                if (contributions.views.hasOwnProperty(location)) {
-                    const views = contributions.views[location];
-                    views.forEach(view => this.viewRegistry.registerView(location, view));
-                }
-            }
-        }
-
+        this.registerCommands(contributions);
         this.menusContributionHandler.handle(contributions);
         this.keybindingsContributionHandler.handle(contributions);
         if (contributions.snippets) {
@@ -145,8 +152,57 @@ export class PluginContributionHandler {
         }
     }
 
+    protected pluginCommandIconId = 0;
+    protected registerCommands(contribution: PluginContribution): void {
+        if (!contribution.commands) {
+            return;
+        }
+        for (const { iconUrl, command, category, title } of contribution.commands) {
+            let iconClass: string | undefined;
+            if (iconUrl) {
+                iconClass = 'plugin-command-icon-' + this.pluginCommandIconId++;
+                const darkIconUrl = typeof iconUrl === 'object' ? iconUrl.dark : iconUrl;
+                const lightIconUrl = typeof iconUrl === 'object' ? iconUrl.light : iconUrl;
+                this.style.insertRule('.' + iconClass, theme => `
+                    width: 16px;
+                    height: 16px;
+                    background: no-repeat url("${theme.id === BuiltinThemeProvider.lightTheme.id ? lightIconUrl : darkIconUrl}");
+                `);
+            }
+            this.commands.registerCommand({
+                id: command,
+                category,
+                label: title,
+                iconClass
+            });
+        }
+    }
+
     private updateConfigurationSchema(schema: PreferenceSchema): void {
+        this.validateConfigurationSchema(schema);
         this.preferenceSchemaProvider.setSchema(schema);
+    }
+
+    protected updateDefaultOverridesSchema(configurationDefaults: PreferenceSchemaProperties): void {
+        const defaultOverrides: PreferenceSchema = {
+            id: 'defaultOverrides',
+            title: 'Default Configuration Overrides',
+            properties: {}
+        };
+        // tslint:disable-next-line:forin
+        for (const key in configurationDefaults) {
+            const defaultValue = configurationDefaults[key];
+            if (this.preferenceSchemaProvider.testOverrideValue(key, defaultValue)) {
+                defaultOverrides.properties[key] = {
+                    type: 'object',
+                    default: defaultValue,
+                    description: `Configure editor settings to be overridden for ${key} language.`
+                };
+            }
+        }
+        if (Object.keys(defaultOverrides.properties).length) {
+            this.preferenceSchemaProvider.setSchema(defaultOverrides);
+        }
     }
 
     private createRegex(value: string | undefined): RegExp | undefined {
@@ -228,5 +284,44 @@ export class PluginContributionHandler {
             result[scope] = getEncodedLanguageId(langId);
         }
         return result;
+    }
+
+    protected validateConfigurationSchema(schema: PreferenceSchema): void {
+        // tslint:disable-next-line:forin
+        for (const p in schema.properties) {
+            const property = schema.properties[p];
+            if (property.type !== 'object') {
+                continue;
+            }
+
+            if (!property.default) {
+                this.validateDefaultValue(property);
+            }
+
+            const properties = property['properties'];
+            if (properties) {
+                // tslint:disable-next-line:forin
+                for (const key in properties) {
+                    if (typeof properties[key] !== 'object') {
+                        delete properties[key];
+                    }
+                }
+            }
+        }
+    }
+
+    private validateDefaultValue(property: PreferenceSchemaProperties): void {
+        property.default = {};
+
+        const properties = property['properties'];
+        if (properties) {
+            // tslint:disable-next-line:forin
+            for (const key in properties) {
+                if (properties[key].default) {
+                    property.default[key] = properties[key].default;
+                    delete properties[key].default;
+                }
+            }
+        }
     }
 }

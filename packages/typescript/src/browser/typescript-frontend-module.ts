@@ -17,13 +17,10 @@
 import { ContainerModule } from 'inversify';
 import { CommandContribution, MenuContribution } from '@devpodio/core/lib/common';
 import { KeybindingContext, KeybindingContribution, WebSocketConnectionProvider, FrontendApplicationContribution } from '@devpodio/core/lib/browser';
-import { LanguageGrammarDefinitionContribution } from '@devpodio/monaco/lib/browser/textmate';
 import { LanguageClientContribution } from '@devpodio/languages/lib/browser';
 import { CallHierarchyService } from '@devpodio/callhierarchy/lib/browser';
 import { TypeScriptClientContribution } from './typescript-client-contribution';
 import { TypeScriptCallHierarchyService } from './typescript-callhierarchy-service';
-import { TypescriptGrammarContribution } from './typescript-language-config';
-import { JavascriptGrammarContribution } from './javascript-language-config';
 import { TypeScriptFrontendContribution } from './typescript-frontend-contribution';
 import { TypeScriptEditorTextFocusContext } from './typescript-keybinding-contexts';
 import { bindTypescriptPreferences } from './typescript-preferences';
@@ -40,9 +37,6 @@ export default new ContainerModule(bind => {
 
     bind(TypeScriptCallHierarchyService).toSelf().inSingletonScope();
     bind(CallHierarchyService).toService(TypeScriptCallHierarchyService);
-
-    bind(LanguageGrammarDefinitionContribution).to(TypescriptGrammarContribution).inSingletonScope();
-    bind(LanguageGrammarDefinitionContribution).to(JavascriptGrammarContribution).inSingletonScope();
 
     bind(TypeScriptFrontendContribution).toSelf().inSingletonScope();
     bind(CommandContribution).toService(TypeScriptFrontendContribution);

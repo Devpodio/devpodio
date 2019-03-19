@@ -15,22 +15,23 @@
  ********************************************************************************/
 
 import { inject, injectable, postConstruct } from 'inversify';
-import * as jsoncparser from 'jsonc-parser';
+import { JSONExt } from '@phosphor/coreutils';
+import { DisposableCollection, MaybePromise, MessageService, Resource, ResourceProvider } from '@devpodio/core';
+import { PreferenceProvider, PreferenceSchemaProvider, PreferenceScope, PreferenceProviderDataChange } from '@devpodio/core/lib/browser';
 import URI from '@devpodio/core/lib/common/uri';
-import { Resource, ResourceProvider, MaybePromise, MessageService } from '@devpodio/core';
-import { PreferenceProvider } from '@devpodio/core/lib/browser/preferences';
+import * as jsoncparser from 'jsonc-parser';
 
 @injectable()
 export abstract class AbstractResourcePreferenceProvider extends PreferenceProvider {
 
     // tslint:disable-next-line:no-any
     protected preferences: { [key: string]: any } = {};
+    protected resource: Promise<Resource>;
+    protected toDisposeOnWorkspaceLocationChanged: DisposableCollection = new DisposableCollection();
 
     @inject(ResourceProvider) protected readonly resourceProvider: ResourceProvider;
-
     @inject(MessageService) protected readonly messageService: MessageService;
-
-    protected resource: Promise<Resource>;
+    @inject(PreferenceSchemaProvider) protected readonly schemaProvider: PreferenceSchemaProvider;
 
     @postConstruct()
     protected async init(): Promise<void> {
@@ -54,14 +55,16 @@ export abstract class AbstractResourcePreferenceProvider extends PreferenceProvi
         const resource = await this.resource;
         this.toDispose.push(resource);
         if (resource.onDidChangeContents) {
-            this.toDispose.push(resource.onDidChangeContents(content => this.readPreferences()));
+            const onDidResourceChanged = resource.onDidChangeContents(() => this.readPreferences());
+            this.toDisposeOnWorkspaceLocationChanged.pushAll([onDidResourceChanged, (await this.resource)]);
+            this.toDispose.push(onDidResourceChanged);
         }
     }
 
-    abstract getUri(): MaybePromise<URI | undefined>;
+    abstract getUri(root?: URI): MaybePromise<URI | undefined>;
 
     // tslint:disable-next-line:no-any
-    getPreferences(): { [key: string]: any } {
+    getPreferences(resourceUri?: string): { [key: string]: any } {
         return this.preferences;
     }
 
@@ -72,7 +75,7 @@ export abstract class AbstractResourcePreferenceProvider extends PreferenceProvi
             const content = await this.readContents();
             const formattingOptions = { tabSize: 3, insertSpaces: true, eol: '' };
             try {
-                const edits = jsoncparser.modify(content, [key], value, { formattingOptions });
+                const edits = jsoncparser.modify(content, this.getPath(key), value, { formattingOptions });
                 const result = jsoncparser.applyEdits(content, edits);
 
                 await resource.saveContents(result);
@@ -82,16 +85,26 @@ export abstract class AbstractResourcePreferenceProvider extends PreferenceProvi
                 console.error(`${message} ${e.toString()}`);
                 return;
             }
+            const oldValue = this.preferences[key];
+            if (oldValue === value || oldValue !== undefined && value !== undefined // JSONExt.deepEqual() does not support handling `undefined`
+                && JSONExt.deepEqual(value, oldValue)) {
+                return;
+            }
             this.preferences[key] = value;
-            this.onDidPreferencesChangedEmitter.fire(undefined);
+            this.emitPreferencesChangedEvent([{
+                preferenceName: key, newValue: value, oldValue, scope: this.getScope(), domain: this.getDomain()
+            }]);
         }
+    }
+
+    protected getPath(preferenceName: string): string[] {
+        return [preferenceName];
     }
 
     protected async readPreferences(): Promise<void> {
         const newContent = await this.readContents();
-        const strippedContent = jsoncparser.stripComments(newContent);
-        this.preferences = jsoncparser.parse(strippedContent) || {};
-        this.onDidPreferencesChangedEmitter.fire(undefined);
+        const newPrefs = await this.getParsedContent(newContent);
+        await this.handlePreferenceChanges(newPrefs);
     }
 
     protected async readContents(): Promise<string> {
@@ -103,4 +116,82 @@ export abstract class AbstractResourcePreferenceProvider extends PreferenceProvi
         }
     }
 
+    // tslint:disable-next-line:no-any
+    protected async getParsedContent(content: string): Promise<{ [key: string]: any }> {
+        const strippedContent = jsoncparser.stripComments(content);
+        const jsonData = jsoncparser.parse(strippedContent);
+        // tslint:disable-next-line:no-any
+        const preferences: { [key: string]: any } = {};
+        if (typeof jsonData !== 'object') {
+            return preferences;
+        }
+        const uri = (await this.resource).uri.toString();
+        // tslint:disable-next-line:forin
+        for (const preferenceName in jsonData) {
+            const preferenceValue = jsonData[preferenceName];
+            if (preferenceValue !== undefined && !this.schemaProvider.validate(preferenceName, preferenceValue)) {
+                console.warn(`Preference ${preferenceName} in ${uri} is invalid.`);
+                continue;
+            }
+            if (this.schemaProvider.testOverrideValue(preferenceName, preferenceValue)) {
+                // tslint:disable-next-line:forin
+                for (const overriddenPreferenceName in preferenceValue) {
+                    const overriddeValue = preferenceValue[overriddenPreferenceName];
+                    preferences[`${preferenceName}.${overriddenPreferenceName}`] = overriddeValue;
+                }
+            } else {
+                preferences[preferenceName] = preferenceValue;
+            }
+        }
+        return preferences;
+    }
+
+    // tslint:disable-next-line:no-any
+    protected async handlePreferenceChanges(newPrefs: { [key: string]: any }): Promise<void> {
+        const oldPrefs = Object.assign({}, this.preferences);
+        this.preferences = newPrefs;
+        const prefNames = new Set([...Object.keys(oldPrefs), ...Object.keys(newPrefs)]);
+        const prefChanges: PreferenceProviderDataChange[] = [];
+        const uri = (await this.resource).uri.toString();
+        for (const prefName of prefNames.values()) {
+            const oldValue = oldPrefs[prefName];
+            const newValue = newPrefs[prefName];
+            const schemaProperties = this.schemaProvider.getCombinedSchema().properties[prefName];
+            if (schemaProperties) {
+                const scope = schemaProperties.scope;
+                // do not emit the change event if the change is made out of the defined preference scope
+                if (!this.schemaProvider.isValidInScope(prefName, this.getScope())) {
+                    console.warn(`Preference ${prefName} in ${uri} can only be defined in scopes: ${PreferenceScope.getScopeNames(scope).join(', ')}.`);
+                    continue;
+                }
+            }
+            if (newValue === undefined && oldValue !== newValue
+                || oldValue === undefined && newValue !== oldValue // JSONExt.deepEqual() does not support handling `undefined`
+                || !JSONExt.deepEqual(oldValue, newValue)) {
+                prefChanges.push({
+                    preferenceName: prefName, newValue, oldValue, scope: this.getScope(), domain: this.getDomain()
+                });
+            }
+        }
+
+        if (prefChanges.length > 0) { // do not emit the change event if the pref value is not changed
+            this.emitPreferencesChangedEvent(prefChanges);
+        }
+    }
+
+    dispose(): void {
+        const prefChanges: PreferenceProviderDataChange[] = [];
+        for (const prefName of Object.keys(this.preferences)) {
+            const value = this.preferences[prefName];
+            if (value !== undefined || value !== null) {
+                prefChanges.push({
+                    preferenceName: prefName, newValue: undefined, oldValue: value, scope: this.getScope(), domain: this.getDomain()
+                });
+            }
+        }
+        if (prefChanges.length > 0) {
+            this.emitPreferencesChangedEvent(prefChanges);
+        }
+        super.dispose();
+    }
 }

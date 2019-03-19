@@ -17,11 +17,13 @@
 import { injectable, inject, postConstruct, interfaces, Container } from 'inversify';
 import { MenuPath } from '@devpodio/core';
 import { TreeNode, NodeProps, SelectableTreeNode } from '@devpodio/core/lib/browser';
+import { SelectionService } from '@devpodio/core/lib/common/selection-service';
 import { SourceTreeWidget, TreeElementNode } from '@devpodio/core/lib/browser/source-tree';
 import { DebugThreadsSource } from './debug-threads-source';
 import { DebugSession } from '../debug-session';
 import { DebugThread } from '../model/debug-thread';
 import { DebugViewModel } from '../view/debug-view-model';
+import { DebugCallStackItemTypeKey } from '../debug-call-stack-item-type-key';
 
 @injectable()
 export class DebugThreadsWidget extends SourceTreeWidget {
@@ -50,6 +52,12 @@ export class DebugThreadsWidget extends SourceTreeWidget {
 
     @inject(DebugViewModel)
     protected readonly viewModel: DebugViewModel;
+
+    @inject(SelectionService)
+    protected readonly selectionService: SelectionService;
+
+    @inject(DebugCallStackItemTypeKey)
+    protected readonly debugCallStackItemTypeKey: DebugCallStackItemTypeKey;
 
     @postConstruct()
     protected init(): void {
@@ -87,14 +95,19 @@ export class DebugThreadsWidget extends SourceTreeWidget {
         }
         this.updatingSelection = true;
         try {
+            let selection: number | undefined;
             const node = this.model.selectedNodes[0];
             if (TreeElementNode.is(node)) {
                 if (node.element instanceof DebugSession) {
                     this.viewModel.currentSession = node.element;
+                    this.debugCallStackItemTypeKey.set('session');
                 } else if (node.element instanceof DebugThread) {
                     node.element.session.currentThread = node.element;
+                    this.debugCallStackItemTypeKey.set('thread');
+                    selection = node.element.raw.id;
                 }
             }
+            this.selectionService.selection = selection;
         } finally {
             this.updatingSelection = false;
         }

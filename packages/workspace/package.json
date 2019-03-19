@@ -1,13 +1,13 @@
 {
   "name": "@devpodio/workspace",
-  "version": "1.0.17",
+  "version": "0.4.0-latest.1",
   "description": "Theia - Workspace Extension",
   "dependencies": {
-    "@devpodio/core": "^1.0.17",
-    "@devpodio/filesystem": "^1.0.17",
-    "@devpodio/variable-resolver": "^1.0.17",
+    "@devpodio/core": "^0.4.0-latest.1",
+    "@devpodio/filesystem": "^0.4.0-latest.1",
+    "@devpodio/variable-resolver": "^0.4.0-latest.1",
     "@types/fs-extra": "^4.0.2",
-    "ajv": "^6.5.3",
+    "ajv": "^6.10.0",
     "fs-extra": "^4.0.2",
     "jsonc-parser": "^2.0.2",
     "moment": "^2.21.0",
@@ -47,7 +47,7 @@
     "docs": "theiaext docs"
   },
   "devDependencies": {
-    "@devpodio/ext-scripts": "^1.0.17"
+    "@devpodio/ext-scripts": "^0.4.0-latest.1"
   },
   "nyc": {
     "extends": "../../configs/nyc.json"

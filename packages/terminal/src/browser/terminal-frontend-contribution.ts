@@ -41,12 +41,13 @@ import { FileSystem } from '@devpodio/filesystem/lib/common';
 import URI from '@devpodio/core/lib/common/uri';
 import { MAIN_MENU_BAR } from '@devpodio/core';
 import { WorkspaceService } from '@devpodio/workspace/lib/browser';
+import { ContextKeyService } from '@devpodio/core/lib/browser/context-key-service';
 
 export namespace TerminalMenus {
     export const TERMINAL = [...MAIN_MENU_BAR, '7_terminal'];
     export const TERMINAL_NEW = [...TERMINAL, '1_terminal'];
     export const TERMINAL_TASKS = [...TERMINAL, '2_terminal'];
-    export const TERMINAL_NAVIGATOR_CONTEXT_MENU = ['navigator-context-menu', '4_new'];
+    export const TERMINAL_NAVIGATOR_CONTEXT_MENU = ['navigator-context-menu', 'navigation'];
 }
 
 export namespace TerminalCommands {
@@ -103,6 +104,9 @@ export class TerminalFrontendContribution implements TerminalService, CommandCon
     protected readonly onDidChangeCurrentTerminalEmitter = new Emitter<TerminalWidget | undefined>();
     readonly onDidChangeCurrentTerminal: Event<TerminalWidget | undefined> = this.onDidCreateTerminalEmitter.event;
 
+    @inject(ContextKeyService)
+    protected readonly contextKeyService: ContextKeyService;
+
     @postConstruct()
     protected init(): void {
         this.shell.currentChanged.connect(() => this.updateCurrentTerminal());
@@ -112,6 +116,11 @@ export class TerminalFrontendContribution implements TerminalService, CommandCon
                 this.onDidCreateTerminalEmitter.fire(widget);
             }
         });
+
+        const terminalFocusKey = this.contextKeyService.createKey<boolean>('terminalFocus', false);
+        const updateFocusKey = () => terminalFocusKey.set(this.shell.activeWidget instanceof TerminalWidget);
+        updateFocusKey();
+        this.shell.activeChanged.connect(updateFocusKey);
     }
 
     protected _currentTerminal: TerminalWidget | undefined;
@@ -191,7 +200,8 @@ export class TerminalFrontendContribution implements TerminalService, CommandCon
             order: '1'
         });
         menus.registerMenuAction(TerminalMenus.TERMINAL_NAVIGATOR_CONTEXT_MENU, {
-            commandId: TerminalCommands.TERMINAL_CONTEXT.id
+            commandId: TerminalCommands.TERMINAL_CONTEXT.id,
+            order: 'z'
         });
     }
 

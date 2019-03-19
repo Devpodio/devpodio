@@ -19,6 +19,7 @@ import { CancellationToken, Progress, ProgressOptions } from '@devpodio/plugin';
 import { RPCProtocol } from '../api/rpc-protocol';
 import { Event, Emitter } from '@devpodio/core/lib/common/event';
 import { Disposable, DisposableCollection } from '@devpodio/core/lib/common/disposable';
+import { StatusBarItemImpl } from './status-bar/status-bar-item';
 
 export class StatusBarExtImpl implements StatusBarExt {
     private readonly proxy: StatusBarMessageRegistryMain;
@@ -29,13 +30,33 @@ export class StatusBarExtImpl implements StatusBarExt {
         task: (progress: Progress<{ message?: string; increment?: number }>, token: CancellationToken) => PromiseLike<R>
     ): Promise<R> {
         const message = options.title ? '$(refresh~spin) ' + options.title : '';
+        const id = StatusBarItemImpl.nextId();
+        this.proxy.$setMessage(id, message, 1, 1, undefined, undefined, undefined);
+        return this.createProgress(id, message, task);
+    }
+
+    private createProgress<R>(
+        id: string,
+        message: string,
+        task: (progress: Progress<{ message?: string; increment?: number }>, token: CancellationToken) => PromiseLike<R>): PromiseLike<R> {
+
         const token = new CancellationTokenImpl(this.onCancel);
-        const id = await this.proxy.$setMessage(message, 1, 1, undefined, undefined, undefined);
-        const promise = task(new ProgressCallback(id, message, this.proxy), token);
-        await promise;
-        this.proxy.$dispose(id);
-        token.dispose();
-        return promise;
+        const progressEnd = (handler: string): void => {
+            this.proxy.$dispose(handler);
+            token.dispose();
+        };
+
+        let progress: PromiseLike<R>;
+
+        try {
+            progress = task(new ProgressCallback(id, message, this.proxy), token);
+        } catch (err) {
+            progressEnd(id);
+            throw err;
+        }
+
+        progress.then(() => progressEnd(id), () => progressEnd(id));
+        return progress;
     }
 
     private readonly onCancel: Event<void> = this.onCancelEmitter.event;

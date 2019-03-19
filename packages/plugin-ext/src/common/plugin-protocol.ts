@@ -18,7 +18,8 @@ import { RPCProtocol } from '../api/rpc-protocol';
 import { Disposable } from '@devpodio/core/lib/common/disposable';
 import { LogPart, KeysToAnyValues, KeysToKeysToAnyValue } from './types';
 import { CharacterPair, CommentRule, PluginAPIFactory, Plugin } from '../api/plugin-api';
-import { PreferenceSchema } from '@devpodio/core/lib/browser/preferences';
+// FIXME get rid of browser code in backend
+import { PreferenceSchema, PreferenceSchemaProperties } from '@devpodio/core/lib/browser/preferences';
 import { ExtPluginApi } from './plugin-ext-api-contribution';
 import { IJSONSchema, IJSONSchemaSnippet } from '@devpodio/core/lib/common/json-schema';
 
@@ -54,11 +55,13 @@ export interface PluginPackage {
  * This interface describes a package.json contribution section object.
  */
 export interface PluginPackageContribution {
-    configuration: PreferenceSchema;
+    configuration?: PreferenceSchema;
+    configurationDefaults?: PreferenceSchemaProperties;
     languages?: PluginPackageLanguageContribution[];
     grammars?: PluginPackageGrammarsContribution[];
     viewsContainers?: { [location: string]: PluginPackageViewContainer[] };
     views?: { [location: string]: PluginPackageView[] };
+    commands?: PluginPackageCommand | PluginPackageCommand[];
     menus?: { [location: string]: PluginPackageMenu[] };
     keybindings?: PluginPackageKeybinding[];
     debuggers?: PluginPackageDebuggersContribution[];
@@ -76,6 +79,13 @@ export interface PluginPackageView {
     name: string;
 }
 
+export interface PluginPackageCommand {
+    command: string;
+    title: string;
+    category?: string;
+    icon?: string | { light: string; dark: string; };
+}
+
 export interface PluginPackageMenu {
     command: string;
     group?: string;
@@ -83,9 +93,12 @@ export interface PluginPackageMenu {
 }
 
 export interface PluginPackageKeybinding {
-    key: string;
+    key?: string;
     command: string;
     when?: string;
+    mac?: string;
+    linux?: string;
+    win?: string;
 }
 
 export interface PluginPackageGrammarsContribution {
@@ -336,10 +349,12 @@ export interface PluginModel {
  */
 export interface PluginContribution {
     configuration?: PreferenceSchema;
+    configurationDefaults?: PreferenceSchemaProperties;
     languages?: LanguageContribution[];
     grammars?: GrammarsContribution[];
     viewsContainers?: { [location: string]: ViewContainer[] };
     views?: { [location: string]: View[] };
+    commands?: PluginCommand[]
     menus?: { [location: string]: Menu[] };
     keybindings?: Keybinding[];
     debuggers?: DebuggerContribution[];
@@ -449,6 +464,15 @@ export interface View {
     name: string;
 }
 
+export interface PluginCommand {
+    command: string;
+    title: string;
+    category?: string;
+    iconUrl?: IconUrl;
+}
+
+export type IconUrl = string | { light: string; dark: string; };
+
 /**
  * Menu contribution
  */
@@ -462,9 +486,12 @@ export interface Menu {
  * Keybinding contribution
  */
 export interface Keybinding {
-    keybinding: string;
+    keybinding?: string;
     command: string;
-    context?: string;
+    when?: string;
+    mac?: string;
+    linux?: string;
+    win?: string;
 }
 
 /**
@@ -594,6 +621,7 @@ export interface ServerPluginRunner {
     onMessage(jsonMessage: any): void;
     setClient(client: HostedPluginClient): void;
     setDefault(defaultRunner: ServerPluginRunner): void;
+    clientClosed(): void;
 
     /**
      * Provides additional metadata.

@@ -14,7 +14,8 @@
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  ********************************************************************************/
 
-import { injectable, inject } from 'inversify';
+import { injectable, inject, postConstruct } from 'inversify';
+import { TabBar, Widget, Title } from '@phosphor/widgets';
 import { MAIN_MENU_BAR, MenuContribution, MenuModelRegistry } from '../common/menu';
 import { KeybindingContribution, KeybindingRegistry } from './keybinding';
 import { FrontendApplicationContribution } from './frontend-application';
@@ -28,6 +29,10 @@ import { SHELL_TABBAR_CONTEXT_MENU } from './shell/tab-bars';
 import { AboutDialog } from './about-dialog';
 import * as browser from './browser';
 import URI from '../common/uri';
+import { ContextKeyService } from './context-key-service';
+import { OS } from '../common/os';
+import { ResourceContextKey } from './resource-context-key';
+import { UriSelection } from '../common/selection';
 
 export namespace CommonMenus {
 
@@ -210,6 +215,30 @@ export class CommonFrontendContribution implements FrontendApplicationContributi
         @inject(AboutDialog) protected readonly aboutDialog: AboutDialog
     ) { }
 
+    @inject(ContextKeyService)
+    protected readonly contextKeyService: ContextKeyService;
+
+    @inject(ResourceContextKey)
+    protected readonly resourceContextKey: ResourceContextKey;
+
+    @postConstruct()
+    protected init(): void {
+        this.contextKeyService.createKey<boolean>('isLinux', OS.type() === OS.Type.Linux);
+        this.contextKeyService.createKey<boolean>('isMac', OS.type() === OS.Type.OSX);
+        this.contextKeyService.createKey<boolean>('isWindows', OS.type() === OS.Type.Windows);
+
+        this.initResourceContextKeys();
+    }
+
+    protected initResourceContextKeys(): void {
+        const updateContextKeys = () => {
+            const resourceUri = UriSelection.getUri(this.selectionService.selection);
+            this.resourceContextKey.set(resourceUri);
+        };
+        updateContextKeys();
+        this.selectionService.onSelectionChanged(updateContextKeys);
+    }
+
     registerMenus(registry: MenuModelRegistry): void {
         registry.registerSubmenu(CommonMenus.FILE, 'File');
         registry.registerSubmenu(CommonMenus.EDIT, 'Edit');
@@ -226,9 +255,7 @@ export class CommonFrontendContribution implements FrontendApplicationContributi
         registry.registerMenuAction(CommonMenus.FILE_AUTOSAVE, {
             commandId: CommonCommands.AUTO_SAVE.id
         });
-        registry.registerMenuAction(CommonMenus.FILE_RELOAD, {
-            commandId: CommonCommands.RELOAD.id
-        });
+
         registry.registerMenuAction(CommonMenus.FILE_NEW_WINDOW, {
             commandId: CommonCommands.NEW_WINDOW.id
         });
@@ -353,57 +380,61 @@ export class CommonFrontendContribution implements FrontendApplicationContributi
             execute: () => this.shell.activatePreviousTab()
         });
         commandRegistry.registerCommand(CommonCommands.CLOSE_TAB, {
-            isEnabled: () => this.shell.currentTabBar !== undefined,
-            execute: () => {
-                const tabBar = this.shell.currentTabBar!;
-                const currentTitle = tabBar.currentTitle;
-                this.shell.closeTabs(tabBar, title => title === currentTitle);
+            isEnabled: (event?: Event) => this.findTabBar(event) !== undefined,
+            execute: (event?: Event) => {
+                const tabBar = this.findTabBar(event)!;
+                const currentTitle = this.findTitle(tabBar, event);
+                this.shell.closeTabs(tabBar, (title, index) => title === currentTitle);
             }
         });
         commandRegistry.registerCommand(CommonCommands.CLOSE_OTHER_TABS, {
-            isEnabled: () => {
-                const tabBar = this.shell.currentTabBar;
-                if (tabBar) {
-                    return tabBar.titles.length > 1;
-                }
-                return false;
+            isEnabled: (event?: Event) => {
+                const tabBar = this.findTabBar(event);
+                return tabBar !== undefined && tabBar.titles.length > 1;
             },
-            execute: () => {
-                const tabBar = this.shell.currentTabBar!;
-                const currentTitle = tabBar.currentTitle;
-                this.shell.closeTabs(this.shell.currentTabArea!, title => title !== currentTitle);
+            execute: (event?: Event) => {
+                const tabBar = this.findTabBar(event)!;
+                const currentTitle = this.findTitle(tabBar, event);
+                const area = this.shell.getAreaFor(tabBar)!;
+                this.shell.closeTabs(area, (title, index) => title !== currentTitle);
             }
         });
         commandRegistry.registerCommand(CommonCommands.CLOSE_RIGHT_TABS, {
-            isEnabled: () => {
-                const tabBar = this.shell.currentTabBar;
-                if (tabBar) {
-                    return tabBar.currentIndex < tabBar.titles.length - 1;
-                }
-                return false;
+            isEnabled: (event?: Event) => {
+                const tabBar = this.findTabBar(event);
+                return tabBar !== undefined && tabBar.currentIndex < tabBar.titles.length - 1;
             },
-            isVisible: () => {
-                const area = this.shell.currentTabArea;
-                return area !== 'left' && area !== 'right';
+            isVisible: (event?: Event) => {
+                const area = this.findTabArea(event);
+                return area !== undefined && area !== 'left' && area !== 'right';
             },
-            execute: () => {
-                const tabBar = this.shell.currentTabBar!;
+            execute: (event?: Event) => {
+                const tabBar = this.findTabBar(event)!;
                 const currentIndex = tabBar.currentIndex;
                 this.shell.closeTabs(tabBar, (title, index) => index > currentIndex);
             }
         });
         commandRegistry.registerCommand(CommonCommands.CLOSE_ALL_TABS, {
-            isEnabled: () => this.shell.currentTabBar !== undefined,
-            execute: () => this.shell.closeTabs(this.shell.currentTabArea!)
+            isEnabled: (event?: Event) => {
+                if (event) {
+                    return this.findTabBar(event) !== undefined;
+                } else {
+                    return this.shell.mainAreaTabBars.find(tb => tb.titles.length > 0) !== undefined;
+                }
+            },
+            execute: (event?: Event) => {
+                if (event) {
+                    this.shell.closeTabs(this.findTabArea(event)!);
+                } else {
+                    this.shell.closeTabs('main');
+                }
+            }
         });
         commandRegistry.registerCommand(CommonCommands.COLLAPSE_PANEL, {
-            isEnabled: () => ApplicationShell.isSideArea(this.shell.currentTabArea),
-            isVisible: () => ApplicationShell.isSideArea(this.shell.currentTabArea),
-            execute: () => {
-                const currentArea = this.shell.currentTabArea;
-                if (ApplicationShell.isSideArea(currentArea)) {
-                    this.shell.collapsePanel(currentArea);
-                }
+            isEnabled: (event?: Event) => ApplicationShell.isSideArea(this.findTabArea(event)),
+            isVisible: (event?: Event) => ApplicationShell.isSideArea(this.findTabArea(event)),
+            execute: (event?: Event) => {
+                this.shell.collapsePanel(this.findTabArea(event)!);
             }
         });
         commandRegistry.registerCommand(CommonCommands.COLLAPSE_ALL_PANELS, {
@@ -442,6 +473,40 @@ export class CommonFrontendContribution implements FrontendApplicationContributi
                 '_blank'
             )
         });
+    }
+
+    private findTabBar(event?: Event): TabBar<Widget> | undefined {
+        if (event && event.target) {
+            const tabBar = this.shell.findWidgetForElement(event.target as HTMLElement);
+            if (tabBar instanceof TabBar) {
+                return tabBar;
+            }
+        }
+        return this.shell.currentTabBar;
+    }
+
+    private findTabArea(event?: Event): ApplicationShell.Area | undefined {
+        const tabBar = this.findTabBar(event);
+        if (tabBar) {
+            return this.shell.getAreaFor(tabBar);
+        }
+        return this.shell.currentTabArea;
+    }
+
+    private findTitle(tabBar: TabBar<Widget>, event?: Event): Title<Widget> | undefined {
+        if (event && event.target) {
+            let tabNode: HTMLElement | null = event.target as HTMLElement;
+            while (tabNode && !tabNode.classList.contains('p-TabBar-tab')) {
+                tabNode = tabNode.parentElement;
+            }
+            if (tabNode && tabNode.title) {
+                const title = tabBar.titles.find(t => t.label === tabNode!.title);
+                if (title) {
+                    return title;
+                }
+            }
+        }
+        return tabBar.currentTitle || undefined;
     }
 
     registerKeybindings(registry: KeybindingRegistry): void {
@@ -487,16 +552,8 @@ export class CommonFrontendContribution implements FrontendApplicationContributi
                 keybinding: 'ctrlcmd+tab'
             },
             {
-                command: CommonCommands.NEXT_TAB.id,
-                keybinding: 'ctrlcmd+alt+d'
-            },
-            {
                 command: CommonCommands.PREVIOUS_TAB.id,
                 keybinding: 'ctrlcmd+shift+tab'
-            },
-            {
-                command: CommonCommands.PREVIOUS_TAB.id,
-                keybinding: 'ctrlcmd+alt+a'
             },
             {
                 command: CommonCommands.CLOSE_TAB.id,
@@ -531,10 +588,6 @@ export class CommonFrontendContribution implements FrontendApplicationContributi
             {
                 command: CommonCommands.SAVE_ALL.id,
                 keybinding: 'ctrlcmd+alt+s'
-            },
-            {
-                command: CommonCommands.RELOAD.id,
-                keybinding: 'ctrlcmd+f5'
             }
         );
     }

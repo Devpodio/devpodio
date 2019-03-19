@@ -14,8 +14,8 @@
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  ********************************************************************************/
 
-import { injectable, inject, optional } from 'inversify';
-import { ArrayExt, find, toArray } from '@phosphor/algorithm';
+import { injectable, inject, optional, postConstruct } from 'inversify';
+import { ArrayExt, find, toArray, each } from '@phosphor/algorithm';
 import { Signal } from '@phosphor/signaling';
 import {
     BoxLayout, BoxPanel, DockLayout, DockPanel, FocusTracker, Layout, Panel, SplitLayout,
@@ -32,6 +32,7 @@ import { TabBarRendererFactory, TabBarRenderer, SHELL_TABBAR_CONTEXT_MENU, Scrol
 import { SplitPositionHandler, SplitPositionOptions } from './split-panels';
 import { FrontendApplicationStateService } from '../frontend-application-state';
 import { TabBarToolbarRegistry, TabBarToolbarFactory, TabBarToolbar } from './tab-bar-toolbar';
+import { ContextKeyService } from '../context-key-service';
 
 /** The class name added to ApplicationShell instances. */
 const APPLICATION_SHELL_CLASS = 'theia-ApplicationShell';
@@ -158,6 +159,9 @@ export class ApplicationShell extends Widget {
     private readonly tracker = new FocusTracker<Widget>();
     private dragState?: WidgetDragState;
 
+    @inject(ContextKeyService)
+    protected readonly contextKeyService: ContextKeyService;
+
     /**
      * Construct a new application shell.
      */
@@ -200,6 +204,39 @@ export class ApplicationShell extends Widget {
 
         this.tracker.currentChanged.connect(this.onCurrentChanged, this);
         this.tracker.activeChanged.connect(this.onActiveChanged, this);
+    }
+
+    @postConstruct()
+    protected init(): void {
+        this.initSidebarVisibleKeyContext();
+        this.initFocusKeyContexts();
+    }
+
+    protected initSidebarVisibleKeyContext(): void {
+        const leftSideBarPanel = this.leftPanelHandler.dockPanel;
+        const sidebarVisibleKey = this.contextKeyService.createKey('sidebarVisible', leftSideBarPanel.isVisible);
+        const onAfterShow = leftSideBarPanel['onAfterShow'].bind(leftSideBarPanel);
+        leftSideBarPanel['onAfterShow'] = (msg: Message) => {
+            onAfterShow(msg);
+            sidebarVisibleKey.set(true);
+        };
+        const onAfterHide = leftSideBarPanel['onAfterHide'].bind(leftSideBarPanel);
+        leftSideBarPanel['onAfterHide'] = (msg: Message) => {
+            onAfterHide(msg);
+            sidebarVisibleKey.set(false);
+        };
+    }
+
+    protected initFocusKeyContexts(): void {
+        const sideBarFocus = this.contextKeyService.createKey('sideBarFocus', false);
+        const panelFocus = this.contextKeyService.createKey('panelFocus', false);
+        const updateFocusContextKeys = () => {
+            const area = this.activeWidget && this.getAreaFor(this.activeWidget);
+            sideBarFocus.set(area === 'left');
+            panelFocus.set(area === 'main');
+        };
+        updateFocusContextKeys();
+        this.activeChanged.connect(updateFocusContextKeys);
     }
 
     protected onBeforeAttach(msg: Message): void {
@@ -708,6 +745,34 @@ export class ApplicationShell extends Widget {
     }
 
     /**
+     * Find the widget that contains the given HTML element. The returned widget may be one
+     * that is managed by the application shell, or one that is embedded in another widget and
+     * not directly managed by the shell, or a tab bar.
+     */
+    findWidgetForElement(element: HTMLElement): Widget | undefined {
+        let widgetNode: HTMLElement | null = element;
+        while (widgetNode && !widgetNode.classList.contains('p-Widget')) {
+            widgetNode = widgetNode.parentElement;
+        }
+        if (widgetNode) {
+            return this.findWidgetForNode(widgetNode, this);
+        }
+        return undefined;
+    }
+
+    private findWidgetForNode(widgetNode: HTMLElement, widget: Widget): Widget | undefined {
+        if (widget.node === widgetNode) {
+            return widget;
+        }
+        let result: Widget | undefined;
+        each(widget.children(), child => {
+            result = this.findWidgetForNode(widgetNode, child);
+            return !result;
+        });
+        return result;
+    }
+
+    /**
      * The current widget in the application shell. The current widget is the last widget that
      * was active and not yet closed. See the remarks to `activeWidget` on what _active_ means.
      */
@@ -1096,20 +1161,35 @@ export class ApplicationShell extends Widget {
      * undefined if the widget does not reside directly in the shell.
      */
     getAreaFor(widget: Widget): ApplicationShell.Area | undefined {
-        const title = widget.title;
-        const mainPanelTabBar = this.mainPanel.findTabBar(title);
-        if (mainPanelTabBar) {
-            return 'main';
-        }
-        const bottomPanelTabBar = this.bottomPanel.findTabBar(title);
-        if (bottomPanelTabBar) {
-            return 'bottom';
-        }
-        if (ArrayExt.firstIndexOf(this.leftPanelHandler.tabBar.titles, title) > -1) {
-            return 'left';
-        }
-        if (ArrayExt.firstIndexOf(this.rightPanelHandler.tabBar.titles, title) > -1) {
-            return 'right';
+        if (widget instanceof TabBar) {
+            if (find(this.mainPanel.tabBars(), tb => tb === widget)) {
+                return 'main';
+            }
+            if (find(this.bottomPanel.tabBars(), tb => tb === widget)) {
+                return 'bottom';
+            }
+            if (this.leftPanelHandler.tabBar === widget) {
+                return 'left';
+            }
+            if (this.rightPanelHandler.tabBar === widget) {
+                return 'right';
+            }
+        } else {
+            const title = widget.title;
+            const mainPanelTabBar = this.mainPanel.findTabBar(title);
+            if (mainPanelTabBar) {
+                return 'main';
+            }
+            const bottomPanelTabBar = this.bottomPanel.findTabBar(title);
+            if (bottomPanelTabBar) {
+                return 'bottom';
+            }
+            if (ArrayExt.firstIndexOf(this.leftPanelHandler.tabBar.titles, title) > -1) {
+                return 'left';
+            }
+            if (ArrayExt.firstIndexOf(this.rightPanelHandler.tabBar.titles, title) > -1) {
+                return 'right';
+            }
         }
         return undefined;
     }

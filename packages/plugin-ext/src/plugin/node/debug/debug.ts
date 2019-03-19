@@ -28,10 +28,10 @@ import { ConnectionExtImpl } from '../../connection-ext';
 import { CommandRegistryImpl } from '../../command-registry';
 import { DebuggerContribution } from '../../../common';
 import { PluginWebSocketChannel } from '../../../common/connection';
-import { DebugAdapterExecutable } from '@devpodio/debug/lib/common/debug-model';
+import { DebugAdapterExecutable, CommunicationProvider } from '@devpodio/debug/lib/common/debug-model';
 import { IJSONSchema, IJSONSchemaSnippet } from '@devpodio/core/lib/common/json-schema';
 import { PluginDebugAdapterSession } from './plugin-debug-adapter-session';
-import { startDebugAdapter } from './plugin-debug-adapter-starter';
+import { startDebugAdapter, connectDebugAdapter } from './plugin-debug-adapter-starter';
 import { resolveDebugAdapterExecutable } from './plugin-debug-adapter-executable-resolver';
 import URI from 'vscode-uri';
 import { Path } from '@devpodio/core/lib/common/path';
@@ -172,8 +172,8 @@ export class DebugExtImpl implements DebugExt {
     }
 
     async $sessionDidChange(sessionId: string | undefined): Promise<void> {
-        const activeDebugSession = sessionId ? this.sessions.get(sessionId) : undefined;
-        this.onDidChangeActiveDebugSessionEmitter.fire(activeDebugSession);
+        this.activeDebugSession = sessionId ? this.sessions.get(sessionId) : undefined;
+        this.onDidChangeActiveDebugSessionEmitter.fire(this.activeDebugSession);
     }
 
     async $breakpointsDidChange(all: Breakpoint[], added: Breakpoint[], removed: Breakpoint[], changed: Breakpoint[]): Promise<void> {
@@ -182,15 +182,20 @@ export class DebugExtImpl implements DebugExt {
     }
 
     async $createDebugSession(debugConfiguration: theia.DebugConfiguration): Promise<string> {
-        const executable = await this.getExecutable(debugConfiguration);
-        const communicationProvider = startDebugAdapter(executable);
+        let communicationProvider: CommunicationProvider;
+        if ('debugServer' in debugConfiguration) {
+            communicationProvider = connectDebugAdapter(debugConfiguration.debugServer);
+        } else {
+            const executable = await this.getExecutable(debugConfiguration);
+            communicationProvider = startDebugAdapter(executable);
+        }
         const sessionId = uuid.v4();
 
         const debugAdapterSession = new PluginDebugAdapterSession(
             sessionId,
             debugConfiguration,
             communicationProvider,
-            (command: string, args?: any) => this.proxy.$customRequest(command, args));
+            (command: string, args?: any) => this.proxy.$customRequest(sessionId, command, args));
         this.sessions.set(sessionId, debugAdapterSession);
 
         const connection = await this.connectionExt!.ensureConnection(sessionId);

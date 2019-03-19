@@ -14,15 +14,15 @@
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  ********************************************************************************/
 
-import * as readline from 'readline';
 import * as fuzzy from 'fuzzy';
-import { injectable, inject } from 'inversify';
-import { FileSearchService } from '../common/file-search-service';
-import { RawProcessFactory } from '@devpodio/process/lib/node';
+import * as readline from 'readline';
 import { rgPath } from 'vscode-ripgrep';
-import { Deferred } from '@devpodio/core/lib/common/promise-util';
+import { injectable, inject } from 'inversify';
+import URI from '@devpodio/core/lib/common/uri';
 import { FileUri } from '@devpodio/core/lib/node/file-uri';
-import { CancellationToken, ILogger } from '@devpodio/core';
+import { CancellationTokenSource, CancellationToken, ILogger } from '@devpodio/core';
+import { RawProcessFactory } from '@devpodio/process/lib/node';
+import { FileSearchService } from '../common/file-search-service';
 
 @injectable()
 export class FileSearchServiceImpl implements FileSearchService {
@@ -31,67 +31,114 @@ export class FileSearchServiceImpl implements FileSearchService {
         @inject(ILogger) protected readonly logger: ILogger,
         @inject(RawProcessFactory) protected readonly rawProcessFactory: RawProcessFactory) { }
 
-    async find(searchPattern: string, options: FileSearchService.Options, cancellationToken?: CancellationToken): Promise<string[]> {
+    async find(searchPattern: string, options: FileSearchService.Options, clientToken?: CancellationToken): Promise<string[]> {
+        const cancellationSource = new CancellationTokenSource();
+        if (clientToken) {
+            clientToken.onCancellationRequested(() => cancellationSource.cancel());
+        }
+        const token = cancellationSource.token;
+
+        if (options.defaultIgnorePatterns && options.defaultIgnorePatterns.length === 0) { // default excludes
+            options.defaultIgnorePatterns.push('.git');
+        }
         const opts = {
             fuzzyMatch: true,
             limit: Number.MAX_SAFE_INTEGER,
             useGitIgnore: true,
-            defaultIgnorePatterns: [
-                '^.git$'
-            ],
             ...options
         };
-        const args: string[] = [
-            '--files',
-            '--sort-files',
-        ];
+        const exactMatches = new Set<string>();
+        const fuzzyMatches = new Set<string>();
+        const stringPattern = searchPattern.toLocaleLowerCase();
+        await Promise.all(options.rootUris.map(async root => {
+            try {
+                const rootUri = new URI(root);
+                await this.doFind(rootUri, searchPattern, opts, candidate => {
+                    const fileUri = rootUri.resolve(candidate).toString();
+                    if (exactMatches.has(fileUri) || fuzzyMatches.has(fileUri)) {
+                        return;
+                    }
+                    if (!searchPattern || searchPattern === '*' || candidate.toLocaleLowerCase().indexOf(stringPattern) !== -1) {
+                        exactMatches.add(fileUri);
+                    } else if (opts.fuzzyMatch && fuzzy.test(searchPattern, candidate)) {
+                        fuzzyMatches.add(fileUri);
+                    }
+                    if (exactMatches.size + fuzzyMatches.size === opts.limit) {
+                        cancellationSource.cancel();
+                    }
+                }, token);
+            } catch (e) {
+                console.error('Failed to search:', root, e);
+            }
+        }));
+        if (clientToken && clientToken.isCancellationRequested) {
+            return [];
+        }
+        return [...exactMatches, ...fuzzyMatches];
+    }
+
+    private doFind(rootUri: URI, searchPattern: string, options: FileSearchService.Options,
+        accept: (fileUri: string) => void, token: CancellationToken): Promise<void> {
+        return new Promise((resolve, reject) => {
+            try {
+                const cwd = FileUri.fsPath(rootUri);
+                const args = this.getSearchArgs(options);
+                // TODO: why not just child_process.spawn, theia process are supposed to be used for user processes like tasks and terminals, not internal
+                const process = this.rawProcessFactory({ command: rgPath, args, options: { cwd } });
+                process.onError(reject);
+                process.output.on('close', resolve);
+                token.onCancellationRequested(() => process.kill());
+
+                const lineReader = readline.createInterface({
+                    input: process.output,
+                    output: process.input
+                });
+                lineReader.on('line', line => {
+                    if (token.isCancellationRequested) {
+                        process.kill();
+                    } else {
+                        accept(line);
+                    }
+                });
+            } catch (e) {
+                reject(e);
+            }
+        });
+    }
+
+    private getSearchArgs(options: FileSearchService.Options): string[] {
+        const args = ['--files', '--case-sensitive'];
+        if (options.includePatterns) {
+            for (const includePattern of options.includePatterns) {
+                let includeGlob = includePattern;
+                if (!includeGlob.endsWith('*')) {
+                    includeGlob = `${includeGlob}*`;
+                }
+                if (!includeGlob.startsWith('*')) {
+                    includeGlob = `*${includeGlob}`;
+                }
+                args.push('--glob', includeGlob);
+            }
+        }
         if (!options.useGitIgnore) {
             args.push('-uu');
         }
-        const process = this.rawProcessFactory({
-            command: rgPath,
-            args: [...args, ...opts.rootUris.map(r => FileUri.fsPath(r))]
-        });
-        const result: string[] = [];
-        const fuzzyMatches: string[] = [];
-        const resultDeferred = new Deferred<string[]>();
-        if (cancellationToken) {
-            const cancel = () => {
-                this.logger.debug('Search cancelled');
-                process.kill();
-                resultDeferred.resolve([]);
-            };
-            if (cancellationToken.isCancellationRequested) {
-                cancel();
-            } else {
-                cancellationToken.onCancellationRequested(cancel);
-            }
+        if (options && options.defaultIgnorePatterns) {
+            options.defaultIgnorePatterns.filter(p => p !== '')
+                .forEach(ignore => {
+                    if (!ignore.endsWith('*')) {
+                        ignore = `${ignore}*`;
+                    }
+                    if (!ignore.startsWith('*')) {
+                        ignore = `!*${ignore}`;
+                    } else {
+                        ignore = `!${ignore}`;
+                    }
+                    args.push('--glob');
+                    args.push(ignore);
+                });
         }
-        const lineReader = readline.createInterface({
-            input: process.output,
-            output: process.input
-        });
-        lineReader.on('line', line => {
-            if (result.length >= opts.limit) {
-                process.kill();
-            } else {
-                const fileUriStr = FileUri.create(line).toString();
-                if (line.toLocaleLowerCase().indexOf(searchPattern.toLocaleLowerCase()) !== -1) {
-                    result.push(fileUriStr);
-                } else if (opts.fuzzyMatch && fuzzy.test(searchPattern, line)) {
-                    fuzzyMatches.push(fileUriStr);
-                }
-            }
-        });
-        process.onError(e => {
-            resultDeferred.reject(e);
-        });
-        process.onExit(e => {
-            const left = opts.limit - result.length;
-            result.push(...fuzzyMatches.slice(0, Math.min(left, fuzzyMatches.length)));
-            resultDeferred.resolve(result);
-        });
-        return resultDeferred.promise;
+        return args;
     }
 
 }

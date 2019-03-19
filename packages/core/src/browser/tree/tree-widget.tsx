@@ -95,7 +95,7 @@ export interface NodeProps {
 }
 
 export const defaultTreeProps: TreeProps = {
-    leftPadding: 16
+    leftPadding: 8
 };
 
 export namespace TreeWidget {
@@ -534,10 +534,10 @@ export class TreeWidget extends ReactWidget implements StatefulWidget {
     protected renderTailDecorations(node: TreeNode, props: NodeProps): React.ReactNode {
         const style = (fontData: TreeDecoration.FontData | undefined) => this.applyFontStyles({}, fontData);
         return <React.Fragment>
-            {this.getDecorationData(node, 'tailDecorations').filter(notEmpty).reduce((acc, current) => acc.concat(current), []).map(decoration => {
+            {this.getDecorationData(node, 'tailDecorations').filter(notEmpty).reduce((acc, current) => acc.concat(current), []).map((decoration, index) => {
                 const { fontData, data, tooltip } = decoration;
                 const className = [TREE_NODE_SEGMENT_CLASS, TREE_NODE_TAIL_CLASS].join(' ');
-                return <div key={node.id + className} className={className} style={style(fontData)} title={tooltip}>
+                return <div key={node.id + className + index} className={className} style={style(fontData)} title={tooltip}>
                     {data}
                 </div>;
             })}
@@ -617,11 +617,14 @@ export class TreeWidget extends ReactWidget implements StatefulWidget {
     }
 
     protected getDecorations(node: TreeNode): TreeDecoration.Data[] {
-        const decorations = this.decorations.get(node.id);
-        if (decorations) {
-            return decorations.sort(TreeDecoration.Data.comparePriority);
+        const decorations: TreeDecoration.Data[] = [];
+        if (TreeDecoration.DecoratedTreeNode.is(node)) {
+            decorations.push(node.decorationData);
         }
-        return [];
+        if (this.decorations.has(node.id)) {
+            decorations.push(...this.decorations.get(node.id));
+        }
+        return decorations.sort(TreeDecoration.Data.comparePriority);
     }
 
     protected getDecorationData<K extends keyof TreeDecoration.Data>(node: TreeNode, key: K): TreeDecoration.Data[K][] {

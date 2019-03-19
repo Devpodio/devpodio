@@ -51,7 +51,7 @@ import { LabelParser } from './label-parser';
 import { LabelProvider, LabelProviderContribution, DefaultUriLabelProviderContribution } from './label-provider';
 import {
     PreferenceProviderProvider, PreferenceProvider, PreferenceScope, PreferenceService,
-    PreferenceServiceImpl, bindPreferenceSchemaProvider
+    PreferenceServiceImpl, bindPreferenceSchemaProvider, PreferenceSchemaProvider
 } from './preferences';
 import { ContextMenuRenderer } from './context-menu-renderer';
 import { ThemingCommandContribution, ThemeService, BuiltinThemeProvider } from './theming';
@@ -67,6 +67,8 @@ import { TabBarToolbarRegistry, TabBarToolbarContribution, TabBarToolbarFactory,
 import { bindCorePreferences } from './core-preferences';
 import { QuickPickServiceImpl } from './quick-open/quick-pick-service-impl';
 import { QuickPickService, quickPickServicePath } from '../common/quick-pick-service';
+import { ContextKeyService } from './context-key-service';
+import { ResourceContextKey } from './resource-context-key';
 
 export const frontendApplicationModule = new ContainerModule((bind, unbind, isBound, rebind) => {
     const themeService = ThemeService.get();
@@ -135,6 +137,8 @@ export const frontendApplicationModule = new ContainerModule((bind, unbind, isBo
     bindContributionProvider(bind, CommandContribution);
     bind(QuickOpenContribution).to(CommandQuickOpenContribution);
 
+    bind(ContextKeyService).toSelf().inSingletonScope();
+
     bind(MenuModelRegistry).toSelf().inSingletonScope();
     bindContributionProvider(bind, MenuContribution);
 
@@ -149,6 +153,7 @@ export const frontendApplicationModule = new ContainerModule((bind, unbind, isBo
         return messages;
     });
 
+    bind(ResourceContextKey).toSelf().inSingletonScope();
     bind(CommonFrontendContribution).toSelf().inSingletonScope();
     [FrontendApplicationContribution, CommandContribution, KeybindingContribution, MenuContribution].forEach(serviceIdentifier =>
         bind(serviceIdentifier).toService(CommonFrontendContribution)
@@ -190,7 +195,13 @@ export const frontendApplicationModule = new ContainerModule((bind, unbind, isBo
 
     bind(PreferenceProvider).toSelf().inSingletonScope().whenTargetNamed(PreferenceScope.User);
     bind(PreferenceProvider).toSelf().inSingletonScope().whenTargetNamed(PreferenceScope.Workspace);
-    bind(PreferenceProviderProvider).toFactory(ctx => (scope: PreferenceScope) => ctx.container.getNamed(PreferenceProvider, scope));
+    bind(PreferenceProvider).toSelf().inSingletonScope().whenTargetNamed(PreferenceScope.Folder);
+    bind(PreferenceProviderProvider).toFactory(ctx => (scope: PreferenceScope) => {
+        if (scope === PreferenceScope.Default) {
+            return ctx.container.get(PreferenceSchemaProvider);
+        }
+        return ctx.container.getNamed(PreferenceProvider, scope);
+    });
     bind(PreferenceServiceImpl).toSelf().inSingletonScope();
     bind(PreferenceService).toService(PreferenceServiceImpl);
     bind(FrontendApplicationContribution).toService(PreferenceServiceImpl);

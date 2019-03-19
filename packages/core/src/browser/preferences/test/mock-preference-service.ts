@@ -17,6 +17,7 @@
 import { injectable } from 'inversify';
 import { PreferenceService, PreferenceChange } from '../';
 import { Emitter, Event } from '../../../common';
+import { OverridePreferenceName } from '../preference-contribution';
 
 @injectable()
 export class MockPreferenceService implements PreferenceService {
@@ -24,11 +25,18 @@ export class MockPreferenceService implements PreferenceService {
     dispose() { }
     get<T>(preferenceName: string): T | undefined;
     get<T>(preferenceName: string, defaultValue: T): T;
-    get<T>(preferenceName: string, defaultValue?: T): T | undefined {
+    get<T>(preferenceName: string, defaultValue: T, resourceUri: string): T;
+    get<T>(preferenceName: string, defaultValue?: T, resourceUri?: string): T | undefined {
         return undefined;
     }
     // tslint:disable-next-line:no-any
     set(preferenceName: string, value: any): Promise<void> { return Promise.resolve(); }
     ready: Promise<void> = Promise.resolve();
     readonly onPreferenceChanged: Event<PreferenceChange> = new Emitter<PreferenceChange>().event;
+    overridePreferenceName(options: OverridePreferenceName): string {
+        return options.preferenceName;
+    }
+    overridenPreferenceName(preferenceName: string): OverridePreferenceName | undefined {
+        return undefined;
+    }
 }

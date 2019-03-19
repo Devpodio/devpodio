@@ -13,12 +13,15 @@
  *
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  ********************************************************************************/
+
+// tslint:disable:no-any
+
 import * as theia from '@devpodio/plugin';
 import { CommandRegistryImpl } from './command-registry';
 import { Emitter } from '@devpodio/core/lib/common/event';
 import { CancellationTokenSource } from '@devpodio/core/lib/common/cancellation';
 import { QuickOpenExtImpl } from './quick-open';
-import { MAIN_RPC_CONTEXT, Plugin as InternalPlugin, PluginManager, PluginAPIFactory } from '../api/plugin-api';
+import { MAIN_RPC_CONTEXT, Plugin as InternalPlugin, PluginManager, PluginAPIFactory, MainMessageType } from '../api/plugin-api';
 import { RPCProtocol } from '../api/rpc-protocol';
 import { MessageRegistryExt } from './message-registry';
 import { StatusBarMessageRegistryExt } from './status-bar-message-registry';
@@ -94,6 +97,8 @@ import {
     ColorInformation,
     ColorPresentation,
     OperatingSystem,
+    WebviewPanelTargetArea,
+    FileSystemError
 } from './types-impl';
 import { SymbolKind } from '../api/model';
 import { EditorsAndDocumentsExtImpl } from './editors-and-documents';
@@ -117,13 +122,17 @@ import { ConnectionExtImpl } from './connection-ext';
 import { WebviewsExtImpl } from './webviews';
 import { TasksExtImpl } from './tasks/tasks';
 import { DebugExtImpl } from './node/debug/debug';
+import { FileSystemExtImpl } from './file-system';
 
 export function createAPIFactory(
     rpc: RPCProtocol,
     pluginManager: PluginManager,
     envExt: EnvExtImpl,
     debugExt: DebugExtImpl,
-    preferenceRegistryExt: PreferenceRegistryExtImpl): PluginAPIFactory {
+    preferenceRegistryExt: PreferenceRegistryExtImpl,
+    editorsAndDocumentsExt: EditorsAndDocumentsExtImpl,
+    workspaceExt: WorkspaceExtImpl
+): PluginAPIFactory {
 
     const commandRegistry = rpc.set(MAIN_RPC_CONTEXT.COMMAND_REGISTRY_EXT, new CommandRegistryImpl(rpc));
     const quickOpenExt = rpc.set(MAIN_RPC_CONTEXT.QUICK_OPEN_EXT, new QuickOpenExtImpl(rpc));
@@ -132,45 +141,66 @@ export function createAPIFactory(
     const windowStateExt = rpc.set(MAIN_RPC_CONTEXT.WINDOW_STATE_EXT, new WindowStateExtImpl());
     const notificationExt = rpc.set(MAIN_RPC_CONTEXT.NOTIFICATION_EXT, new NotificationExtImpl(rpc));
     const statusBarExt = new StatusBarExtImpl(rpc);
-    const editorsAndDocuments = rpc.set(MAIN_RPC_CONTEXT.EDITORS_AND_DOCUMENTS_EXT, new EditorsAndDocumentsExtImpl(rpc));
-    const editors = rpc.set(MAIN_RPC_CONTEXT.TEXT_EDITORS_EXT, new TextEditorsExtImpl(rpc, editorsAndDocuments));
-    const documents = rpc.set(MAIN_RPC_CONTEXT.DOCUMENTS_EXT, new DocumentsExtImpl(rpc, editorsAndDocuments));
-    const workspaceExt = rpc.set(MAIN_RPC_CONTEXT.WORKSPACE_EXT, new WorkspaceExtImpl(rpc, editorsAndDocuments));
+    const editors = rpc.set(MAIN_RPC_CONTEXT.TEXT_EDITORS_EXT, new TextEditorsExtImpl(rpc, editorsAndDocumentsExt));
+    const documents = rpc.set(MAIN_RPC_CONTEXT.DOCUMENTS_EXT, new DocumentsExtImpl(rpc, editorsAndDocumentsExt));
     const statusBarMessageRegistryExt = new StatusBarMessageRegistryExt(rpc);
     const terminalExt = rpc.set(MAIN_RPC_CONTEXT.TERMINAL_EXT, new TerminalServiceExtImpl(rpc));
     const outputChannelRegistryExt = new OutputChannelRegistryExt(rpc);
-    const languagesExt = rpc.set(MAIN_RPC_CONTEXT.LANGUAGES_EXT, new LanguagesExtImpl(rpc, documents, commandRegistry));
+    const languagesExt = rpc.set(MAIN_RPC_CONTEXT.LANGUAGES_EXT, new LanguagesExtImpl(rpc, documents));
     const treeViewsExt = rpc.set(MAIN_RPC_CONTEXT.TREE_VIEWS_EXT, new TreeViewsExtImpl(rpc, commandRegistry));
     const webviewExt = rpc.set(MAIN_RPC_CONTEXT.WEBVIEWS_EXT, new WebviewsExtImpl(rpc));
     const tasksExt = rpc.set(MAIN_RPC_CONTEXT.TASKS_EXT, new TasksExtImpl(rpc));
     const connectionExt = rpc.set(MAIN_RPC_CONTEXT.CONNECTION_EXT, new ConnectionExtImpl(rpc));
     const languagesContributionExt = rpc.set(MAIN_RPC_CONTEXT.LANGUAGES_CONTRIBUTION_EXT, new LanguagesContributionExtImpl(rpc, connectionExt));
+    const fileSystemExt = rpc.set(MAIN_RPC_CONTEXT.FILE_SYSTEM_EXT, new FileSystemExtImpl(rpc));
     rpc.set(MAIN_RPC_CONTEXT.DEBUG_EXT, debugExt);
 
     return function (plugin: InternalPlugin): typeof theia {
         const commands: typeof theia.commands = {
             // tslint:disable-next-line:no-any
-            registerCommand(command: theia.Command, handler?: <T>(...args: any[]) => T | Thenable<T>): Disposable {
-                return commandRegistry.registerCommand(command, handler);
+            registerCommand(command: theia.CommandDescription, handler?: <T>(...args: any[]) => T | Thenable<T>, thisArg?: any): Disposable {
+                return commandRegistry.registerCommand(command, handler, thisArg);
             },
             // tslint:disable-next-line:no-any
             executeCommand<T>(commandId: string, ...args: any[]): PromiseLike<T | undefined> {
                 return commandRegistry.executeCommand<T>(commandId, ...args);
             },
-            // tslint:disable-next-line:no-any
-            registerTextEditorCommand(command: theia.Command, callback: (textEditor: theia.TextEditor, edit: theia.TextEditorEdit, ...arg: any[]) => void): Disposable {
-                throw new Error('Function registerTextEditorCommand is not implemented');
+            registerTextEditorCommand(command: string, handler: (textEditor: theia.TextEditor, edit: theia.TextEditorEdit, ...arg: any[]) => void, thisArg?: any): Disposable {
+                return commandRegistry.registerCommand({ id: command }, (...args: any[]): any => {
+                    const activeTextEditor = editors.getActiveEditor();
+                    if (!activeTextEditor) {
+                        console.warn('Cannot execute ' + command + ' because there is no active text editor.');
+                        return undefined;
+                    }
+
+                    return activeTextEditor.edit((edit: theia.TextEditorEdit) => {
+                        args.unshift(activeTextEditor, edit);
+                        handler.apply(thisArg, args);
+                    }).then(result => {
+                        if (!result) {
+                            console.warn('Edits from command ' + command + ' were not applied.');
+                        }
+                    }, err => {
+                        console.warn('An error occurred while running command ' + command, err);
+                    });
+                });
             },
             // tslint:disable-next-line:no-any
-            registerHandler(commandId: string, handler: (...args: any[]) => any): Disposable {
-                return commandRegistry.registerHandler(commandId, handler);
+            registerHandler(commandId: string, handler: (...args: any[]) => any, thisArg?: any): Disposable {
+                return commandRegistry.registerHandler(commandId, handler, thisArg);
             },
             getKeyBinding(commandId: string): PromiseLike<theia.CommandKeyBinding[] | undefined> {
                 return commandRegistry.getKeyBinding(commandId);
+            },
+            getCommands(filterInternal: boolean = false): PromiseLike<string[]> {
+                return commandRegistry.getCommands(filterInternal);
             }
         };
 
         const { onDidChangeActiveTerminal, onDidCloseTerminal, onDidOpenTerminal } = terminalExt;
+        const showInformationMessage = messageRegistryExt.showMessage.bind(messageRegistryExt, MainMessageType.Info);
+        const showWarningMessage = messageRegistryExt.showMessage.bind(messageRegistryExt, MainMessageType.Warning);
+        const showErrorMessage = messageRegistryExt.showMessage.bind(messageRegistryExt, MainMessageType.Error);
         const window: typeof theia.window = {
             get activeTerminal() {
                 return terminalExt.activeTerminal;
@@ -244,24 +274,9 @@ export function createAPIFactory(
             showWorkspaceFolderPick(options?: theia.WorkspaceFolderPickOptions): PromiseLike<theia.WorkspaceFolder | undefined> {
                 return workspaceExt.pickWorkspaceFolder(options);
             },
-            showInformationMessage(message: string,
-                optionsOrFirstItem: theia.MessageOptions | string | theia.MessageItem,
-                // tslint:disable-next-line:no-any
-                ...items: any[]): PromiseLike<any> {
-                return messageRegistryExt.showInformationMessage(message, optionsOrFirstItem, items);
-            },
-            showWarningMessage(message: string,
-                optionsOrFirstItem: theia.MessageOptions | string | theia.MessageItem,
-                // tslint:disable-next-line:no-any
-                ...items: any[]): PromiseLike<any> {
-                return messageRegistryExt.showWarningMessage(message, optionsOrFirstItem, items);
-            },
-            showErrorMessage(message: string,
-                optionsOrFirstItem: theia.MessageOptions | string | theia.MessageItem,
-                // tslint:disable-next-line:no-any
-                ...items: any[]): PromiseLike<any> {
-                return messageRegistryExt.showErrorMessage(message, optionsOrFirstItem, items);
-            },
+            showInformationMessage,
+            showWarningMessage,
+            showErrorMessage,
             showOpenDialog(options: theia.OpenDialogOptions): PromiseLike<Uri[] | undefined> {
                 return dialogsExt.showOpenDialog(options);
             },
@@ -289,7 +304,7 @@ export function createAPIFactory(
             },
             createWebviewPanel(viewType: string,
                 title: string,
-                showOptions: theia.ViewColumn | { viewColumn: theia.ViewColumn, preserveFocus?: boolean },
+                showOptions: theia.ViewColumn | theia.WebviewPanelShowOptions,
                 options: theia.WebviewPanelOptions & theia.WebviewOptions): theia.WebviewPanel {
                 return webviewExt.createWebview(viewType, title, showOptions, options, Uri.file(plugin.pluginPath));
             },
@@ -331,6 +346,9 @@ export function createAPIFactory(
         };
 
         const workspace: typeof theia.workspace = {
+            get rootPath(): string | undefined {
+                return workspaceExt.rootPath;
+            },
             get workspaceFolders(): theia.WorkspaceFolder[] | undefined {
                 return workspaceExt.workspaceFolders;
             },
@@ -353,8 +371,7 @@ export function createAPIFactory(
                 return documents.onDidAddDocument(listener, thisArg, disposables);
             },
             onWillSaveTextDocument(listener, thisArg?, disposables?) {
-                // TODO to implement
-                return { dispose: () => {}};
+                return documents.onWillSaveTextDocument(listener, thisArg, disposables);
             },
             onDidSaveTextDocument(listener, thisArg?, disposables?) {
                 return documents.onDidSaveTextDocument(listener, thisArg, disposables);
@@ -391,8 +408,11 @@ export function createAPIFactory(
                 ignoreDeleteEvents?: boolean): theia.FileSystemWatcher {
                 return workspaceExt.createFileSystemWatcher(globPattern, ignoreCreateEvents, ignoreChangeEvents, ignoreDeleteEvents);
             },
-            findFiles(include: theia.GlobPattern, exclude?: theia.GlobPattern | undefined, maxResults?: number, token?: CancellationToken): PromiseLike<Uri[]> {
-                return workspaceExt.findFiles(include, undefined, maxResults, token);
+            findFiles(include: theia.GlobPattern, exclude?: theia.GlobPattern | null, maxResults?: number, token?: CancellationToken): PromiseLike<Uri[]> {
+                return workspaceExt.findFiles(include, exclude, maxResults, token);
+            },
+            saveAll(includeUntitled?: boolean): PromiseLike<boolean> {
+                return editors.saveAll(includeUntitled);
             },
             applyEdit(edit: theia.WorkspaceEdit): PromiseLike<boolean> {
                 return editors.applyWorkspaceEdit(edit);
@@ -400,16 +420,25 @@ export function createAPIFactory(
             registerTextDocumentContentProvider(scheme: string, provider: theia.TextDocumentContentProvider): theia.Disposable {
                 return workspaceExt.registerTextDocumentContentProvider(scheme, provider);
             },
-            registerFileSystemProvider(scheme: string, provider: theia.FileSystemProvider, options?: { isCaseSensitive?: boolean, isReadonly?: boolean }): theia.Disposable {
-                // FIXME: to implement
-                return new Disposable(() => { });
+            registerFileSystemProvider(scheme: string, provider: theia.FileSystemProvider): theia.Disposable {
+                return fileSystemExt.registerFileSystemProvider(scheme, provider);
             },
-            getWorkspaceFolder(uri: theia.Uri): theia.WorkspaceFolder | Uri | undefined {
+            getWorkspaceFolder(uri: theia.Uri): theia.WorkspaceFolder | undefined {
                 return workspaceExt.getWorkspaceFolder(uri);
             },
             asRelativePath(pathOrUri: theia.Uri | string, includeWorkspace?: boolean): string | undefined {
                 return workspaceExt.getRelativePath(pathOrUri, includeWorkspace);
             },
+            registerTaskProvider(type: string, provider: theia.TaskProvider): theia.Disposable {
+                return tasks.registerTaskProvider(type, provider);
+            },
+            // Experimental API https://github.com/theia-ide/theia/issues/4167
+            onDidRenameFile(listener, thisArg?, disposables?): theia.Disposable {
+                return workspaceExt.onDidRenameFile(listener, thisArg, disposables);
+            },
+            onWillRenameFile(listener, thisArg?, disposables?): theia.Disposable {
+                return workspaceExt.onWillRenameFile(listener, thisArg, disposables);
+            }
         };
 
         const env: typeof theia.env = {
@@ -583,6 +612,10 @@ export function createAPIFactory(
                 return tasksExt.registerTaskProvider(type, provider);
             },
 
+            get taskExecutions(): ReadonlyArray<theia.TaskExecution> {
+                return tasksExt.taskExecutions;
+            },
+
             onDidStartTask(listener, thisArg?, disposables?) {
                 return tasksExt.onDidStartTask(listener, thisArg, disposables);
             },
@@ -676,7 +709,9 @@ export function createAPIFactory(
             ColorPresentation,
             FoldingRange,
             FoldingRangeKind,
-            OperatingSystem
+            OperatingSystem,
+            WebviewPanelTargetArea,
+            FileSystemError
         };
     };
 }

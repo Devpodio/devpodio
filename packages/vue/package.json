@@ -8,17 +8,17 @@
     "theia-extension"
   ],
   "license": "Apache-2.0",
-  "version": "1.0.17",
+  "version": "0.4.0-latest.1",
   "files": [
     "data",
     "lib",
     "src"
   ],
   "dependencies": {
-    "@devpodio/core": "^1.0.17",
-    "@devpodio/languages": "^1.0.17",
-    "@devpodio/monaco": "^1.0.17",
-    "@devpodio/vue-language-server": "^0.1.0"
+    "@devpodio/core": "^0.4.0-latest.1",
+    "@devpodio/languages": "^0.4.0-latest.1",
+    "@devpodio/monaco": "^0.4.0-latest.1",
+    "vue-language-server": "^0.0.45"
   },
   "devDependencies": {
     "rimraf": "^2.6.2",

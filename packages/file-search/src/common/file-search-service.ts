@@ -38,6 +38,8 @@ export namespace FileSearchService {
         fuzzyMatch?: boolean
         limit?: number
         useGitIgnore?: boolean
+        /** when `undefined`, no excludes will apply, when empty array, default excludes will apply */
         defaultIgnorePatterns?: string[]
+        includePatterns?: string[]
     }
 }

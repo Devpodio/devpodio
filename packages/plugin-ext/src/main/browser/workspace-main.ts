@@ -67,10 +67,7 @@ export class WorkspaceMainImpl implements WorkspaceMain {
 
         this.inPluginFileSystemWatcherManager = new InPluginFileSystemWatcherManager(this.proxy, container);
 
-        this.workspaceService.roots.then(roots => {
-            this.processWorkspaceFoldersChanged(roots);
-        });
-
+        this.processWorkspaceFoldersChanged(this.workspaceService.tryGetRoots());
         this.workspaceService.onWorkspaceChanged(roots => {
             this.processWorkspaceFoldersChanged(roots);
         });
@@ -81,13 +78,13 @@ export class WorkspaceMainImpl implements WorkspaceMain {
             return;
         }
         this.roots = roots;
+        this.proxy.$onWorkspaceFoldersChanged({ roots });
 
         await this.storagePathService.updateStoragePath(roots);
 
         const keyValueStorageWorkspacesData = await this.pluginServer.keyValueStorageGetAll(false);
         this.storageProxy.$updatePluginsWorkspaceData(keyValueStorageWorkspacesData);
 
-        this.proxy.$onWorkspaceFoldersChanged({ roots });
     }
 
     private isAnyRootChanged(roots: FileStat[]): boolean {
@@ -155,9 +152,24 @@ export class WorkspaceMainImpl implements WorkspaceMain {
         });
     }
 
-    async $startFileSearch(includePattern: string, excludePatternOrDisregardExcludes?: string | false,
-        maxResults?: number, token?: theia.CancellationToken): Promise<UriComponents[]> {
-        const uriStrs = await this.fileSearchService.find(includePattern, { rootUris: this.roots.map(r => r.uri) });
+    async $startFileSearch(includePattern: string, includeFolderUri: string | undefined, excludePatternOrDisregardExcludes?: string | false,
+        maxResults?: number): Promise<UriComponents[]> {
+        const rootUris = includeFolderUri ? [includeFolderUri] : this.roots.map(r => r.uri);
+        const opts: FileSearchService.Options = { rootUris };
+        if (includePattern) {
+            opts.includePatterns = [includePattern];
+        }
+        if (typeof excludePatternOrDisregardExcludes === 'string') {
+            if (excludePatternOrDisregardExcludes === '') { // default excludes
+                opts.defaultIgnorePatterns = [];
+            } else {
+                opts.defaultIgnorePatterns = [excludePatternOrDisregardExcludes];
+            }
+        }
+        if (typeof maxResults === 'number') {
+            opts.limit = maxResults;
+        }
+        const uriStrs = await this.fileSearchService.find('', opts);
         return uriStrs.map(uriStr => Uri.parse(uriStr));
     }
 

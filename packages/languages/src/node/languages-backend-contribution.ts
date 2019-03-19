@@ -17,11 +17,14 @@
 // tslint:disable:no-any
 
 import { injectable, inject, named } from 'inversify';
-import { ContributionProvider } from '@devpodio/core/lib/common';
-import { LanguageServerContribution } from './language-server-contribution';
-import { ILogger } from '@devpodio/core/lib/common/logger';
+import { ContributionProvider, ILogger } from '@devpodio/core/lib/common';
+import { IConnection } from 'vscode-ws-jsonrpc/lib/server';
+// tslint:disable-next-line:no-implicit-dependencies
+import { ResponseError, ErrorCodes, ResponseMessage, Message, isRequestMessage } from 'vscode-jsonrpc/lib/messages';
+import { InitializeRequest, ShutdownRequest } from 'vscode-languageserver-protocol';
 import { MessagingService } from '@devpodio/core/lib/node/messaging/messaging-service';
 import { LanguageContribution } from '../common';
+import { LanguageServerContribution } from './language-server-contribution';
 
 @injectable()
 export class LanguagesBackendContribution implements MessagingService.Contribution, LanguageContribution.Service {
@@ -32,12 +35,12 @@ export class LanguagesBackendContribution implements MessagingService.Contributi
     @inject(ContributionProvider) @named(LanguageServerContribution)
     protected readonly contributors: ContributionProvider<LanguageServerContribution>;
 
-    protected readonly ids = new Map<string, number>();
+    protected nextId: number = 1;
     protected readonly sessions = new Map<string, any>();
 
     async create(contributionId: string, startParameters: any): Promise<string> {
-        const id = (this.ids.get(contributionId) || 0) + 1;
-        this.ids.set(contributionId, id);
+        const id = this.nextId;
+        this.nextId++;
         const sessionId = String(id);
         this.sessions.set(sessionId, startParameters);
         return sessionId;
@@ -49,18 +52,46 @@ export class LanguagesBackendContribution implements MessagingService.Contributi
     configure(service: MessagingService): void {
         for (const contribution of this.contributors.getContributions()) {
             const path = LanguageContribution.getPath(contribution);
-            service.forward(path, ({ id }: { id: string }, connection) => {
+            service.forward(path, async ({ id }: { id: string }, connection) => {
                 try {
                     const parameters = this.sessions.get(id);
                     connection.onClose(() => this.destroy(id));
-                    contribution.start(connection, { sessionId: id, parameters });
+                    await contribution.start(connection, { sessionId: id, parameters });
                 } catch (e) {
                     this.logger.error(`Error occurred while starting language contribution. ${path}.`, e);
-                    connection.dispose();
-                    throw e;
+                    this.handleStartError(e, connection);
                 }
             });
         }
+    }
+
+    protected handleStartError(cause: any, connection: IConnection): void {
+        connection.reader.listen((message: Message) => {
+            if (isRequestMessage(message)) {
+                const { method, jsonrpc, id } = message;
+                if (method === InitializeRequest.type.method) {
+                    const error = new ResponseError<string>(ErrorCodes.serverErrorStart, `${cause}`).toJson();
+                    connection.writer.write(<ResponseMessage>{
+                        jsonrpc,
+                        id,
+                        error
+                    });
+                } else if (method === ShutdownRequest.type.method) {
+                    // The client expects a `null` as the response.
+                    // https://microsoft.github.io/language-server-protocol/specification#shutdown
+                    const data = null; // tslint:disable-line:no-null-keyword
+                    connection.writer.write(<ResponseMessage>{
+                        jsonrpc,
+                        id,
+                        data
+                    });
+                    // We do not dispose the `connection` here.
+                    // The client contribution will do it for us on LS start-up error.
+                }
+            } else {
+                this.logger.warn(`Ignored request message: ${message}`);
+            }
+        });
     }
 
 }
