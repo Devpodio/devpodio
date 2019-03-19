@@ -1,12 +1,12 @@
 {
   "name": "@devpodio/keymaps",
-  "version": "0.4.0",
+  "version": "0.4.0-latest.1",
   "description": "Theia - Custom Keymaps Extension",
   "dependencies": {
-    "@devpodio/core": "^0.4.0",
-    "@devpodio/monaco": "^0.4.0",
-    "@devpodio/userstorage": "^0.4.0",
-    "@devpodio/workspace": "^0.4.0",
+    "@devpodio/core": "^0.4.0-latest.1",
+    "@devpodio/monaco": "^0.4.0-latest.1",
+    "@devpodio/userstorage": "^0.4.0-latest.1",
+    "@devpodio/workspace": "^0.4.0-latest.1",
     "@types/lodash.debounce": "4.0.3",
     "ajv": "^6.10.0",
     "fuzzy": "^0.1.3",
@@ -14,7 +14,7 @@
     "lodash.debounce": "^4.0.8"
   },
   "devDependencies": {
-    "@devpodio/ext-scripts": "^0.4.0",
+    "@devpodio/ext-scripts": "^0.4.0-latest.1",
     "@types/temp": "^0.8.29",
     "temp": "^0.8.3"
   },
