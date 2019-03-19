@@ -8,16 +8,14 @@
 
 <div id="badges" align="center">
 
-  [![Gitpod - Code Now](https://img.shields.io/badge/Gitpod-code%20now-blue.svg?longCache=true)](https://gitpod.io#https://github.com/theia-ide/theia)
-  [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-curved)](https://github.com/theia-ide/theia/labels/help%20wanted)
-  [![Spectrum](https://img.shields.io/badge/Chat-on%20Spectrum-blue.svg)](https://spectrum.chat/theia)
-  [![Build Status](https://travis-ci.org/theia-ide/theia.svg?branch=master)](https://travis-ci.org/theia-ide/theia)
-  [![Build status](https://ci.appveyor.com/api/projects/status/02s4d40orokl3njl/branch/master?svg=true)](https://ci.appveyor.com/project/kittaakos/theia/branch/master)
-  [![Open questions](https://img.shields.io/badge/Open-questions-blue.svg?style=flat-curved)](https://github.com/theia-ide/theia/labels/question)
+  [![Gitpod - Code Now](https://img.shields.io/badge/Gitpod-code%20now-blue.svg?longCache=true)](https://gitpod.io#https://github.com/devpodio/devpod)
+  [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-curved)](https://github.com/devpodio/devpod/labels/help%20wanted)
+  [![Build Status](https://travis-ci.org/devpodio/devpod.svg?branch=master)](https://travis-ci.org/devpodio/devpod)
+  [![Open questions](https://img.shields.io/badge/Open-questions-blue.svg?style=flat-curved)](https://github.com/devpodio/devpod/labels/question)
   [![Open bugs](https://img.shields.io/badge/Open-bugs-red.svg?style=flat-curved)](https://github.com/theia-ide/theia/labels/bug)
 
   Eclipse Theia is an extensible platform to develop full-fledged multi-language Cloud & Desktop IDE-like products with state-of-the-art web  technologies.
-
+<p><small style="font-weight:bold;">This is a for of Theia Ide that adds PWA for caching and web app</small></p>
 </div>
 
 <div style='margin:0 auto;width:80%;'>
@@ -78,9 +76,9 @@ Read below how to engage with Theia community:
  - __Debugging__
 
    A visual debugger leveraging the Debug Server Protocol defined by the VS Code team.
-   
+
  - __Plug-in System__
- 
+
    A plug-in system supporting VS Code extensions.
 
  - __Workbench Improvements__
@@ -92,7 +90,7 @@ Read below how to engage with Theia community:
    Integration with testing frameworks, based on a Test Adapter Protocol.
 
  - __Robustness and Improved UX__
- 
+
    We will further work on simplifying Theia and its UI / UX, improve the performance and keep working on bug reports that are rolling in.
 
  - __More__
