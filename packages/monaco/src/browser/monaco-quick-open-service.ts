@@ -59,11 +59,7 @@ export class MonacoQuickOpenService extends QuickOpenService {
     }
 
     @postConstruct()
-<<<<<<< HEAD
     protected init(): void {
-=======
-    protected init(): void {
->>>>>>> 8f429290... fix #4098: preserve focus when open the quick pick recursively
         this.inQuickOpenKey = this.contextKeyService.createKey<boolean>('inQuickOpen', false);
     }
 

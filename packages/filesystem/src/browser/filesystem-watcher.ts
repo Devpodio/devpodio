@@ -180,14 +180,6 @@ export class FileSystemWatcher implements Disposable {
         return this.getIgnored(uri).then(ignored => ({
             ignored
         }));
-        return toDispose;
-    }
-
-    protected async createWatchOptions(): Promise<WatchOptions> {
-        const ignored = await this.getIgnored();
-        return ({
-            ignored
-        });
     }
 
     protected async getIgnored(uri: string): Promise<string[]> {

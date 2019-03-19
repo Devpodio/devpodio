@@ -16,7 +16,6 @@
 
 import { injectable } from 'inversify';
 
-
 export interface ContextKey<T> {
     set(value: T | undefined): void;
     reset(): void;

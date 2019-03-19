@@ -7,7 +7,7 @@
     "@devpodio/filesystem": "^0.4.0",
     "@devpodio/variable-resolver": "^0.4.0",
     "@types/fs-extra": "^4.0.2",
-    "ajv": "^6.5.3",
+    "ajv": "^6.10.0",
     "fs-extra": "^4.0.2",
     "jsonc-parser": "^2.0.2",
     "moment": "^2.21.0",

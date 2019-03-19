@@ -255,9 +255,7 @@ export class CommonFrontendContribution implements FrontendApplicationContributi
         registry.registerMenuAction(CommonMenus.FILE_AUTOSAVE, {
             commandId: CommonCommands.AUTO_SAVE.id
         });
-        registry.registerMenuAction(CommonMenus.FILE_RELOAD, {
-            commandId: CommonCommands.RELOAD.id
-        });
+
         registry.registerMenuAction(CommonMenus.FILE_NEW_WINDOW, {
             commandId: CommonCommands.NEW_WINDOW.id
         });
@@ -554,16 +552,8 @@ export class CommonFrontendContribution implements FrontendApplicationContributi
                 keybinding: 'ctrlcmd+tab'
             },
             {
-                command: CommonCommands.NEXT_TAB.id,
-                keybinding: 'ctrlcmd+alt+d'
-            },
-            {
                 command: CommonCommands.PREVIOUS_TAB.id,
                 keybinding: 'ctrlcmd+shift+tab'
-            },
-            {
-                command: CommonCommands.PREVIOUS_TAB.id,
-                keybinding: 'ctrlcmd+alt+a'
             },
             {
                 command: CommonCommands.CLOSE_TAB.id,
@@ -598,10 +588,6 @@ export class CommonFrontendContribution implements FrontendApplicationContributi
             {
                 command: CommonCommands.SAVE_ALL.id,
                 keybinding: 'ctrlcmd+alt+s'
-            },
-            {
-                command: CommonCommands.RELOAD.id,
-                keybinding: 'ctrlcmd+f5'
             }
         );
     }

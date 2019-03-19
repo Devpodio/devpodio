@@ -185,7 +185,7 @@ export class BackendApplication {
 
         server.listen(port, hostname, () => {
             const scheme = this.cliParams.ssl ? 'https' : 'http';
-            this.logger.info(`Theia app listening on ${scheme}://${hostname || 'localhost'}:${server.address().port}.`);
+            this.logger.info(`Theia app listening on ${scheme}://${hostname || 'localhost'}:${port}.`);
             deferred.resolve(server);
         });
 

@@ -18,7 +18,7 @@ import { injectable, inject, named } from 'inversify';
 import { ILogger } from '@devpodio/core/lib/common';
 import { Process, ProcessType, ProcessOptions } from './process';
 import { ProcessManager } from './process-manager';
-import { IPty, spawn } from '@devpodio/node-pty';
+import { IPty, spawn } from '@theia/node-pty';
 import { MultiRingBuffer, MultiRingBufferReadableStream } from './multi-ring-buffer';
 import { signame } from './utils';
 

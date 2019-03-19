@@ -94,10 +94,10 @@
       "@devpodio/callhierarchy/lib/*": [
         "packages/callhierarchy/src/*"
       ],
-      "@theia/typehierarchy/lib/*": [
+      "@devpodio/typehierarchy/lib/*": [
         "packages/typehierarchy/src/*"
       ],
-      "@theia/variable-resolver/lib/*": [
+      "@devpodio/variable-resolver/lib/*": [
         "packages/variable-resolver/src/*"
       ],
       "@devpodio/editorconfig/lib/*": [

@@ -17,9 +17,14 @@
 import * as ws from 'ws';
 import * as http from 'http';
 import * as https from 'https';
+
 import { WebSocketChannel } from '../../../common/messaging/web-socket-channel';
 import { Disposable } from '../../../common/disposable';
-
+interface AddressInfo {
+    address: string;
+    family: string;
+    port: number;
+}
 export class TestWebSocketChannel extends WebSocketChannel {
 
     constructor({ server, path }: {
@@ -27,7 +32,8 @@ export class TestWebSocketChannel extends WebSocketChannel {
         path: string
     }) {
         super(0, content => socket.send(content));
-        const socket = new ws(`ws://localhost:${server.address().port}${WebSocketChannel.wsPath}`);
+        const { port } = server.address() as AddressInfo;
+        const socket = new ws(`ws://localhost:${port}${WebSocketChannel.wsPath}`);
         socket.on('error', error =>
             this.fireError(error)
         );

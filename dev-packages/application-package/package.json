@@ -15,8 +15,7 @@
   },
   "homepage": "https://github.com/theia-ide/theia",
   "files": [
-    "lib",
-    "src"
+    "lib"
   ],
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",

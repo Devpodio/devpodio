@@ -22,8 +22,7 @@ export class WebpackGenerator extends AbstractGenerator {
 
     async generate(): Promise<void> {
         await this.write(this.configPath, this.compileWebpackConfig());
-        await this.write(this.manifestPath, `${this.compileManifest()}`);
-        await this.write(this.swPath, `${this.compileServiceWorker()}`);
+        await this.write(this.manifestPath, this.compileManifest());
     }
 
     get configPath(): string {
@@ -32,10 +31,6 @@ export class WebpackGenerator extends AbstractGenerator {
 
     get manifestPath(): string {
         return this.pck.path('lib/json/manifest.json');
-    }
-
-    get swPath(): string {
-        return this.pck.path('lib/sw.js');
     }
 
     protected getTemplate(templateName: string): string {
@@ -53,9 +48,6 @@ export class WebpackGenerator extends AbstractGenerator {
         return fs.readFileSync(this.getTemplate('manifest')).toString();
     }
 
-    protected compileServiceWorker(): string {
-        return fs.readFileSync(this.getTemplate('serviceWorker')).toString();
-    }
     protected compileWebpackConfig(): string {
         return `// @ts-check
 const path = require('path');
@@ -67,7 +59,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const TerserWebpackPlugin = require('terser-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const ManifestPlugin = require('webpack-manifest-plugin');
+const PreloadWebpackPlugin = require('preload-webpack-plugin');
+const {GenerateSW} = require('workbox-webpack-plugin');
 
 const outputPath = path.resolve(__dirname, 'lib');
 const { mode, env: { hashed } } = yargs.option('mode', {
@@ -90,7 +83,7 @@ const iconPath = '${this.resolveLogo()}'
 module.exports = {
     entry: path.resolve(__dirname, 'src-gen/frontend/index.js'),
     output: {
-        filename: hashed ? '[contenthash].js' : 'bundle.js',
+        filename: hashed ? 'js/[contenthash:8].js' : 'js/bundle.js',
         path: outputPath
     },
     target: '${this.ifBrowser('web', 'electron-renderer')}',
@@ -121,12 +114,16 @@ module.exports = {
                 }
             }
         },
+        minimize: true,
         minimizer: [
             new TerserWebpackPlugin({
                 parallel: true,
                 cache: true,
                 sourceMap: false,
-                extractComments: 'all'
+                extractComments: true,
+                terserOptions: {
+                    output: { comments: false }
+                }
             }),
             new OptimizeCSSAssetsPlugin({})
         ]
@@ -153,36 +150,41 @@ module.exports = {
                 use: [
                     {
                         loader: 'style-loader/useable',
-                        options: { singleton: true }
+                        options: { singleton: true,  attrs: { id: 'theia-theme' } }
                     },
                     { loader: 'css-loader' },
                 ]
             },
             {
-                test: /\\.(ttf|eot|svg)(\\?v=\\d+\\.\\d+\\.\\d+)?$/,
-                loader: 'url-loader?limit=10000&mimetype=image/svg+xml'
-            },
-            {
                 test: /\\.(jpg|png|gif)$/,
                 loader: 'file-loader',
                 options: {
-                    name: '[hash].[ext]',
+                    name: '[hash].[ext]'
                 }
             },
             {
-                // see https://github.com/theia-ide/theia/issues/556
-                test: /source-map-support/,
-                loader: 'ignore-loader'
-            },
-            {
-                test: /\\.js$/,
-                enforce: 'pre',
-                loader: 'source-map-loader',
-                exclude: /jsonc-parser|fast-plist|onigasm|(monaco-editor.*)/
+                test: /\\.(ttf|eot|svg)(\\?v=\\d+\\.\\d+\\.\\d+)?$/,
+                 use: [{
+                    loader: 'url-loader',
+                    options: {
+                        name: '[hash].[ext]',
+                        limit: 10000,
+                        mimetype: 'image/svg+xml',
+                        outputPath: 'fonts/'
+                    }
+                }]
             },
             {
                 test: /\\.woff(2)?(\\?v=[0-9]\\.[0-9]\\.[0-9])?$/,
-                loader: "url-loader?limit=10000&mimetype=application/font-woff"
+                use: [{
+                    loader: 'url-loader',
+                    options: {
+                        name: '[hash].[ext]',
+                        limit: 10000,
+                        mimetype: 'application/font-woff',
+                        outputPath: 'fonts/'
+                    }
+                }]
             },
             {
                 test: /node_modules[\\\\/](vscode-languageserver-types|vscode-uri|jsonc-parser)/,
@@ -206,19 +208,30 @@ module.exports = {
             'vscode': require.resolve('monaco-languageclient/lib/vscode-compatibility')
         }`)}
     },
-    devtool: 'source-map',
+    devtool:  false,
     plugins: [
-        new ManifestPlugin({
-            fileName: 'pwa.manifest.json'
-        }),
         new MiniCssExtractPlugin({
             filename: "[contenthash].css",
         }),
         new webpack.optimize.ModuleConcatenationPlugin(),
         new HtmlWebpackPlugin({
             filename: 'index.html',
-            template: 'src-gen/frontend/index.html',
-            inject: 'head'
+            template: 'src-gen/frontend/index.html'
+        }),
+        new PreloadWebpackPlugin({
+            rel: 'preload',
+            as(entry) {
+                   if (/\\.css$/.test(entry)) return 'style';
+                if (/\\.woff$/.test(entry)) return 'font';
+                if (/\\.png$/.test(entry)) return 'image';
+                return 'script';
+            },
+            include: 'allChunks'
+        }),
+        new GenerateSW({
+            swDest: 'sw.js',
+            clientsClaim: true,
+            skipWaiting: true
         }),
         new webpack.HashedModuleIdsPlugin(),
         new CopyWebpackPlugin([${this.ifMonaco(() => `

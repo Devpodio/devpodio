@@ -83,7 +83,7 @@ export class TerminalWidgetImpl extends TerminalWidget implements StatefulWidget
 
         if (this.options.destroyTermOnClose === true) {
             this.toDispose.push(Disposable.create(() =>
-                this.term.dispose()
+                this.term.destroy()
             ));
         }
 
@@ -119,9 +119,14 @@ export class TerminalWidgetImpl extends TerminalWidget implements StatefulWidget
             }
         }));
 
-        this.toDispose.push(this.themeService.onThemeChange(() => {
+        this.toDispose.push(this.themeService.onThemeChange(c => {
             const changedProps = this.getCSSPropertiesFromPage();
-            this.term.setOption('theme', changedProps.termTheme);
+            this.term.setOption('theme', {
+                foreground: changedProps.foreground,
+                background: changedProps.background,
+                cursor: changedProps.foreground,
+                selection: cssProps.selection
+            });
         }));
         this.attachCustomKeyEventHandler();
         this.term.on('title', (title: string) => {

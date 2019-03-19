@@ -18,6 +18,7 @@
     "@types/sinon": "^2.3.5",
     "@types/temp": "^0.8.29",
     "@types/webdriverio": "^4.7.0",
+    "ajv": "^6.10.0",
     "chai": "^4.1.0",
     "chai-string": "^1.4.0",
     "concurrently": "^3.5.0",

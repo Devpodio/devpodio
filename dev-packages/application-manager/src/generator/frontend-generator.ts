@@ -14,6 +14,7 @@
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  ********************************************************************************/
 
+import * as paths from 'path';
 import { AbstractGenerator } from './abstract-generator';
 import { existsSync, readFileSync } from 'fs';
 
@@ -23,11 +24,14 @@ export class FrontendGenerator extends AbstractGenerator {
         const frontendModules = this.pck.targetFrontendModules;
         await this.write(this.pck.frontend('index.html'), this.compileIndexHtml(frontendModules));
         await this.write(this.pck.frontend('index.js'), this.compileIndexJs(frontendModules));
+        await this.write(this.pck.frontend('passive-events.js'), this.compilePassiveJs(frontendModules));
         if (this.pck.isElectron()) {
             await this.write(this.pck.frontend('electron-main.js'), this.compileElectronMain());
         }
     }
-
+    protected getTemplate(templateName: string): string {
+        return paths.resolve(__dirname, '../../src/generator/templates', templateName + '.template');
+    }
     protected compileIndexPreload(frontendModules: Map<string, string>): string {
         const template = this.pck.props.generator.config.preloadTemplate;
         if (!template) {
@@ -57,6 +61,10 @@ export class FrontendGenerator extends AbstractGenerator {
 
 <body>
   <div class="theia-preload">${this.compileIndexPreload(frontendModules)}</div>
+  <script type="application/javascript">
+    "serviceWorker"in navigator&&window.addEventListener("load",()=>{navigator.serviceWorker.register("/sw.js")
+    .then(e=>{console.log("SW registered: ",e)}).catch(e=>{console.log("SW registration failed: ",e)})});
+ </script>
 </body>
 
 </html>`;
@@ -66,10 +74,13 @@ export class FrontendGenerator extends AbstractGenerator {
         return `
   <meta charset="UTF-8">`;
     }
-
+    protected compilePassiveJs(frontendModules: Map<string, string>): string {
+        return readFileSync(this.getTemplate('passive')).toString();
+    }
     protected compileIndexJs(frontendModules: Map<string, string>): string {
         return `// @ts-check
 ${this.ifBrowser("require('es6-promise/auto');")}
+require('./passive-events');
 require('reflect-metadata');
 const { Container } = require('inversify');
 const { FrontendApplication } = require('@devpodio/core/lib/browser');
