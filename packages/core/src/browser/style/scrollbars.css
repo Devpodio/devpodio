@@ -14,7 +14,7 @@
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  ********************************************************************************/
 
-@import url('~perfect-scrollbar/css/perfect-scrollbar.css');
+@import url('~@devpodio/perfect-scrollbar/dist/perfect-scrollbar.css');
 
 ::-webkit-scrollbar {
     height: var(--theia-scrollbar-width);

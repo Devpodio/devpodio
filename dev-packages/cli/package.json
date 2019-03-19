@@ -1,6 +1,6 @@
 {
   "name": "@devpodio/cli",
-  "version": "0.4.0-latest.1",
+  "version": "0.4.0-latest.3",
   "description": "Theia CLI.",
   "publishConfig": {
     "access": "public"
@@ -31,6 +31,6 @@
     "docs": "echo 'skip'"
   },
   "dependencies": {
-    "@devpodio/application-manager": "^0.4.0-latest.1"
+    "@devpodio/application-manager": "^0.4.0-latest.3"
   }
 }

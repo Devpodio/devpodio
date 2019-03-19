@@ -14,5 +14,5 @@
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  ********************************************************************************/
 
-export const VUE_LANGUAGE_ID = 'vue';
+export const VUE_LANGUAGE_ID_HTML = 'vue';
 export const VUE_LANGUAGE_NAME = 'Vue';

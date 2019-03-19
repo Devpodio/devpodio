@@ -14,7 +14,7 @@
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  ********************************************************************************/
 
-import PerfectScrollbar from 'perfect-scrollbar';
+import PerfectScrollbar from '@devpodio/perfect-scrollbar';
 import { TabBar, Title, Widget } from '@phosphor/widgets';
 import { VirtualElement, h, VirtualDOM, ElementInlineStyle } from '@phosphor/virtualdom';
 import { MenuPath } from '../../common';
@@ -188,6 +188,10 @@ export class ScrollableTabBar extends TabBar<Widget> {
     private pendingReveal?: Promise<void>;
 
     constructor(options?: TabBar.IOptions<Widget> & PerfectScrollbar.Options) {
+        if (options) {
+            options.colorY = '#699737';
+            options.colorX = '#699737';
+        }
         super(options);
         this.scrollBarFactory = () => new PerfectScrollbar(this.scrollbarHost, options);
     }

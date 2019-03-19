@@ -16,7 +16,26 @@
 
 import { LanguageGrammarDefinitionContribution, TextmateRegistry } from '@devpodio/monaco/lib/browser/textmate';
 import { injectable } from 'inversify';
-import { VUE_LANGUAGE_ID, VUE_LANGUAGE_NAME } from '../common';
+import { VUE_LANGUAGE_ID_HTML, VUE_LANGUAGE_NAME } from '../common';
+
+const EMPTY_ELEMENTS: string[] = [
+    'area',
+    'base',
+    'br',
+    'col',
+    'embed',
+    'hr',
+    'img',
+    'input',
+    'keygen',
+    'link',
+    'menuitem',
+    'meta',
+    'param',
+    'source',
+    'track',
+    'wbr'
+];
 
 @injectable()
 export class VueGrammarContribution implements LanguageGrammarDefinitionContribution {
@@ -25,39 +44,22 @@ export class VueGrammarContribution implements LanguageGrammarDefinitionContribu
 
     registerTextmateLanguage(registry: TextmateRegistry) {
         monaco.languages.register({
-            id: VUE_LANGUAGE_ID,
+            id: VUE_LANGUAGE_ID_HTML,
             extensions: ['.vue'],
             aliases: [VUE_LANGUAGE_NAME, 'vue']
         });
-        monaco.languages.setLanguageConfiguration(VUE_LANGUAGE_ID, {
+        monaco.languages.setLanguageConfiguration(VUE_LANGUAGE_ID_HTML, {
             wordPattern: /(-?\d*\.\d\w*)|([^\`\~\!\@\$\^\&\*\(\)\=\+\[\{\]\}\\\|\;\:\'\"\,\.\<\>\/\s]+)/g,
-
-            comments: {
-                lineComment: '//',
-                blockComment: ['/*', '*/']
-            },
-
-            brackets: [
-                ['<', '>'],
-                ['{', '}'],
-                ['(', ')']
-            ],
-
-            autoClosingPairs: [
-                { open: '{', close: '}' },
-                { open: '[', close: ']' },
-                { open: '(', close: ')' },
-                { open: '"', close: '"' },
-                { open: '\'', close: '\'' }
-            ],
-
-            surroundingPairs: [
-                { open: '"', close: '"' },
-                { open: '\'', close: '\'' },
-                { open: '{', close: '}' },
-                { open: '[', close: ']' },
-                { open: '(', close: ')' },
-                { open: '<', close: '>' },
+            onEnterRules: [
+                {
+                    beforeText: new RegExp(`<(?!(?:${EMPTY_ELEMENTS.join('|')}))([_:\\w][_:\\w-.\\d]*)([^/>]*(?!/)>)[^<]*$`, 'i'),
+                    afterText: /^<\/([_:\w][_:\w-.\d]*)\s*>$/i,
+                    action: { indentAction: monaco.languages.IndentAction.IndentOutdent }
+                },
+                {
+                    beforeText: new RegExp(`<(?!(?:${EMPTY_ELEMENTS.join('|')}))(\\w[\\w\\d]*)([^/>]*(?!/)>)[^<]*$`, 'i'),
+                    action: { indentAction: monaco.languages.IndentAction.Indent }
+                }
             ]
         });
         const grammar = require('../../data/vue.tmLanguage.json');
@@ -69,6 +71,6 @@ export class VueGrammarContribution implements LanguageGrammarDefinitionContribu
                 };
             }
         });
-        registry.mapLanguageIdToTextmateGrammar(VUE_LANGUAGE_ID, this.scopeName);
+        registry.mapLanguageIdToTextmateGrammar(VUE_LANGUAGE_ID_HTML, this.scopeName);
     }
 }

@@ -16,12 +16,12 @@
 
 import { injectable, inject } from 'inversify';
 import { BaseLanguageClientContribution, Workspace, Languages, LanguageClientFactory } from '@devpodio/languages/lib/browser';
-import { VUE_LANGUAGE_ID, VUE_LANGUAGE_NAME } from '../common';
+import { VUE_LANGUAGE_ID_HTML, VUE_LANGUAGE_NAME } from '../common';
 
 @injectable()
 export class VueClientContribution extends BaseLanguageClientContribution {
 
-    readonly id = VUE_LANGUAGE_ID;
+    readonly id = VUE_LANGUAGE_ID_HTML;
     readonly name = VUE_LANGUAGE_NAME;
 
     constructor(

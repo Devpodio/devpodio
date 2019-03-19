@@ -16,14 +16,14 @@
 
 import { injectable } from 'inversify';
 import { IConnection, BaseLanguageServerContribution } from '@devpodio/languages/lib/node';
-import { VUE_LANGUAGE_ID, VUE_LANGUAGE_NAME } from '../common';
+import { VUE_LANGUAGE_ID_HTML, VUE_LANGUAGE_NAME } from '../common';
 import { SpawnOptions } from 'child_process';
 import { ProcessErrorEvent } from '@devpodio/process/lib/node/process';
 
 @injectable()
 export class VueContribution extends BaseLanguageServerContribution {
 
-    readonly id = VUE_LANGUAGE_ID;
+    readonly id = VUE_LANGUAGE_ID_HTML;
     readonly name = VUE_LANGUAGE_NAME;
 
     async start(clientConnection: IConnection): Promise<void> {

@@ -29,7 +29,7 @@ if (process.platform === 'win32') {
     }
     console.log(`Running lerna as: ${process.argv.join(' ')}`);
 } else {
-    process.argv.push('--concurrency=5');
+    process.argv.push('--concurrency=6');
 
 }
 require(lernaPath);
