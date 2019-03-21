@@ -29,13 +29,13 @@ import * as temp from 'temp';
 import { Emitter } from '@devpodio/core/lib/common';
 import {
     PreferenceService, PreferenceScope, PreferenceProviderDataChanges,
-    PreferenceSchemaProvider, PreferenceProviderProvider, PreferenceServiceImpl, bindPreferenceSchemaProvider, PreferenceChange
-} from '@devpodio/core/lib/browser/preferences';
-import { FileSystem, FileShouldOverwrite, FileStat } from '@devpodio/filesystem/lib/common/';
-import { FileSystemWatcher } from '@devpodio/filesystem/lib/browser/filesystem-watcher';
-import { FileSystemWatcherServer } from '@devpodio/filesystem/lib/common/filesystem-watcher-protocol';
-import { FileSystemPreferences, createFileSystemPreferences } from '@devpodio/filesystem/lib/browser/filesystem-preferences';
-import { ILogger, MessageService, MessageClient } from '@devpodio/core';
+    PreferenceSchemaProvider, PreferenceProviderProvider, PreferenceServiceImpl, bindPreferenceSchemaProvider, PreferenceChange, PreferenceSchema
+} from '@theia/core/lib/browser/preferences';
+import { FileSystem, FileShouldOverwrite, FileStat } from '@theia/filesystem/lib/common/';
+import { FileSystemWatcher } from '@theia/filesystem/lib/browser/filesystem-watcher';
+import { FileSystemWatcherServer } from '@theia/filesystem/lib/common/filesystem-watcher-protocol';
+import { FileSystemPreferences, createFileSystemPreferences } from '@theia/filesystem/lib/browser/filesystem-preferences';
+import { ILogger, MessageService, MessageClient } from '@theia/core';
 import { UserPreferenceProvider } from './user-preference-provider';
 import { WorkspacePreferenceProvider } from './workspace-preference-provider';
 import { FoldersPreferencesProvider, } from './folders-preferences-provider';
@@ -623,14 +623,59 @@ describe('Preference Service', () => {
             })));
         });
 
-        function prepareServices() {
+        it('defaultOverrides [go].editor.formatOnSave', () => {
+            const { preferences, schema } = prepareServices({
+                schema: {
+                    properties: {
+                        'editor.insertSpaces': {
+                            type: 'boolean',
+                            default: true,
+                            overridable: true
+                        },
+                        'editor.formatOnSave': {
+                            type: 'boolean',
+                            default: false,
+                            overridable: true
+                        }
+                    }
+                }
+            });
+
+            assert.equal(true, preferences.get('editor.insertSpaces'));
+            assert.equal(undefined, preferences.get('[go].editor.insertSpaces'));
+            assert.equal(false, preferences.get('editor.formatOnSave'));
+            assert.equal(undefined, preferences.get('[go].editor.formatOnSave'));
+
+            schema.registerOverrideIdentifier('go');
+            schema.setSchema({
+                id: 'defaultOverrides',
+                title: 'Default Configuration Overrides',
+                properties: {
+                    '[go]': {
+                        type: 'object',
+                        default: {
+                            'editor.insertSpaces': false,
+                            'editor.formatOnSave': true
+                        },
+                        description: 'Configure editor settings to be overridden for go language.'
+                    }
+                }
+            });
+
+            assert.equal(true, preferences.get('editor.insertSpaces'));
+            assert.equal(false, preferences.get('[go].editor.insertSpaces'));
+            assert.equal(false, preferences.get('editor.formatOnSave'));
+            assert.equal(true, preferences.get('[go].editor.formatOnSave'));
+        });
+
+        function prepareServices(options?: { schema: PreferenceSchema }) {
             const container = new Container();
             bindPreferenceSchemaProvider(container.bind.bind(container));
             container.bind(PreferenceProviderProvider).toFactory(() => () => new MockPreferenceProvider());
             container.bind(PreferenceServiceImpl).toSelf().inSingletonScope();
 
             const schema = container.get(PreferenceSchemaProvider);
-            schema.setSchema({
+            schema.setSchema(options && options.schema || {
                 properties: {
                     'editor.tabSize': {
                         type: 'number',
