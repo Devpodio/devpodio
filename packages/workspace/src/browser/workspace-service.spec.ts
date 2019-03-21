@@ -34,7 +34,7 @@ import * as jsoncparser from 'jsonc-parser';
 import * as sinon from 'sinon';
 import * as chai from 'chai';
 import * as assert from 'assert';
-import URI from '@theia/core/lib/common/uri';
+import URI from '@devpodio/core/lib/common/uri';
 const expect = chai.expect;
 
 disableJSDOM();

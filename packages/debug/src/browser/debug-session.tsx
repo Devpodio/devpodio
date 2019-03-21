@@ -35,8 +35,8 @@ import { BreakpointManager } from './breakpoint/breakpoint-manager';
 import { DebugSessionOptions, InternalDebugSessionOptions } from './debug-session-options';
 import { DebugConfiguration } from '../common/debug-common';
 import { SourceBreakpoint } from './breakpoint/breakpoint-marker';
-import { FileSystem } from '@theia/filesystem/lib/common';
-import { TerminalWidgetOptions } from '@theia/terminal/lib/browser/base/terminal-widget';
+import { FileSystem } from '@devpodio/filesystem/lib/common';
+import { TerminalWidgetOptions } from '@devpodio/terminal/lib/browser/base/terminal-widget';
 
 export enum DebugState {
     Inactive,

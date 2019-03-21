@@ -26,9 +26,9 @@ import { DebugSessionOptions } from '@devpodio/debug/lib/browser/debug-session-o
 import { DebugSession } from '@devpodio/debug/lib/browser/debug-session';
 import { DebugSessionConnection } from '@devpodio/debug/lib/browser/debug-session-connection';
 import { IWebSocket } from 'vscode-ws-jsonrpc/lib/socket/socket';
-import { FileSystem } from '@theia/filesystem/lib/common';
+import { FileSystem } from '@devpodio/filesystem/lib/common';
 import { DebugProtocol } from 'vscode-debugprotocol';
-import { TerminalWidgetOptions } from '@theia/terminal/lib/browser/base/terminal-widget';
+import { TerminalWidgetOptions } from '@devpodio/terminal/lib/browser/base/terminal-widget';
 import { TerminalOptionsExt } from '../../../api/plugin-api';
 
 export class PluginDebugSession extends DebugSession {

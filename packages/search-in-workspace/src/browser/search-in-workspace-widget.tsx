@@ -20,8 +20,8 @@ import { SearchInWorkspaceResultTreeWidget } from './search-in-workspace-result-
 import { SearchInWorkspaceOptions } from '../common/search-in-workspace-interface';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import { Event, Emitter, Disposable } from '@theia/core/lib/common';
-import { WorkspaceService } from '@theia/workspace/lib/browser';
+import { Event, Emitter, Disposable } from '@devpodio/core/lib/common';
+import { WorkspaceService } from '@devpodio/workspace/lib/browser';
 import { SearchInWorkspaceContextKeyService } from './search-in-workspace-context-key-service';
 
 export interface SearchFieldState {

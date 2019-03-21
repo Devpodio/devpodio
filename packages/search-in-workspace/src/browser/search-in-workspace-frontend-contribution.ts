@@ -17,15 +17,15 @@
 import { AbstractViewContribution, KeybindingRegistry, LabelProvider, CommonMenus, FrontendApplication, FrontendApplicationContribution } from '@devpodio/core/lib/browser';
 import { SearchInWorkspaceWidget } from './search-in-workspace-widget';
 import { injectable, inject, postConstruct } from 'inversify';
-import { CommandRegistry, MenuModelRegistry, SelectionService, Command } from '@theia/core';
-import { Widget } from '@theia/core/lib/browser/widgets';
-import { NavigatorContextMenu } from '@theia/navigator/lib/browser/navigator-contribution';
-import { UriCommandHandler, UriAwareCommandHandler } from '@theia/core/lib/common/uri-command-handler';
-import URI from '@theia/core/lib/common/uri';
-import { WorkspaceService } from '@theia/workspace/lib/browser';
-import { FileSystem } from '@theia/filesystem/lib/common';
+import { CommandRegistry, MenuModelRegistry, SelectionService, Command } from '@devpodio/core';
+import { Widget } from '@devpodio/core/lib/browser/widgets';
+import { NavigatorContextMenu } from '@devpodio/navigator/lib/browser/navigator-contribution';
+import { UriCommandHandler, UriAwareCommandHandler } from '@devpodio/core/lib/common/uri-command-handler';
+import URI from '@devpodio/core/lib/common/uri';
+import { WorkspaceService } from '@devpodio/workspace/lib/browser';
+import { FileSystem } from '@devpodio/filesystem/lib/common';
 import { SearchInWorkspaceContextKeyService } from './search-in-workspace-context-key-service';
-import { TabBarToolbarContribution, TabBarToolbarRegistry } from '@theia/core/lib/browser/shell/tab-bar-toolbar';
+import { TabBarToolbarContribution, TabBarToolbarRegistry } from '@devpodio/core/lib/browser/shell/tab-bar-toolbar';
 
 export namespace SearchInWorkspaceCommands {
     const SEARCH_CATEGORY = 'Search';

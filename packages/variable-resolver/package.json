@@ -1,9 +1,9 @@
 {
   "name": "@devpodio/variable-resolver",
-  "version": "0.4.0-latest.3",
+  "version": "0.4.0-latest.4",
   "description": "Theia - Variable Resolver Extension",
   "dependencies": {
-    "@devpodio/core": "^0.4.0-latest.3"
+    "@devpodio/core": "^0.4.0-latest.4"
   },
   "publishConfig": {
     "access": "public"
@@ -44,7 +44,7 @@
     "docs": "theiaext docs"
   },
   "devDependencies": {
-    "@devpodio/ext-scripts": "^0.4.0-latest.3"
+    "@devpodio/ext-scripts": "^0.4.0-latest.4"
   },
   "nyc": {
     "extends": "../../configs/nyc.json"

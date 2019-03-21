@@ -15,15 +15,15 @@
  ********************************************************************************/
 
 import { inject, injectable, named, postConstruct } from 'inversify';
-import { EditorManager } from '@theia/editor/lib/browser';
-import { ILogger } from '@theia/core/lib/common';
-import { FrontendApplication, ApplicationShell } from '@theia/core/lib/browser';
+import { EditorManager } from '@devpodio/editor/lib/browser';
+import { ILogger } from '@devpodio/core/lib/common';
+import { FrontendApplication, ApplicationShell } from '@devpodio/core/lib/browser';
 import { TaskResolverRegistry, TaskProviderRegistry } from './task-contribution';
-import { TERMINAL_WIDGET_FACTORY_ID, TerminalWidgetFactoryOptions } from '@theia/terminal/lib/browser/terminal-widget-impl';
-import { TerminalService } from '@theia/terminal/lib/browser/base/terminal-service';
-import { TerminalWidget } from '@theia/terminal/lib/browser/base/terminal-widget';
-import { WidgetManager } from '@theia/core/lib/browser/widget-manager';
-import { MessageService } from '@theia/core/lib/common/message-service';
+import { TERMINAL_WIDGET_FACTORY_ID, TerminalWidgetFactoryOptions } from '@devpodio/terminal/lib/browser/terminal-widget-impl';
+import { TerminalService } from '@devpodio/terminal/lib/browser/base/terminal-service';
+import { TerminalWidget } from '@devpodio/terminal/lib/browser/base/terminal-widget';
+import { WidgetManager } from '@devpodio/core/lib/browser/widget-manager';
+import { MessageService } from '@devpodio/core/lib/common/message-service';
 import { TaskServer, TaskExitedEvent, TaskInfo, TaskConfiguration } from '../common/task-protocol';
 import { WorkspaceService } from '@devpodio/workspace/lib/browser/workspace-service';
 import { VariableResolverService } from '@devpodio/variable-resolver/lib/browser';
@@ -31,7 +31,7 @@ import { TaskWatcher } from '../common/task-watcher';
 import { TaskConfigurationClient, TaskConfigurations } from './task-configurations';
 import { ProvidedTaskConfigurations } from './provided-task-configurations';
 import { Range } from 'vscode-languageserver-types';
-import URI from '@theia/core/lib/common/uri';
+import URI from '@devpodio/core/lib/common/uri';
 
 @injectable()
 export class TaskService implements TaskConfigurationClient {
