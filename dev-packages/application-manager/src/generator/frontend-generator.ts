@@ -24,7 +24,7 @@ export class FrontendGenerator extends AbstractGenerator {
         const frontendModules = this.pck.targetFrontendModules;
         await this.write(this.pck.frontend('index.html'), this.compileIndexHtml(frontendModules));
         await this.write(this.pck.frontend('index.js'), this.compileIndexJs(frontendModules));
-        await this.write(this.pck.frontend('passive-events.js'), this.compilePassiveJs(frontendModules));
+
         if (this.pck.isElectron()) {
             await this.write(this.pck.frontend('electron-main.js'), this.compileElectronMain());
         }
@@ -74,13 +74,10 @@ export class FrontendGenerator extends AbstractGenerator {
         return `
   <meta charset="UTF-8">`;
     }
-    protected compilePassiveJs(frontendModules: Map<string, string>): string {
-        return readFileSync(this.getTemplate('passive')).toString();
-    }
+
     protected compileIndexJs(frontendModules: Map<string, string>): string {
         return `// @ts-check
 ${this.ifBrowser("require('es6-promise/auto');")}
-require('./passive-events');
 require('reflect-metadata');
 const { Container } = require('inversify');
 const { FrontendApplication } = require('@devpodio/core/lib/browser');
