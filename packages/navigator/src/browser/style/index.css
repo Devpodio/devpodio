@@ -24,6 +24,9 @@
 .theia-navigator-container .open-workspace-button-container {
     margin: auto;
     margin-top: 5px;
+    display: flex;
+    justify-content: center;
+    align-self: center;
 }
 
 .theia-navigator-container .center {
@@ -45,6 +48,7 @@
     width: calc(100% - var(--theia-ui-padding)*4);
 }
 
-.navigator-tab-icon::before {
-    content: "\f0c5"
+.navigator-tab-icon {
+    -webkit-mask: url('files.svg');
+    mask: url('files.svg');
 }

@@ -78,6 +78,10 @@ is not optimized for dense, information rich UIs.
   --theia-terminal-font-family: Inconsolata, "Source Code Pro", Consolas,  monospace;
   --theia-ui-padding: 6px;
 
+  /* Tab Icon Colors */
+  --theia-tab-icon-color: var(--theia-ui-font-color1);
+  --theia-tab-font-color: #000;
+
   /* Main layout colors (bright to dark)
     ------------------------------------ */
 
@@ -181,6 +185,8 @@ is not optimized for dense, information rich UIs.
   --theia-icon-replace: url(../icons/replace.svg);
   --theia-icon-replace-all: url(../icons/replace-all.svg);
   --theia-icon-open-file: url(../icons/open-file-bright.svg);
+  --theia-icon-open-change: url(../icons/open-change-bright.svg);
+  --theia-icon-preview: url(../icons/preview-bright.svg);
 
   /* Scrollbars */
   --theia-scrollbar-width: 6px;

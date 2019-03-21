@@ -15,10 +15,12 @@
  ********************************************************************************/
 
 import { inject, injectable, named, postConstruct } from 'inversify';
+import { EditorManager } from '@devpodio/editor/lib/browser';
 import { ILogger } from '@devpodio/core/lib/common';
 import { FrontendApplication, ApplicationShell } from '@devpodio/core/lib/browser';
 import { TaskResolverRegistry, TaskProviderRegistry } from './task-contribution';
 import { TERMINAL_WIDGET_FACTORY_ID, TerminalWidgetFactoryOptions } from '@devpodio/terminal/lib/browser/terminal-widget-impl';
+import { TerminalService } from '@devpodio/terminal/lib/browser/base/terminal-service';
 import { TerminalWidget } from '@devpodio/terminal/lib/browser/base/terminal-widget';
 import { WidgetManager } from '@devpodio/core/lib/browser/widget-manager';
 import { MessageService } from '@devpodio/core/lib/common/message-service';
@@ -28,6 +30,7 @@ import { VariableResolverService } from '@devpodio/variable-resolver/lib/browser
 import { TaskWatcher } from '../common/task-watcher';
 import { TaskConfigurationClient, TaskConfigurations } from './task-configurations';
 import { ProvidedTaskConfigurations } from './provided-task-configurations';
+import { Range } from 'vscode-languageserver-types';
 import URI from '@devpodio/core/lib/common/uri';
 
 @injectable()
@@ -78,6 +81,12 @@ export class TaskService implements TaskConfigurationClient {
 
     @inject(TaskResolverRegistry)
     protected readonly taskResolverRegistry: TaskResolverRegistry;
+
+    @inject(TerminalService)
+    protected readonly terminalService: TerminalService;
+
+    @inject(EditorManager)
+    protected readonly editorManager: EditorManager;
 
     /**
      * @deprecated To be removed in 0.5.0
@@ -236,6 +245,30 @@ export class TaskService implements TaskConfigurationClient {
         if (taskInfo.terminalId !== undefined) {
             this.attach(taskInfo.terminalId, taskInfo.taskId);
         }
+    }
+
+    /**
+     * Run selected text in the last active terminal.
+     */
+    async runSelectedText(): Promise<void> {
+        if (!this.editorManager.currentEditor) { return; }
+        const startLine = this.editorManager.currentEditor.editor.selection.start.line;
+        const startCharacter = this.editorManager.currentEditor.editor.selection.start.character;
+        const endLine = this.editorManager.currentEditor.editor.selection.end.line;
+        const endCharacter = this.editorManager.currentEditor.editor.selection.end.character;
+        let selectedRange: Range = Range.create(startLine, startCharacter, endLine, endCharacter);
+        // if no text is selected, default to selecting entire line
+        if (startLine === endLine && startCharacter === endCharacter) {
+            selectedRange = Range.create(startLine, 0, endLine + 1, 0);
+        }
+        const selectedText: string = this.editorManager.currentEditor.editor.document.getText(selectedRange).trimRight() + '\n';
+        let terminal = this.terminalService.currentTerminal;
+        if (!terminal) {
+            terminal = <TerminalWidget>await this.terminalService.newTerminal(<TerminalWidgetFactoryOptions>{ created: new Date().toString() });
+            await terminal.start();
+            this.terminalService.activateTerminal(terminal);
+        }
+        terminal.sendText(selectedText);
     }
 
     async attach(terminalId: number, taskId: number): Promise<void> {

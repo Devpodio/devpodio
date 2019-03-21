@@ -19,6 +19,7 @@ import { MonacoToProtocolConverter, ProtocolToMonacoConverter } from 'monaco-lan
 import { TextEditorDocument } from '@devpodio/editor/lib/browser';
 import { DisposableCollection, Disposable, Emitter, Event, Resource, CancellationTokenSource, CancellationToken, ResourceError } from '@devpodio/core';
 import ITextEditorModel = monaco.editor.ITextEditorModel;
+import { Range } from 'vscode-languageserver-types';
 
 export {
     TextDocumentSaveReason
@@ -124,8 +125,15 @@ export class MonacoEditorModel implements ITextEditorModel, TextEditorDocument {
         return this.model.getVersionId();
     }
 
-    getText(): string {
-        return this.model.getValue();
+    /**
+     * Return selected text by Range or all text by default
+     */
+    getText(range?: Range): string {
+        if (!range) {
+            return this.model.getValue();
+        } else {
+            return this.model.getValueInRange(this.p2m.asRange(range));
+        }
     }
 
     positionAt(offset: number): Position {
@@ -141,6 +149,9 @@ export class MonacoEditorModel implements ITextEditorModel, TextEditorDocument {
         return this.model.getLineCount();
     }
 
+    /**
+     * Retrieves a line in a text document expressed as a one-based position.
+     */
     getLineContent(lineNumber: number): string {
         return this.model.getLineContent(lineNumber);
     }
