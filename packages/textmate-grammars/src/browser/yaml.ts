@@ -1,5 +1,5 @@
 /********************************************************************************
- * Copyright (C) 2019 Uni Sayo and others.
+ * Copyright (C) 2018 TypeFox and others.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0 which is available at
@@ -18,59 +18,66 @@ import { LanguageGrammarDefinitionContribution, TextmateRegistry } from '@devpod
 import { injectable } from 'inversify';
 
 @injectable()
-export class SassContribution implements LanguageGrammarDefinitionContribution {
+export class YamlContribution implements LanguageGrammarDefinitionContribution {
 
-    readonly id = 'sass';
-    readonly scopeName = 'source.sass';
+    readonly id = 'yaml';
+    readonly scopeName = 'source.yaml';
 
     registerTextmateLanguage(registry: TextmateRegistry) {
         monaco.languages.register({
             id: this.id,
-            extensions: ['.sass'],
-            aliases: ['Sass', 'sass']
+            aliases: [
+                'YAML',
+                'yaml'
+            ],
+            extensions: [
+                '.yml',
+                '.eyaml',
+                '.eyml',
+                '.yaml'
+            ],
+            filenames: [],
+            firstLine: '^#cloud-config'
         });
+
         monaco.languages.setLanguageConfiguration(this.id, {
-            wordPattern: /(#?-?\d*\.\d\w*%?)|([@#!.:]?[\w-?]+%?)|[@#!.]/g,
             comments: {
-                blockComment: ['/*', '*/'],
-                lineComment: '//'
+                lineComment: '#'
             },
             brackets: [
                 ['{', '}'],
                 ['[', ']'],
-                ['(', ')'],
+                ['(', ')']
             ],
             autoClosingPairs: [
-                { open: '{', close: '}', notIn: ['string', 'comment'] },
-                { open: '[', close: ']', notIn: ['string', 'comment'] },
-                { open: '(', close: ')', notIn: ['string', 'comment'] },
-                { open: '"', close: '"', notIn: ['string', 'comment'] },
-                { open: '\'', close: '\'', notIn: ['string', 'comment'] },
+                { open: '{', close: '}' },
+                { open: '[', close: ']' },
+                { open: '(', close: ')' },
+                { open: '\'', close: '\'' },
+                { open: '"', close: '"' }
             ],
             surroundingPairs: [
                 { open: '{', close: '}' },
                 { open: '[', close: ']' },
                 { open: '(', close: ')' },
-                { open: '"', close: '"' },
                 { open: '\'', close: '\'' },
+                { open: '"', close: '"' }
             ],
-            folding: {
-                markers: {
-                    start: new RegExp('^\\s*\\/\\*\\s*#region\\b\\s*(.*?)\\s*\\*\\/'),
-                    end: new RegExp('^\\s*\\/\\*\\s*#endregion\\b.*\\*\\/')
-                }
+            indentationRules: {
+                increaseIndentPattern: new RegExp('^\\s*.*(:|-) ?(&amp;\\w+)?(\\{[^}"\']*|\\([^)"\']*)?$'),
+                decreaseIndentPattern: new RegExp('^\\s+\\}$')
             }
         });
-
-        const grammar = require('../../data/sass.tmLanguage.json');
+        const yamlGrammar = require('../../data/yaml.tmLanguage.json');
         registry.registerTextmateGrammarScope(this.scopeName, {
             async getGrammarDefinition() {
                 return {
                     format: 'json',
-                    content: grammar
+                    content: yamlGrammar
                 };
             }
         });
+
         registry.mapLanguageIdToTextmateGrammar(this.id, this.scopeName);
     }
 }

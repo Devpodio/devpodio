@@ -53,6 +53,8 @@ import { JavascriptContribution } from './js';
 import { JsxTagsContribution } from './jsx-tags';
 import { PythonContribution } from './python';
 import { GoContribution } from './go';
+import { SassContribution } from './sass';
+import { YamlContribution } from './yaml';
 
 export default new ContainerModule(bind => {
     bind(BatContribution).toSelf().inSingletonScope();
@@ -165,4 +167,10 @@ export default new ContainerModule(bind => {
 
     bind(GoContribution).toSelf().inSingletonScope();
     bind(LanguageGrammarDefinitionContribution).toService(GoContribution);
+
+    bind(SassContribution).toSelf().inSingletonScope();
+    bind(LanguageGrammarDefinitionContribution).toService(SassContribution);
+
+    bind(YamlContribution).toSelf().inSingletonScope();
+    bind(LanguageGrammarDefinitionContribution).toService(YamlContribution);
 });
