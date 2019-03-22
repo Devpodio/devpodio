@@ -8,7 +8,7 @@
     "theia-extension"
   ],
   "license": "Apache-2.0",
-  "version": "0.4.0-latest.4",
+  "version": "0.4.1",
   "files": [
     "data",
     "lib",
@@ -16,11 +16,11 @@
     "languages"
   ],
   "dependencies": {
-    "@devpodio/callhierarchy": "^0.4.0-latest.4",
-    "@devpodio/core": "^0.4.0-latest.4",
-    "@devpodio/languages": "^0.4.0-latest.4",
-    "@devpodio/monaco": "^0.4.0-latest.4",
-    "@devpodio/process": "^0.4.0-latest.4",
+    "@devpodio/callhierarchy": "^0.4.1",
+    "@devpodio/core": "^0.4.1",
+    "@devpodio/languages": "^0.4.1",
+    "@devpodio/monaco": "^0.4.1",
+    "@devpodio/process": "^0.4.1",
     "@devpodio/vue-language-server": "^0.0.47"
   },
   "devDependencies": {
@@ -35,12 +35,12 @@
     "test": "theiaext test",
     "docs": "theiaext docs"
   },
-  "author": "Uni Sayo <unibtc@gmail.com> (https://github.com/uniibu)",
-  "repository": "https://github.com/uniibu/theia-vue-extension",
+  "author": "Uni Sayo <unibtc@gmail.com> (https://github.com/devpodio)",
+  "repository": "https://github.com/devpodio/devpodio",
   "bugs": {
-    "url": "https://github.com/uniibu/theia-vue-extension/issues"
+    "url": "https://github.com/Devpodio/devpodio/issues"
   },
-  "homepage": "https://github.com/uniibu/theia-vue-extension#readme",
+  "homepage": "https://github.com/Devpodio/devpodio#readme",
   "nyc": {
     "extends": "../../configs/nyc.json"
   },

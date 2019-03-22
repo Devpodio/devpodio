@@ -1,12 +1,12 @@
 {
   "name": "@devpodio/editorconfig",
-  "version": "0.4.0-latest.4",
+  "version": "0.4.1",
   "description": "Theia - Editorconfig Extension",
   "dependencies": {
-    "@devpodio/core": "^0.4.0-latest.4",
-    "@devpodio/editor": "^0.4.0-latest.4",
-    "@devpodio/languages": "^0.4.0-latest.4",
-    "@devpodio/monaco": "^0.4.0-latest.4",
+    "@devpodio/core": "^0.4.1",
+    "@devpodio/editor": "^0.4.1",
+    "@devpodio/languages": "^0.4.1",
+    "@devpodio/monaco": "^0.4.1",
     "editorconfig": "^0.15.0"
   },
   "publishConfig": {
@@ -43,7 +43,7 @@
     "docs": "theiaext docs"
   },
   "devDependencies": {
-    "@devpodio/ext-scripts": "^0.4.0-latest.4"
+    "@devpodio/ext-scripts": "^0.4.1"
   },
   "nyc": {
     "extends": "../../configs/nyc.json"

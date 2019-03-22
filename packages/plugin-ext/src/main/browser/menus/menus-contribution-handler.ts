@@ -25,8 +25,8 @@ import { NAVIGATOR_CONTEXT_MENU } from '@devpodio/navigator/lib/browser/navigato
 import { QuickCommandService } from '@devpodio/core/lib/browser/quick-open/quick-command-service';
 import { VIEW_ITEM_CONTEXT_MENU } from '../view/tree-views-main';
 import { PluginContribution, Menu } from '../../../common';
-import { DebugStackFramesWidget } from '@theia/debug/lib/browser/view/debug-stack-frames-widget';
-import { DebugThreadsWidget } from '@theia/debug/lib/browser/view/debug-threads-widget';
+import { DebugStackFramesWidget } from '@devpodio/debug/lib/browser/view/debug-stack-frames-widget';
+import { DebugThreadsWidget } from '@devpodio/debug/lib/browser/view/debug-threads-widget';
 import { MetadataSelection } from '../metadata-selection';
 
 @injectable()

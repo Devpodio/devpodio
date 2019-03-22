@@ -39,8 +39,8 @@ import { TreeViewItem, TreeViewItemCollapsibleState } from '../../../api/plugin-
 import { MenuPath } from '@devpodio/core/lib/common/menu';
 import * as ReactDOM from 'react-dom';
 import * as React from 'react';
-import { ContextKeyService, ContextKey } from '@theia/core/lib/browser/context-key-service';
-import { Disposable, SelectionService } from '@theia/core/lib/common';
+import { ContextKeyService, ContextKey } from '@devpodio/core/lib/browser/context-key-service';
+import { Disposable, SelectionService } from '@devpodio/core/lib/common';
 
 export const TREE_NODE_HYPERLINK = 'theia-TreeNodeHyperlink';
 export const VIEW_ITEM_CONTEXT_MENU: MenuPath = ['view-item-context-menu'];

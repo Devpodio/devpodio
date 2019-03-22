@@ -30,12 +30,12 @@ import { Emitter } from '@devpodio/core/lib/common';
 import {
     PreferenceService, PreferenceScope, PreferenceProviderDataChanges,
     PreferenceSchemaProvider, PreferenceProviderProvider, PreferenceServiceImpl, bindPreferenceSchemaProvider, PreferenceChange, PreferenceSchema
-} from '@theia/core/lib/browser/preferences';
-import { FileSystem, FileShouldOverwrite, FileStat } from '@theia/filesystem/lib/common/';
-import { FileSystemWatcher } from '@theia/filesystem/lib/browser/filesystem-watcher';
-import { FileSystemWatcherServer } from '@theia/filesystem/lib/common/filesystem-watcher-protocol';
-import { FileSystemPreferences, createFileSystemPreferences } from '@theia/filesystem/lib/browser/filesystem-preferences';
-import { ILogger, MessageService, MessageClient } from '@theia/core';
+} from '@devpodio/core/lib/browser/preferences';
+import { FileSystem, FileShouldOverwrite, FileStat } from '@devpodio/filesystem/lib/common/';
+import { FileSystemWatcher } from '@devpodio/filesystem/lib/browser/filesystem-watcher';
+import { FileSystemWatcherServer } from '@devpodio/filesystem/lib/common/filesystem-watcher-protocol';
+import { FileSystemPreferences, createFileSystemPreferences } from '@devpodio/filesystem/lib/browser/filesystem-preferences';
+import { ILogger, MessageService, MessageClient } from '@devpodio/core';
 import { UserPreferenceProvider } from './user-preference-provider';
 import { WorkspacePreferenceProvider } from './workspace-preference-provider';
 import { FoldersPreferencesProvider, } from './folders-preferences-provider';

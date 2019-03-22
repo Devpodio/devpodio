@@ -51,11 +51,11 @@ import { isObject } from 'util';
 import { GrammarsReader } from './grammars-reader';
 import { CharacterPair } from '../../../api/plugin-api';
 import * as jsoncparser from 'jsonc-parser';
-import { IJSONSchema } from '@theia/core/lib/common/json-schema';
-import { deepClone } from '@theia/core/lib/common/objects';
-import { FileUri } from '@theia/core/lib/node/file-uri';
-import { PreferenceSchema, PreferenceSchemaProperties } from '@theia/core/lib/common/preferences/preference-schema';
-import { RecursivePartial } from '@theia/core/lib/common/types';
+import { IJSONSchema } from '@devpodio/core/lib/common/json-schema';
+import { deepClone } from '@devpodio/core/lib/common/objects';
+import { FileUri } from '@devpodio/core/lib/node/file-uri';
+import { PreferenceSchema, PreferenceSchemaProperties } from '@devpodio/core/lib/common/preferences/preference-schema';
+import { RecursivePartial } from '@devpodio/core/lib/common/types';
 
 namespace nls {
     export function localize(key: string, _default: string) {

@@ -19,9 +19,9 @@ import { Disposable } from '@devpodio/core/lib/common/disposable';
 import { LogPart, KeysToAnyValues, KeysToKeysToAnyValue } from './types';
 import { CharacterPair, CommentRule, PluginAPIFactory, Plugin } from '../api/plugin-api';
 import { ExtPluginApi } from './plugin-ext-api-contribution';
-import { IJSONSchema, IJSONSchemaSnippet } from '@theia/core/lib/common/json-schema';
-import { RecursivePartial } from '@theia/core/lib/common/types';
-import { PreferenceSchema, PreferenceSchemaProperties } from '@theia/core/lib/common/preferences/preference-schema';
+import { IJSONSchema, IJSONSchemaSnippet } from '@devpodio/core/lib/common/json-schema';
+import { RecursivePartial } from '@devpodio/core/lib/common/types';
+import { PreferenceSchema, PreferenceSchemaProperties } from '@devpodio/core/lib/common/preferences/preference-schema';
 
 export const hostedServicePath = '/services/hostedPlugin';
 

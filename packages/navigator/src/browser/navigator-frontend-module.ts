@@ -26,7 +26,7 @@ import { WidgetFactory } from '@devpodio/core/lib/browser/widget-manager';
 import { bindFileNavigatorPreferences } from './navigator-preferences';
 import { FileNavigatorFilter } from './navigator-filter';
 import { NavigatorContextKeyService } from './navigator-context-key-service';
-import { TabBarToolbarContribution } from '@theia/core/lib/browser/shell/tab-bar-toolbar';
+import { TabBarToolbarContribution } from '@devpodio/core/lib/browser/shell/tab-bar-toolbar';
 
 export default new ContainerModule(bind => {
     bindFileNavigatorPreferences(bind);
