@@ -26,7 +26,7 @@ import { SearchInWorkspaceResultTreeWidget } from './search-in-workspace-result-
 import { SearchInWorkspaceFrontendContribution } from './search-in-workspace-frontend-contribution';
 import { InMemoryTextResourceResolver } from './in-memory-text-resource';
 import { SearchInWorkspaceContextKeyService } from './search-in-workspace-context-key-service';
-import { TabBarToolbarContribution } from '@devpodio/core/lib/browser/shell/tab-bar-toolbar';
+import { TabBarToolbarContribution } from '@theia/core/lib/browser/shell/tab-bar-toolbar';
 import { bindSearchInWorkspacePreferences } from './search-in-workspace-preferences';
 
 export default new ContainerModule(bind => {
