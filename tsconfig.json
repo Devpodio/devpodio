@@ -111,6 +111,9 @@
       ],
       "@devpodio/getting-started/lib/*": [
         "packages/getting-started/src/*"
+      ],
+      "@devpodio/vue/lib/*": [
+        "packages/vue/src/*"
       ]
     },
     "plugins": [

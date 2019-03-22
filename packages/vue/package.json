@@ -1,0 +1,53 @@
+{
+  "name": "@devpodio/vue",
+  "description": "Vuejs support for the Theia IDE",
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "theia-extension"
+  ],
+  "license": "Apache-2.0",
+  "version": "0.4.0-latest.4",
+  "files": [
+    "data",
+    "lib",
+    "src",
+    "languages"
+  ],
+  "dependencies": {
+    "@devpodio/callhierarchy": "^0.4.0-latest.4",
+    "@devpodio/core": "^0.4.0-latest.4",
+    "@devpodio/languages": "^0.4.0-latest.4",
+    "@devpodio/monaco": "^0.4.0-latest.4",
+    "@devpodio/process": "^0.4.0-latest.4",
+    "@devpodio/vue-language-server": "^0.0.47"
+  },
+  "devDependencies": {
+    "rimraf": "^2.6.2",
+    "typescript": "latest"
+  },
+  "scripts": {
+    "prepare": "yarn run clean && yarn run build",
+    "clean": "theiaext clean",
+    "build": "theiaext build",
+    "watch": "theiaext watch",
+    "test": "theiaext test",
+    "docs": "theiaext docs"
+  },
+  "author": "Uni Sayo <unibtc@gmail.com> (https://github.com/uniibu)",
+  "repository": "https://github.com/uniibu/theia-vue-extension",
+  "bugs": {
+    "url": "https://github.com/uniibu/theia-vue-extension/issues"
+  },
+  "homepage": "https://github.com/uniibu/theia-vue-extension#readme",
+  "nyc": {
+    "extends": "../../configs/nyc.json"
+  },
+  "theiaExtensions": [
+    {
+      "frontend": "lib/browser/vue-frontend-module",
+      "backend": "lib/node/vue-backend-module"
+    }
+  ]
+}
