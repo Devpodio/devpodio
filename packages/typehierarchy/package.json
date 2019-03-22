@@ -1,11 +1,11 @@
 {
   "name": "@devpodio/typehierarchy",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "Theia - Type Hierarchy Extension",
   "dependencies": {
-    "@devpodio/core": "^0.4.1",
-    "@devpodio/editor": "^0.4.1",
-    "@devpodio/languages": "^0.4.1",
+    "@devpodio/core": "^0.4.2",
+    "@devpodio/editor": "^0.4.2",
+    "@devpodio/languages": "^0.4.2",
     "@types/uuid": "^3.4.3",
     "uuid": "^3.2.1"
   },
@@ -42,7 +42,7 @@
     "docs": "theiaext docs"
   },
   "devDependencies": {
-    "@devpodio/ext-scripts": "^0.4.1"
+    "@devpodio/ext-scripts": "^0.4.2"
   },
   "nyc": {
     "extends": "../../configs/nyc.json"

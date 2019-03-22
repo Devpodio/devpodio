@@ -1,14 +1,14 @@
 {
   "name": "@devpodio/git",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "Theia - Git Integration",
   "dependencies": {
-    "@devpodio/core": "^0.4.1",
-    "@devpodio/editor": "^0.4.1",
-    "@devpodio/filesystem": "^0.4.1",
-    "@devpodio/languages": "^0.4.1",
-    "@devpodio/navigator": "^0.4.1",
-    "@devpodio/workspace": "^0.4.1",
+    "@devpodio/core": "^0.4.2",
+    "@devpodio/editor": "^0.4.2",
+    "@devpodio/filesystem": "^0.4.2",
+    "@devpodio/languages": "^0.4.2",
+    "@devpodio/navigator": "^0.4.2",
+    "@devpodio/workspace": "^0.4.2",
     "@types/diff": "^3.2.2",
     "@types/fs-extra": "^4.0.2",
     "@types/p-queue": "^2.3.1",
@@ -66,7 +66,7 @@
     "docs": "theiaext docs"
   },
   "devDependencies": {
-    "@devpodio/ext-scripts": "^0.4.1",
+    "@devpodio/ext-scripts": "^0.4.2",
     "upath": "^1.0.2"
   },
   "nyc": {

@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "@devpodio/example-browser",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "theia": {
     "frontend": {
       "config": {
@@ -10,25 +10,25 @@
     }
   },
   "dependencies": {
-    "@devpodio/core": "^0.4.1",
-    "@devpodio/editor": "^0.4.1",
-    "@devpodio/editorconfig": "^0.4.1",
-    "@devpodio/filesystem": "^0.4.1",
-    "@devpodio/languages": "^0.4.1",
-    "@devpodio/markers": "^0.4.1",
-    "@devpodio/messages": "^0.4.1",
-    "@devpodio/monaco": "^0.4.1",
-    "@devpodio/navigator": "^0.4.1",
-    "@devpodio/plugin": "^0.4.1",
-    "@devpodio/plugin-ext": "^0.4.1",
-    "@devpodio/plugin-ext-vscode": "^0.4.1",
-    "@devpodio/preferences": "^0.4.1",
-    "@devpodio/process": "^0.4.1",
-    "@devpodio/terminal": "^0.4.1",
-    "@devpodio/textmate-grammars": "^0.4.1",
-    "@devpodio/typescript": "^0.4.1",
-    "@devpodio/vue": "^0.4.1",
-    "@devpodio/workspace": "^0.4.1"
+    "@devpodio/core": "^0.4.2",
+    "@devpodio/editor": "^0.4.2",
+    "@devpodio/editorconfig": "^0.4.2",
+    "@devpodio/filesystem": "^0.4.2",
+    "@devpodio/languages": "^0.4.2",
+    "@devpodio/markers": "^0.4.2",
+    "@devpodio/messages": "^0.4.2",
+    "@devpodio/monaco": "^0.4.2",
+    "@devpodio/navigator": "^0.4.2",
+    "@devpodio/plugin": "^0.4.2",
+    "@devpodio/plugin-ext": "^0.4.2",
+    "@devpodio/plugin-ext-vscode": "^0.4.2",
+    "@devpodio/preferences": "^0.4.2",
+    "@devpodio/process": "^0.4.2",
+    "@devpodio/terminal": "^0.4.2",
+    "@devpodio/textmate-grammars": "^0.4.2",
+    "@devpodio/typescript": "^0.4.2",
+    "@devpodio/vue": "^0.4.2",
+    "@devpodio/workspace": "^0.4.2"
   },
   "scripts": {
     "prepare": "yarn run clean && yarn build",
@@ -46,6 +46,6 @@
     "coverage": "yarn coverage:compile && yarn test && yarn coverage:remap && yarn coverage:report:lcov && yarn coverage:report:html"
   },
   "devDependencies": {
-    "@devpodio/cli": "^0.4.1"
+    "@devpodio/cli": "^0.4.2"
   }
 }

@@ -1,16 +1,16 @@
 {
   "name": "@devpodio/cpp",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "Theia - Cpp Extension",
   "dependencies": {
-    "@devpodio/core": "^0.4.1",
-    "@devpodio/editor": "^0.4.1",
-    "@devpodio/filesystem": "^0.4.1",
-    "@devpodio/languages": "^0.4.1",
-    "@devpodio/monaco": "^0.4.1",
-    "@devpodio/preferences": "^0.4.1",
-    "@devpodio/process": "^0.4.1",
-    "@devpodio/task": "^0.4.1",
+    "@devpodio/core": "^0.4.2",
+    "@devpodio/editor": "^0.4.2",
+    "@devpodio/filesystem": "^0.4.2",
+    "@devpodio/languages": "^0.4.2",
+    "@devpodio/monaco": "^0.4.2",
+    "@devpodio/preferences": "^0.4.2",
+    "@devpodio/process": "^0.4.2",
+    "@devpodio/task": "^0.4.2",
     "string-argv": "^0.1.1"
   },
   "publishConfig": {
@@ -48,7 +48,7 @@
     "docs": "theiaext docs"
   },
   "devDependencies": {
-    "@devpodio/ext-scripts": "^0.4.1"
+    "@devpodio/ext-scripts": "^0.4.2"
   },
   "nyc": {
     "extends": "../../configs/nyc.json"

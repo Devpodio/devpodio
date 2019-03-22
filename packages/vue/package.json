@@ -8,7 +8,7 @@
     "theia-extension"
   ],
   "license": "Apache-2.0",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "files": [
     "data",
     "lib",
@@ -16,11 +16,11 @@
     "languages"
   ],
   "dependencies": {
-    "@devpodio/callhierarchy": "^0.4.1",
-    "@devpodio/core": "^0.4.1",
-    "@devpodio/languages": "^0.4.1",
-    "@devpodio/monaco": "^0.4.1",
-    "@devpodio/process": "^0.4.1",
+    "@devpodio/callhierarchy": "^0.4.2",
+    "@devpodio/core": "^0.4.2",
+    "@devpodio/languages": "^0.4.2",
+    "@devpodio/monaco": "^0.4.2",
+    "@devpodio/process": "^0.4.2",
     "@devpodio/vue-language-server": "^0.0.48"
   },
   "devDependencies": {

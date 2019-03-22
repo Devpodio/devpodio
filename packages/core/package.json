@@ -1,11 +1,11 @@
 {
   "name": "@devpodio/core",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "Theia is a cloud & desktop IDE framework implemented in TypeScript.",
   "main": "lib/common/index.js",
   "typings": "lib/common/index.d.ts",
   "dependencies": {
-    "@devpodio/application-package": "^0.4.1",
+    "@devpodio/application-package": "^0.4.2",
     "@devpodio/perfect-scrollbar": "^1.5.1",
     "@phosphor/widgets": "^1.5.0",
     "@types/body-parser": "^1.16.4",
@@ -87,7 +87,7 @@
     "docs": "theiaext docs"
   },
   "devDependencies": {
-    "@devpodio/ext-scripts": "^0.4.1"
+    "@devpodio/ext-scripts": "^0.4.2"
   },
   "nyc": {
     "extends": "../../configs/nyc.json"
