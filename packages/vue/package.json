@@ -21,7 +21,7 @@
     "@devpodio/languages": "^0.4.1",
     "@devpodio/monaco": "^0.4.1",
     "@devpodio/process": "^0.4.1",
-    "@devpodio/vue-language-server": "^0.0.47"
+    "@devpodio/vue-language-server": "^0.0.48"
   },
   "devDependencies": {
     "rimraf": "^2.6.2",
