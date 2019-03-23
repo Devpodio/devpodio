@@ -8,7 +8,7 @@
 
 <div id="badges" align="center">
 
-  [![Gitpod - Code Now](https://img.shields.io/badge/Gitpod-code%20now-blue.svg?longCache=true)](https://gitpod.io#https://github.com/devpodio/devpod)
+  [![Gitpod - Code Now](https://img.shields.io/badge/Gitpod-code%20now-blue.svg?longCache=true)](https://gitpod.io#https://github.com/devpodio/devpodio)
   [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-curved)](https://github.com/devpodio/devpod/labels/help%20wanted)
   [![Build Status](https://travis-ci.org/devpodio/devpod.svg?branch=master)](https://travis-ci.org/devpodio/devpod)
   [![Open questions](https://img.shields.io/badge/Open-questions-blue.svg?style=flat-curved)](https://github.com/devpodio/devpod/labels/question)
