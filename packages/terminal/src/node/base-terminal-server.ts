@@ -74,8 +74,6 @@ export abstract class BaseTerminalServer implements IBaseTerminalServer {
         const term = this.processManager.get(id);
         if (term && term instanceof TerminalProcess) {
             term.resize(cols, rows);
-        } else {
-            console.error("Couldn't resize terminal " + id + ", because it doesn't exist.");
         }
     }
 

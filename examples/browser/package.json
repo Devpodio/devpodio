@@ -14,6 +14,7 @@
     "@devpodio/editor": "^0.4.2",
     "@devpodio/editorconfig": "^0.4.2",
     "@devpodio/filesystem": "^0.4.2",
+    "@devpodio/git": "^0.4.2",
     "@devpodio/languages": "^0.4.2",
     "@devpodio/markers": "^0.4.2",
     "@devpodio/messages": "^0.4.2",

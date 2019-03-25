@@ -80,10 +80,6 @@ export class BaseWidget extends Widget {
             (async () => {
                 const container = await this.getScrollContainer();
                 container.style.overflow = 'hidden';
-                if (this.scrollOptions) {
-                    this.scrollOptions.colorY = '#699737';
-                    this.scrollOptions.colorX = '#699737';
-                }
                 this.scrollBar = new PerfectScrollbar(container, this.scrollOptions);
                 this.toDisposeOnDetach.push(Disposable.create(() => {
                     if (this.scrollBar) {

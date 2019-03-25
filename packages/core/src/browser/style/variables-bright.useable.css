@@ -45,6 +45,7 @@ is not optimized for dense, information rich UIs.
 
   --theia-ui-font-color0: var(--md-grey-900);
   --theia-ui-font-color1: var(--md-grey-700);
+  --theia-ui-font-color1-5: var(--md-grey-400);
   --theia-ui-font-color2: var(--md-grey-500);
   --theia-ui-font-color3: var(--md-grey-300);
 
@@ -93,10 +94,10 @@ is not optimized for dense, information rich UIs.
 
   /* Brand colors */
 
-  --theia-brand-color0: var(--md-blue-700);
-  --theia-brand-color1: var(--md-blue-500);
-  --theia-brand-color2: var(--md-blue-300);
-  --theia-brand-color3: var(--md-blue-100);
+  --theia-brand-color0: var(--md-green-700);
+  --theia-brand-color1: var(--md-green-500);
+  --theia-brand-color2: var(--md-green-300);
+  --theia-brand-color3: var(--md-green-100);
 
   /* Secondary Brand colors */
 
@@ -107,7 +108,7 @@ is not optimized for dense, information rich UIs.
 
   /* Accent colors (dark to bright): Use these to create contrast to layout colors. */
 
-  --theia-accent-color0: var(--md-blue-900);
+  --theia-accent-color0: var(--md-green-900);
   --theia-accent-color1: #2b75c0;
   --theia-accent-color2: #4496da;
   --theia-accent-color3: #c0dbf1;

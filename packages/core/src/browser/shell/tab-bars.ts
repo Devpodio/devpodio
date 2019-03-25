@@ -188,10 +188,6 @@ export class ScrollableTabBar extends TabBar<Widget> {
     private pendingReveal?: Promise<void>;
 
     constructor(options?: TabBar.IOptions<Widget> & PerfectScrollbar.Options) {
-        if (options) {
-            options.colorY = '#699737';
-            options.colorX = '#699737';
-        }
         super(options);
         this.scrollBarFactory = () => new PerfectScrollbar(this.scrollbarHost, options);
     }

@@ -45,6 +45,7 @@ is not optimized for dense, information rich UIs.
 
   --theia-ui-font-color0: var(--md-grey-100);
   --theia-ui-font-color1: var(--md-grey-300);
+  --theia-ui-font-color1-5: var(--md-grey-400);
   --theia-ui-font-color2: var(--md-grey-500);
   --theia-ui-font-color3: var(--md-grey-700);
 
@@ -93,10 +94,10 @@ is not optimized for dense, information rich UIs.
 
   /* Brand colors */
 
-  --theia-brand-color0: var(--md-blue-700);
-  --theia-brand-color1: var(--md-blue-500);
-  --theia-brand-color2: var(--md-blue-300);
-  --theia-brand-color3: var(--md-blue-100);
+  --theia-brand-color0: var(--md-green-700);
+  --theia-brand-color1: var(--md-green-500);
+  --theia-brand-color2: var(--md-green-300);
+  --theia-brand-color3: var(--md-green-100);
 
   /* Secondary Brand colors */
 
@@ -191,9 +192,9 @@ is not optimized for dense, information rich UIs.
   /* Scrollbars */
   --theia-scrollbar-width: 10px;
   --theia-scrollbar-rail-width: 10px;
-  --theia-scrollbar-thumb-color: hsla(0,0%,39%,.4);
+  --theia-scrollbar-thumb-color: hsla(89, 47%, 39%, 0.4);
   --theia-scrollbar-rail-color: transparent;
-  --theia-scrollbar-active-thumb-color: hsla(0,0%,61%,.4);
+  --theia-scrollbar-active-thumb-color: hsla(89, 47%, 61%, 0.4);
   --theia-scrollbar-active-rail-color: transparent;
 
   /* Menu */

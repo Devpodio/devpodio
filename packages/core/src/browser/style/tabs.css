@@ -14,7 +14,7 @@
 |----------------------------------------------------------------------------*/
 
 .p-TabBar {
-  color: var(--theia-ui-font-color1);
+  color: var(--theia-ui-font-color1-5);
   background: var(--theia-layout-color1);
   font-size: var(--theia-ui-font-size1);
   cursor: pointer;
