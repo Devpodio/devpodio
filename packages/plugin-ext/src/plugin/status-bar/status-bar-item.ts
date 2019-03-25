@@ -41,6 +41,9 @@ export class StatusBarItemImpl implements theia.StatusBarItem {
         priority: number = 0) {
         this._proxy = _proxy;
         this._alignment = alignment;
+        if (alignment === StatusBarAlignment.Right && priority <= 0) {
+            priority = 0.1;
+        }
         this._priority = priority;
     }
 
