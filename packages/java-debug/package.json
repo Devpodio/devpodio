@@ -1,10 +1,10 @@
 {
   "name": "@devpodio/java-debug",
-  "version": "0.4.2",
+  "version": "0.4.3",
   "description": "Theia - Java Debug Extension",
   "dependencies": {
-    "@devpodio/debug": "^0.4.2",
-    "@devpodio/java": "^0.4.2",
+    "@devpodio/debug": "^0.4.3",
+    "@devpodio/java": "^0.4.3",
     "lodash": "^4.17.10"
   },
   "publishConfig": {
@@ -45,7 +45,7 @@
     "docs": "theiaext docs"
   },
   "devDependencies": {
-    "@devpodio/ext-scripts": "^0.4.2"
+    "@devpodio/ext-scripts": "^0.4.3"
   },
   "nyc": {
     "extends": "../../configs/nyc.json"
