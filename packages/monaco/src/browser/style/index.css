@@ -6,17 +6,17 @@
 }
 
 .monaco-editor {
-    padding-bottom: 5.6px;
-    font-family: var(--theia-ui-font-family);
+    padding-bottom: 5.6px !important;
+    font-family: var(--theia-ui-font-family) !important;
     font-size: inherit !important;
 }
 
 .monaco-editor, .monaco-editor-background {
-    background: var(--theia-layout-color0);
+    background: var(--theia-layout-color0) !important;
 }
 
 .monaco-editor .margin {
-    background: var(--theia-layout-color0);
+    background: var(--theia-layout-color0) !important;
 }
 
 .monaco-keybinding-key {
@@ -73,4 +73,7 @@
     border-top-color: var(--theia-accent-color2);
     border-bottom-color: var(--theia-accent-color2);
 	position: relative;
+}
+.monaco-editor .find-widget {
+    background-color: var(--theia-layout-color1) !important;
 }

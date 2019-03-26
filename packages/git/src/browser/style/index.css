@@ -20,10 +20,6 @@
     box-sizing: border-box;
 }
 
-.theia-side-panel .theia-git {
-    padding-left: 19px;
-}
-
 .theia-git:focus, .theia-git :focus {
     outline: 0;
     box-shadow: none;

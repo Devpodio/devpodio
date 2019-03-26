@@ -75,11 +75,11 @@
 
 .theia-Tree:focus .theia-TreeNode.theia-mod-selected,
 .theia-Tree .ReactVirtualized__List:focus .theia-TreeNode.theia-mod-selected {
-    background: var(--theia-accent-color3);
+    background: var(--theia-accent-color4);
 }
 
 .theia-Tree .theia-TreeNode.theia-mod-selected {
-    background: var(--theia-accent-color4);
+    background: var(--theia-transparent-accent-color3);
     color: var(--theia-ui-font-color0);
 }
 

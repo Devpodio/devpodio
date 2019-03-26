@@ -26,17 +26,23 @@
 
 .p-TabBar[data-orientation='horizontal'].theia-app-bottom .p-TabBar-tab {
   background: var(--theia-layout-color0);
+  text-transform: uppercase;
+  font-size: var(--theia-ui-font-size0);
 }
 
 .p-TabBar[data-orientation='horizontal'].theia-app-bottom .p-TabBar-tab.p-mod-current {
   background: var(--theia-layout-color0);
-  border-top: var(--theia-border-width) solid var(--theia-ui-font-color2);
+}
+.p-TabBar[data-orientation='horizontal'].theia-app-bottom .p-TabBar-tab.p-mod-current .p-TabBar-tabLabel {
+  border-bottom: var(--theia-border-width) solid var(--theia-ui-font-color3);
 }
 
+.p-TabBar[data-orientation='horizontal'].theia-app-bottom .p-TabBar-tab.p-mod-current.theia-mod-active .p-TabBar-tabLabel {
+  border-bottom-color: var(--theia-accent-color2);
+}
 .p-TabBar[data-orientation='horizontal'].theia-app-bottom .p-TabBar-tab.p-mod-current.theia-mod-active {
-  border-top-color: var(--theia-accent-color2);
+  border-top: none !important;
 }
-
 .p-TabBar[data-orientation='horizontal'] {
   overflow-x: hidden;
   overflow-y: hidden;
@@ -57,14 +63,11 @@
   padding: 0px 8px;
   background: var(--theia-layout-color2);
   align-items: center;
-}
 
-.p-TabBar[data-orientation='horizontal'] .p-TabBar-tab:last-child {
-  border-right: var(--theia-border-width) solid var(--theia-border-color0);
 }
 
 .p-TabBar[data-orientation='horizontal'] .p-TabBar-tab:hover:not(.p-mod-current) {
-  background: var(--theia-accent-color3);
+  background: var(--theia-accent-color4);
 }
 
 

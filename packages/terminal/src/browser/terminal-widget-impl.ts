@@ -47,6 +47,9 @@ interface TerminalCSSProperties {
 
     /* The color of selections. */
     selection: string;
+
+    /* The color of cursor. */
+    cursor: string;
 }
 
 @injectable()
@@ -124,7 +127,7 @@ export class TerminalWidgetImpl extends TerminalWidget implements StatefulWidget
             this.term.setOption('theme', {
                 foreground: changedProps.foreground,
                 background: changedProps.background,
-                cursor: changedProps.foreground,
+                cursor: changedProps.cursor,
                 selection: cssProps.selection
             });
         }));
@@ -208,9 +211,10 @@ export class TerminalWidgetImpl extends TerminalWidget implements StatefulWidget
         /* Get the CSS properties of <html> (aka :root in css).  */
         const htmlElementProps = getComputedStyle(document.documentElement!);
 
-        const foreground = lookup(htmlElementProps, '--theia-ui-font-color1');
-        const background = lookup(htmlElementProps, '--theia-layout-color0');
-        const selection = lookup(htmlElementProps, '--theia-transparent-accent-color2');
+        const foreground = lookup(htmlElementProps, '--theia-terminal-foreground');
+        const background = lookup(htmlElementProps, '--theia-terminal-background');
+        const selection = lookup(htmlElementProps, '--theia-terminal-selection');
+        const cursor = lookup(htmlElementProps, '--theia-terminal-cursor');
 
         /* xterm.js expects #XXX of #XXXXXX for colors.  */
         const colorRe = /^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/;
@@ -226,7 +230,8 @@ export class TerminalWidgetImpl extends TerminalWidget implements StatefulWidget
         return {
             foreground,
             background,
-            selection
+            selection,
+            cursor
         };
     }
 
