@@ -25,9 +25,9 @@ is not optimized for dense, information rich UIs.
   --theia-panel-border-width: 2px;
   --theia-border-color0: var(--md-grey-900);
   --theia-border-color1: var(--md-grey-800);
-  --theia-border-color2: var(--md-grey-700);
+  --theia-border-color2: #383E4A;
   --theia-border-color3: var(--md-grey-400);
- 
+
 
   /* UI fonts: Family, size and color (bright to dark)
     ---------------------------------------------------
@@ -199,8 +199,8 @@ is not optimized for dense, information rich UIs.
 
   /* Menu */
   --theia-menu-color0: var(--theia-layout-color4);
-  --theia-menu-color1: var(--theia-layout-color4);
-  --theia-menu-color2: var(--theia-layout-color1);
+  --theia-menu-color1: var(--theia-layout-color1);
+  --theia-menu-color2: var(--theia-layout-color4);
 
   /* Statusbar */
   --theia-statusbar-color: var(--theia-brand-color0);
