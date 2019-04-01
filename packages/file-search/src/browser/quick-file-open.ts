@@ -17,11 +17,12 @@
 import { inject, injectable } from 'inversify';
 import {
     QuickOpenModel, QuickOpenItem, QuickOpenMode, PrefixQuickOpenService,
-    OpenerService, KeybindingRegistry, QuickOpenGroupItem, QuickOpenGroupItemOptions, QuickOpenItemOptions, QuickOpenHandler, QuickOpenOptions, Keybinding
-} from '@devpodio/core/lib/browser';
-import { FileSystem } from '@devpodio/filesystem/lib/common/filesystem';
-import { WorkspaceService } from '@devpodio/workspace/lib/browser/workspace-service';
-import URI from '@devpodio/core/lib/common/uri';
+    OpenerService, KeybindingRegistry, QuickOpenGroupItem, QuickOpenGroupItemOptions, QuickOpenItemOptions,
+    QuickOpenHandler, QuickOpenOptions
+} from '@theia/core/lib/browser';
+import { FileSystem } from '@theia/filesystem/lib/common/filesystem';
+import { WorkspaceService } from '@theia/workspace/lib/browser/workspace-service';
+import URI from '@theia/core/lib/common/uri';
 import { FileSearchService } from '../common/file-search-service';
 import { CancellationTokenSource } from '@devpodio/core/lib/common';
 import { LabelProvider } from '@devpodio/core/lib/browser/label-provider';
@@ -131,7 +132,7 @@ export class QuickFileOpenService implements QuickOpenModel, QuickOpenHandler {
         const keyCommand = this.keybindingRegistry.getKeybindingsForCommand(quickFileOpen.id);
         if (keyCommand) {
             // We only consider the first keybinding.
-            const accel = Keybinding.acceleratorFor(keyCommand[0], '+');
+            const accel = this.keybindingRegistry.acceleratorFor(keyCommand[0], '+');
             return accel.join(' ');
         }
 

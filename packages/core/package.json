@@ -33,6 +33,7 @@
     "inversify": "^5.0.1",
     "lodash.debounce": "^4.0.8",
     "lodash.throttle": "^4.1.1",
+    "native-keymap": "^1.2.5",
     "nsfw": "^1.2.2",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
@@ -57,6 +58,10 @@
     {
       "frontend": "lib/browser/window/browser-window-module",
       "frontendElectron": "lib/electron-browser/window/electron-window-module"
+    },
+    {
+      "frontend": "lib/browser/keyboard/browser-keyboard-module",
+      "frontendElectron": "lib/electron-browser/keyboard/electron-keyboard-module"
     }
   ],
   "keywords": [
@@ -80,10 +85,12 @@
     "clean": "theiaext clean",
     "build": "theiaext build",
     "watch": "theiaext watch",
-    "test": "theiaext test"
+    "test": "theiaext test",
+    "generate-layout": "electron ./scripts/generate-layout"
   },
   "devDependencies": {
-    "@devpodio/ext-scripts": "^0.5.0"
+    "@theia/ext-scripts": "^0.5.0",
+    "minimist": "^1.2.0"
   },
   "nyc": {
     "extends": "../../configs/nyc.json"
