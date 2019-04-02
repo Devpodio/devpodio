@@ -2,7 +2,7 @@
 <br/>
 <div id="theia-logo" align="center">
     <br />
-    <h2> DEVPOD </h2>
+    <img src="https://raw.githubusercontent.com/theia-ide/theia/master/logo/theia-logo.svg?sanitize=true" alt="Theia Logo" width="300"/>
     <h3>Cloud & Desktop IDE Platform</h3>
 </div>
 
