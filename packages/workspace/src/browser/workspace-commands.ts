@@ -32,6 +32,7 @@ import { WorkspaceDeleteHandler } from './workspace-delete-handler';
 import { WorkspaceDuplicateHandler } from './workspace-duplicate-handler';
 import { FileSystemUtils } from '@devpodio/filesystem/lib/common';
 import { WorkspaceCompareHandler } from './workspace-compare-handler';
+import { FileDownloadCommands } from '@devpodio/filesystem/lib/browser/download/file-download-command-contribution';
 
 const validFilename: (arg: string) => boolean = require('valid-filename');
 
@@ -136,6 +137,15 @@ export class FileMenuContribution implements MenuContribution {
         registry.registerMenuAction(CommonMenus.FILE_NEW, {
             commandId: WorkspaceCommands.NEW_FOLDER.id
         });
+        const downloadUploadMenu = [...CommonMenus.FILE, '4_downloadupload'];
+        registry.registerMenuAction(downloadUploadMenu, {
+            commandId: FileDownloadCommands.UPLOAD.id,
+            order: 'a'
+        });
+        registry.registerMenuAction(downloadUploadMenu, {
+            commandId: FileDownloadCommands.DOWNLOAD.id,
+            order: 'b'
+        });
     }
 
 }
@@ -172,11 +182,13 @@ export class WorkspaceCommandContribution implements CommandContribution {
                     const parentUri = new URI(parent.uri);
                     const { fileName, fileExtension } = this.getDefaultFileConfig();
                     const vacantChildUri = FileSystemUtils.generateUniqueResourceURI(parentUri, parent, fileName, fileExtension);
+
                     const dialog = new SingleTextInputDialog({
                         title: 'New File',
                         initialValue: vacantChildUri.path.base,
-                        validate: name => this.validateFileName(name, parent)
+                        validate: name => this.validateFileName(name, parent, true)
                     });
+
                     dialog.open().then(name => {
                         if (name) {
                             const fileUri = parentUri.resolve(name);
@@ -196,7 +208,7 @@ export class WorkspaceCommandContribution implements CommandContribution {
                     const dialog = new SingleTextInputDialog({
                         title: 'New Folder',
                         initialValue: vacantChildUri.path.base,
-                        validate: name => this.validateFileName(name, parent)
+                        validate: name => this.validateFileName(name, parent, true)
                     });
                     dialog.open().then(name => {
                         if (name) {
@@ -230,12 +242,12 @@ export class WorkspaceCommandContribution implements CommandContribution {
                                 if (initialValue === name && mode === 'preview') {
                                     return false;
                                 }
-                                return this.validateFileName(name, parent);
+                                return this.validateFileName(name, parent, false);
                             }
                         });
                         dialog.open().then(name => {
                             if (name) {
-                                this.fileSystem.move(uri.toString(), uri.parent.resolve(name).toString());
+                                this.fileSystem.move(uri.toString(), uri.parent.resolve(name).toString(), { overwrite: true });
                             }
                         });
                     }
@@ -298,19 +310,38 @@ export class WorkspaceCommandContribution implements CommandContribution {
      *
      * @param name the simple file name of the file to validate.
      * @param parent the parent directory's file stat.
+     * @param recursive allow file or folder creation using recursive path
      */
-    protected validateFileName(name: string, parent: FileStat): string {
-        if (!validFilename(name)) {
-            return 'Invalid name, try other';
+    protected async validateFileName(name: string, parent: FileStat, recursive: boolean = false): Promise<string> {
+        if (!name) {
+            return '';
         }
-        if (parent.children) {
-            for (const child of parent.children) {
-                if (new URI(child.uri).path.base === name) {
-                    return 'A file with this name already exists.';
-                }
-            }
+        // do not allow recursive rename
+        if (!recursive && !validFilename(name)) {
+            return 'Invalid file or folder name';
+        }
+        if (name.startsWith('/')) {
+            return 'Absolute paths or names that starts with / are not allowed';
+        } else if (name.startsWith(' ') || name.endsWith(' ')) {
+            return 'Names with leading or trailing whitespaces are not allowed';
+        }
+        // check and validate each sub-paths
+        if (name.split(/[\\/]/).some(file => !file || !validFilename(file) || /^\s+$/.test(file))) {
+            return `The name <strong>${this.trimFileName(name)}</strong> is not a valid file or folder name.`;
+        }
+        const childUri = new URI(parent.uri).resolve(name).toString();
+        const exists = await this.fileSystem.exists(childUri);
+        if (exists) {
+            return `A file or folder <strong>${this.trimFileName(name)}</strong> already exists at this location.`;
         }
         return '';
+    }
+
+    protected trimFileName(name: string): string {
+        if (name && name.length > 30) {
+            return `${name.substr(0, 30)}...`;
+        }
+        return name;
     }
 
     protected async getDirectory(candidate: URI): Promise<FileStat | undefined> {
@@ -390,7 +421,6 @@ export class WorkspaceCommandContribution implements CommandContribution {
         }
         return false;
     }
-
 }
 
 export class WorkspaceRootUriAwareCommandHandler extends UriAwareCommandHandler<URI> {

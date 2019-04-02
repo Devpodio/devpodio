@@ -2,34 +2,63 @@
   "private": true,
   "name": "@devpodio/example-browser",
   "version": "0.4.4",
+  "license": "EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0",
   "theia": {
     "frontend": {
       "config": {
-        "applicationName": "Theia Browser Example"
+        "applicationName": "Theia Browser Example",
+        "preferences": {
+          "files.enableTrash": false
+        }
       }
     }
   },
   "dependencies": {
+    "@devpodio/callhierarchy": "^0.4.4",
+    "@devpodio/console": "^0.4.4",
     "@devpodio/core": "^0.4.4",
+    "@devpodio/cpp": "^0.4.4",
+    "@devpodio/debug": "^0.4.4",
+    "@devpodio/debug-nodejs": "^0.4.4",
     "@devpodio/editor": "^0.4.4",
+    "@devpodio/editor-preview": "^0.4.4",
     "@devpodio/editorconfig": "^0.4.4",
+    "@devpodio/extension-manager": "^0.4.4",
+    "@devpodio/file-search": "^0.4.4",
     "@devpodio/filesystem": "^0.4.4",
+    "@devpodio/getting-started": "^0.4.4",
     "@devpodio/git": "^0.4.4",
+    "@devpodio/java": "^0.4.4",
+    "@devpodio/java-debug": "^0.4.4",
+    "@devpodio/json": "^0.4.4",
+    "@devpodio/keymaps": "^0.4.4",
     "@devpodio/languages": "^0.4.4",
     "@devpodio/markers": "^0.4.4",
+    "@devpodio/merge-conflicts": "^0.4.4",
     "@devpodio/messages": "^0.4.4",
+    "@devpodio/metrics": "^0.4.4",
+    "@devpodio/mini-browser": "^0.4.4",
     "@devpodio/monaco": "^0.4.4",
     "@devpodio/navigator": "^0.4.4",
-    "@devpodio/plugin": "^0.4.4",
+    "@devpodio/outline-view": "^0.4.4",
+    "@devpodio/output": "^0.4.4",
     "@devpodio/plugin-ext": "^0.4.4",
     "@devpodio/plugin-ext-vscode": "^0.4.4",
     "@devpodio/preferences": "^0.4.4",
+    "@devpodio/preview": "^0.4.4",
     "@devpodio/process": "^0.4.4",
+    "@devpodio/python": "^0.4.4",
+    "@devpodio/search-in-workspace": "^0.4.4",
+    "@devpodio/task": "^0.4.4",
     "@devpodio/terminal": "^0.4.4",
     "@devpodio/textmate-grammars": "^0.4.4",
+    "@devpodio/tslint": "^0.4.4",
+    "@devpodio/typehierarchy": "^0.4.4",
     "@devpodio/typescript": "^0.4.4",
-    "@devpodio/vue": "^0.4.4",
-    "@devpodio/workspace": "^0.4.4"
+    "@devpodio/userstorage": "^0.4.4",
+    "@devpodio/variable-resolver": "^0.4.4",
+    "@devpodio/workspace": "^0.4.4",
+    "@devpodio/vue": "^0.4.4"
   },
   "scripts": {
     "prepare": "yarn run clean && yarn build",
