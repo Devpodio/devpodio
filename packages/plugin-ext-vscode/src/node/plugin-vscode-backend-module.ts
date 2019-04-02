@@ -21,8 +21,8 @@ import { PluginVsCodeDirectoryHandler } from './plugin-vscode-directory-handler'
 import { VsCodePluginScanner } from './scanner-vscode';
 import { VsCodePluginDeployerResolver } from './plugin-vscode-resolver';
 import { PluginVsCodeCliContribution } from './plugin-vscode-cli-contribution';
-import { CliContribution } from '@theia/core/lib/node';
-import { PluginHostEnvironmentVariable } from '@theia/plugin-ext/lib/common';
+import { CliContribution } from '@devpodio/core/lib/node';
+import { PluginHostEnvironmentVariable } from '@devpodio/plugin-ext/lib/common';
 
 export default new ContainerModule(bind => {
     bind(PluginDeployerFileHandler).to(PluginVsCodeFileHandler).inSingletonScope();

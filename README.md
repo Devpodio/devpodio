@@ -2,7 +2,7 @@
 <br/>
 <div id="theia-logo" align="center">
     <br />
-    <img src="./logo/theia-logo.svg" alt="Theia Logo" width="300"/>
+    <h2> DEVPOD </h2>
     <h3>Cloud & Desktop IDE Platform</h3>
 </div>
 
@@ -14,13 +14,13 @@
   [![Open questions](https://img.shields.io/badge/Open-questions-blue.svg?style=flat-curved)](https://github.com/devpodio/devpod/labels/question)
   [![Open bugs](https://img.shields.io/badge/Open-bugs-red.svg?style=flat-curved)](https://github.com/theia-ide/theia/labels/bug)
 
-  Eclipse Theia is an extensible platform to develop full-fledged multi-language Cloud & Desktop IDE-like products with state-of-the-art web  technologies.
+  Devpod is a fork of Eclipse Theia which is an extensible platform to develop full-fledged multi-language Cloud & Desktop IDE-like products with state-of-the-art web  technologies.
 <p><small style="font-weight:bold;">This is a for of Theia Ide that adds PWA for caching and web app</small></p>
 </div>
 
 <div style='margin:0 auto;width:80%;'>
 
-![Theia](https://raw.githubusercontent.com/theia-ide/theia/master/doc/images/theia-screenshot.png)
+![Theia](https://i.gyazo.com/054dc376e2259ab828390b2c79288ed2.png)
 
 </div>
 

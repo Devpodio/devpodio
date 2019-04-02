@@ -17,9 +17,9 @@
 import * as path from 'path';
 import * as cp from 'child_process';
 import { injectable, inject, named } from 'inversify';
-import { ILogger, ConnectionErrorHandler, ContributionProvider } from '@theia/core/lib/common';
-import { Emitter } from '@theia/core/lib/common/event';
-import { createIpcEnv } from '@theia/core/lib/node/messaging/ipc-protocol';
+import { ILogger, ConnectionErrorHandler, ContributionProvider } from '@devpodio/core/lib/common';
+import { Emitter } from '@devpodio/core/lib/common/event';
+import { createIpcEnv } from '@devpodio/core/lib/node/messaging/ipc-protocol';
 import { HostedPluginClient, ServerPluginRunner, PluginMetadata, PluginHostEnvironmentVariable } from '../../common/plugin-protocol';
 import { RPCProtocolImpl } from '../../api/rpc-protocol';
 import { MAIN_RPC_CONTEXT } from '../../api/plugin-api';

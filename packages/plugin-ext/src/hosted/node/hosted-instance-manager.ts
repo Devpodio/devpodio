@@ -130,10 +130,12 @@ export abstract class AbstractHostedInstanceManager implements HostedInstanceMan
         let processOptions: cp.SpawnOptions;
         if (pluginUri.scheme === 'file') {
             processOptions = { ...PROCESS_OPTIONS };
-            processOptions.env.HOSTED_PLUGIN = pluginUri.path.toString();
+            if (processOptions.env) {
+                processOptions.env.HOSTED_PLUGIN = pluginUri.path.toString();
 
-            // Disable all the other plugins on this instance
-            processOptions.env.THEIA_PLUGINS = '';
+                // Disable all the other plugins on this instance
+                processOptions.env.THEIA_PLUGINS = '';
+            }
             command = await this.getStartCommand(port, debugConfig);
         } else {
             throw new Error('Not supported plugin location: ' + pluginUri.toString());
