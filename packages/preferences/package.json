@@ -1,15 +1,15 @@
 {
   "name": "@devpodio/preferences",
-  "version": "0.4.4",
+  "version": "0.5.0",
   "description": "Theia - Preferences Extension",
   "dependencies": {
-    "@devpodio/core": "^0.4.4",
-    "@devpodio/editor": "^0.4.4",
-    "@devpodio/filesystem": "^0.4.4",
-    "@devpodio/json": "^0.4.4",
-    "@devpodio/monaco": "^0.4.4",
-    "@devpodio/userstorage": "^0.4.4",
-    "@devpodio/workspace": "^0.4.4",
+    "@devpodio/core": "^0.5.0",
+    "@devpodio/editor": "^0.5.0",
+    "@devpodio/filesystem": "^0.5.0",
+    "@devpodio/json": "^0.5.0",
+    "@devpodio/monaco": "^0.5.0",
+    "@devpodio/userstorage": "^0.5.0",
+    "@devpodio/workspace": "^0.5.0",
     "@types/fs-extra": "^4.0.2",
     "fs-extra": "^4.0.2",
     "jsonc-parser": "^2.0.2"
@@ -47,7 +47,7 @@
     "docs": "theiaext docs"
   },
   "devDependencies": {
-    "@devpodio/ext-scripts": "^0.4.4"
+    "@devpodio/ext-scripts": "^0.5.0"
   },
   "nyc": {
     "extends": "../../configs/nyc.json"
