@@ -24,7 +24,7 @@ import {
     PreferenceSchema, PreferenceSchemaProperties, PreferenceDataSchema, PreferenceItem, PreferenceSchemaProperty, PreferenceDataProperty, JsonType
 } from '../../common/preferences/preference-schema';
 import { FrontendApplicationConfigProvider } from '../frontend-application-config-provider';
-import { FrontendApplicationConfig } from '@theia/application-package/lib/application-props';
+import { FrontendApplicationConfig } from '@devpodio/application-package/lib/application-props';
 export { PreferenceSchema, PreferenceSchemaProperties, PreferenceDataSchema, PreferenceItem, PreferenceSchemaProperty, PreferenceDataProperty, JsonType };
 
 // tslint:disable:no-any

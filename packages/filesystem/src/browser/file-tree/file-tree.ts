@@ -18,8 +18,8 @@ import { injectable, inject } from 'inversify';
 import URI from '@devpodio/core/lib/common/uri';
 import { TreeNode, CompositeTreeNode, SelectableTreeNode, ExpandableTreeNode, TreeImpl } from '@devpodio/core/lib/browser';
 import { FileSystem, FileStat } from '../../common';
-import { LabelProvider } from '@theia/core/lib/browser/label-provider';
-import { UriSelection } from '@theia/core/lib/common/selection';
+import { LabelProvider } from '@devpodio/core/lib/browser/label-provider';
+import { UriSelection } from '@devpodio/core/lib/common/selection';
 import { FileSelection } from '../file-selection';
 
 @injectable()

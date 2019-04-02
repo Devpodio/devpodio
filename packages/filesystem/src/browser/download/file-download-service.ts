@@ -15,15 +15,15 @@
  ********************************************************************************/
 
 import { inject, injectable, postConstruct } from 'inversify';
-import URI from '@theia/core/lib/common/uri';
-import { cancelled } from '@theia/core/lib/common/cancellation';
-import { ILogger } from '@theia/core/lib/common/logger';
-import { Endpoint } from '@theia/core/lib/browser/endpoint';
-import { StatusBar, StatusBarAlignment } from '@theia/core/lib/browser/status-bar';
+import URI from '@devpodio/core/lib/common/uri';
+import { cancelled } from '@devpodio/core/lib/common/cancellation';
+import { ILogger } from '@devpodio/core/lib/common/logger';
+import { Endpoint } from '@devpodio/core/lib/browser/endpoint';
+import { StatusBar, StatusBarAlignment } from '@devpodio/core/lib/browser/status-bar';
 import { FileSystem } from '../../common/filesystem';
 import { FileDownloadData } from '../../common/download/file-download-data';
-import { Deferred } from '@theia/core/lib/common/promise-util';
-import { MessageService } from '@theia/core/lib/common/message-service';
+import { Deferred } from '@devpodio/core/lib/common/promise-util';
+import { MessageService } from '@devpodio/core/lib/common/message-service';
 
 @injectable()
 export class FileDownloadService {

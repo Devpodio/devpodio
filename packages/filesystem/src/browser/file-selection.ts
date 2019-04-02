@@ -14,8 +14,8 @@
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  ********************************************************************************/
 
-import { SelectionService } from '@theia/core/lib/common/selection-service';
-import { SelectionCommandHandler } from '@theia/core/lib/common/selection-command-handler';
+import { SelectionService } from '@devpodio/core/lib/common/selection-service';
+import { SelectionCommandHandler } from '@devpodio/core/lib/common/selection-command-handler';
 import { FileStat } from '../common/filesystem';
 
 export interface FileSelection {

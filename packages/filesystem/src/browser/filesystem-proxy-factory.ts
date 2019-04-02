@@ -17,7 +17,7 @@
 // tslint:disable:no-any
 
 import { injectable, inject } from 'inversify';
-import { JsonRpcProxyFactory } from '@theia/core/lib/common/messaging/proxy-factory';
+import { JsonRpcProxyFactory } from '@devpodio/core/lib/common/messaging/proxy-factory';
 import { FileSystem, FileDeleteOptions } from '../common/filesystem';
 import { FileSystemPreferences } from './filesystem-preferences';
 

@@ -15,15 +15,15 @@
  ********************************************************************************/
 
 import { inject, injectable } from 'inversify';
-import URI from '@theia/core/lib/common/uri';
-import { SelectionService } from '@theia/core/lib/common/selection-service';
-import { Command, CommandContribution, CommandRegistry } from '@theia/core/lib/common/command';
-import { UriAwareCommandHandler, UriCommandHandler } from '@theia/core/lib/common/uri-command-handler';
-import { ExpandableTreeNode } from '@theia/core/lib/browser/tree';
+import URI from '@devpodio/core/lib/common/uri';
+import { SelectionService } from '@devpodio/core/lib/common/selection-service';
+import { Command, CommandContribution, CommandRegistry } from '@devpodio/core/lib/common/command';
+import { UriAwareCommandHandler, UriCommandHandler } from '@devpodio/core/lib/common/uri-command-handler';
+import { ExpandableTreeNode } from '@devpodio/core/lib/browser/tree';
 import { FileDownloadService } from './file-download-service';
 import { FileSelection } from '../file-selection';
-import { TreeWidgetSelection } from '@theia/core/lib/browser/tree/tree-widget-selection';
-import { isCancelled } from '@theia/core/lib/common/cancellation';
+import { TreeWidgetSelection } from '@devpodio/core/lib/browser/tree/tree-widget-selection';
+import { isCancelled } from '@devpodio/core/lib/common/cancellation';
 
 @injectable()
 export class FileDownloadCommandContribution implements CommandContribution {

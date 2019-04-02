@@ -16,9 +16,9 @@
 
 import { injectable, inject, postConstruct } from 'inversify';
 import { Message } from '@phosphor/messaging';
-import URI from '@theia/core/lib/common/uri';
-import { CommandService, SelectionService } from '@theia/core/lib/common';
-import { CommonCommands, CorePreferences } from '@theia/core/lib/browser';
+import URI from '@devpodio/core/lib/common/uri';
+import { CommandService, SelectionService } from '@devpodio/core/lib/common';
+import { CommonCommands, CorePreferences } from '@devpodio/core/lib/browser';
 import {
     ContextMenuRenderer, ExpandableTreeNode,
     TreeProps, TreeModel, TreeNode,

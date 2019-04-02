@@ -19,9 +19,9 @@ import { json } from 'body-parser';
 // tslint:disable-next-line:no-implicit-dependencies
 import { Application, Router, Request, Response, NextFunction } from 'express';
 import * as formidable from 'formidable';
-import URI from '@theia/core/lib/common/uri';
-import { FileUri } from '@theia/core/lib/node/file-uri';
-import { BackendApplicationContribution } from '@theia/core/lib/node/backend-application';
+import URI from '@devpodio/core/lib/common/uri';
+import { FileUri } from '@devpodio/core/lib/node/file-uri';
+import { BackendApplicationContribution } from '@devpodio/core/lib/node/backend-application';
 import { FileDownloadHandler } from './file-download-handler';
 
 // upload max file size in MB, default 2048

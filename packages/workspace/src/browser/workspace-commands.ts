@@ -32,7 +32,7 @@ import { WorkspaceDeleteHandler } from './workspace-delete-handler';
 import { WorkspaceDuplicateHandler } from './workspace-duplicate-handler';
 import { FileSystemUtils } from '@devpodio/filesystem/lib/common';
 import { WorkspaceCompareHandler } from './workspace-compare-handler';
-import { FileDownloadCommands } from '@theia/filesystem/lib/browser/download/file-download-command-contribution';
+import { FileDownloadCommands } from '@devpodio/filesystem/lib/browser/download/file-download-command-contribution';
 
 const validFilename: (arg: string) => boolean = require('valid-filename');
 
