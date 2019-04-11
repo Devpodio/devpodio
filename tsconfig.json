@@ -16,10 +16,7 @@
       "@devpodio/core/lib/*": [
         "packages/core/src/*"
       ],
-      "@devpodio/extension-manager/lib/*": [
-        "packages/extension-manager/src/*"
-      ],
-      "@devpodio/filesystem/lib/*": [
+      "@theia/filesystem/lib/*": [
         "packages/filesystem/src/*"
       ],
       "mv": [
