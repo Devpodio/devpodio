@@ -20,13 +20,13 @@ let disableJSDOM = enableJSDOM();
 import { Container } from 'inversify';
 import { Git, Repository } from '../common';
 import { DugiteGit } from '../node/dugite-git';
-import { WorkspaceService } from '@devpodio/workspace/lib/browser/workspace-service';
-import { FileSystem, FileStat } from '@devpodio/filesystem/lib/common';
-import { FileSystemWatcher } from '@devpodio/filesystem/lib/browser/filesystem-watcher';
-import { FileSystemNode } from '@devpodio/filesystem/lib/node/node-filesystem';
-import { FileChange } from '@devpodio/filesystem/lib/browser';
-import { Emitter } from '@devpodio/core';
-import { LocalStorageService } from '@devpodio/core/lib/browser';
+import { WorkspaceService } from '@theia/workspace/lib/browser/workspace-service';
+import { FileSystem, FileStat } from '@theia/filesystem/lib/common';
+import { FileSystemWatcher } from '@theia/filesystem/lib/browser/filesystem-watcher';
+import { FileSystemNode } from '@theia/filesystem/lib/node/node-filesystem';
+import { FileChange } from '@theia/filesystem/lib/browser';
+import { Emitter } from '@theia/core';
+import { LocalStorageService, StorageService } from '@theia/core/lib/browser';
 import { GitRepositoryProvider } from './git-repository-provider';
 import * as sinon from 'sinon';
 import * as chai from 'chai';
@@ -63,7 +63,7 @@ describe('GitRepositoryProvider', () => {
     let mockWorkspaceService: WorkspaceService;
     let mockFilesystem: FileSystem;
     let mockFileSystemWatcher: FileSystemWatcher;
-    let mockStorageService: LocalStorageService;
+    let mockStorageService: StorageService;
 
     let gitRepositoryProvider: GitRepositoryProvider;
     const mockRootChangeEmitter: Emitter<FileStat[]> = new Emitter();
@@ -89,7 +89,7 @@ describe('GitRepositoryProvider', () => {
         testContainer.bind(WorkspaceService).toConstantValue(mockWorkspaceService);
         testContainer.bind(FileSystem).toConstantValue(mockFilesystem);
         testContainer.bind(FileSystemWatcher).toConstantValue(mockFileSystemWatcher);
-        testContainer.bind(LocalStorageService).toConstantValue(mockStorageService);
+        testContainer.bind(StorageService).toConstantValue(mockStorageService);
 
         sinon.stub(mockWorkspaceService, 'onWorkspaceChanged').value(mockRootChangeEmitter.event);
         sinon.stub(mockFileSystemWatcher, 'onFilesChanged').value(mockFileChangeEmitter.event);
