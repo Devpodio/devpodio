@@ -9,6 +9,8 @@ RUN apt-get update \
     && apt-get install -y libgtk-3-0 libnss3 libasound2 \
     # native-keymap
     && apt-get install -y libx11-dev libxkbfile-dev \
+    # other utilities
+    && apt-get install -y jq hub \
     && apt-get clean && rm -rf /var/cache/apt/* && rm -rf /var/lib/apt/lists/* && rm -rf /tmp/*
 
 USER gitpod
@@ -16,7 +18,7 @@ USER gitpod
 RUN bash -c ". .nvm/nvm.sh \
     && nvm install 10 \
     && nvm use 10 \
-    && npm install -g yarn"
+    && npm install -g yarn typescript"
 
 # Give back control
 USER root
