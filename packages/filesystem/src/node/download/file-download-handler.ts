@@ -53,7 +53,7 @@ export abstract class FileDownloadHandler {
         } else {
             this.logger.debug(`Cannot determine the content-type for file: ${filePath}. Skipping the 'Content-type' header from the HTTP response.`);
         }
-        response.setHeader('Content-Disposition', `attachment; filename=${name}`);
+        response.setHeader('Content-Disposition', `attachment; filename=${encodeURIComponent(name)}`);
         try {
             await fs.access(filePath, fs.constants.R_OK);
             fs.readFile(filePath, (error, data) => {
@@ -89,7 +89,7 @@ export abstract class FileDownloadHandler {
 
     protected async handleError(response: Response, reason: string | Error, status: number = INTERNAL_SERVER_ERROR): Promise<void> {
         this.logger.error(reason);
-        response.status(status).send(reason).end();
+        response.status(status).send('Unable to download file.').end();
     }
 
 }

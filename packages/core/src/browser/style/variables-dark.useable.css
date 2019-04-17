@@ -94,10 +94,10 @@ is not optimized for dense, information rich UIs.
 
   /* Brand colors */
 
-  --theia-brand-color0: var(--md-green-700);
-  --theia-brand-color1: var(--md-green-500);
-  --theia-brand-color2: var(--md-green-300);
-  --theia-brand-color3: var(--md-green-100);
+  --theia-brand-color0: var(--md-purple-700);
+  --theia-brand-color1: var(--md-purple-500);
+  --theia-brand-color2: var(--md-purple-300);
+  --theia-brand-color3: var(--md-purple-100);
 
   /* Secondary Brand colors */
 

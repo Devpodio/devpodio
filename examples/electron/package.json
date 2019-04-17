@@ -11,10 +11,6 @@
       }
     }
   },
-  "//": [
-    "`@devpodio/plugin-ext` and `@devpodio/plugin-ext-vscode` are missing due to https://github.com/theia-ide/theia/issues/3723",
-    "`@devpodio/debug`, `@devpodio/debug-nodejs` and `@devpodio/java-debug` are removed due to https://github.com/theia-ide/theia/issues/3716"
-  ],
   "dependencies": {
     "@devpodio/callhierarchy": "^0.5.0",
     "@devpodio/console": "^0.5.0",
@@ -25,7 +21,6 @@
     "@devpodio/editor": "^0.5.0",
     "@devpodio/editor-preview": "^0.5.0",
     "@devpodio/editorconfig": "^0.5.0",
-    "@devpodio/extension-manager": "^0.5.0",
     "@devpodio/file-search": "^0.5.0",
     "@devpodio/filesystem": "^0.5.0",
     "@devpodio/getting-started": "^0.5.0",
@@ -44,6 +39,8 @@
     "@devpodio/navigator": "^0.5.0",
     "@devpodio/outline-view": "^0.5.0",
     "@devpodio/output": "^0.5.0",
+    "@devpodio/plugin": "^0.5.0",
+    "@devpodio/plugin-ext-vscode": "^0.5.0",
     "@devpodio/preferences": "^0.5.0",
     "@devpodio/preview": "^0.5.0",
     "@devpodio/process": "^0.5.0",
@@ -57,15 +54,14 @@
     "@devpodio/typescript": "^0.5.0",
     "@devpodio/userstorage": "^0.5.0",
     "@devpodio/variable-resolver": "^0.5.0",
-    "@devpodio/vue": "^0.5.0",
     "@devpodio/workspace": "^0.5.0"
   },
   "scripts": {
     "prepare": "yarn run clean && yarn build",
     "clean": "theia clean",
-    "build": "theia build --mode development",
-    "watch": "yarn build --watch",
-    "start": "theia start",
+    "build": "theiaext compile && theia build --mode development",
+    "watch": "concurrently -n compile,bundle \"theiaext watch --preserveWatchOutput\" \"theia build --watch --mode development\"",
+    "start": "theia start --plugins=local-dir:../../plugins",
     "start:debug": "yarn start --log-level=debug",
     "test": "electron-mocha --timeout 60000 --require ts-node/register \"./test/**/*.espec.ts\"",
     "test:ui": "wdio wdio.conf.js"

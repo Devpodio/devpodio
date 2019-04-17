@@ -23,7 +23,6 @@
     "@devpodio/editor": "^0.5.0",
     "@devpodio/editor-preview": "^0.5.0",
     "@devpodio/editorconfig": "^0.5.0",
-    "@devpodio/extension-manager": "^0.5.0",
     "@devpodio/file-search": "^0.5.0",
     "@devpodio/filesystem": "^0.5.0",
     "@devpodio/getting-started": "^0.5.0",

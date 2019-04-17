@@ -1,6 +1,7 @@
 #!/bin/bash
 
 
-
-find ./packages -type f -exec sed -i '/@devpodio/s/\^0.5.0/\^0.4.4/g' {} \;
-echo 'dev-packages done'
+find ./packages -type f -exec sed -i '/node-pty/!s/@theia/@devpodio/g' {} \;
+echo 'packages done'
+find ./dev-packages -type f -exec sed -i '/node-pty/!s/@theia/@devpodio/g' {} \;
+echo 'dev packages done'

@@ -53,8 +53,8 @@ import { JavascriptContribution } from './js';
 import { JsxTagsContribution } from './jsx-tags';
 import { PythonContribution } from './python';
 import { GoContribution } from './go';
-import { SassContribution } from './sass';
-import { YamlContribution } from './yaml';
+import { RustContribution } from './rust';
+import { PhpGrammarContribution } from './php';
 
 export default new ContainerModule(bind => {
     bind(BatContribution).toSelf().inSingletonScope();
@@ -168,9 +168,9 @@ export default new ContainerModule(bind => {
     bind(GoContribution).toSelf().inSingletonScope();
     bind(LanguageGrammarDefinitionContribution).toService(GoContribution);
 
-    bind(SassContribution).toSelf().inSingletonScope();
-    bind(LanguageGrammarDefinitionContribution).toService(SassContribution);
+    bind(RustContribution).toSelf().inSingletonScope();
+    bind(LanguageGrammarDefinitionContribution).toService(RustContribution);
 
-    bind(YamlContribution).toSelf().inSingletonScope();
-    bind(LanguageGrammarDefinitionContribution).toService(YamlContribution);
+    bind(PhpGrammarContribution).toSelf().inSingletonScope();
+    bind(LanguageGrammarDefinitionContribution).toService(PhpGrammarContribution);
 });

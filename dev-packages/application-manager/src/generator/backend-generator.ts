@@ -86,7 +86,7 @@ const { BackendApplicationConfigProvider } = require('@devpodio/core/lib/node/ba
 BackendApplicationConfigProvider.set(${this.prettyStringify(this.pck.props.backend.config)});
 
 const serverPath = require('path').resolve(__dirname, 'server');
-const address = require('@devpodio/core/lib/node/cluster/main').default(serverPath);
+const address = require('@devpodio/core/lib/node/main').default(serverPath);
 address.then(function (address) {
     if (process && process.send) {
         process.send(address.port.toString());

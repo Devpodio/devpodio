@@ -21,14 +21,9 @@
     "@types/yargs": "^11.1.0",
     "ajv": "^6.10.0",
     "body-parser": "^1.17.2",
-    "cors": "^2.8.5",
-    "default-passive-events": "^1.0.10",
-    "electron": "^2.0.14",
-    "electron-store": "^2.0.0",
     "es6-promise": "^4.2.4",
     "express": "^4.16.3",
     "file-icons-js": "^1.0.3",
-    "fix-path": "^2.1.0",
     "font-awesome": "^4.7.0",
     "fs-extra": "^4.0.2",
     "fuzzy": "^0.1.3",
@@ -59,6 +54,11 @@
     {
       "frontend": "lib/browser/window/browser-window-module",
       "frontendElectron": "lib/electron-browser/window/electron-window-module"
+    },
+    {
+      "frontend": "lib/browser/keyboard/browser-keyboard-module",
+      "frontendElectron": "lib/electron-browser/keyboard/electron-keyboard-module",
+      "backendElectron": "lib/electron-main/keyboard/electron-backend-keyboard-module"
     }
   ],
   "keywords": [
@@ -83,10 +83,11 @@
     "build": "theiaext build",
     "watch": "theiaext watch",
     "test": "theiaext test",
-    "docs": "theiaext docs"
+    "generate-layout": "electron ./scripts/generate-layout"
   },
   "devDependencies": {
-    "@devpodio/ext-scripts": "^0.5.0"
+    "@devpodio/ext-scripts": "^0.5.0",
+    "minimist": "^1.2.0"
   },
   "nyc": {
     "extends": "../../configs/nyc.json"

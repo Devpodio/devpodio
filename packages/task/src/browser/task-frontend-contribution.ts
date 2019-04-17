@@ -20,13 +20,14 @@ import { QuickOpenTask } from './quick-open-task';
 import { CommandContribution, Command, CommandRegistry, MenuContribution, MenuModelRegistry } from '@devpodio/core/lib/common';
 import {
     FrontendApplication, FrontendApplicationContribution, QuickOpenContribution,
-    QuickOpenHandlerRegistry, KeybindingRegistry, KeybindingContribution
+    QuickOpenHandlerRegistry, KeybindingRegistry, KeybindingContribution, StorageService
 } from '@devpodio/core/lib/browser';
 import { WidgetManager } from '@devpodio/core/lib/browser/widget-manager';
 import { TaskContribution, TaskResolverRegistry, TaskProviderRegistry } from './task-contribution';
 import { TaskService } from './task-service';
 import { TerminalMenus } from '@devpodio/terminal/lib/browser/terminal-frontend-contribution';
 import { TaskSchemaUpdater } from './task-schema-updater';
+import { TaskConfiguration } from '../common';
 
 export namespace TaskCommands {
     const TASK_CATEGORY = 'Task';
@@ -53,7 +54,21 @@ export namespace TaskCommands {
         category: TASK_CATEGORY,
         label: 'Run Selected Text'
     };
+
+    export const TASK_CONFIGURE: Command = {
+        id: 'task:configure',
+        category: TASK_CATEGORY,
+        label: 'Configure Tasks...'
+    };
+
+    export const TASK_CLEAR_HISTORY: Command = {
+        id: 'task:clear-history',
+        category: TASK_CATEGORY,
+        label: 'Clear History'
+    };
 }
+
+const TASKS_STORAGE_KEY = 'tasks';
 
 @injectable()
 export class TaskFrontendContribution implements CommandContribution, MenuContribution, KeybindingContribution, FrontendApplicationContribution, QuickOpenContribution {
@@ -84,6 +99,9 @@ export class TaskFrontendContribution implements CommandContribution, MenuContri
     @inject(TaskSchemaUpdater)
     protected readonly schemaUpdater: TaskSchemaUpdater;
 
+    @inject(StorageService)
+    protected readonly storageService: StorageService;
+
     onStart(): void {
         this.contributionProvider.getContributions().forEach(contrib => {
             if (contrib.registerResolvers) {
@@ -94,6 +112,14 @@ export class TaskFrontendContribution implements CommandContribution, MenuContri
             }
         });
         this.schemaUpdater.update();
+
+        this.storageService.getData<{ recent: TaskConfiguration[] }>(TASKS_STORAGE_KEY, { recent: [] })
+            .then(tasks => this.taskService.addRecentTasks(tasks.recent));
+    }
+
+    onStop(): void {
+        const recent = this.taskService.getRecentTasks();
+        this.storageService.setData<{ recent: TaskConfiguration[] }>(TASKS_STORAGE_KEY, { recent });
     }
 
     registerCommands(registry: CommandRegistry): void {
@@ -132,6 +158,20 @@ export class TaskFrontendContribution implements CommandContribution, MenuContri
                 execute: () => this.taskService.runSelectedText()
             }
         );
+
+        registry.registerCommand(
+            TaskCommands.TASK_CONFIGURE,
+            {
+                execute: () => this.quickOpenTask.configure()
+            }
+        );
+
+        registry.registerCommand(
+            TaskCommands.TASK_CLEAR_HISTORY,
+            {
+                execute: () => this.taskService.clearRecentTasks()
+            }
+        );
     }
 
     registerMenus(menus: MenuModelRegistry): void {
@@ -153,6 +193,11 @@ export class TaskFrontendContribution implements CommandContribution, MenuContri
         menus.registerMenuAction(TerminalMenus.TERMINAL_TASKS, {
             commandId: TaskCommands.TASK_RUN_TEXT.id,
             order: '3'
+        });
+
+        menus.registerMenuAction(TerminalMenus.TERMINAL_TASKS, {
+            commandId: TaskCommands.TASK_CONFIGURE.id,
+            order: '4'
         });
     }
 

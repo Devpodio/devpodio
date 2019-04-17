@@ -17,7 +17,8 @@
 import { inject, injectable } from 'inversify';
 import {
     QuickOpenModel, QuickOpenItem, QuickOpenMode, PrefixQuickOpenService,
-    OpenerService, KeybindingRegistry, QuickOpenGroupItem, QuickOpenGroupItemOptions, QuickOpenItemOptions, QuickOpenHandler, QuickOpenOptions, Keybinding
+    OpenerService, KeybindingRegistry, QuickOpenGroupItem, QuickOpenGroupItemOptions, QuickOpenItemOptions,
+    QuickOpenHandler, QuickOpenOptions
 } from '@devpodio/core/lib/browser';
 import { FileSystem } from '@devpodio/filesystem/lib/common/filesystem';
 import { WorkspaceService } from '@devpodio/workspace/lib/browser/workspace-service';
@@ -131,7 +132,7 @@ export class QuickFileOpenService implements QuickOpenModel, QuickOpenHandler {
         const keyCommand = this.keybindingRegistry.getKeybindingsForCommand(quickFileOpen.id);
         if (keyCommand) {
             // We only consider the first keybinding.
-            const accel = Keybinding.acceleratorFor(keyCommand[0], '+');
+            const accel = this.keybindingRegistry.acceleratorFor(keyCommand[0], '+');
             return accel.join(' ');
         }
 
@@ -205,6 +206,7 @@ export class QuickFileOpenService implements QuickOpenModel, QuickOpenHandler {
                 fuzzyMatch: true,
                 limit: 200,
                 useGitIgnore: this.hideIgnoredFiles,
+                excludePatterns: ['*.git*']
             }, token).then(handler);
         } else {
             acceptor(recentlyUsedItems);

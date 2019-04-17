@@ -19,7 +19,7 @@ import { injectable, inject } from 'inversify';
 import { WorkspaceService } from '@devpodio/workspace/lib/browser/workspace-service';
 import { FileSystem, FileStat } from '@devpodio/filesystem/lib/common';
 import { DisposableCollection, Event, Emitter } from '@devpodio/core';
-import { LocalStorageService } from '@devpodio/core/lib/browser';
+import { StorageService } from '@devpodio/core/lib/browser';
 import URI from '@devpodio/core/lib/common/uri';
 import { FileSystemWatcher } from '@devpodio/filesystem/lib/browser/filesystem-watcher';
 
@@ -43,7 +43,7 @@ export class GitRepositoryProvider {
         @inject(WorkspaceService) protected readonly workspaceService: WorkspaceService,
         @inject(FileSystemWatcher) protected readonly watcher: FileSystemWatcher,
         @inject(FileSystem) protected readonly fileSystem: FileSystem,
-        @inject(LocalStorageService) protected readonly storageService: LocalStorageService
+        @inject(StorageService) protected readonly storageService: StorageService
     ) {
         this.initialize();
     }

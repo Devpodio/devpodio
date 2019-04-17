@@ -15,6 +15,7 @@
  ********************************************************************************/
 
 export * from './quick-open-model';
+export * from './quick-open-action-provider';
 export * from './quick-open-service';
 export * from './quick-pick-service';
 export * from './quick-input-service';

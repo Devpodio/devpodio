@@ -17,12 +17,11 @@
 import { inject, injectable, named, postConstruct } from 'inversify';
 import { EditorManager } from '@devpodio/editor/lib/browser';
 import { ILogger } from '@devpodio/core/lib/common';
-import { FrontendApplication, ApplicationShell } from '@devpodio/core/lib/browser';
+import { ApplicationShell, FrontendApplication, WidgetManager } from '@devpodio/core/lib/browser';
 import { TaskResolverRegistry, TaskProviderRegistry } from './task-contribution';
 import { TERMINAL_WIDGET_FACTORY_ID, TerminalWidgetFactoryOptions } from '@devpodio/terminal/lib/browser/terminal-widget-impl';
 import { TerminalService } from '@devpodio/terminal/lib/browser/base/terminal-service';
 import { TerminalWidget } from '@devpodio/terminal/lib/browser/base/terminal-widget';
-import { WidgetManager } from '@devpodio/core/lib/browser/widget-manager';
 import { MessageService } from '@devpodio/core/lib/common/message-service';
 import { TaskServer, TaskExitedEvent, TaskInfo, TaskConfiguration } from '../common/task-protocol';
 import { WorkspaceService } from '@devpodio/workspace/lib/browser/workspace-service';
@@ -45,6 +44,7 @@ export class TaskService implements TaskConfigurationClient {
      * The last executed task.
      */
     protected lastTask: { source: string, taskLabel: string } | undefined = undefined;
+    protected recentTasks: TaskConfiguration[] = [];
 
     @inject(FrontendApplication)
     protected readonly app: FrontendApplication;
@@ -153,6 +153,29 @@ export class TaskService implements TaskConfigurationClient {
         return this.providedTaskConfigurations.getTasks();
     }
 
+    addRecentTasks(tasks: TaskConfiguration | TaskConfiguration[]): void {
+        if (Array.isArray(tasks)) {
+            tasks.forEach(task => this.addRecentTasks(task));
+        } else {
+            const ind = this.recentTasks.findIndex(recent => TaskConfiguration.equals(recent, tasks));
+            if (ind >= 0) {
+                this.recentTasks.splice(ind, 1);
+            }
+            this.recentTasks.unshift(tasks);
+        }
+    }
+
+    getRecentTasks(): TaskConfiguration[] {
+        return this.recentTasks;
+    }
+
+    /**
+     * Clears the list of recently used tasks.
+     */
+    clearRecentTasks(): void {
+        this.recentTasks = [];
+    }
+
     /**
      * Returns a task configuration provided by an extension by task source and label.
      * If there are no task configuration, returns undefined.
@@ -190,7 +213,8 @@ export class TaskService implements TaskConfigurationClient {
             this.logger.error(`Can't get task launch configuration for label: ${taskLabel}`);
             return;
         }
-        this.run(task._source, task.label);
+
+        this.runTask(task);
     }
 
     /**
@@ -218,10 +242,18 @@ export class TaskService implements TaskConfigurationClient {
             }
         }
 
+        this.runTask(task);
+    }
+
+    async runTask(task: TaskConfiguration): Promise<void> {
+        const source = task._source;
+        const taskLabel = task.label;
+
         const resolver = this.taskResolverRegistry.getResolver(task.type);
         let resolvedTask: TaskConfiguration;
         try {
             resolvedTask = resolver ? await resolver.resolveTask(task) : task;
+            this.addRecentTasks(task);
         } catch (error) {
             this.logger.error(`Error resolving task '${taskLabel}': ${error}`);
             this.messageService.error(`Error resolving task '${taskLabel}': ${error}`);
@@ -286,6 +318,10 @@ export class TaskService implements TaskConfigurationClient {
         this.shell.addWidget(widget, { area: 'bottom' });
         this.shell.activateWidget(widget.id);
         widget.start(terminalId);
+    }
+
+    async configure(task: TaskConfiguration): Promise<void> {
+        await this.taskConfigurations.configure(task);
     }
 
     protected isEventForThisClient(context: string | undefined): boolean {

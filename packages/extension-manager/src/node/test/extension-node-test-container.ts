@@ -15,8 +15,6 @@
  ********************************************************************************/
 
 import { Container } from 'inversify';
-import { stubRemoteMasterProcessFactory } from '@devpodio/core/lib/node';
-import { bindServerProcess } from '@devpodio/core/lib/node/backend-application-module';
 import { bindLogger } from '@devpodio/core/lib/node/logger-backend-module';
 import { bindFileSystem, bindFileSystemWatcherServer } from '@devpodio/filesystem/lib/node/filesystem-backend-module';
 import { ApplicationProjectArgs } from '../application-project-cli';
@@ -26,7 +24,6 @@ export const extensionNodeTestContainer = (args: ApplicationProjectArgs) => {
     const container = new Container();
     const bind = container.bind.bind(container);
     bindLogger(bind);
-    bindServerProcess(bind, stubRemoteMasterProcessFactory);
     bindFileSystem(bind);
     bindFileSystemWatcherServer(bind);
     bindNodeExtensionServer(bind, args);

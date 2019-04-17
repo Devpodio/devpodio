@@ -16,9 +16,6 @@
       "@devpodio/core/lib/*": [
         "packages/core/src/*"
       ],
-      "@devpodio/extension-manager/lib/*": [
-        "packages/extension-manager/src/*"
-      ],
       "@devpodio/filesystem/lib/*": [
         "packages/filesystem/src/*"
       ],
@@ -112,8 +109,14 @@
       "@devpodio/getting-started/lib/*": [
         "packages/getting-started/src/*"
       ],
-      "@devpodio/vue/lib/*": [
-        "packages/vue/src/*"
+      "@devpodio/file-search/lib/*": [
+        "packages/file-search/src/*"
+      ],
+      "@devpodio/plugin-ext/lib/*": [
+        "packages/plugin-ext/src/*"
+      ],
+      "@devpodio/plugin-ext-vscode/lib/*": [
+        "packages/plugin-ext-vscode/src/*"
       ]
     },
     "plugins": [
