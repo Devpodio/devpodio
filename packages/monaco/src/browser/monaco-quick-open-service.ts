@@ -20,7 +20,7 @@ import {
     QuickOpenService, QuickOpenModel, QuickOpenOptions, QuickOpenItem, QuickOpenGroupItem,
     QuickOpenMode, KeySequence, QuickOpenActionProvider, QuickOpenAction, ResolvedKeybinding,
     KeyCode, Key, KeybindingRegistry
-} from '@theia/core/lib/browser';
+} from '@devpodio/core/lib/browser';
 import { KEY_CODE_MAP } from './monaco-keycode-map';
 import { ContextKey } from '@devpodio/core/lib/browser/context-key-service';
 import { MonacoContextKeyService } from './monaco-context-key-service';

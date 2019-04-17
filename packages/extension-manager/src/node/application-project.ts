@@ -23,9 +23,9 @@ import { ApplicationPackageManager } from '@devpodio/application-manager';
 import {
     Disposable, DisposableCollection, Event, Emitter, ILogger,
     CancellationTokenSource, CancellationToken, isCancelled, checkCancelled
-} from '@theia/core';
-import { FileUri } from '@theia/core/lib/node';
-import { FileSystemWatcherServer, DidFilesChangedParams } from '@theia/filesystem/lib/common/filesystem-watcher-protocol';
+} from '@devpodio/core';
+import { FileUri } from '@devpodio/core/lib/node';
+import { FileSystemWatcherServer, DidFilesChangedParams } from '@devpodio/filesystem/lib/common/filesystem-watcher-protocol';
 import { InstallationResult, InstallationParam } from '../common/extension-protocol';
 import { NpmClient } from './npm-client';
 

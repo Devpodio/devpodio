@@ -19,10 +19,10 @@ import {
     QuickOpenModel, QuickOpenItem, QuickOpenMode, PrefixQuickOpenService,
     OpenerService, KeybindingRegistry, QuickOpenGroupItem, QuickOpenGroupItemOptions, QuickOpenItemOptions,
     QuickOpenHandler, QuickOpenOptions
-} from '@theia/core/lib/browser';
-import { FileSystem } from '@theia/filesystem/lib/common/filesystem';
-import { WorkspaceService } from '@theia/workspace/lib/browser/workspace-service';
-import URI from '@theia/core/lib/common/uri';
+} from '@devpodio/core/lib/browser';
+import { FileSystem } from '@devpodio/filesystem/lib/common/filesystem';
+import { WorkspaceService } from '@devpodio/workspace/lib/browser/workspace-service';
+import URI from '@devpodio/core/lib/common/uri';
 import { FileSearchService } from '../common/file-search-service';
 import { CancellationTokenSource } from '@devpodio/core/lib/common';
 import { LabelProvider } from '@devpodio/core/lib/browser/label-provider';

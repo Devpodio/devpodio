@@ -16,7 +16,7 @@
       "@devpodio/core/lib/*": [
         "packages/core/src/*"
       ],
-      "@theia/filesystem/lib/*": [
+      "@devpodio/filesystem/lib/*": [
         "packages/filesystem/src/*"
       ],
       "mv": [
@@ -109,13 +109,13 @@
       "@devpodio/getting-started/lib/*": [
         "packages/getting-started/src/*"
       ],
-      "@theia/file-search/lib/*": [
+      "@devpodio/file-search/lib/*": [
         "packages/file-search/src/*"
       ],
-      "@theia/plugin-ext/lib/*": [
+      "@devpodio/plugin-ext/lib/*": [
         "packages/plugin-ext/src/*"
       ],
-      "@theia/plugin-ext-vscode/lib/*": [
+      "@devpodio/plugin-ext-vscode/lib/*": [
         "packages/plugin-ext-vscode/src/*"
       ]
     },

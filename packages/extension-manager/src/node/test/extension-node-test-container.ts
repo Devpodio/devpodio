@@ -15,8 +15,8 @@
  ********************************************************************************/
 
 import { Container } from 'inversify';
-import { bindLogger } from '@theia/core/lib/node/logger-backend-module';
-import { bindFileSystem, bindFileSystemWatcherServer } from '@theia/filesystem/lib/node/filesystem-backend-module';
+import { bindLogger } from '@devpodio/core/lib/node/logger-backend-module';
+import { bindFileSystem, bindFileSystemWatcherServer } from '@devpodio/filesystem/lib/node/filesystem-backend-module';
 import { ApplicationProjectArgs } from '../application-project-cli';
 import { bindNodeExtensionServer } from '../extension-backend-module';
 

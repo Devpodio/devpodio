@@ -29,9 +29,9 @@ import { QuickPickService } from '@devpodio/core/lib/common/quick-pick-service';
 import {
     ApplicationShell, KeybindingContribution, KeyCode, Key,
     KeybindingRegistry, Widget, LabelProvider, WidgetOpenerOptions
-} from '@theia/core/lib/browser';
-import { TabBarToolbarContribution, TabBarToolbarRegistry } from '@theia/core/lib/browser/shell/tab-bar-toolbar';
-import { WidgetManager } from '@theia/core/lib/browser';
+} from '@devpodio/core/lib/browser';
+import { TabBarToolbarContribution, TabBarToolbarRegistry } from '@devpodio/core/lib/browser/shell/tab-bar-toolbar';
+import { WidgetManager } from '@devpodio/core/lib/browser';
 import { TERMINAL_WIDGET_FACTORY_ID, TerminalWidgetFactoryOptions } from './terminal-widget-impl';
 import { TerminalKeybindingContexts } from './terminal-keybinding-contexts';
 import { TerminalService } from './base/terminal-service';

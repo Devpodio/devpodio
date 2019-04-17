@@ -16,7 +16,7 @@
 
 import * as theia from '@devpodio/plugin';
 import URI from 'vscode-uri/lib/umd';
-import { DocumentsExtImpl } from '@theia/plugin-ext/src/plugin/documents';
+import { DocumentsExtImpl } from '@devpodio/plugin-ext/src/plugin/documents';
 import * as Converter from '../type-converters';
 import { RawColorInfo } from '@devpodio/plugin-ext/src/api/plugin-api';
 import { ColorPresentation } from '../../api/model';

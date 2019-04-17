@@ -19,7 +19,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { injectable } from 'inversify';
-import { LanguageGrammarDefinitionContribution, TextmateRegistry } from '@theia/monaco/lib/browser/textmate';
+import { LanguageGrammarDefinitionContribution, TextmateRegistry } from '@devpodio/monaco/lib/browser/textmate';
 
 @injectable()
 export class RustContribution implements LanguageGrammarDefinitionContribution {

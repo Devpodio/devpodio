@@ -27,10 +27,10 @@ import { Emitter, Event } from '@devpodio/core';
 import { DisposableCollection } from '@devpodio/core';
 import { DocumentsMainImpl } from './documents-main';
 import { TextEditorsMainImpl } from './text-editors-main';
-import { EditorManager } from '@theia/editor/lib/browser';
-import { OpenerService } from '@theia/core/lib/browser/opener-service';
-import { MonacoBulkEditService } from '@theia/monaco/lib/browser/monaco-bulk-edit-service';
-import { MonacoEditorService } from '@theia/monaco/lib/browser/monaco-editor-service';
+import { EditorManager } from '@devpodio/editor/lib/browser';
+import { OpenerService } from '@devpodio/core/lib/browser/opener-service';
+import { MonacoBulkEditService } from '@devpodio/monaco/lib/browser/monaco-bulk-edit-service';
+import { MonacoEditorService } from '@devpodio/monaco/lib/browser/monaco-editor-service';
 
 export class EditorsAndDocumentsMain {
     private toDispose = new DisposableCollection();

@@ -35,8 +35,8 @@ import { DisposableCollection } from '@devpodio/core';
 import { TextEditorMain } from './text-editor-main';
 import { disposed } from '../../common/errors';
 import { reviveWorkspaceEditDto } from './languages-main';
-import { MonacoBulkEditService } from '@theia/monaco/lib/browser/monaco-bulk-edit-service';
-import { MonacoEditorService } from '@theia/monaco/lib/browser/monaco-editor-service';
+import { MonacoBulkEditService } from '@devpodio/monaco/lib/browser/monaco-bulk-edit-service';
+import { MonacoEditorService } from '@devpodio/monaco/lib/browser/monaco-editor-service';
 
 export class TextEditorsMainImpl implements TextEditorsMain {
 

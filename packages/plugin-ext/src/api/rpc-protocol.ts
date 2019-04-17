@@ -25,7 +25,7 @@
 import { Event } from '@devpodio/core/lib/common/event';
 import { Deferred } from '@devpodio/core/lib/common/promise-util';
 import VSCodeURI from 'vscode-uri';
-import URI from '@theia/core/lib/common/uri';
+import URI from '@devpodio/core/lib/common/uri';
 import { CancellationToken, CancellationTokenSource } from 'vscode-languageserver-protocol';
 
 export interface MessageConnection {

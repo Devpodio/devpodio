@@ -15,14 +15,14 @@
  ********************************************************************************/
 
 import { inject, injectable, named, postConstruct } from 'inversify';
-import { EditorManager } from '@theia/editor/lib/browser';
-import { ILogger } from '@theia/core/lib/common';
-import { ApplicationShell, FrontendApplication, WidgetManager } from '@theia/core/lib/browser';
+import { EditorManager } from '@devpodio/editor/lib/browser';
+import { ILogger } from '@devpodio/core/lib/common';
+import { ApplicationShell, FrontendApplication, WidgetManager } from '@devpodio/core/lib/browser';
 import { TaskResolverRegistry, TaskProviderRegistry } from './task-contribution';
-import { TERMINAL_WIDGET_FACTORY_ID, TerminalWidgetFactoryOptions } from '@theia/terminal/lib/browser/terminal-widget-impl';
-import { TerminalService } from '@theia/terminal/lib/browser/base/terminal-service';
-import { TerminalWidget } from '@theia/terminal/lib/browser/base/terminal-widget';
-import { MessageService } from '@theia/core/lib/common/message-service';
+import { TERMINAL_WIDGET_FACTORY_ID, TerminalWidgetFactoryOptions } from '@devpodio/terminal/lib/browser/terminal-widget-impl';
+import { TerminalService } from '@devpodio/terminal/lib/browser/base/terminal-service';
+import { TerminalWidget } from '@devpodio/terminal/lib/browser/base/terminal-widget';
+import { MessageService } from '@devpodio/core/lib/common/message-service';
 import { TaskServer, TaskExitedEvent, TaskInfo, TaskConfiguration } from '../common/task-protocol';
 import { WorkspaceService } from '@devpodio/workspace/lib/browser/workspace-service';
 import { VariableResolverService } from '@devpodio/variable-resolver/lib/browser';

@@ -21,8 +21,8 @@ import { CommandContribution, Command, CommandRegistry, MenuContribution, MenuMo
 import {
     FrontendApplication, FrontendApplicationContribution, QuickOpenContribution,
     QuickOpenHandlerRegistry, KeybindingRegistry, KeybindingContribution, StorageService
-} from '@theia/core/lib/browser';
-import { WidgetManager } from '@theia/core/lib/browser/widget-manager';
+} from '@devpodio/core/lib/browser';
+import { WidgetManager } from '@devpodio/core/lib/browser/widget-manager';
 import { TaskContribution, TaskResolverRegistry, TaskProviderRegistry } from './task-contribution';
 import { TaskService } from './task-service';
 import { TerminalMenus } from '@devpodio/terminal/lib/browser/terminal-frontend-contribution';

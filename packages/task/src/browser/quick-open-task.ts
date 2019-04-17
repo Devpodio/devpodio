@@ -18,14 +18,14 @@ import { inject, injectable } from 'inversify';
 import {
     QuickOpenService, QuickOpenModel, QuickOpenItem,
     QuickOpenGroupItem, QuickOpenMode, QuickOpenHandler, QuickOpenOptions, QuickOpenActionProvider, QuickOpenGroupItemOptions
-} from '@theia/core/lib/browser/quick-open/';
+} from '@devpodio/core/lib/browser/quick-open/';
 import { TaskService } from './task-service';
 import { ContributedTaskConfiguration, TaskInfo, TaskConfiguration } from '../common/task-protocol';
 import { TaskConfigurations } from './task-configurations';
-import URI from '@theia/core/lib/common/uri';
+import URI from '@devpodio/core/lib/common/uri';
 import { TaskActionProvider } from './task-action-provider';
-import { LabelProvider } from '@theia/core/lib/browser';
-import { WorkspaceService } from '@theia/workspace/lib/browser';
+import { LabelProvider } from '@devpodio/core/lib/browser';
+import { WorkspaceService } from '@devpodio/workspace/lib/browser';
 
 @injectable()
 export class QuickOpenTask implements QuickOpenModel, QuickOpenHandler {

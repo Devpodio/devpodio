@@ -32,7 +32,7 @@ import { FileWatcherSubscriberOptions } from '../../api/model';
 import { InPluginFileSystemWatcherManager } from './in-plugin-filesystem-watcher-manager';
 import { StoragePathService } from './storage-path-service';
 import { PluginServer } from '../../common/plugin-protocol';
-import { FileSystemPreferences } from '@theia/filesystem/lib/browser';
+import { FileSystemPreferences } from '@devpodio/filesystem/lib/browser';
 
 export class WorkspaceMainImpl implements WorkspaceMain {
 

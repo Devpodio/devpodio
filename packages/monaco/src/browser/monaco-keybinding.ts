@@ -15,8 +15,8 @@
  ********************************************************************************/
 
 import { injectable, inject } from 'inversify';
-import { KeybindingContribution, KeybindingRegistry, Key, KeyCode, Keystroke, KeyModifier, KeySequence } from '@theia/core/lib/browser';
-import { EditorKeybindingContexts } from '@theia/editor/lib/browser';
+import { KeybindingContribution, KeybindingRegistry, Key, KeyCode, Keystroke, KeyModifier, KeySequence } from '@devpodio/core/lib/browser';
+import { EditorKeybindingContexts } from '@devpodio/editor/lib/browser';
 import { MonacoCommands } from './monaco-command';
 import { MonacoCommandRegistry } from './monaco-command-registry';
 import { KEY_CODE_MAP } from './monaco-keycode-map';

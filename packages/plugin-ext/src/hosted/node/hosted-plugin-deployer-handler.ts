@@ -18,7 +18,7 @@ import { injectable, inject } from 'inversify';
 import { ILogger } from '@devpodio/core';
 import { PluginDeployerHandler, PluginDeployerEntry, PluginMetadata } from '../../common/plugin-protocol';
 import { HostedPluginReader } from './plugin-reader';
-import { Deferred } from '@theia/core/lib/common/promise-util';
+import { Deferred } from '@devpodio/core/lib/common/promise-util';
 
 @injectable()
 export class HostedPluginDeployerHandler implements PluginDeployerHandler {

@@ -51,9 +51,9 @@ export class ApplicationPackage {
         if (this.isElectron()) {
             const { version } = require('../package.json');
             try {
-                require.resolve('@theia/electron/package.json', { paths: [this.projectPath] });
+                require.resolve('@devpodio/electron/package.json', { paths: [this.projectPath] });
             } catch {
-                console.warn(`please install @theia/electron@${version} as a runtime dependency`);
+                console.warn(`please install @devpodio/electron@${version} as a runtime dependency`);
             }
         }
     }
