@@ -54,16 +54,8 @@ function start(port, host, argv) {
     const cliManager = container.get(CliManager);
     return cliManager.initializeCli(argv).then(function () {
         const application = container.get(BackendApplication);
-        application.use(cors());
-        application.use(express.static(path.join(__dirname, '../../lib'), {
-            index: 'index.html',
-            maxAge: '1d',
-            setHeaders: function(res, path) {
-                if (express.static.mime.lookup(path) === 'text/html') {
-                    res.setHeader('Cache-Control', 'public, max-age=0')
-                }
-            }
-        }));
+        application.use(express.static(path.join(__dirname, '../../lib')));
+        application.use(express.static(path.join(__dirname, '../../lib/index.html')));
         return application.start(port, host);
     });
 }
