@@ -28,6 +28,14 @@ export class BuiltinTextmateThemeProvider {
             ...BuiltinThemeProvider.lightTheme,
             editorTheme: MonacoThemeRegistry.LIGHT_DEFAULT_THEME,
         },
+        {
+            ...BuiltinThemeProvider.greenTheme,
+            editorTheme: MonacoThemeRegistry.GREEN_DEFAULT_THEME,
+        },
+        {
+            ...BuiltinThemeProvider.purpleTheme,
+            editorTheme: MonacoThemeRegistry.PURPLE_DEFAULT_THEME,
+        },
     ];
 
 }

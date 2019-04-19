@@ -196,6 +196,8 @@ export class BuiltinThemeProvider {
     // Webpack converts these `require` in some Javascript object that wraps the `.css` files
     static readonly darkCss = require('../../src/browser/style/variables-dark.useable.css');
     static readonly lightCss = require('../../src/browser/style/variables-bright.useable.css');
+    static readonly greenCss = require('../../src/browser/style/variables-green.useable.css');
+    static readonly purpleCss = require('../../src/browser/style/variables-purple.useable.css');
 
     static readonly darkTheme = {
         id: 'dark',
@@ -222,9 +224,35 @@ export class BuiltinThemeProvider {
             BuiltinThemeProvider.lightCss.unuse();
         }
     };
+    static readonly greenTheme = {
+        id: 'green',
+        label: 'Green Theme',
+        description: 'Bright fonts on dark backgrounds with green theme.',
+        editorTheme: 'vs-green',
+        activate() {
+            BuiltinThemeProvider.greenCss.use();
+        },
+        deactivate() {
+            BuiltinThemeProvider.greenCss.unuse();
+        }
+    };
+    static readonly purpleTheme = {
+        id: 'purple',
+        label: 'Purple Theme',
+        description: 'Bright fonts on dark backgrounds with purple theme.',
+        editorTheme: 'vs-purple',
+        activate() {
+            BuiltinThemeProvider.purpleCss.use();
+        },
+        deactivate() {
+            BuiltinThemeProvider.purpleCss.unuse();
+        }
+    };
 
     static readonly themes = [
         BuiltinThemeProvider.darkTheme,
         BuiltinThemeProvider.lightTheme,
+        BuiltinThemeProvider.greenTheme,
+        BuiltinThemeProvider.purpleTheme,
     ];
 }

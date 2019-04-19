@@ -61,10 +61,20 @@ export class FrontendGenerator extends AbstractGenerator {
 
 <body>
   <div class="theia-preload">${this.compileIndexPreload(frontendModules)}</div>
-  <script type="application/javascript">
-    "serviceWorker"in navigator&&window.addEventListener("load",()=>{navigator.serviceWorker.register("/sw.js")
-    .then(e=>{console.log("SW registered: ",e)}).catch(e=>{console.log("SW registration failed: ",e)})});
- </script>
+  <script type="module">
+    import {Workbox} from 'https://storage.googleapis.com/workbox-cdn/releases/4.3.0/workbox-window.prod.mjs';
+    if ('serviceWorker' in navigator) {
+        const wb = new Workbox('/sw.js');
+        wb.addEventListener('message', (event) => {
+            if (event.data.type === 'CACHE_UPDATE') {
+                const {updatedURL} = event.data.payload;
+
+                console.log(\`A newer version of \${updatedURL} is available!\`);
+            }
+        });
+        wb.register();
+    }
+  </script>
 </body>
 
 </html>`;

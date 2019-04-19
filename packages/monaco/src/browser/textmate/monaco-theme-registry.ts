@@ -123,4 +123,12 @@ export namespace MonacoThemeRegistry {
         './light_defaults.json': require('../../../data/monaco-themes/vscode/light_defaults.json'),
         './light_vs.json': require('../../../data/monaco-themes/vscode/light_vs.json')
     }, 'light-plus', 'vs').name!;
+    export const GREEN_DEFAULT_THEME: string = SINGLETON.register(require('../../../data/monaco-themes/vscode/dark_plus.json'), {
+        './dark_defaults.json': require('../../../data/monaco-themes/vscode/dark_defaults.json'),
+        './dark_vs.json': require('../../../data/monaco-themes/vscode/dark_vs.json')
+    }, 'dark-plus', 'vs-dark').name!;
+    export const PURPLE_DEFAULT_THEME: string = SINGLETON.register(require('../../../data/monaco-themes/vscode/dark_plus.json'), {
+        './dark_defaults.json': require('../../../data/monaco-themes/vscode/dark_defaults.json'),
+        './dark_vs.json': require('../../../data/monaco-themes/vscode/dark_vs.json')
+    }, 'dark-plus', 'vs-dark').name!;
 }

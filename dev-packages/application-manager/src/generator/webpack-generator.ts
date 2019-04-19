@@ -60,6 +60,7 @@ const TerserWebpackPlugin = require('terser-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const PreloadWebpackPlugin = require('preload-webpack-plugin');
+const WorkboxCachePlugin = require('workbox-cacheable-response');
 const {GenerateSW} = require('workbox-webpack-plugin');
 
 const outputPath = path.resolve(__dirname, 'lib');
@@ -231,7 +232,35 @@ module.exports = {
         new GenerateSW({
             swDest: 'sw.js',
             clientsClaim: true,
-            skipWaiting: true
+            skipWaiting: true,
+            globDirectory: './lib/',
+            globPatterns: ['fonts/*.*', 'img/*.*', 'js/*.*', 'vs/**/*.*'],
+            exclude: [/\\.map$/, /^manifest.*\\.js$/, /^manifest.*\\.json$/, /\\.html$/],
+            runtimeCaching: [{
+                urlPattern: /services/,
+                handler: 'NetworkFirst'
+            },{
+                urlPattern: /\\.(png|gif|jpg|jpeg)$/,
+                handler: 'StaleWhileRevalidate',
+                options: {
+                    cacheableResponse: {
+                        statuses: [0, 200]
+                    }
+                }
+            },{
+                urlPattern: /https:\\/\\/storage.googleapis\\.com\\/workbox-cdn\\/releases\\/4\\.3\\.0/,
+                handler: 'CacheFirst'
+            },{
+                urlPattern: /vs\\/(editor|language|loader\\.js)/,
+                handler: 'CacheFirst',
+                options: {
+                    cacheName: 'vs-cache',
+                    cacheableResponse: {
+                        statuses: [0, 200]
+                    }
+                }
+            }],
+            cleanupOutdatedCaches: true
         }),
         new webpack.HashedModuleIdsPlugin(),
         new CopyWebpackPlugin([${this.ifMonaco(() => `
