@@ -1,3 +1,4 @@
+> [Submit a session proposal](https://docs.google.com/forms/d/1EpFRHG1duzmQ4I9TbB6hSzYpSBq03FXt3EOKBzmwXwA/edit) for Theia Developer Conference June 2019 in Stockholm, Sweden ([learn more](https://github.com/theia-ide/theia/wiki/Theia-Developer-Conference-2019))
 
 <br/>
 <div id="theia-logo" align="center">
@@ -50,6 +51,7 @@ Here you can find guides and examples for common scenarios:
 - [Develop a Theia application - your own IDE](https://www.theia-ide.org/doc/Composing_Applications.html)
 - [Develop a Theia plugin - a VS Code like extension](https://www.theia-ide.org/doc/Authoring_Plugins.html)
 - [Develop a Theia extension](http://www.theia-ide.org/doc/Authoring_Extensions.html)
+- [Test a VS Code extension in Theia](https://github.com/theia-ide/theia/wiki/Testing-VS-Code-extensions)
 - [Package a desktop Theia application with Electron](https://github.com/theia-ide/yangster-electron)
 
 ## Contributing

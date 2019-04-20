@@ -19,7 +19,7 @@
 import * as theia from '@devpodio/plugin';
 import { BackendInitializationFn, PluginAPIFactory, Plugin, emptyPlugin } from '@devpodio/plugin-ext';
 
-export const VSCODE_DEFAULT_API_VERSION = '1.32.3';
+export const VSCODE_DEFAULT_API_VERSION = '1.33.1';
 
 /** Set up en as a default locale for VS Code extensions using vscode-nls */
 process.env['VSCODE_NLS_CONFIG'] = JSON.stringify({ locale: 'en', availableLanguages: {} });
@@ -36,12 +36,12 @@ export const doInitialization: BackendInitializationFn = (apiFactory: PluginAPIF
 
     // replace command API as it will send only the ID as a string parameter
     const registerCommand = vscode.commands.registerCommand;
-    vscode.commands.registerCommand = function (command: any, handler?: <T>(...args: any[]) => T | Thenable<T>): any {
+    vscode.commands.registerCommand = function (command: any, handler?: <T>(...args: any[]) => T | Thenable<T>, thisArg?: any): any {
         // use of the ID when registering commands
         if (typeof command === 'string' && handler) {
-            return vscode.commands.registerHandler(command, handler);
+            return vscode.commands.registerHandler(command, handler, thisArg);
         }
-        return registerCommand(command, handler);
+        return registerCommand(command, handler, thisArg);
     };
 
     // replace createWebviewPanel API for override html setter
