@@ -81,8 +81,15 @@ function start(port, host, argv) {
             callback(null, true);
         }));
         console.info('Cors', (cors || origin) ? 'enabled for'+ origin: 'disabled');
-        application.use(express.static(path.join(__dirname, '../../lib')));
-        application.use(express.static(path.join(__dirname, '../../lib/index.html')));
+        application.use(express.static(path.join(__dirname, '../../lib'), {
+            index: 'index.html',
+            maxAge: '1d',
+            setHeaders: function(res, path) {
+                if (express.static.mime.lookup(path) === 'text/html') {
+                    res.setHeader('Cache-Control', 'public, max-age=0')
+                }
+            }
+        }));
         return application.start(port, host);
     });
 }
