@@ -16,7 +16,7 @@
 
 import { injectable, inject, named } from 'inversify';
 import { ProcessManager } from './process-manager';
-import { ILogger } from '@theia/core/lib/common';
+import { ILogger } from '@devpodio/core/lib/common';
 import { Process, ProcessType, ProcessOptions, ForkOptions, ProcessErrorEvent } from './process';
 import { ChildProcess, spawn, fork } from 'child_process';
 import * as stream from 'stream';

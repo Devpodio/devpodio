@@ -62,7 +62,7 @@
   "scripts": {
     "prepare": "yarn run clean && yarn build",
     "clean": "theia clean && rimraf errorShots",
-    "build": "theiaext compile && theia build --env.hashed --mode production",
+    "build": "theiaext compile && theia build --env.hashed --mode production --env.origin .devpod.io,.cloudflareaccess.com,.gitpod.io",
     "watch": "concurrently -n compile,bundle \"theiaext watch --preserveWatchOutput\" \"theia build --watch --mode development\"",
     "start": "theia start --plugins=local-dir:../../plugins --hostname=0.0.0.0 --port=3000 --startup-timeout -1",
     "start:debug": "yarn start --log-level=debug",

@@ -28,12 +28,24 @@ export class BackendGenerator extends AbstractGenerator {
         return `// @ts-check
 require('reflect-metadata');
 const path = require('path');
+const yargs = require('yargs');
 const express = require('express');
+const corsHandler = require('cors');
+const escapeStringRegexp = require("escape-string-regexp")
+const tldjs = require('tldjs');
 const { Container } = require('inversify');
-const { BackendApplication, CliManager } = require('@theia/core/lib/node');
-const { backendApplicationModule } = require('@theia/core/lib/node/backend-application-module');
-const { messagingBackendModule } = require('@theia/core/lib/node/messaging/messaging-backend-module');
-const { loggerBackendModule } = require('@theia/core/lib/node/logger-backend-module');
+const { BackendApplication, CliManager } = require('@devpodio/core/lib/node');
+const { backendApplicationModule } = require('@devpodio/core/lib/node/backend-application-module');
+const { messagingBackendModule } = require('@devpodio/core/lib/node/messaging/messaging-backend-module');
+const { loggerBackendModule } = require('@devpodio/core/lib/node/logger-backend-module');
+
+let { env: { cors, origin } } = yargs.option('env.cors', {
+    description: "Enabe cors headers, set true to enable, false to disable.",
+    type: "boolean"
+}).option('env.origin', {
+    description: "The domain or list(comma separated) of domain to to allow cors requests. Regex expressions are allowed",
+    type: "string"
+}).argv;
 
 const container = new Container();
 container.load(backendApplicationModule);
@@ -54,6 +66,21 @@ function start(port, host, argv) {
     const cliManager = container.get(CliManager);
     return cliManager.initializeCli(argv).then(function () {
         const application = container.get(BackendApplication);
+        if(cors || origin) {
+            if(origin) {
+                origin = origin.split(',').map(list => new RegExp(escapeStringRegexp(list)));
+            }
+            if(cors && !origin) {
+                origin = true;
+            }
+        } else if (!cors && !origin) {
+            origin = false;
+        }
+        application.use(corsHandler((ctx, callback)=> {
+            console.info(ctx.request,callback);
+            callback(null, true);
+        }));
+        console.info('Cors', (cors || origin) ? 'enabled for'+ origin: 'disabled');
         application.use(express.static(path.join(__dirname, '../../lib')));
         application.use(express.static(path.join(__dirname, '../../lib/index.html')));
         return application.start(port, host);
@@ -72,8 +99,8 @@ module.exports = (port, host, argv) => Promise.resolve()${this.compileBackendMod
 
     protected compileMain(backendModules: Map<string, string>): string {
         return `// @ts-check
-const { BackendApplicationConfigProvider } = require('@theia/core/lib/node/backend-application-config-provider');
-const main = require('@theia/core/lib/node/main');
+const { BackendApplicationConfigProvider } = require('@devpodio/core/lib/node/backend-application-config-provider');
+const main = require('@devpodio/core/lib/node/main');
 BackendApplicationConfigProvider.set(${this.prettyStringify(this.pck.props.backend.config)});
 
 const serverModule = require('./server');
