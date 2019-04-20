@@ -1,11 +1,11 @@
 {
   "name": "@devpodio/core",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "Theia is a cloud & desktop IDE framework implemented in TypeScript.",
   "main": "lib/common/index.js",
   "typings": "lib/common/index.d.ts",
   "dependencies": {
-    "@devpodio/application-package": "^0.5.0",
+    "@devpodio/application-package": "^0.5.1",
     "@devpodio/perfect-scrollbar": "^1.5.1",
     "@phosphor/widgets": "^1.5.0",
     "@types/body-parser": "^1.16.4",
@@ -88,7 +88,7 @@
     "generate-layout": "electron ./scripts/generate-layout"
   },
   "devDependencies": {
-    "@devpodio/ext-scripts": "^0.5.0",
+    "@devpodio/ext-scripts": "^0.5.1",
     "minimist": "^1.2.0"
   },
   "nyc": {

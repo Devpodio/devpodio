@@ -1,20 +1,20 @@
 {
   "name": "@devpodio/debug",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "Theia - Debug Extension",
   "dependencies": {
-    "@devpodio/console": "^0.5.0",
-    "@devpodio/core": "^0.5.0",
-    "@devpodio/editor": "^0.5.0",
-    "@devpodio/filesystem": "^0.5.0",
-    "@devpodio/json": "^0.5.0",
-    "@devpodio/markers": "^0.5.0",
-    "@devpodio/monaco": "^0.5.0",
-    "@devpodio/output": "^0.5.0",
-    "@devpodio/process": "^0.5.0",
-    "@devpodio/terminal": "^0.5.0",
-    "@devpodio/variable-resolver": "^0.5.0",
-    "@devpodio/workspace": "^0.5.0",
+    "@devpodio/console": "^0.5.1",
+    "@devpodio/core": "^0.5.1",
+    "@devpodio/editor": "^0.5.1",
+    "@devpodio/filesystem": "^0.5.1",
+    "@devpodio/json": "^0.5.1",
+    "@devpodio/markers": "^0.5.1",
+    "@devpodio/monaco": "^0.5.1",
+    "@devpodio/output": "^0.5.1",
+    "@devpodio/process": "^0.5.1",
+    "@devpodio/terminal": "^0.5.1",
+    "@devpodio/variable-resolver": "^0.5.1",
+    "@devpodio/workspace": "^0.5.1",
     "@types/p-debounce": "^1.0.0",
     "jsonc-parser": "^2.0.2",
     "mkdirp": "^0.5.0",
@@ -62,7 +62,7 @@
     "test": "theiaext test"
   },
   "devDependencies": {
-    "@devpodio/ext-scripts": "^0.5.0"
+    "@devpodio/ext-scripts": "^0.5.1"
   },
   "nyc": {
     "extends": "../../configs/nyc.json"

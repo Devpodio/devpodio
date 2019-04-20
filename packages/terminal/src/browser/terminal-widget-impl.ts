@@ -14,7 +14,7 @@
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  ********************************************************************************/
 
-import * as Xterm from 'xterm';
+import { Terminal, ITerminalOptions } from 'xterm';
 import { proposeGeometry } from 'xterm/lib/addons/fit/fit';
 import { inject, injectable, named, postConstruct } from 'inversify';
 import { Disposable, Event, Emitter, ILogger, DisposableCollection } from '@devpodio/core';
@@ -58,7 +58,8 @@ export class TerminalWidgetImpl extends TerminalWidget implements StatefulWidget
     private readonly TERMINAL = 'Terminal';
     protected readonly onTermDidClose = new Emitter<TerminalWidget>();
     protected terminalId = -1;
-    protected term: Xterm.Terminal;
+    protected term: Terminal;
+    protected termOptions: ITerminalOptions;
     protected restored = false;
     protected closeOnDispose = true;
     protected waitForConnection: Deferred<MessageConnection> | undefined;
@@ -96,7 +97,7 @@ export class TerminalWidgetImpl extends TerminalWidget implements StatefulWidget
         /* Read CSS properties from the page and apply them to the terminal.  */
         const cssProps = this.getCSSPropertiesFromPage();
 
-        this.term = new Xterm.Terminal({
+        this.term = new Terminal({
             experimentalCharAtlas: 'dynamic',
             cursorBlink: false,
             fontFamily: this.preferences['terminal.integrated.fontFamily'],
@@ -116,9 +117,12 @@ export class TerminalWidgetImpl extends TerminalWidget implements StatefulWidget
             const lastSeparator = change.preferenceName.lastIndexOf('.');
             if (lastSeparator > 0) {
                 const preferenceName = change.preferenceName.substr(lastSeparator + 1);
-                this.term.setOption(preferenceName, this.preferences[change.preferenceName]);
-                this.needsResize = true;
-                this.update();
+                if(preferenceName in this.termOptions) {
+                    this.term.getOption(preferenceName);
+                    this.term.setOption(preferenceName, this.preferences[change.preferenceName]);
+                    this.needsResize = true;
+                    this.update();
+                }
             }
         }));
 
