@@ -18,24 +18,65 @@
 const path = require('path');
 const chalk = require('chalk').default;
 const cp = require('child_process');
+const request = require('request');
 
 let code = 0;
-const workspaces = JSON.parse(JSON.parse(cp.execSync('yarn workspaces info --json').toString()).data);
-for (const name in workspaces) {
-    const workspace = workspaces[name];
-    const location = path.resolve(process.cwd(), workspace.location);
-    const packagePath = path.resolve(location, 'package.json');
-    const pck = require(packagePath);
-    if (!pck.private) {
-        const pckName = `${pck.name}@${pck.version}`;
-        if (cp.execSync(`npm view ${pckName} version --json`).toString().trim()) {
-            console.info(`${pckName}: published`);
-        } else {
-            console.error(`(${chalk.red('ERR')}) ${pckName}: ${chalk.red('NOT')} published`);
-            code = 1;
+let done = false;
+let counter = 0;
+let timerCount;
+const getPackageLink = (package) => {
+    const pck = `${package.name}/-/${package.name.split('/')[1]}-${package.version}.tgz`
+    return `https://registry.npmjs.org/${pck}`
+}
+
+const headRequest = async function (uri, pck) {
+    return new Promise((resolve, reject) => {
+        counter--;
+        code = 0;
+        request({ method: 'HEAD', uri })
+            .on('error', function (error) {
+                console.error(`(${chalk.red('ERR')}) ${pck.name}: ${chalk.red('NOT')} published`);
+                code = 1;
+            })
+            .on('response', function (response) {
+                if (response.statusCode !== 200) {
+                    console.error(`${chalk.red('ERR')}) ${pck.name}: ${chalk.red('NOT')} published`);
+                    code = 1;
+                }else {
+                    console.info(`${chalk.green('✔')} ${pck.name}: ${chalk.green('published')} statusCode: ${response.statusCode}`);
+                }
+
+            }).on('complete', () => {
+                if (code == 1) {
+                    return reject()
+                }
+                return resolve();
+            })
+    })
+}
+const checkPublish = async function () {
+    const workspaces = JSON.parse(JSON.parse(cp.execSync('yarn workspaces info --json').toString()).data);
+    for (const name in workspaces) {
+        const workspace = workspaces[name];
+        const location = path.resolve(process.cwd(), workspace.location);
+        const packagePath = path.resolve(location, 'package.json');
+        const pck = require(packagePath);
+        if (!pck.private) {
+            counter++;
+            const pckUrl = getPackageLink(pck);
+            headRequest(pckUrl, pck);
         }
     }
+    return code;
 }
-process.exit(code);
-
-
+checkPublish();
+const checker = () => {
+    timerCount = setTimeout(() => {
+        if(done) {
+            process.nextTick(process.exit);
+        }else {
+            clearTimeout(timerCount);
+            checker();
+        }
+    })
+}
