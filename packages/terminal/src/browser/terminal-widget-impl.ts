@@ -117,7 +117,7 @@ export class TerminalWidgetImpl extends TerminalWidget implements StatefulWidget
             const lastSeparator = change.preferenceName.lastIndexOf('.');
             if (lastSeparator > 0) {
                 const preferenceName = change.preferenceName.substr(lastSeparator + 1);
-                if(preferenceName in this.termOptions) {
+                if (preferenceName in this.termOptions) {
                     this.term.getOption(preferenceName);
                     this.term.setOption(preferenceName, this.preferences[change.preferenceName]);
                     this.needsResize = true;

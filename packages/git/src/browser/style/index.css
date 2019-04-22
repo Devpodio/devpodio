@@ -364,3 +364,26 @@
 #theia-gitContainer .git-change-list-buttons-container .buttons .toolbar-button:hover {
     background: var(--theia-content-font-color3);
 }
+#theia-gitContainer .theia-git-semantic-container {
+  width: 100%;
+  margin-top: 5px;
+  display: flex;
+  align-items: center;
+  height: 25px;
+}
+#theia-gitContainer .theia-git-semantic-type,
+#theia-gitContainer .theia-git-semantic-scope {
+  width: 100%;
+  flex-grow: 1;
+}
+#theia-gitContainer .theia-git-semantic-type{
+  margin-right: 10px;
+  height: 23px;
+}
+#theia-gitContainer .theia-git-semantic-scope{
+  margin-right: 0;
+}
+#theia-gitContainer .theia-git-semantic-container > label {
+   margin-right: 5px;
+}
+
