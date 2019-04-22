@@ -33,6 +33,9 @@ import { GitDiffWidget } from './diff/git-diff-widget';
 import { AlertMessage } from '@devpodio/core/lib/browser/widgets/alert-message';
 import { GitFileChangeNode } from './git-file-change-node';
 import { FileSystem } from '@devpodio/filesystem/lib/common';
+import { GitPreferences, GitConfiguration, SemanticEmojiList } from './git-preferences';
+import { PreferenceChangeEvent } from '@devpodio/core/lib/browser/preferences/preference-proxy';
+import debounce = require('lodash.debounce');
 
 @injectable()
 export class GitWidget extends GitDiffWidget implements StatefulWidget {
@@ -43,7 +46,6 @@ export class GitWidget extends GitDiffWidget implements StatefulWidget {
     protected unstagedChanges: GitFileChangeNode[] = [];
     protected mergeChanges: GitFileChangeNode[] = [];
     protected incomplete?: boolean;
-    protected message: string = '';
     protected messageBoxHeight: number = GitWidget.MESSAGE_BOX_MIN_HEIGHT;
     protected status: WorkingDirectoryStatus | undefined;
     protected scrollContainer: string;
@@ -55,6 +57,13 @@ export class GitWidget extends GitDiffWidget implements StatefulWidget {
     protected readonly selectChange = (change: GitFileChangeNode) => this.selectNode(change);
 
     protected readonly toDisposeOnInitialize = new DisposableCollection();
+    protected semanticPreferenceTypes: string[];
+    protected semanticPreferenceEnabled: boolean;
+    protected semanticPreferenceEmojiEnabled: boolean;
+    protected semanticMessage: string;
+    protected semanticType: string;
+    protected semanticScope: string;
+    protected semanticEmojis: SemanticEmojiList;
 
     @inject(EditorManager)
     protected readonly editorManager: EditorManager;
@@ -64,6 +73,9 @@ export class GitWidget extends GitDiffWidget implements StatefulWidget {
 
     @inject(FileSystem)
     protected readonly fileSystem: FileSystem;
+
+    @inject(GitPreferences)
+    protected readonly preferences: GitPreferences;
 
     constructor(
         @inject(Git) protected readonly git: Git,
@@ -94,6 +106,11 @@ export class GitWidget extends GitDiffWidget implements StatefulWidget {
         ));
         this.initialize(this.repositoryProvider.selectedRepository);
         this.gitNodes = [];
+        this.toDispose.push(this.preferences.onPreferenceChanged(e => this.handlePreferenceChange(e)));
+        this.semanticPreferenceTypes = this.preferences['git.commit.semantic.types'];
+        this.semanticPreferenceEnabled = this.preferences['git.commit.semantic.enabled'];
+        this.semanticPreferenceEmojiEnabled = this.preferences['git.commit.semantic.emoji.enabled'];
+        this.semanticEmojis = this.preferences['git.commit.semantic.emoji.list'];
         this.update();
     }
 
@@ -114,6 +131,35 @@ export class GitWidget extends GitDiffWidget implements StatefulWidget {
             }));
         } else {
             this.updateView(undefined);
+        }
+    }
+
+    protected async handlePreferenceChange(event: PreferenceChangeEvent<GitConfiguration>): Promise<void> {
+        let refresh = false;
+        const { preferenceName, newValue } = event;
+        if (preferenceName === 'git.commit.semantic.enabled') {
+            const enabled = !!newValue;
+            if (this.semanticPreferenceEnabled !== enabled) {
+                this.semanticPreferenceEnabled = enabled;
+                refresh = true;
+            }
+        }
+        if (preferenceName === 'git.commit.semantic.types' && Array.isArray(newValue)) {
+            const types = newValue;
+            if (this.semanticPreferenceTypes !== types) {
+                this.semanticPreferenceTypes = types;
+                refresh = true;
+            }
+        }
+        if (preferenceName === 'git.commit.semantic.emoji.enabled') {
+            const emojiEnabled = !!newValue;
+            if (this.semanticPreferenceEmojiEnabled !== emojiEnabled) {
+                this.semanticPreferenceEmojiEnabled = emojiEnabled;
+                refresh = true;
+            }
+        }
+        if (refresh) {
+            this.update();
         }
     }
 
@@ -138,7 +184,7 @@ export class GitWidget extends GitDiffWidget implements StatefulWidget {
     storeState(): object {
         const messageBoxHeight = this.messageBoxHeight ? this.messageBoxHeight : GitWidget.MESSAGE_BOX_MIN_HEIGHT;
         return {
-            message: this.message,
+            message: this.semanticMessage,
             commitMessageValidationResult: this.commitMessageValidationResult,
             messageBoxHeight
         };
@@ -146,9 +192,9 @@ export class GitWidget extends GitDiffWidget implements StatefulWidget {
 
     // tslint:disable-next-line:no-any
     restoreState(oldState: any): void {
-        this.message = oldState.message;
+        this.semanticMessage = oldState.message;
         // Do not restore the validation message if the commit message is undefined or empty.
-        this.commitMessageValidationResult = this.message ? oldState.commitMessageValidationResult : undefined;
+        this.commitMessageValidationResult = this.semanticMessage ? oldState.commitMessageValidationResult : undefined;
         this.messageBoxHeight = oldState.messageBoxHeight || GitWidget.MESSAGE_BOX_MIN_HEIGHT;
     }
 
@@ -189,7 +235,7 @@ export class GitWidget extends GitDiffWidget implements StatefulWidget {
             const commitTextArea = document.getElementById(GitWidget.Styles.COMMIT_MESSAGE) as HTMLTextAreaElement;
             await this.git.exec(selectedRepository, ['reset', 'HEAD~', '--soft']);
             if (commitTextArea) {
-                this.message = message;
+                this.semanticMessage = message;
                 commitTextArea.value = message;
                 this.resize(commitTextArea);
                 commitTextArea.focus();
@@ -197,7 +243,27 @@ export class GitWidget extends GitDiffWidget implements StatefulWidget {
         }
     }
 
-    async doCommit(repository?: Repository, options?: 'amend' | 'sign-off', message: string = this.message) {
+    protected buildSemanticMessage(): string {
+        let message = this.semanticMessage;
+        if (!this.semanticPreferenceEnabled) {
+            return message;
+        } else {
+            message = `: ${this.semanticMessage}`;
+            if (this.semanticScope) {
+                message = `(${this.semanticScope})${message}`;
+            }
+            if (this.semanticType && this.semanticPreferenceTypes.indexOf(this.semanticType) !== -1) {
+                message = `${this.semanticType}${message}`;
+            }
+        }
+        if (this.semanticPreferenceEmojiEnabled) {
+            const emojis = this.semanticEmojis[this.semanticType];
+            message = `${emojis} ${message} ${emojis}`;
+        }
+        return message;
+    }
+
+    async doCommit(repository?: Repository, options?: 'amend' | 'sign-off', message: string = this.buildSemanticMessage()) {
         if (repository) {
             this.commitMessageValidationResult = undefined;
             if (message.trim().length === 0) {
@@ -303,15 +369,16 @@ export class GitWidget extends GitDiffWidget implements StatefulWidget {
     protected renderCommitMessage(): React.ReactNode {
         const validationStatus = this.commitMessageValidationResult ? this.commitMessageValidationResult.status : 'idle';
         const validationMessage = this.commitMessageValidationResult ? this.commitMessageValidationResult.message : '';
+        const types = this.semanticPreferenceTypes.map(type => this.renderTypes(type));
         return <div className={GitWidget.Styles.COMMIT_MESSAGE_CONTAINER}>
             <textarea
                 className={`${GitWidget.Styles.COMMIT_MESSAGE} theia-git-commit-message-${validationStatus}`}
                 style={{ height: this.messageBoxHeight, overflow: this.messageBoxHeight > GitWidget.MESSAGE_BOX_MIN_HEIGHT ? 'auto' : 'hidden' }}
                 autoFocus={true}
-                onInput={this.onCommitMessageChange.bind(this)}
+                onInput={this.handleCommitMessageChange}
                 placeholder='Commit message'
                 id={GitWidget.Styles.COMMIT_MESSAGE}
-                defaultValue={this.message}
+                defaultValue={this.semanticMessage}
                 tabIndex={1}>
             </textarea>
             <div
@@ -324,14 +391,44 @@ export class GitWidget extends GitDiffWidget implements StatefulWidget {
                         display: !!this.commitMessageValidationResult ? 'block' : 'none'
                     }
                 }>{validationMessage}</div>
+            {
+                this.semanticPreferenceEnabled ?
+                    <div className='theia-git-semantic-container'>
+                        <label> Type </label>
+                        <select className={GitWidget.Styles.SEMANTIC_TYPE} onChange={this.handleTypeChange}>{...types}</select>
+                        <label> Scope </label>
+                        <input className={GitWidget.Styles.SEMANTIC_SCOPE} type='text' placeholder='Scope' title='Scope' size={1} onKeyUp={this.handleScopeChange}></input>
+                    </div> : ''
+            }
         </div>;
     }
 
-    protected onCommitMessageChange(e: Event): void {
+    protected renderTypes(value: string): React.ReactNode {
+        return <option value={value} key={value}>{value}</option>;
+    }
+
+    protected readonly handleScopeChange = debounce(() => this.onScopeChange(), 50);
+    protected onScopeChange(): void {
+        const target = document.getElementsByClassName(GitWidget.Styles.SEMANTIC_SCOPE)[0];
+        if (target && target instanceof HTMLInputElement) {
+            const { value } = target;
+            this.semanticScope = value;
+        }
+    }
+    protected readonly handleTypeChange = debounce(() => this.onTypeChange(), 50);
+    protected onTypeChange(): void {
+        const target = document.getElementsByClassName(GitWidget.Styles.SEMANTIC_TYPE)[0];
+        if (target && target instanceof HTMLSelectElement) {
+            this.semanticType = target.value;
+        }
+    }
+
+    protected readonly handleCommitMessageChange = (e: React.FormEvent<HTMLTextAreaElement>) => this.onCommitMessageChange(e);
+    protected onCommitMessageChange(e: React.FormEvent<HTMLTextAreaElement>): void {
         const { target } = e;
         if (target instanceof HTMLTextAreaElement) {
             const { value } = target;
-            this.message = value;
+            this.semanticMessage = value;
             this.resize(target);
             this.validateCommitMessage(value).then(result => {
                 if (!GitCommitMessageValidator.Result.equal(this.commitMessageValidationResult, result)) {
@@ -502,7 +599,7 @@ export class GitWidget extends GitDiffWidget implements StatefulWidget {
                     commitTextArea.value = `${content}${signOff}`;
                 }
                 this.resize(commitTextArea);
-                this.message = commitTextArea.value;
+                this.semanticMessage = commitTextArea.value;
                 commitTextArea.focus();
             }
         }
@@ -694,7 +791,7 @@ export class GitWidget extends GitDiffWidget implements StatefulWidget {
     }
 
     protected resetCommitMessages(): void {
-        this.message = '';
+        this.semanticMessage = '';
         const messageInput = document.getElementById(GitWidget.Styles.COMMIT_MESSAGE) as HTMLTextAreaElement;
         messageInput.value = '';
         this.resize(messageInput);
@@ -729,6 +826,8 @@ export namespace GitWidget {
         export const CHANGES_CONTAINER = 'changesOuterContainer';
         export const COMMIT_MESSAGE_CONTAINER = 'theia-git-commit-message-container';
         export const COMMIT_MESSAGE = 'theia-git-commit-message';
+        export const SEMANTIC_TYPE = 'theia-git-semantic-type';
+        export const SEMANTIC_SCOPE = 'theia-git-semantic-scope';
         export const MESSAGE_CONTAINER = 'theia-git-message';
         export const WARNING_MESSAGE = 'theia-git-message-warning';
         export const VALIDATION_MESSAGE = 'theia-git-commit-validation-message';
