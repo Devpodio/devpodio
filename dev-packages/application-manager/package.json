@@ -1,6 +1,6 @@
 {
   "name": "@devpodio/application-manager",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "description": "Theia application manager API.",
   "publishConfig": {
     "access": "public"
@@ -28,7 +28,7 @@
     "test": "theiaext test"
   },
   "dependencies": {
-    "@devpodio/application-package": "^0.5.1",
+    "@devpodio/application-package": "^0.5.2",
     "@types/fs-extra": "^4.0.2",
     "bunyan": "^1.8.10",
     "circular-dependency-plugin": "^5.0.0",
@@ -56,7 +56,7 @@
     "worker-loader": "^1.1.1"
   },
   "devDependencies": {
-    "@devpodio/ext-scripts": "^0.5.1"
+    "@devpodio/ext-scripts": "^0.5.2"
   },
   "nyc": {
     "extends": "../../configs/nyc.json"

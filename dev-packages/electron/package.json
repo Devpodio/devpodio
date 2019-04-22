@@ -1,6 +1,6 @@
 {
   "name": "@devpodio/electron",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "description": "Electron runtime dependencies for Theia",
   "publishConfig": {
     "access": "public"
