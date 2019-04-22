@@ -29,7 +29,7 @@
   },
   "dependencies": {
     "@devpodio/application-package": "^0.5.2",
-    "@types/fs-extra": "^4.0.2",
+    "@types/fs-extra": "^5.0.0",
     "bunyan": "^1.8.10",
     "circular-dependency-plugin": "^5.0.0",
     "clean-webpack-plugin": "^2.0.1",

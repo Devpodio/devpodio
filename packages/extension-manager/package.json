@@ -7,7 +7,7 @@
     "@devpodio/application-package": "^0.5.2",
     "@devpodio/core": "^0.5.2",
     "@devpodio/filesystem": "^0.5.2",
-    "@types/fs-extra": "^4.0.2",
+    "@types/fs-extra": "^5.0.0",
     "@types/sanitize-html": "^1.13.31",
     "@types/showdown": "^1.7.1",
     "fs-extra": "^4.0.2",
