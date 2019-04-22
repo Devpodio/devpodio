@@ -1,14 +1,14 @@
 {
   "name": "@devpodio/search-in-workspace",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "description": "Theia - Search in workspace",
   "dependencies": {
-    "@devpodio/core": "^0.5.1",
-    "@devpodio/editor": "^0.5.1",
-    "@devpodio/filesystem": "^0.5.1",
-    "@devpodio/navigator": "^0.5.1",
-    "@devpodio/process": "^0.5.1",
-    "@devpodio/workspace": "^0.5.1",
+    "@devpodio/core": "^0.5.2",
+    "@devpodio/editor": "^0.5.2",
+    "@devpodio/filesystem": "^0.5.2",
+    "@devpodio/navigator": "^0.5.2",
+    "@devpodio/process": "^0.5.2",
+    "@devpodio/workspace": "^0.5.2",
     "vscode-ripgrep": "^1.2.4"
   },
   "publishConfig": {
@@ -44,6 +44,6 @@
     "test": "theiaext test"
   },
   "devDependencies": {
-    "@devpodio/ext-scripts": "^0.5.1"
+    "@devpodio/ext-scripts": "^0.5.2"
   }
 }

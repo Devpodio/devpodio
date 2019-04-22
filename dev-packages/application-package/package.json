@@ -1,6 +1,6 @@
 {
   "name": "@devpodio/application-package",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "description": "Theia application package API.",
   "publishConfig": {
     "access": "public"
@@ -39,7 +39,7 @@
     "write-json-file": "^2.2.0"
   },
   "devDependencies": {
-    "@devpodio/ext-scripts": "^0.5.1"
+    "@devpodio/ext-scripts": "^0.5.2"
   },
   "nyc": {
     "extends": "../../configs/nyc.json"

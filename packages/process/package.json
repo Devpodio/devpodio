@@ -1,9 +1,9 @@
 {
   "name": "@devpodio/process",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "description": "Theia process support.",
   "dependencies": {
-    "@devpodio/core": "^0.5.1",
+    "@devpodio/core": "^0.5.2",
     "@theia/node-pty": "0.7.8-theia004",
     "string-argv": "^0.1.1"
   },
@@ -39,7 +39,7 @@
     "test": "theiaext test"
   },
   "devDependencies": {
-    "@devpodio/ext-scripts": "^0.5.1"
+    "@devpodio/ext-scripts": "^0.5.2"
   },
   "nyc": {
     "extends": "../../configs/nyc.json"
