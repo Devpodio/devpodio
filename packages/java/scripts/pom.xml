@@ -34,7 +34,7 @@
 						<artifactItem>
 							<groupId>org.eclipse.che.ls.jdt</groupId>
 							<artifactId>jdt.ls.extension.product</artifactId>
-							<version>0.0.1-SNAPSHOT</version>
+							<version>0.0.3</version>
 							<type>tar.gz</type>
 							<overWrite>true</overWrite>
 							<outputDirectory>../download</outputDirectory>
