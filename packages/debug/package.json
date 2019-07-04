@@ -22,7 +22,8 @@
     "requestretry": "^3.1.0",
     "tar": "^4.0.0",
     "unzip-stream": "^0.3.0",
-    "vscode-debugprotocol": "^1.32.0"
+    "vscode-debugprotocol": "^1.32.0",
+    "snyk": "^1.189.0"
   },
   "publishConfig": {
     "access": "public"
@@ -59,12 +60,15 @@
     "clean": "theiaext clean",
     "build": "theiaext build",
     "watch": "theiaext watch",
-    "test": "theiaext test"
+    "test": "theiaext test",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "devDependencies": {
     "@devpodio/ext-scripts": "^0.5.2"
   },
   "nyc": {
     "extends": "../../configs/nyc.json"
-  }
+  },
+  "snyk": true
 }
