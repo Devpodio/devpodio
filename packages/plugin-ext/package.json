@@ -26,7 +26,8 @@
     "uuid": "^3.2.1",
     "vscode-debugprotocol": "^1.32.0",
     "vscode-jsonrpc": "^3.6.2",
-    "vscode-uri": "^1.0.1"
+    "vscode-uri": "^1.0.1",
+    "snyk": "^1.189.0"
   },
   "publishConfig": {
     "access": "public"
@@ -59,7 +60,9 @@
     "clean": "theiaext clean",
     "build": "theiaext build",
     "watch": "theiaext watch",
-    "test": "theiaext test"
+    "test": "theiaext test",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "devDependencies": {
     "@devpodio/ext-scripts": "^0.5.2",
@@ -68,5 +71,6 @@
   },
   "nyc": {
     "extends": "../../configs/nyc.json"
-  }
+  },
+  "snyk": true
 }
