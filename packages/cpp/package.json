@@ -11,7 +11,8 @@
     "@devpodio/preferences": "^0.5.2",
     "@devpodio/process": "^0.5.2",
     "@devpodio/task": "^0.5.2",
-    "string-argv": "^0.1.1"
+    "string-argv": "^0.1.1",
+    "snyk": "^1.230.5"
   },
   "publishConfig": {
     "access": "public"
@@ -40,16 +41,18 @@
     "src"
   ],
   "scripts": {
-    "prepare": "yarn run clean && yarn run build",
+    "prepare": "npm run snyk-protect && yarn run clean && yarn run build",
     "clean": "theiaext clean",
     "build": "theiaext build",
     "watch": "theiaext watch",
-    "test": "theiaext test"
+    "test": "theiaext test",
+    "snyk-protect": "snyk protect"
   },
   "devDependencies": {
     "@devpodio/ext-scripts": "^0.5.2"
   },
   "nyc": {
     "extends": "../../configs/nyc.json"
-  }
+  },
+  "snyk": true
 }
