@@ -1,0 +1,14 @@
+# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
+version: v1.13.5
+ignore: {}
+# patches apply the minimum changes required to fix a vulnerability
+patch:
+  SNYK-JS-HTTPSPROXYAGENT-469131:
+    - '@devpodio/json > vscode-json-languageserver > request-light > https-proxy-agent':
+        patched: '2019-10-05T00:03:47.741Z'
+    - '@devpodio/debug > @devpodio/json > vscode-json-languageserver > request-light > https-proxy-agent':
+        patched: '2019-10-05T00:03:47.741Z'
+    - '@devpodio/java-debug > @devpodio/debug > @devpodio/json > vscode-json-languageserver > request-light > https-proxy-agent':
+        patched: '2019-10-05T00:03:47.741Z'
+    - '@devpodio/plugin-ext-vscode > @devpodio/plugin-ext > @devpodio/debug > @devpodio/json > vscode-json-languageserver > request-light > https-proxy-agent':
+        patched: '2019-10-05T00:03:47.741Z'
