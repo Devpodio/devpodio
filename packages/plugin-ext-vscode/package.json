@@ -6,7 +6,7 @@
     "@devpodio/core": "^0.5.2",
     "@devpodio/plugin": "^0.5.2",
     "@devpodio/plugin-ext": "^0.5.2",
-    "vscode-uri": "^1.0.1"
+    "vscode-uri": "^2.0.0"
   },
   "publishConfig": {
     "access": "public"
