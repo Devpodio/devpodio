@@ -10,8 +10,8 @@
     "@devpodio/monaco": "^0.5.2",
     "@devpodio/userstorage": "^0.5.2",
     "@devpodio/workspace": "^0.5.2",
-    "@types/fs-extra": "^4.0.2",
-    "fs-extra": "^4.0.2",
+    "@types/fs-extra": "^8.0.0",
+    "fs-extra": "^8.0.0",
     "jsonc-parser": "^2.0.2"
   },
   "publishConfig": {
