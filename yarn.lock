@@ -630,9 +630,12 @@
   dependencies:
     "@types/node" "*"
 
-"@types/touch@0.0.1":
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/@types/touch/-/touch-0.0.1.tgz#10289d42e80530f3997f3413eab1ac6ef9027d0c"
+"@types/touch@3.1.1":
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/@types/touch/-/touch-3.1.1.tgz#fdbb769f2af98f8bdbd52bc3ebfb9eaaa4b40bc3"
+  integrity sha512-6qjr7Erk0b9FkZSu17wUJaWhmzUgGfQuec7eIwl9cP7V/YO/k9IcMnHSwAjxAeadC5guq9rwHcoij7PT1RkO1w==
+  dependencies:
+    "@types/node" "*"
 
 "@types/tough-cookie@*":
   version "2.3.3"
