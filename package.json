@@ -21,7 +21,7 @@
     "ajv": "^6.10.0",
     "chai": "^4.1.0",
     "chai-string": "^1.4.0",
-    "concurrently": "^3.5.0",
+    "concurrently": "^5.0.0",
     "electron-mocha": "~3.5.0",
     "ignore-styles": "^5.0.1",
     "istanbul": "^0.4.5",
