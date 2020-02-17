@@ -17,7 +17,7 @@
     "@types/react-dom": "^16.0.6",
     "@types/react-virtualized": "^9.18.3",
     "@types/route-parser": "^0.1.1",
-    "@types/ws": "^5.1.2",
+    "@types/ws": "^7.0.0",
     "@types/yargs": "^11.1.0",
     "ajv": "^6.10.0",
     "body-parser": "^1.17.2",
@@ -42,7 +42,7 @@
     "vscode-languageserver-types": "^3.10.0",
     "vscode-uri": "^1.0.1",
     "vscode-ws-jsonrpc": "^0.0.2-1",
-    "ws": "^5.2.2",
+    "ws": "^7.0.0",
     "yargs": "^11.1.0"
   },
   "publishConfig": {
