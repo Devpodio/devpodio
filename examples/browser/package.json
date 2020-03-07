@@ -56,7 +56,7 @@
     "@devpodio/typescript": "^0.5.2",
     "@devpodio/userstorage": "^0.5.2",
     "@devpodio/variable-resolver": "^0.5.2",
-    "@devpodio/vue": "^0.5.2",
+    "@devpodio/vue": "^0.6.0",
     "@devpodio/workspace": "^0.5.2"
   },
   "scripts": {
