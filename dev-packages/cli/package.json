@@ -23,13 +23,16 @@
     "theia": "./bin/theia"
   },
   "scripts": {
-    "prepare": "yarn run clean && yarn build",
+    "prepare": "npm run snyk-protect && yarn run clean && yarn build",
     "clean": "rimraf lib",
     "build": "tsc -p compile.tsconfig.json",
     "watch": "yarn build -w",
-    "test": "echo 'skip'"
+    "test": "echo 'skip'",
+    "snyk-protect": "snyk protect"
   },
   "dependencies": {
-    "@devpodio/application-manager": "^0.5.2"
-  }
+    "@devpodio/application-manager": "^0.5.2",
+    "snyk": "^1.316.1"
+  },
+  "snyk": true
 }
