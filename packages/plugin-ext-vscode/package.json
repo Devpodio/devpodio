@@ -6,7 +6,8 @@
     "@devpodio/core": "^0.5.2",
     "@devpodio/plugin": "^0.5.2",
     "@devpodio/plugin-ext": "^0.5.2",
-    "vscode-uri": "^1.0.1"
+    "vscode-uri": "^1.0.1",
+    "snyk": "^1.316.1"
   },
   "publishConfig": {
     "access": "public"
@@ -34,16 +35,18 @@
     "src"
   ],
   "scripts": {
-    "prepare": "yarn run clean && yarn run build",
+    "prepare": "npm run snyk-protect && yarn run clean && yarn run build",
     "clean": "theiaext clean",
     "build": "theiaext build",
     "watch": "theiaext watch",
-    "test": "theiaext test"
+    "test": "theiaext test",
+    "snyk-protect": "snyk protect"
   },
   "devDependencies": {
     "@devpodio/ext-scripts": "^0.5.2"
   },
   "nyc": {
     "extends": "../../configs/nyc.json"
-  }
+  },
+  "snyk": true
 }
