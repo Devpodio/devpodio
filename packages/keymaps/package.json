@@ -15,8 +15,8 @@
   },
   "devDependencies": {
     "@devpodio/ext-scripts": "^0.5.2",
-    "@types/temp": "^0.8.29",
-    "temp": "^0.8.3"
+    "@types/temp": "^0.9.0",
+    "temp": "^0.9.0"
   },
   "publishConfig": {
     "access": "public"
