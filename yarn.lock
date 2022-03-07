@@ -9910,8 +9910,7 @@ shellsubstitute@^1.1.0:
   integrity sha1-5PcCpQxRiw9v6YRRiQ1wWvKba3A=
 
 showdown@^1.7.4:
-  version "1.8.6"
-  resolved "https://registry.yarnpkg.com/showdown/-/showdown-1.8.6.tgz#91ea4ee3b7a5448aaca6820a4e27e690c6ad771c"
+  version: "1.9.1"
   dependencies:
     yargs "^10.0.3"
 
