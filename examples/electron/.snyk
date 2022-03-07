@@ -1,0 +1,14 @@
+# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
+version: v1.14.1
+ignore: {}
+# patches apply the minimum changes required to fix a vulnerability
+patch:
+  SNYK-JS-LODASH-567746:
+    - '@devpodio/java-debug > lodash':
+        patched: '2020-05-01T00:04:49.108Z'
+    - '@devpodio/debug > requestretry > lodash':
+        patched: '2020-05-01T00:04:49.108Z'
+    - '@devpodio/java-debug > @devpodio/debug > requestretry > lodash':
+        patched: '2020-05-01T00:04:49.108Z'
+    - '@devpodio/plugin-ext-vscode > @devpodio/plugin-ext > @devpodio/debug > requestretry > lodash':
+        patched: '2020-05-01T00:04:49.108Z'
