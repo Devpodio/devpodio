@@ -8,7 +8,7 @@
     "@devpodio/languages": "^0.5.2",
     "@devpodio/mini-browser": "^0.5.2",
     "@types/highlight.js": "^9.12.2",
-    "@types/markdown-it": "^0.0.4",
+    "@types/markdown-it": "^0.0.9",
     "@types/markdown-it-anchor": "^4.0.1",
     "highlight.js": "^9.12.0",
     "markdown-it": "^8.4.0",
