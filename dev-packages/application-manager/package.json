@@ -35,7 +35,7 @@
     "clean-webpack-plugin": "^2.0.1",
     "copy-webpack-plugin": "^4.5.0",
     "css-loader": "^0.28.1",
-    "electron-rebuild": "^1.5.11",
+    "electron-rebuild": "^2.0.1",
     "file-loader": "^1.1.11",
     "fs-extra": "^4.0.2",
     "html-webpack-plugin": "^4.0.0-beta.5",
@@ -51,7 +51,7 @@
     "umd-compat-loader": "^2.1.1",
     "url-loader": "^1.1.2",
     "webpack": "^4.0.0",
-    "webpack-cli": "^3.2.1",
+    "webpack-cli": "^4.0.0",
     "workbox-webpack-plugin": "^4.3.0",
     "worker-loader": "^1.1.1"
   },
