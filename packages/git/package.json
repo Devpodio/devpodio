@@ -15,7 +15,7 @@
     "diff": "^3.4.0",
     "dugite-extra": "0.1.15",
     "find-git-exec": "^0.0.4",
-    "find-git-repositories": "^0.1.0",
+    "find-git-repositories": "^0.2.0",
     "fs-extra": "^4.0.2",
     "lodash.debounce": "^4.0.8",
     "moment": "^2.21.0",
