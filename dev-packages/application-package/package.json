@@ -35,7 +35,7 @@
     "fs-extra": "^4.0.2",
     "is-electron": "^2.1.0",
     "request": "^2.82.0",
-    "semver": "^5.4.1",
+    "semver": "^7.0.0",
     "write-json-file": "^2.2.0"
   },
   "devDependencies": {
