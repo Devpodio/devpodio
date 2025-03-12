@@ -5,7 +5,8 @@
   "dependencies": {
     "@devpodio/debug": "^0.5.2",
     "ps-list": "5.0.1",
-    "vscode-debugprotocol": "^1.32.0"
+    "vscode-debugprotocol": "^1.32.0",
+    "snyk": "^1.316.1"
   },
   "publishConfig": {
     "access": "public"
@@ -36,11 +37,12 @@
   ],
   "scripts": {
     "postinstall": "download-debug-adapters",
-    "prepare": "yarn run clean && yarn run build",
+    "prepare": "npm run snyk-protect && yarn run clean && yarn run build",
     "clean": "theiaext clean",
     "build": "theiaext build",
     "watch": "theiaext watch",
-    "test": "theiaext test"
+    "test": "theiaext test",
+    "snyk-protect": "snyk protect"
   },
   "devDependencies": {
     "@devpodio/ext-scripts": "^0.5.2"
@@ -51,5 +53,6 @@
   "adapters": {
     "node-debug": "https://ms-vscode.gallery.vsassets.io/_apis/public/gallery/publisher/ms-vscode/extension/node-debug/1.29.2/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage",
     "node-debug2": "https://ms-vscode.gallery.vsassets.io/_apis/public/gallery/publisher/ms-vscode/extension/node-debug2/1.29.2/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
-  }
+  },
+  "snyk": true
 }
