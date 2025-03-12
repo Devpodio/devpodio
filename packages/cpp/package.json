@@ -11,7 +11,7 @@
     "@devpodio/preferences": "^0.5.2",
     "@devpodio/process": "^0.5.2",
     "@devpodio/task": "^0.5.2",
-    "string-argv": "^0.1.1"
+    "string-argv": "^0.3.0"
   },
   "publishConfig": {
     "access": "public"
