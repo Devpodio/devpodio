@@ -57,7 +57,8 @@
     "@devpodio/userstorage": "^0.5.2",
     "@devpodio/variable-resolver": "^0.5.2",
     "@devpodio/vue": "^0.5.2",
-    "@devpodio/workspace": "^0.5.2"
+    "@devpodio/workspace": "^0.5.2",
+    "snyk": "^1.192.0"
   },
   "scripts": {
     "prepare": "yarn run clean && yarn build",
@@ -72,9 +73,12 @@
     "coverage:remap": "remap-istanbul -i coverage/coverage.json -o coverage/coverage-final.json --exclude 'frontend/index.js' && rimraf coverage/coverage.json",
     "coverage:report:html": "istanbul report --root coverage --format html",
     "coverage:report:lcov": "istanbul report --root coverage --format lcov",
-    "coverage": "yarn coverage:compile && yarn test && yarn coverage:remap && yarn coverage:report:lcov && yarn coverage:report:html"
+    "coverage": "yarn coverage:compile && yarn test && yarn coverage:remap && yarn coverage:report:lcov && yarn coverage:report:html",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "devDependencies": {
     "@devpodio/cli": "^0.5.2"
-  }
+  },
+  "snyk": true
 }
