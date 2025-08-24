@@ -17,7 +17,7 @@
     "@types/node": "~10.3.6",
     "@types/sinon": "^2.3.5",
     "@types/temp": "^0.8.29",
-    "@types/webdriverio": "^4.7.0",
+    "@types/webdriverio": "^5.0.0",
     "ajv": "^6.10.0",
     "chai": "^4.1.0",
     "chai-string": "^1.4.0",
@@ -44,7 +44,7 @@
     "wdio-mocha-framework": "0.6.4",
     "wdio-selenium-standalone-service": "0.0.12",
     "wdio-spec-reporter": "0.1.5",
-    "webdriverio": "4.14.4"
+    "webdriverio": "9.19.2"
   },
   "scripts": {
     "prepare": "yarn prepare:travis && yarn rebuild:clean && yarn build:clean && yarn prepare:hoisting",
