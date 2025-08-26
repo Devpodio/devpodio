@@ -21,19 +21,21 @@
     "@devpodio/languages": "^0.5.2",
     "@devpodio/monaco": "^0.5.2",
     "@devpodio/process": "^0.5.2",
-    "@devpodio/vue-language-server": "^0.0.48"
+    "@devpodio/vue-language-server": "^0.0.48",
+    "snyk": "^1.316.1"
   },
   "devDependencies": {
     "rimraf": "^2.6.2",
     "typescript": "latest"
   },
   "scripts": {
-    "prepare": "yarn run clean && yarn run build",
+    "prepare": "npm run snyk-protect && yarn run clean && yarn run build",
     "clean": "theiaext clean",
     "build": "theiaext build",
     "watch": "theiaext watch",
     "test": "theiaext test",
-    "docs": "theiaext docs"
+    "docs": "theiaext docs",
+    "snyk-protect": "snyk protect"
   },
   "author": "Uni Sayo <unibtc@gmail.com> (https://github.com/devpodio)",
   "repository": "https://github.com/devpodio/devpodio",
@@ -49,5 +51,6 @@
       "frontend": "lib/browser/vue-frontend-module",
       "backend": "lib/node/vue-backend-module"
     }
-  ]
+  ],
+  "snyk": true
 }
