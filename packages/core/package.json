@@ -35,7 +35,7 @@
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-virtualized": "^9.20.0",
-    "reconnecting-websocket": "^3.0.7",
+    "reconnecting-websocket": "^4.0.0",
     "reflect-metadata": "^0.1.10",
     "route-parser": "^0.0.5",
     "tldjs": "^2.3.1",
