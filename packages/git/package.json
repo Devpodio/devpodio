@@ -19,7 +19,7 @@
     "fs-extra": "^4.0.2",
     "lodash.debounce": "^4.0.8",
     "moment": "^2.21.0",
-    "octicons": "^7.1.0",
+    "octicons": "^8.0.0",
     "p-queue": "^2.4.2",
     "ts-md5": "^1.2.2"
   },
