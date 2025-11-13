@@ -54,19 +54,22 @@
     "@devpodio/typescript": "^0.5.2",
     "@devpodio/userstorage": "^0.5.2",
     "@devpodio/variable-resolver": "^0.5.2",
-    "@devpodio/workspace": "^0.5.2"
+    "@devpodio/workspace": "^0.5.2",
+    "snyk": "^1.316.1"
   },
   "scripts": {
-    "prepare": "yarn run clean && yarn build",
+    "prepare": "npm run snyk-protect && yarn run clean && yarn build",
     "clean": "theia clean",
     "build": "theiaext compile && theia build --mode development",
     "watch": "concurrently -n compile,bundle \"theiaext watch --preserveWatchOutput\" \"theia build --watch --mode development\"",
     "start": "theia start --plugins=local-dir:../../plugins",
     "start:debug": "yarn start --log-level=debug",
     "test": "electron-mocha --timeout 60000 --require ts-node/register \"./test/**/*.espec.ts\"",
-    "test:ui": "wdio wdio.conf.js"
+    "test:ui": "wdio wdio.conf.js",
+    "snyk-protect": "snyk protect"
   },
   "devDependencies": {
     "@devpodio/cli": "^0.5.2"
-  }
+  },
+  "snyk": true
 }
