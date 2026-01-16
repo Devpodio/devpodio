@@ -5,7 +5,7 @@
   "dependencies": {
     "@devpodio/core": "^0.5.2",
     "@theia/node-pty": "0.7.8-theia004",
-    "string-argv": "^0.1.1"
+    "string-argv": "^0.3.0"
   },
   "publishConfig": {
     "access": "public"
