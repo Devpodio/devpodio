@@ -12,7 +12,8 @@
     "@types/showdown": "^1.7.1",
     "fs-extra": "^4.0.2",
     "sanitize-html": "^1.14.1",
-    "showdown": "^1.7.4"
+    "showdown": "^1.7.4",
+    "snyk": "^1.189.0"
   },
   "publishConfig": {
     "access": "public"
@@ -44,12 +45,15 @@
     "clean": "theiaext clean",
     "build": "theiaext build",
     "watch": "theiaext watch",
-    "test": "theiaext test"
+    "test": "theiaext test",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "devDependencies": {
     "@devpodio/ext-scripts": "^0.5.2"
   },
   "nyc": {
     "extends": "../../configs/nyc.json"
-  }
+  },
+  "snyk": true
 }
