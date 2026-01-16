@@ -5,7 +5,8 @@
   "dependencies": {
     "@devpodio/debug": "^0.5.2",
     "@devpodio/java": "^0.5.2",
-    "lodash": "^4.17.10"
+    "lodash": "^4.17.10",
+    "snyk": "^1.190.0"
   },
   "publishConfig": {
     "access": "public"
@@ -41,7 +42,9 @@
     "clean": "theiaext clean",
     "build": "theiaext build",
     "watch": "theiaext watch",
-    "test": "theiaext test"
+    "test": "theiaext test",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "devDependencies": {
     "@devpodio/ext-scripts": "^0.5.2"
@@ -51,5 +54,6 @@
   },
   "adapters": {
     "java-debug": "https://ms-vscode.gallery.vsassets.io/_apis/public/gallery/publisher/vscjava/extension/vscode-java-debug/0.15.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
-  }
+  },
+  "snyk": true
 }
