@@ -27,9 +27,13 @@
     "clean": "rimraf lib",
     "build": "tsc -p compile.tsconfig.json",
     "watch": "yarn build -w",
-    "test": "echo 'skip'"
+    "test": "echo 'skip'",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "dependencies": {
-    "@devpodio/application-manager": "^0.5.2"
-  }
+    "@devpodio/application-manager": "^0.5.2",
+    "snyk": "^1.189.0"
+  },
+  "snyk": true
 }
