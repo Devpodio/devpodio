@@ -25,7 +25,9 @@
     "clean": "theiaext clean",
     "build": "theiaext build",
     "watch": "theiaext watch",
-    "test": "theiaext test"
+    "test": "theiaext test",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "dependencies": {
     "@devpodio/application-package": "^0.5.2",
@@ -53,12 +55,14 @@
     "webpack": "^4.0.0",
     "webpack-cli": "^3.2.1",
     "workbox-webpack-plugin": "^4.3.0",
-    "worker-loader": "^1.1.1"
+    "worker-loader": "^1.1.1",
+    "snyk": "^1.189.0"
   },
   "devDependencies": {
     "@devpodio/ext-scripts": "^0.5.2"
   },
   "nyc": {
     "extends": "../../configs/nyc.json"
-  }
+  },
+  "snyk": true
 }
