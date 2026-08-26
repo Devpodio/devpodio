@@ -7,7 +7,7 @@
     "@devpodio/editor": "^0.5.2",
     "@devpodio/languages": "^0.5.2",
     "@types/uuid": "^3.4.3",
-    "uuid": "^3.2.1"
+    "uuid": "^11.0.0"
   },
   "publishConfig": {
     "access": "public"
